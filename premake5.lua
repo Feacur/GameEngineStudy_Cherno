@@ -1,12 +1,41 @@
 workspace "GameEngineStudy"
     architecture "x64"
+    startproject "Sandbox"
+    warnings "Extra"
+    flags { "FatalWarnings", "NoMinimalRebuild" }
+    floatingpoint "Fast"
+    floatingpointexceptions "off"
 
-    configurations
-    {
+    configurations {
         "Debug",
         "Development",
         "Shipping"
     }
+
+    filter "toolset:msc*"
+        disablewarnings {
+            "4201", -- nameless struct/union (suppress)
+            "4189", -- local variable is initialized but not referenced (suppress)
+            "4100", -- unreferenced formal parameter (suppress)
+        }
+
+    filter "toolset:gcc*"
+        disablewarnings { "unused-variable", "unused-parameter", "missing-field-initializers" }
+
+    filter "configurations:Debug"
+        defines "DEBUG"
+        symbols "On"
+        optimize "Off"
+
+    filter "configurations:Development"
+        defines "DEVELOPMENT"
+        symbols "On"
+        optimize "On"
+
+    filter "configurations:Shipping"
+        defines "SHIPPING"
+        symbols "Off"
+        optimize "On"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 enginename = "GameEngineStudy"
@@ -19,15 +48,13 @@ project "GameEngineStudy"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-    files
-    {
+    files {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp"
     }
 
-    includedirs
-    {
-        "%{prj.name}/vendor/spdlog/include"
+    includedirs {
+        "%{prj.name}/vendor/spdlog/include",
     }
 
     filter "system:windows"
@@ -35,28 +62,14 @@ project "GameEngineStudy"
         staticruntime "On"
         systemversion "latest"
 
-        defines
-        {
+        defines {
             "GES_PLATFORM_WINDOWS",
-            "GES_BUILD_DLL"
+            "GES_BUILD_DLL",
         }
 
-        postbuildcommands
-        {
+        postbuildcommands {
             ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
         }
-
-    filter "configurations:Debug"
-        defines "GES_DEBUG"
-        symbols "On"
-
-    filter "configurations:Development"
-        defines "GES_DEVELOPMENT"
-        optimize "On"
-
-    filter "configurations:Shipping"
-        defines "GES_SHIPPING"
-        optimize "On"
 
 project "Sandbox"
     location "Sandbox"
@@ -66,21 +79,18 @@ project "Sandbox"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-    files
-    {
+    files {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
     }
 
-    includedirs
-    {
-        enginename .. "/src",
-        enginename .. "/vendor/spdlog/include"
+    includedirs {
+        (enginename .. "/src"),
+        (enginename .. "/vendor/spdlog/include"),
     }
 
-    links
-    {
-        "GameEngineStudy"
+    links {
+        "GameEngineStudy",
     }
 
     filter "system:windows"
@@ -88,19 +98,6 @@ project "Sandbox"
         staticruntime "On"
         systemversion "latest"
 
-        defines
-        {
-            "GES_PLATFORM_WINDOWS"
+        defines {
+            "GES_PLATFORM_WINDOWS",
         }
-
-    filter "configurations:Debug"
-        defines "GES_DEBUG"
-        symbols "On"
-
-    filter "configurations:Development"
-        defines "GES_DEVELOPMENT"
-        optimize "On"
-
-    filter "configurations:Shipping"
-        defines "GES_SHIPPING"
-        optimize "On"
