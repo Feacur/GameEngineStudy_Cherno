@@ -2,6 +2,9 @@
 
 #include "Core.h"
 #include <spdlog/spdlog.h>
+#include <spdlog/fmt/ostr.h>
+
+GES_TEMPLATE template class GES_API std::shared_ptr<spdlog::logger>;
 
 namespace GES {
 	class GES_API Log
@@ -26,8 +29,8 @@ namespace GES {
 #define GES_CORE_FATAL(...) GES::Log::GetCoreLogger()->fatal(__VA_ARGS__)
 
 // client logger
-#define GES_CLIENT_TRACE(...) GES::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define GES_CLIENT_INFO(...)  GES::Log::GetClientLogger()->info(__VA_ARGS__)
-#define GES_CLIENT_WARN(...)  GES::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define GES_CLIENT_ERROR(...) GES::Log::GetClientLogger()->error(__VA_ARGS__)
-#define GES_CLIENT_FATAL(...) GES::Log::GetClientLogger()->fatal(__VA_ARGS__)
+#define GES_TRACE(...) GES::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define GES_INFO(...)  GES::Log::GetClientLogger()->info(__VA_ARGS__)
+#define GES_WARN(...)  GES::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define GES_ERROR(...) GES::Log::GetClientLogger()->error(__VA_ARGS__)
+#define GES_FATAL(...) GES::Log::GetClientLogger()->fatal(__VA_ARGS__)

@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
 	GES::Log::Init();
 
 	GES_CORE_INFO("Inititialized");
-	GES_CLIENT_INFO("Inititialized");
+	GES_INFO("Inititialized");
 
 	printf("Welcome to this study!\n");
 	auto app = GES::CreateApplication();

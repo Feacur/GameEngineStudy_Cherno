@@ -81,7 +81,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4201;4189;4100;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>DEBUG;GES_PLATFORM_WINDOWS;GES_BUILD_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -107,7 +107,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4201;4189;4100;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>DEVELOPMENT;GES_PLATFORM_WINDOWS;GES_BUILD_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -138,7 +138,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4201;4189;4100;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PreprocessorDefinitions>SHIPPING;GES_PLATFORM_WINDOWS;GES_BUILD_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -167,6 +167,10 @@
     <ClInclude Include="src\GES\Application.h" />
     <ClInclude Include="src\GES\Core.h" />
     <ClInclude Include="src\GES\EntryPoint.h" />
+    <ClInclude Include="src\GES\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\GES\Events\Event.h" />
+    <ClInclude Include="src\GES\Events\KeyEvent.h" />
+    <ClInclude Include="src\GES\Events\MouseEvent.h" />
     <ClInclude Include="src\GES\Log.h" />
   </ItemGroup>
   <ItemGroup>

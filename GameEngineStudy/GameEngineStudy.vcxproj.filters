@@ -4,6 +4,9 @@
     <Filter Include="GES">
       <UniqueIdentifier>{24EA870B-90F3-877C-196F-9E7C8577937C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GES\Events">
+      <UniqueIdentifier>{8845F41E-74FD-356C-DD04-0FC8C9DBD05C}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GES.h" />
@@ -15,6 +18,18 @@
     </ClInclude>
     <ClInclude Include="src\GES\EntryPoint.h">
       <Filter>GES</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GES\Events\ApplicationEvent.h">
+      <Filter>GES\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GES\Events\Event.h">
+      <Filter>GES\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GES\Events\KeyEvent.h">
+      <Filter>GES\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GES\Events\MouseEvent.h">
+      <Filter>GES\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\GES\Log.h">
       <Filter>GES</Filter>
