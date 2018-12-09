@@ -1,3 +1,4 @@
+#include "ges_pch.h"
 #include "Application.h"
 
 #include "GES/Events/ApplicationEvent.h"

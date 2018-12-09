@@ -1,9 +1,10 @@
 #pragma once
 
+#include "ges_pch.h"
 #include "GES/Core.h"
 
-#include <string>
-#include <functional>
+// #include <string>     // moved to PCH
+// #include <functional> // moved to PCH
 
 namespace GES {
 

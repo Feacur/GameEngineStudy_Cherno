@@ -2,7 +2,7 @@
 
 #include "Event.h"
 
-#include <sstream>
+// #include <sstream>    // moved to PCH
 
 namespace GES {
 
