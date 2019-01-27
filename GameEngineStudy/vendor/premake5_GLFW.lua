@@ -44,6 +44,3 @@ project "GLFW"
 		links {
 			"gdi32",
 		}
-	
-	filter { "system:windows", "configurations:Release" }
-		buildoptions "/MT"
