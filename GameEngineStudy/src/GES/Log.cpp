@@ -1,7 +1,7 @@
 #include "ges_pch.h"
 #include "Log.h"
 
-#include "spdlog/sinks/stdout_color_sinks.h"
+#include <spdlog/sinks/stdout_color_sinks.h>
 
 namespace GES {
 	std::shared_ptr<spdlog::logger> Log::s_CoreLogger;

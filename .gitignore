@@ -1,7 +1,9 @@
-# Custom project caches
-/[Bb]in/
-/[Bb]in-int/
-
 # IDE
 /.vs/
 *.user
+
+# Custom project caches
+/bin/
+/bin-int/
+/GameEngineStudy/vendor/bin/
+/GameEngineStudy/vendor/bin-int/

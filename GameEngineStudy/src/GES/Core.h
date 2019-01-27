@@ -27,4 +27,12 @@ typedef unsigned long uint48; // witty (32 + 64) / 2
 	#error supported platforms: Windows
 #endif
 
+#ifdef SHIPPING
+	#define GES_ASSERT(x, ...)
+	#define GES_CORE_ASSERT(x, ...)
+#else
+	#define GES_ASSERT(x, ...) { if(!(x)) { GES_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define GES_CORE_ASSERT(x, ...) { if(!(x)) { GES_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#endif
+
 #define BIT(T, index) static_cast<T>(static_cast<T>(1) << index)

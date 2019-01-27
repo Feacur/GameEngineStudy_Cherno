@@ -22,7 +22,6 @@
 		"files.exclude": {
 			".vs/" : true,
 			"bin-int/" : true,
-			"**/vendor/" : true,
 		}
 	},
 	"extensions": {

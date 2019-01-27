@@ -36,7 +36,7 @@ namespace GES {
 								virtual EventType GetEventType() const override { return GetStaticType(); }\
 								virtual const char* GetName() const override { return #type; }
 
-#define EVENT_CLASS_CATEGORY(category) virtual int32 GetCategoryFlags() const override { return (int)(category); }
+#define EVENT_CLASS_CATEGORY(category) virtual int32 GetCategoryFlags() const override { return (int32)(category); }
 
 	class GES_API Event
 	{
@@ -49,7 +49,7 @@ namespace GES {
 
 		inline bool IsInCategory(EventCategory category)
 		{
-			return GetCategoryFlags() & (int)category;
+			return GetCategoryFlags() & (int32)category;
 		}
 	protected:
 		bool m_Handled = false;

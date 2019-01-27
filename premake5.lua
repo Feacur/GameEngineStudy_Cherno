@@ -31,6 +31,9 @@ workspace "GameEngineStudy"
 	filter "toolset:gcc*"
 		disablewarnings { "unused-variable", "unused-parameter", "missing-field-initializers" }
 
+	filter "toolset:clang*"
+		disablewarnings { "unused-variable", "unused-parameter", "missing-field-initializers" }
+
 	filter "configurations:Debug"
 		defines "DEBUG"
 		symbols "On"
@@ -48,6 +51,12 @@ workspace "GameEngineStudy"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 enginename = "GameEngineStudy"
+
+-- Include directories relative to root folder (solution directory)
+include_directories = {}
+include_directories["GLFW"] = "GameEngineStudy/vendor/GLFW/include"
+
+include "GameEngineStudy/vendor/premake5_GLFW.lua"
 
 project "GameEngineStudy"
 	location "GameEngineStudy"
@@ -69,6 +78,12 @@ project "GameEngineStudy"
 	includedirs {
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
+		"%{include_directories.GLFW}",
+	}
+
+	links {
+		"GLFW",
+		"opengl32.lib",
 	}
 
 	filter "system:windows"
