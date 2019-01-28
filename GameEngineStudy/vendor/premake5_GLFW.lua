@@ -1,11 +1,14 @@
 project "GLFW"
 	kind "StaticLib"
 	language "C"
+	cdialect "C99"
+	cppdialect "C++11"
 	warnings "Default"
 	removeflags { "FatalWarnings" }
 	
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	GLFW_to_root = path.getrelative(os.getcwd(), root_directory)
+	targetdir (GLFW_to_root .. "/bin/" .. outputdir .. "/%{prj.name}")
+	objdir (GLFW_to_root .. "/bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files {
 		"GLFW/include/GLFW/glfw3.h",
@@ -20,9 +23,8 @@ project "GLFW"
 	}
 	
 	filter "system:windows"
-		cppdialect "C++11"
-		systemversion "latest"
 		staticruntime "On"
+		systemversion "latest"
 		
 		files {
 			"GLFW/src/win32_init.c",

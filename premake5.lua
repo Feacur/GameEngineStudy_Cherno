@@ -56,12 +56,15 @@ enginename = "GameEngineStudy"
 include_directories = {}
 include_directories["GLFW"] = "GameEngineStudy/vendor/GLFW/include"
 
+root_directory = os.getcwd()
 include "GameEngineStudy/vendor/premake5_GLFW.lua"
 
 project "GameEngineStudy"
 	location "GameEngineStudy"
 	kind "SharedLib"
 	language "C++"
+	cdialect "C11"
+	cppdialect "C++17"
 	characterset ("Unicode")
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -81,19 +84,18 @@ project "GameEngineStudy"
 		"%{include_directories.GLFW}",
 	}
 
-	links {
-		"GLFW",
-		"opengl32.lib",
-	}
-
 	filter "system:windows"
-		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
 
 		defines {
 			"GES_PLATFORM_WINDOWS",
 			"GES_BUILD_DLL",
+		}
+
+		links {
+			"GLFW",
+			"opengl32.lib",
 		}
 
 		postbuildcommands {
@@ -104,6 +106,8 @@ project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	cdialect "C11"
+	cppdialect "C++17"
 	characterset ("Unicode")
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -124,7 +128,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
 
