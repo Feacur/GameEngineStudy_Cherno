@@ -6,6 +6,8 @@ workspace "GameEngineStudy"
 	flags { "FatalWarnings", "NoMinimalRebuild" }
 	floatingpoint "Fast"
 	floatingpointexceptions "off"
+	exceptionhandling "Off"
+	rtti "Off"
 
 	configurations {
 		"Debug",
@@ -18,6 +20,7 @@ workspace "GameEngineStudy"
 			"4201", -- nameless struct/union (suppress)
 			"4189", -- local variable is initialized but not referenced (suppress)
 			"4100", -- unreferenced formal parameter (suppress)
+			"4530", -- C++ exception handling was used but -EHsc was not selected (suppress)
 		}
 		-- buildoptions {
 		-- 	"-Bt+",
