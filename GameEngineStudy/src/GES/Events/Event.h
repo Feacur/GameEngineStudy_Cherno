@@ -32,9 +32,13 @@ namespace GES {
 		MouseButton    = BIT(int32, 4),
 	};
 
+	inline EventCategory operator|(EventCategory container, EventCategory bits) {
+		return static_cast<EventCategory>(static_cast<int32>(container) | static_cast<int32>(bits));
+	}
+
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
 								virtual EventType GetEventType() const override { return GetStaticType(); }\
-								virtual const char* GetName() const override { return #type; }
+								virtual char const * GetName() const override { return #type; }
 
 #define EVENT_CLASS_CATEGORY(category) virtual int32 GetCategoryFlags() const override { return (int32)(category); }
 
@@ -43,7 +47,7 @@ namespace GES {
 		friend class EventDispatcher;
 	public:
 		virtual EventType GetEventType() const = 0;
-		virtual const char* GetName() const = 0;
+		virtual char const * GetName() const = 0;
 		virtual int32 GetCategoryFlags() const = 0;
 		virtual std::string ToString() const { return GetName(); }
 
@@ -60,7 +64,7 @@ namespace GES {
 		template<typename T>
 		using EventFn = std::function<bool(T&)>;
 	public:
-		EventDispatcher(Event& event)
+		EventDispatcher(Event & event)
 			: m_Event(event)
 		{
 		}
@@ -76,10 +80,10 @@ namespace GES {
 			return false;
 		}
 	private:
-		Event& m_Event;
+		Event & m_Event;
 	};
 
-	inline std::ostream& operator<<(std::ostream& os, const Event& e)
+	inline std::ostream& operator<<(std::ostream & os, Event const & e)
 	{
 		return os << e.ToString();
 	}

@@ -101,7 +101,7 @@
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\GameEngineStudy\GameEngineStudy.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\GameEngineStudy\GameEngineStudy.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\GameEngineStudy\GameEngineStudy.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\GameEngineStudy\GameEngineStudy.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\GameEngineStudy\GameEngineStudy.dll "..\bin\Debug-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\GameEngineStudy\GameEngineStudy.dll "..\bin\Debug-windows-x86_64\Sandbox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Development|x64'">
@@ -136,7 +136,7 @@
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Development-windows-x86_64\GameEngineStudy\GameEngineStudy.dll\ (xcopy /Q /E /Y /I ..\bin\Development-windows-x86_64\GameEngineStudy\GameEngineStudy.dll ..\bin\Development-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Development-windows-x86_64\GameEngineStudy\GameEngineStudy.dll ..\bin\Development-windows-x86_64\Sandbox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Development-windows-x86_64\GameEngineStudy\GameEngineStudy.dll\ (xcopy /Q /E /Y /I ..\bin\Development-windows-x86_64\GameEngineStudy\GameEngineStudy.dll "..\bin\Development-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Development-windows-x86_64\GameEngineStudy\GameEngineStudy.dll "..\bin\Development-windows-x86_64\Sandbox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|x64'">
@@ -171,7 +171,7 @@
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Shipping-windows-x86_64\GameEngineStudy\GameEngineStudy.dll\ (xcopy /Q /E /Y /I ..\bin\Shipping-windows-x86_64\GameEngineStudy\GameEngineStudy.dll ..\bin\Shipping-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Shipping-windows-x86_64\GameEngineStudy\GameEngineStudy.dll ..\bin\Shipping-windows-x86_64\Sandbox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Shipping-windows-x86_64\GameEngineStudy\GameEngineStudy.dll\ (xcopy /Q /E /Y /I ..\bin\Shipping-windows-x86_64\GameEngineStudy\GameEngineStudy.dll "..\bin\Shipping-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Shipping-windows-x86_64\GameEngineStudy\GameEngineStudy.dll "..\bin\Shipping-windows-x86_64\Sandbox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
