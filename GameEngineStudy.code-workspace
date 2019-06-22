@@ -12,12 +12,22 @@
 		// extensions: typescript
 		"typescript.tsc.autoDetect": "off",
 		// extensions: ms-vscode.cpptools
+		"C_Cpp.dimInactiveRegions": true,
 		"C_Cpp.intelliSenseEngine": "Default",
 		"C_Cpp.default.cStandard": "c11",
 		"C_Cpp.default.cppStandard": "c++17",
 		"C_Cpp.default.compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Tools\\MSVC\\14.16.27023\\bin\\Hostx64\\x64\\cl.exe",
 		"C_Cpp.default.intelliSenseMode": "msvc-x64",
-		"C_Cpp.default.includePath": ["."],
+		"C_Cpp.default.includePath": [
+			"GameEngineStudy\\src",
+			"GameEngineStudy\\src\\GES",
+			"GameEngineStudy\\vendor\\GLFW\\include",
+			"GameEngineStudy\\vendor\\spdlog\\include",
+		],
+		"C_Cpp.default.defines": [
+			"GES_PLATFORM_WINDOWS",
+			"GES_BUILD_DLL",
+		],
 		// files
 		"files.exclude": {
 			".vs/" : true,

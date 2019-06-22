@@ -1,6 +1,9 @@
 # IDE
 /.vs/
+#*.sln
+#*.vcxproj*
 *.user
+**/.vscode/ipch/
 
 # Custom project caches
 /bin/
