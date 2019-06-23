@@ -4,7 +4,7 @@
 #include "GES/Events/ApplicationEvent.h"
 #include "GES/Log.h"
 
-#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 #define BIND_EVENT_FN(name) std::bind(&name, this, std::placeholders::_1)
 

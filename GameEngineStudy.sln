@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLFW", "GameEngineStudy\ven
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngineStudy", "GameEngineStudy\GameEngineStudy.vcxproj", "{CE099DE9-3A95-0AAE-43A6-8DA2AFB066AE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Glad", "GameEngineStudy\vendor\Glad.vcxproj", "{BDD6857C-A90D-870D-52FA-6C103E10030F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -32,6 +34,12 @@ Global
 		{CE099DE9-3A95-0AAE-43A6-8DA2AFB066AE}.Development|x64.Build.0 = Development|x64
 		{CE099DE9-3A95-0AAE-43A6-8DA2AFB066AE}.Shipping|x64.ActiveCfg = Shipping|x64
 		{CE099DE9-3A95-0AAE-43A6-8DA2AFB066AE}.Shipping|x64.Build.0 = Shipping|x64
+		{BDD6857C-A90D-870D-52FA-6C103E10030F}.Debug|x64.ActiveCfg = Debug|x64
+		{BDD6857C-A90D-870D-52FA-6C103E10030F}.Debug|x64.Build.0 = Debug|x64
+		{BDD6857C-A90D-870D-52FA-6C103E10030F}.Development|x64.ActiveCfg = Development|x64
+		{BDD6857C-A90D-870D-52FA-6C103E10030F}.Development|x64.Build.0 = Development|x64
+		{BDD6857C-A90D-870D-52FA-6C103E10030F}.Shipping|x64.ActiveCfg = Shipping|x64
+		{BDD6857C-A90D-870D-52FA-6C103E10030F}.Shipping|x64.Build.0 = Shipping|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

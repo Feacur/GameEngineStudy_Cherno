@@ -21,6 +21,7 @@ workspace "GameEngineStudy"
 			"4189", -- local variable is initialized but not referenced (suppress)
 			"4100", -- unreferenced formal parameter (suppress)
 			"4530", -- C++ exception handling was used but -EHsc was not selected (suppress)
+			-- "4521", -- 'identifier' : class 'type' needs to have dll-interface to be used by clients of class 'type2'
 		}
 		-- buildoptions {
 		-- 	"-Bt+",
@@ -58,9 +59,11 @@ enginename = "GameEngineStudy"
 -- Include directories relative to root folder (solution directory)
 include_directories = {}
 include_directories["GLFW"] = "GameEngineStudy/vendor/GLFW/include"
+include_directories["Glad"] = "GameEngineStudy/vendor/Glad/include"
 
 root_directory = os.getcwd()
 include "GameEngineStudy/vendor/premake5_GLFW.lua"
+include "GameEngineStudy/vendor/premake5_Glad.lua"
 
 project "GameEngineStudy"
 	location "GameEngineStudy"
@@ -85,6 +88,7 @@ project "GameEngineStudy"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{include_directories.GLFW}",
+		"%{include_directories.Glad}",
 	}
 
 	filter "system:windows"
@@ -94,10 +98,12 @@ project "GameEngineStudy"
 		defines {
 			"GES_PLATFORM_WINDOWS",
 			"GES_BUILD_DLL",
+			"GLFW_INCLUDE_NONE",
 		}
 
 		links {
 			"GLFW",
+			"Glad",
 			"opengl32.lib",
 		}
 

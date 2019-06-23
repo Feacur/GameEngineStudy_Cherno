@@ -21,6 +21,10 @@ project "GLFW"
 		"GLFW/src/vulkan.c",
 		"GLFW/src/window.c"
 	}
+
+	includedirs {
+		"GLFW/include"
+	}
 	
 	filter "system:windows"
 		staticruntime "Off"

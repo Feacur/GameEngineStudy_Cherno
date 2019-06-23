@@ -5,6 +5,8 @@
 #include "GES/Events/MouseEvent.h"
 #include "GES/Events/KeyEvent.h"
 
+#include <glad/glad.h>
+
 namespace GES {
 	static bool s_GLFWInitialized = false;
 
@@ -48,6 +50,8 @@ namespace GES {
 
 		m_Window = glfwCreateWindow((int32)props.Width, (int32)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+		int gladStatus = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		GES_CORE_ASSERT(gladStatus, "Failed to initialize GLAD");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
