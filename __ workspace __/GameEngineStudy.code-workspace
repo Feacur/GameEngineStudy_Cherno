@@ -3,6 +3,10 @@
 		{
 			"path": "."
 		},
+		// {
+		// 	"name": "root, messes intellisense",
+		// 	"path": ".."
+		// },
 		{
 			"path": "..\\GameEngineStudy"
 		},
@@ -42,6 +46,10 @@
 		"files.exclude": {
 			".vs/" : true,
 			"bin-int/" : true,
+		},
+		"files.associations": {
+			"vector": "cpp",
+			"xstring": "cpp"
 		}
 	},
 	"extensions": {
