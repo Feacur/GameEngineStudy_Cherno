@@ -37,6 +37,12 @@
     <ClInclude Include="src\GES\Events\MouseEvent.h">
       <Filter>GES\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\GES\Layer.h">
+      <Filter>GES</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GES\LayerStack.h">
+      <Filter>GES</Filter>
+    </ClInclude>
     <ClInclude Include="src\GES\Log.h">
       <Filter>GES</Filter>
     </ClInclude>
@@ -50,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GES\Application.cpp">
+      <Filter>GES</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GES\Layer.cpp">
+      <Filter>GES</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GES\LayerStack.cpp">
       <Filter>GES</Filter>
     </ClCompile>
     <ClCompile Include="src\GES\Log.cpp">
