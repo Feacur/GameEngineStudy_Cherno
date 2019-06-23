@@ -88,7 +88,7 @@ project "GameEngineStudy"
 	}
 
 	filter "system:windows"
-		staticruntime "On"
+		staticruntime "Off"
 		systemversion "latest"
 
 		defines {
@@ -131,7 +131,7 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		staticruntime "On"
+		staticruntime "Off"
 		systemversion "latest"
 
 		defines {

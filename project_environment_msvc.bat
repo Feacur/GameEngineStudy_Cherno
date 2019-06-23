@@ -5,6 +5,9 @@ rem code page 1250: Windows Central Europe
 rem code page 1251: Windows Cyrillic
 rem code page 1252: Windows Western
 
+set VSLANG=1033
+rem msbuild locale 1033: English
+
 rem read batch file arguments
 set architecture=%1
 if [%architecture%] == [] (
