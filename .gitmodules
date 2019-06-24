@@ -7,3 +7,6 @@
 [submodule "GameEngineStudy/vendor/GLFW"]
 	path = GameEngineStudy/vendor/GLFW
 	url = https://github.com/glfw/glfw
+[submodule "GameEngineStudy/vendor/imgui"]
+	path = GameEngineStudy/vendor/imgui
+	url = https://github.com/ocornut/imgui
