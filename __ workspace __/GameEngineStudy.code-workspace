@@ -45,12 +45,13 @@
 		],
 		// files
 		"files.exclude": {
-			".vs/" : true,
-			"bin-int/" : true,
+			"**/.vscode/ipch/" : true,
 		},
 		"files.associations": {
+			"*.h": "cpp",
 			"vector": "cpp",
-			"xstring": "cpp"
+			"xstring": "cpp",
+			"xutility": "cpp"
 		}
 	},
 	"extensions": {
