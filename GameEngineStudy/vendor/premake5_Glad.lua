@@ -6,9 +6,9 @@ project "Glad"
 	warnings "Default"
 	removeflags { "FatalWarnings" }
 	
-	GLFW_to_root = path.getrelative(os.getcwd(), root_directory)
-	targetdir (GLFW_to_root .. "/bin/" .. outputdir .. "/%{prj.name}")
-	objdir (GLFW_to_root .. "/bin-int/" .. outputdir .. "/%{prj.name}")
+	Glad_to_root = path.getrelative(os.getcwd(), root_directory)
+	targetdir (Glad_to_root .. "/bin/" .. outputdir .. "/%{prj.name}")
+	objdir (Glad_to_root .. "/bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files {
 		"Glad/include/KHR/khrplatform.h",

@@ -60,10 +60,12 @@ enginename = "GameEngineStudy"
 include_directories = {}
 include_directories["GLFW"] = "GameEngineStudy/vendor/GLFW/include"
 include_directories["Glad"] = "GameEngineStudy/vendor/Glad/include"
+include_directories["imgui"] = "GameEngineStudy/vendor/imgui"
 
 root_directory = os.getcwd()
 include "GameEngineStudy/vendor/premake5_GLFW.lua"
 include "GameEngineStudy/vendor/premake5_Glad.lua"
+include "GameEngineStudy/vendor/premake5_imgui.lua"
 
 project "GameEngineStudy"
 	location "GameEngineStudy"
@@ -89,6 +91,7 @@ project "GameEngineStudy"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{include_directories.GLFW}",
 		"%{include_directories.Glad}",
+		"%{include_directories.imgui}",
 	}
 
 	filter "system:windows"
@@ -104,6 +107,7 @@ project "GameEngineStudy"
 		links {
 			"GLFW",
 			"Glad",
+			"imgui",
 			"opengl32.lib",
 		}
 
