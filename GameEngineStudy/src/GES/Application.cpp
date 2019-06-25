@@ -9,8 +9,13 @@
 #define BIND_EVENT_FN(name) std::bind(&name, this, std::placeholders::_1)
 
 namespace GES {
+	Application * Application::s_Instance = nullptr;
+
 	Application::Application()
 	{
+		GES_ASSERT(!s_Instance, "Duplicate Application intance");
+		s_Instance = this;
+
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 	}

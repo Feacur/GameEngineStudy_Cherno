@@ -16,6 +16,9 @@ namespace GES {
 		Application();
 		virtual ~Application();
 	public:
+		inline static Application& Get() { return *s_Instance; }
+		inline Window& GetWindow() { return *m_Window; }
+	public:
 		void Run();
 		void OnEvent(Event & e);
 
@@ -26,6 +29,8 @@ namespace GES {
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 		LayerStack m_layerStack;
+
+		static Application * s_Instance;
 	};
 
 	Application *CreateApplication();

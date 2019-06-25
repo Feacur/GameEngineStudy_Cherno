@@ -102,6 +102,7 @@ project "GameEngineStudy"
 			"GES_PLATFORM_WINDOWS",
 			"GES_BUILD_DLL",
 			"GLFW_INCLUDE_NONE",
+			"_CRT_SECURE_NO_WARNINGS"
 		}
 
 		links {

@@ -81,7 +81,7 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4201;4189;4100;4530;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>DEBUG;GES_PLATFORM_WINDOWS;GES_BUILD_DLL;GLFW_INCLUDE_NONE;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG;GES_PLATFORM_WINDOWS;GES_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -111,7 +111,7 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4201;4189;4100;4530;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>DEVELOPMENT;GES_PLATFORM_WINDOWS;GES_BUILD_DLL;GLFW_INCLUDE_NONE;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEVELOPMENT;GES_PLATFORM_WINDOWS;GES_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -146,7 +146,7 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4201;4189;4100;4530;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>SHIPPING;GES_PLATFORM_WINDOWS;GES_BUILD_DLL;GLFW_INCLUDE_NONE;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SHIPPING;GES_PLATFORM_WINDOWS;GES_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -183,18 +183,22 @@
     <ClInclude Include="src\GES\Events\Event.h" />
     <ClInclude Include="src\GES\Events\KeyEvent.h" />
     <ClInclude Include="src\GES\Events\MouseEvent.h" />
+    <ClInclude Include="src\GES\ImGuiLayer\ImGuiLayer.h" />
     <ClInclude Include="src\GES\Layer.h" />
     <ClInclude Include="src\GES\LayerStack.h" />
     <ClInclude Include="src\GES\Log.h" />
     <ClInclude Include="src\GES\Window.h" />
+    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\ges_pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GES\Application.cpp" />
+    <ClCompile Include="src\GES\ImGuiLayer\ImGuiLayer.cpp" />
     <ClCompile Include="src\GES\Layer.cpp" />
     <ClCompile Include="src\GES\LayerStack.cpp" />
     <ClCompile Include="src\GES\Log.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\ges_pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

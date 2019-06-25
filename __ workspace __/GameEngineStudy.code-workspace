@@ -38,6 +38,7 @@
 			"..\\GameEngineStudy\\src\\GES",
 			"..\\GameEngineStudy\\vendor\\GLFW\\include",
 			"..\\GameEngineStudy\\vendor\\Glad\\include",
+			"..\\GameEngineStudy\\vendor\\imgui",
 			"..\\GameEngineStudy\\vendor\\spdlog\\include",
 		],
 		"C_Cpp.default.defines": [
