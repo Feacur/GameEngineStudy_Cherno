@@ -3,7 +3,7 @@
 #*.sln
 #*.vcxproj*
 *.user
-**/.vscode/ipch/
+/ipch/
 
 # Custom project caches
 /bin/

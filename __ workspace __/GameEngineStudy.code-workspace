@@ -43,6 +43,7 @@
 		"C_Cpp.default.defines": [
 			"GES_PLATFORM_WINDOWS",
 		],
+		"C_Cpp.intelliSenseCachePath": "..",
 		// files
 		"files.exclude": {
 			"**/.vscode/ipch/" : true,
