@@ -63,9 +63,12 @@ include_directories["Glad"] = "GameEngineStudy/vendor/Glad/include"
 include_directories["imgui"] = "GameEngineStudy/vendor/imgui"
 
 root_directory = os.getcwd()
+
+group "Dependecies"
 include "GameEngineStudy/vendor/premake5_GLFW.lua"
 include "GameEngineStudy/vendor/premake5_Glad.lua"
 include "GameEngineStudy/vendor/premake5_imgui.lua"
+group ""
 
 project "GameEngineStudy"
 	location "GameEngineStudy"
