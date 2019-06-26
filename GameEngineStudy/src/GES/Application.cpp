@@ -6,8 +6,6 @@
 
 #include <glad/glad.h>
 
-#define BIND_EVENT_FN(name) std::bind(&name, this, std::placeholders::_1)
-
 namespace GES {
 	Application * Application::s_Instance = nullptr;
 

@@ -36,3 +36,5 @@ typedef unsigned long uint48; // witty (32 + 64) / 2
 #endif
 
 #define BIT(T, index) static_cast<T>(static_cast<T>(1) << index)
+
+#define BIND_EVENT_FN(name) std::bind(&name, this, std::placeholders::_1)

@@ -90,6 +90,13 @@ namespace GES {
 			}
 		});
 
+		glfwSetCharCallback(m_Window, [](GLFWwindow * window, uint32 keycode) {
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			KeyTypedEvent event(keycode);
+			data.EventCallback(event);
+		});
+
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow * window, int button, int action, int mods) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			
