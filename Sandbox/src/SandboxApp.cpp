@@ -10,14 +10,20 @@ public:
 
 	void OnUpdate() override
 	{
-		GES_INFO("ExampleLayer::Update");
+		if (GES::Input::IsKeyPressed(GES_KEY_TAB))
+			GES_TRACE("Tab key is pressed (poll)!");
 	}
 
 	void OnEvent(GES::Event& event) override
 	{
-		GES_TRACE("{0}", event);
+		if (event.GetEventType() == GES::EventType::KeyPressed)
+		{
+			GES::KeyPressedEvent& e = (GES::KeyPressedEvent&)event;
+			if (e.GetKeyCode() == GES_KEY_TAB)
+				GES_TRACE("Tab key is pressed (event)!");
+			GES_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
-
 };
 
 class Sandbox : public GES::Application
