@@ -6,6 +6,8 @@
 
 #include <glad/glad.h>
 
+#include "Input.h"
+
 namespace GES {
 	Application * Application::s_Instance = nullptr;
 

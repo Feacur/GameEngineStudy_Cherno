@@ -37,10 +37,10 @@ namespace GES {
 	}
 
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
-								virtual EventType GetEventType() const override { return GetStaticType(); }\
-								virtual char const * GetName() const override { return #type; }
+								EventType GetEventType() const override { return GetStaticType(); }\
+								char const * GetName() const override { return #type; }
 
-#define EVENT_CLASS_CATEGORY(category) virtual int32 GetCategoryFlags() const override { return (int32)(category); }
+#define EVENT_CLASS_CATEGORY(category) int32 GetCategoryFlags() const override { return (int32)(category); }
 
 	class GES_API Event
 	{

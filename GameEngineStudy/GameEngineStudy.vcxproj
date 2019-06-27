@@ -184,11 +184,13 @@
     <ClInclude Include="src\GES\Events\KeyEvent.h" />
     <ClInclude Include="src\GES\Events\MouseEvent.h" />
     <ClInclude Include="src\GES\ImGuiLayer\ImGuiLayer.h" />
+    <ClInclude Include="src\GES\Input.h" />
     <ClInclude Include="src\GES\Layer.h" />
     <ClInclude Include="src\GES\LayerStack.h" />
     <ClInclude Include="src\GES\Log.h" />
     <ClInclude Include="src\GES\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\ges_pch.h" />
   </ItemGroup>
@@ -199,6 +201,7 @@
     <ClCompile Include="src\GES\LayerStack.cpp" />
     <ClCompile Include="src\GES\Log.cpp" />
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\ges_pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

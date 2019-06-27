@@ -58,10 +58,10 @@ namespace GES {
 	void ImGuiLayer::OnUpdate()
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		Application& app = Application::Get();
+		Window& window = Application::Get().GetWindow();
 		io.DisplaySize = ImVec2(
-			(float)app.GetWindow().GetWidth(),
-			(float)app.GetWindow().GetHeight()
+			(float)window.GetWidth(),
+			(float)window.GetHeight()
 		);
 		
 		float time = (float)glfwGetTime();

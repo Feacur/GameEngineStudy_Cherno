@@ -28,10 +28,6 @@ public:
 		PushLayer(new ExampleLayer());
 		PushLayer(new GES::ImGuiLayer());
 	}
-
-	~Sandbox()
-	{
-	}
 };
 
 GES::Application *GES::CreateApplication()

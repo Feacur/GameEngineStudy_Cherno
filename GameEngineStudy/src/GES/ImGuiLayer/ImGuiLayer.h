@@ -11,13 +11,13 @@ namespace GES {
 	{
 	public:
 		ImGuiLayer();
-		virtual ~ImGuiLayer();
+		~ImGuiLayer() override;
 
 	public:
-		virtual void OnAttach();
-		virtual void OnDetach();
-		virtual void OnUpdate();
-		virtual void OnEvent(Event& e);
+		void OnAttach() override;
+		void OnDetach() override;
+		void OnUpdate() override;
+		void OnEvent(Event& e) override;
 
 	private:
 		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);

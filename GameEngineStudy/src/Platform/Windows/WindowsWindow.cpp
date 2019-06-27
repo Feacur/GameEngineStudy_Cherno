@@ -152,5 +152,4 @@ namespace GES {
 	{
 		return m_Data.VSync;
 	}
-
 }

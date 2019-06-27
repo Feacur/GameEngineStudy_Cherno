@@ -9,7 +9,7 @@ namespace GES {
 	{
 	public:
 		WindowsWindow(WindowProps const & props);
-		virtual ~WindowsWindow();
+		~WindowsWindow() override;
 
 		void OnUpdate() override;
 
@@ -20,9 +20,10 @@ namespace GES {
 		inline void SetEventCallback(EventCallbackFn const & callback) override { m_Data.EventCallback = callback; }
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
+		inline void * GetNativeWindow() const override { return m_Window; }
 	private:
-		virtual void Init(WindowProps const & props);
-		virtual void Shutdown();
+		void Init(WindowProps const & props);
+		void Shutdown();
 	private:
 		GLFWwindow* m_Window;
 
