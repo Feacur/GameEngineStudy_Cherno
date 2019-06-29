@@ -49,6 +49,9 @@
     <ClInclude Include="src\GES\Input.h">
       <Filter>GES</Filter>
     </ClInclude>
+    <ClInclude Include="src\GES\KeyCodes.h">
+      <Filter>GES</Filter>
+    </ClInclude>
     <ClInclude Include="src\GES\Layer.h">
       <Filter>GES</Filter>
     </ClInclude>
@@ -56,6 +59,9 @@
       <Filter>GES</Filter>
     </ClInclude>
     <ClInclude Include="src\GES\Log.h">
+      <Filter>GES</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GES\MouseButtonCodes.h">
       <Filter>GES</Filter>
     </ClInclude>
     <ClInclude Include="src\GES\Window.h">

@@ -10,3 +10,6 @@
 [submodule "GameEngineStudy/vendor/imgui"]
 	path = GameEngineStudy/vendor/imgui
 	url = https://github.com/ocornut/imgui
+[submodule "GameEngineStudy/vendor/glm"]
+	path = GameEngineStudy/vendor/glm
+	url = https://github.com/g-truc/glm

@@ -40,6 +40,7 @@
 			"..\\GameEngineStudy\\vendor\\Glad\\include",
 			"..\\GameEngineStudy\\vendor\\imgui",
 			"..\\GameEngineStudy\\vendor\\spdlog\\include",
+			"..\\GameEngineStudy\\vendor\\glm",
 		],
 		"C_Cpp.default.defines": [
 			"GES_PLATFORM_WINDOWS",

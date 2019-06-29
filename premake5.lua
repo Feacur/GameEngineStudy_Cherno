@@ -56,11 +56,14 @@ workspace "GameEngineStudy"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 enginename = "GameEngineStudy"
 
--- Include directories relative to root folder (solution directory)
+-- Include directories relative to the root folder (solution directory)
 include_directories = {}
-include_directories["GLFW"] = "GameEngineStudy/vendor/GLFW/include"
-include_directories["Glad"] = "GameEngineStudy/vendor/Glad/include"
-include_directories["imgui"] = "GameEngineStudy/vendor/imgui"
+include_directories["GES"]    = enginename .. "/src"
+include_directories["spdlog"] = enginename .. "/vendor/spdlog/include"
+include_directories["GLFW"]   = enginename .. "/vendor/GLFW/include"
+include_directories["Glad"]   = enginename .. "/vendor/Glad/include"
+include_directories["imgui"]  = enginename .. "/vendor/imgui"
+include_directories["glm"]    = enginename .. "/vendor/glm"
 
 root_directory = os.getcwd()
 
@@ -82,19 +85,23 @@ project "GameEngineStudy"
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	pchheader "ges_pch.h"
-	pchsource "GameEngineStudy/src/ges_pch.cpp"
+	pchsource (enginename .. "/src/ges_pch.cpp")
 
 	files {
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		-- "%{include_directories.spdlog}/spdlog/**.h",
+		-- "%{include_directories.glm}/glm/**.hpp",
+		-- "%{include_directories.glm}/glm/**.inl",
 	}
 
 	includedirs {
-		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include",
+		"%{include_directories.GES}",
+		"%{include_directories.spdlog}",
 		"%{include_directories.GLFW}",
 		"%{include_directories.Glad}",
 		"%{include_directories.imgui}",
+		"%{include_directories.glm}",
 	}
 
 	filter "system:windows"
@@ -136,8 +143,9 @@ project "Sandbox"
 	}
 
 	includedirs {
-		(enginename .. "/src"),
-		(enginename .. "/vendor/spdlog/include"),
+		"%{include_directories.GES}",
+		"%{include_directories.spdlog}",
+		"%{include_directories.glm}",
 	}
 
 	links {
