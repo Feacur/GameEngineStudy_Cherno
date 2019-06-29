@@ -14,6 +14,13 @@ public:
 			GES_TRACE("Tab key is pressed (poll)!");
 	}
 
+	void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello, World!");
+		ImGui::End();
+	}
+
 	void OnEvent(GES::Event& event) override
 	{
 		if (event.GetEventType() == GES::EventType::KeyPressed)
@@ -32,7 +39,6 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
-		PushLayer(new GES::ImGuiLayer());
 	}
 };
 

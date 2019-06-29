@@ -10,7 +10,7 @@
 #include "GES/KeyCodes.h"
 #include "GES/MouseButtonCodes.h"
 
-#include "GES/ImGuiLayer/ImGuiLayer.h"
+#include <imgui.h>
 
 // ---- Entry Point -------
 #include "GES/EntryPoint.h"

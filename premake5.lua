@@ -75,7 +75,7 @@ group ""
 
 project "GameEngineStudy"
 	location "GameEngineStudy"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
 	cdialect "C11"
 	cppdialect "C++17"
@@ -110,7 +110,8 @@ project "GameEngineStudy"
 
 		defines {
 			"GES_PLATFORM_WINDOWS",
-			"GES_BUILD_DLL",
+			-- "GES_BUILD_DLL",
+			"GES_BUILD_NONE",
 			"GLFW_INCLUDE_NONE",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
@@ -122,9 +123,10 @@ project "GameEngineStudy"
 			"opengl32.lib",
 		}
 
-		postbuildcommands {
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-		}
+		-- if specified [kind "SharedLib"]
+		-- postbuildcommands {
+		-- 	("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
+		-- }
 
 project "Sandbox"
 	location "Sandbox"
@@ -145,11 +147,13 @@ project "Sandbox"
 	includedirs {
 		"%{include_directories.GES}",
 		"%{include_directories.spdlog}",
+		"%{include_directories.imgui}",
 		"%{include_directories.glm}",
 	}
 
 	links {
 		"GameEngineStudy",
+		-- "imgui",
 	}
 
 	filter "system:windows"
@@ -158,4 +162,5 @@ project "Sandbox"
 
 		defines {
 			"GES_PLATFORM_WINDOWS",
+			"GES_BUILD_NONE",
 		}

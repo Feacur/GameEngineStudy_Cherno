@@ -23,19 +23,19 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
@@ -54,25 +54,22 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
     <OutDir>..\bin\Debug-windows-x86_64\GameEngineStudy\</OutDir>
     <IntDir>..\bin-int\Debug-windows-x86_64\GameEngineStudy\</IntDir>
     <TargetName>GameEngineStudy</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Development|x64'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>..\bin\Development-windows-x86_64\GameEngineStudy\</OutDir>
     <IntDir>..\bin-int\Development-windows-x86_64\GameEngineStudy\</IntDir>
     <TargetName>GameEngineStudy</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|x64'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>..\bin\Shipping-windows-x86_64\GameEngineStudy\</OutDir>
     <IntDir>..\bin-int\Shipping-windows-x86_64\GameEngineStudy\</IntDir>
     <TargetName>GameEngineStudy</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -81,7 +78,7 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4201;4189;4100;4530;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>DEBUG;GES_PLATFORM_WINDOWS;GES_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG;GES_PLATFORM_WINDOWS;GES_BUILD_NONE;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -96,13 +93,11 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>..\bin\Debug-windows-x86_64\GameEngineStudy\GameEngineStudy.lib</ImportLibrary>
-      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\GameEngineStudy\GameEngineStudy.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\GameEngineStudy\GameEngineStudy.dll "..\bin\Debug-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\GameEngineStudy\GameEngineStudy.dll "..\bin\Debug-windows-x86_64\Sandbox\" &gt; nul)</Command>
-    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <TreatLibWarningAsErrors>true</TreatLibWarningAsErrors>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Development|x64'">
     <ClCompile>
@@ -111,7 +106,7 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4201;4189;4100;4530;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>DEVELOPMENT;GES_PLATFORM_WINDOWS;GES_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEVELOPMENT;GES_PLATFORM_WINDOWS;GES_BUILD_NONE;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -131,13 +126,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>..\bin\Development-windows-x86_64\GameEngineStudy\GameEngineStudy.lib</ImportLibrary>
-      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Development-windows-x86_64\GameEngineStudy\GameEngineStudy.dll\ (xcopy /Q /E /Y /I ..\bin\Development-windows-x86_64\GameEngineStudy\GameEngineStudy.dll "..\bin\Development-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Development-windows-x86_64\GameEngineStudy\GameEngineStudy.dll "..\bin\Development-windows-x86_64\Sandbox\" &gt; nul)</Command>
-    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <TreatLibWarningAsErrors>true</TreatLibWarningAsErrors>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|x64'">
     <ClCompile>
@@ -146,7 +139,7 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4201;4189;4100;4530;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>SHIPPING;GES_PLATFORM_WINDOWS;GES_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SHIPPING;GES_PLATFORM_WINDOWS;GES_BUILD_NONE;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>Full</Optimization>
@@ -166,13 +159,11 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>..\bin\Shipping-windows-x86_64\GameEngineStudy\GameEngineStudy.lib</ImportLibrary>
-      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Shipping-windows-x86_64\GameEngineStudy\GameEngineStudy.dll\ (xcopy /Q /E /Y /I ..\bin\Shipping-windows-x86_64\GameEngineStudy\GameEngineStudy.dll "..\bin\Shipping-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Shipping-windows-x86_64\GameEngineStudy\GameEngineStudy.dll "..\bin\Shipping-windows-x86_64\Sandbox\" &gt; nul)</Command>
-    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <TreatLibWarningAsErrors>true</TreatLibWarningAsErrors>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\GES.h" />
@@ -191,18 +182,17 @@
     <ClInclude Include="src\GES\Log.h" />
     <ClInclude Include="src\GES\MouseButtonCodes.h" />
     <ClInclude Include="src\GES\Window.h" />
-    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\ges_pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GES\Application.cpp" />
+    <ClCompile Include="src\GES\ImGuiLayer\ImGuiBuild.cpp" />
     <ClCompile Include="src\GES\ImGuiLayer\ImGuiLayer.cpp" />
     <ClCompile Include="src\GES\Layer.cpp" />
     <ClCompile Include="src\GES\LayerStack.cpp" />
     <ClCompile Include="src\GES\Log.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\ges_pch.cpp">

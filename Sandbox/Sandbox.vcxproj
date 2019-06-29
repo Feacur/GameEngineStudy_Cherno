@@ -80,8 +80,8 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4201;4189;4100;4530;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>DEBUG;GES_PLATFORM_WINDOWS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\GameEngineStudy\src;..\GameEngineStudy\vendor\spdlog\include;..\GameEngineStudy\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DEBUG;GES_PLATFORM_WINDOWS;GES_BUILD_NONE;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\GameEngineStudy\src;..\GameEngineStudy\vendor\spdlog\include;..\GameEngineStudy\vendor\imgui;..\GameEngineStudy\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -104,8 +104,8 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4201;4189;4100;4530;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>DEVELOPMENT;GES_PLATFORM_WINDOWS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\GameEngineStudy\src;..\GameEngineStudy\vendor\spdlog\include;..\GameEngineStudy\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DEVELOPMENT;GES_PLATFORM_WINDOWS;GES_BUILD_NONE;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\GameEngineStudy\src;..\GameEngineStudy\vendor\spdlog\include;..\GameEngineStudy\vendor\imgui;..\GameEngineStudy\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -133,8 +133,8 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DisableSpecificWarnings>4201;4189;4100;4530;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <PreprocessorDefinitions>SHIPPING;GES_PLATFORM_WINDOWS;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\GameEngineStudy\src;..\GameEngineStudy\vendor\spdlog\include;..\GameEngineStudy\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SHIPPING;GES_PLATFORM_WINDOWS;GES_BUILD_NONE;_HAS_EXCEPTIONS=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\GameEngineStudy\src;..\GameEngineStudy\vendor\spdlog\include;..\GameEngineStudy\vendor\imgui;..\GameEngineStudy\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>

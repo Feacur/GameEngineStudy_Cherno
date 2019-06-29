@@ -11,7 +11,7 @@ namespace GES {
 	class GES_API LayerStack
 	{
 	public:
-		LayerStack();
+		LayerStack() = default;
 		~LayerStack();
 
 		void PushLayer(Layer* layer);
@@ -23,7 +23,7 @@ namespace GES {
 		std::vector<Layer*>::iterator end() { return m_Layers.end(); }
 	private:
 		std::vector<Layer*> m_Layers;
-		std::vector<Layer*>::iterator m_LayerInsert;
+		uint32 m_LayerInsertIndex = 0;
 	};
 }
 #pragma warning(pop)

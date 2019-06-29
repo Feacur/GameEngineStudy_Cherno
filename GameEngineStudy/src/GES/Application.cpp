@@ -18,10 +18,9 @@ namespace GES {
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
-	}
 
-	Application::~Application()
-	{
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 	}
 
 	void Application::Run()
@@ -33,6 +32,11 @@ namespace GES {
 
 			for (Layer* layer: m_layerStack)
 				layer->OnUpdate();
+
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : m_layerStack)
+				layer->OnImGuiRender();
+			m_ImGuiLayer->End();
 
 			m_Window->OnUpdate();
 		}

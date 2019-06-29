@@ -39,7 +39,7 @@ project "GLFW"
 			"GLFW/src/win32_window.c",
 			"GLFW/src/wgl_context.c",
 			"GLFW/src/egl_context.c",
-			"GLFW/src/osmesa_context.c"
+			"GLFW/src/osmesa_context.c",
 		}
 
 		defines {

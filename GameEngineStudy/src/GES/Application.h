@@ -5,6 +5,8 @@
 #include "Events/Event.h"
 #include "Window.h"
 
+#include "ImGuiLayer/ImGuiLayer.h"
+
 namespace GES {
 	GES_TEMPLATE template class GES_API std::_Compressed_pair<std::default_delete<Window>, Window *, true>;
 	GES_TEMPLATE template class GES_API std::unique_ptr<Window>;
@@ -14,7 +16,7 @@ namespace GES {
 	{
 	public:
 		Application();
-		virtual ~Application();
+		virtual ~Application() = default;
 	public:
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
@@ -27,6 +29,7 @@ namespace GES {
 	private:
 		bool OnWindowClose(WindowCloseEvent & e);
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer * m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_layerStack;
 
