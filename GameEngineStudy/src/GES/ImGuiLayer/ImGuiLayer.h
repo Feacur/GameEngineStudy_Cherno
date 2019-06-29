@@ -6,6 +6,8 @@
 #include "GES/Events/KeyEvent.h"
 #include "GES/Events/MouseEvent.h"
 
+struct ImGuiContext;
+
 namespace GES {
 	class GES_API ImGuiLayer : public Layer
 	{
@@ -21,8 +23,10 @@ namespace GES {
 	public:
 		void Begin();
 		void End();
+		inline ImGuiContext* GetImGuiContext() { return m_ImGuiContext; }
 
 	private:
 		float m_Time = 0;
+		ImGuiContext * m_ImGuiContext;
 	};
 }

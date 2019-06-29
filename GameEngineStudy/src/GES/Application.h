@@ -20,6 +20,7 @@ namespace GES {
 	public:
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
+		inline ImGuiContext* GetImGuiContext() { return m_ImGuiLayer->GetImGuiContext(); }
 	public:
 		void Run();
 		void OnEvent(Event & e);

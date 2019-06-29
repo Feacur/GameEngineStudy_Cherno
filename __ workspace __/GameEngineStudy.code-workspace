@@ -44,7 +44,7 @@
 		],
 		"C_Cpp.default.defines": [
 			"GES_PLATFORM_WINDOWS",
-			"GES_BUILD_NONE",
+			// "GES_BUILD_NONE",
 		],
 		"C_Cpp.intelliSenseCachePath": "..",
 		// files

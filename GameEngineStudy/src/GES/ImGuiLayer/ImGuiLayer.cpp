@@ -49,6 +49,8 @@ namespace GES {
 		// Setup Platform/Renderer bindings
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 410");
+		
+		m_ImGuiContext = ImGui::GetCurrentContext();
 	}
 
 	void ImGuiLayer::OnDetach()
