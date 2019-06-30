@@ -5,6 +5,9 @@
 #include "GES/Events/MouseEvent.h"
 #include "GES/Events/KeyEvent.h"
 
+#include "Platform/OpenGL/OpenGLContext.h"
+
+#include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
 namespace GES {
@@ -49,9 +52,10 @@ namespace GES {
 		}
 
 		m_Window = glfwCreateWindow((int32)props.Width, (int32)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
-		int gladStatus = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		GES_CORE_ASSERT(gladStatus, "Failed to initialize GLAD");
+
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
@@ -135,7 +139,7 @@ namespace GES {
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)
