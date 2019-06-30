@@ -30,11 +30,11 @@ namespace GES {
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			for (Layer* layer: m_layerStack)
+			for (Layer* layer: m_LayerStack)
 				layer->OnUpdate();
 
 			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_layerStack)
+			for (Layer* layer : m_LayerStack)
 				layer->OnImGuiRender();
 			m_ImGuiLayer->End();
 
@@ -47,7 +47,7 @@ namespace GES {
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 
-		for (auto it = m_layerStack.end(); it != m_layerStack.begin();)
+		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
 		{
 			(*--it)->OnEvent(e);
 			if (e.Handled)
@@ -57,12 +57,12 @@ namespace GES {
 
 	void Application::PushLayer(Layer* layer)
 	{
-		m_layerStack.PushLayer(layer);
+		m_LayerStack.PushLayer(layer);
 	}
 
 	void Application::PushOverlay(Layer* layer)
 	{
-		m_layerStack.PushOverlay(layer);
+		m_LayerStack.PushOverlay(layer);
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent & e)

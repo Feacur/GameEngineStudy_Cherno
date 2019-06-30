@@ -34,7 +34,7 @@ namespace GES {
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer * m_ImGuiLayer;
 		bool m_Running = true;
-		LayerStack m_layerStack;
+		LayerStack m_LayerStack;
 
 		static Application * s_Instance;
 	};
