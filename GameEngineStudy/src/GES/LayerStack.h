@@ -5,8 +5,10 @@
 
 #include <vector>
 
+#ifdef GES_SHARED
 #pragma warning(push)
 #pragma warning(disable: 4251)
+#endif
 namespace GES {
 	class GES_API LayerStack
 	{
@@ -26,4 +28,6 @@ namespace GES {
 		uint32 m_LayerInsertIndex = 0;
 	};
 }
+#ifdef GES_SHARED
 #pragma warning(pop)
+#endif

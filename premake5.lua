@@ -114,7 +114,7 @@ project "GameEngineStudy"
 		defines {
 			"GES_PLATFORM_WINDOWS",
 			-- "GES_BUILD_DLL", -- if specified [kind "SharedLib"]
-			"GES_BUILD_NONE", -- if specified [kind "StaticLib"]
+			-- "GES_SHARED", -- if specified [kind "SharedLib"]
 			"GLFW_INCLUDE_NONE",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
@@ -164,6 +164,6 @@ project "Sandbox"
 
 		defines {
 			"GES_PLATFORM_WINDOWS",
-			"GES_BUILD_NONE", -- if specified [kind "StaticLib"] for the GameEngineStudy
+			-- "GES_SHARED", -- if specified [kind "SharedLib"] for the GameEngineStudy
 			-- "IMGUI_API=__declspec(dllimport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
 		}

@@ -3,8 +3,10 @@
 #include "GES/Core.h"
 #include "GES/Events/Event.h"
 
+#ifdef GES_SHARED
 #pragma warning(push)
 #pragma warning(disable: 4251)
+#endif
 namespace GES {
 	class GES_API Layer
 	{
@@ -26,4 +28,7 @@ namespace GES {
 		std::string m_DebugName;
 	};
 }
+
+#ifdef GES_SHARED
 #pragma warning(pop)
+#endif

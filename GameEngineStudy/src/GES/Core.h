@@ -16,10 +16,7 @@ typedef long          int48;  // witty (32 + 64) / 2
 typedef unsigned long uint48; // witty (32 + 64) / 2
 
 #ifdef GES_PLATFORM_WINDOWS
-	#ifdef GES_BUILD_NONE
-		#define GES_API
-		#define GES_TEMPLATE
-	#else
+	#ifdef GES_SHARED
 		#ifdef GES_BUILD_DLL
 			#define GES_API __declspec(dllexport)
 			#define GES_TEMPLATE
@@ -27,6 +24,9 @@ typedef unsigned long uint48; // witty (32 + 64) / 2
 			#define GES_API __declspec(dllimport)
 			#define GES_TEMPLATE extern
 		#endif
+	#else
+		#define GES_API
+		#define GES_TEMPLATE
 	#endif
 #else
 	#error supported platforms: Windows

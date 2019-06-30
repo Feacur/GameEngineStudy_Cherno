@@ -4,7 +4,9 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/ostr.h>
 
+#ifdef GES_SHARED
 GES_TEMPLATE template class GES_API std::shared_ptr<spdlog::logger>;
+#endif
 
 namespace GES {
 	class GES_API Log
