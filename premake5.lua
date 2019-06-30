@@ -75,7 +75,7 @@ group ""
 
 project "GameEngineStudy"
 	location "GameEngineStudy"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
 	cdialect "C11"
 	cppdialect "C++17"
@@ -110,8 +110,8 @@ project "GameEngineStudy"
 
 		defines {
 			"GES_PLATFORM_WINDOWS",
-			"GES_BUILD_DLL", -- if specified [kind "SharedLib"]
-			-- "GES_BUILD_NONE", -- if specified [kind "StaticLib"]
+			-- "GES_BUILD_DLL", -- if specified [kind "SharedLib"]
+			"GES_BUILD_NONE", -- if specified [kind "StaticLib"]
 			"GLFW_INCLUDE_NONE",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
@@ -124,9 +124,9 @@ project "GameEngineStudy"
 		}
 
 		-- if specified [kind "SharedLib"]
-		postbuildcommands {
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-		}
+		-- postbuildcommands {
+		-- 	("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
+		-- }
 
 project "Sandbox"
 	location "Sandbox"
@@ -161,6 +161,6 @@ project "Sandbox"
 
 		defines {
 			"GES_PLATFORM_WINDOWS",
-			-- "GES_BUILD_NONE", -- if specified [kind "StaticLib"] for the GameEngineStudy
-			"IMGUI_API=__declspec(dllimport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
+			"GES_BUILD_NONE", -- if specified [kind "StaticLib"] for the GameEngineStudy
+			-- "IMGUI_API=__declspec(dllimport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
 		}

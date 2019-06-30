@@ -30,6 +30,6 @@ project "imgui"
 		staticruntime "Off"
 		systemversion "latest"
 		
-		defines {
-			"IMGUI_API=__declspec(dllexport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
-		}
+		-- defines {
+		-- 	"IMGUI_API=__declspec(dllexport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
+		-- }
