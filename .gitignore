@@ -1,7 +1,7 @@
 # IDE
 /.vs/
-#*.sln
-#*.vcxproj*
+*.sln
+*.vcxproj*
 *.user
 /ipch/
 
