@@ -153,7 +153,6 @@ project "Sandbox"
 
 	links {
 		"GameEngineStudy",
-		"imgui", -- if specified [kind "SharedLib"] for the GameEngineStudy
 	}
 
 	filter "system:windows"
