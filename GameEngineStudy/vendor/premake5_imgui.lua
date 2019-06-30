@@ -20,7 +20,6 @@ project "imgui"
 		"imgui/imstb_rectpack.h",
 		"imgui/imstb_textedit.h",
 		"imgui/imstb_truetype.h",
-		"imgui/imgui_demo.cpp",
 	}
 
 	includedirs {
