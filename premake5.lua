@@ -1,5 +1,5 @@
 workspace "GameEngineStudy"
-	toolset ("msc")
+	-- toolset ("msc")
 	architecture "x64"
 	startproject "Sandbox"
 	warnings "Extra"
