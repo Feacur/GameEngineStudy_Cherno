@@ -12,7 +12,7 @@ namespace GES {
 	{
 	public:
 		Layer(const std::string& name = "Layer");
-		virtual ~Layer();
+		virtual ~Layer() = default;
 
 	public:
 		virtual void OnAttach() {}

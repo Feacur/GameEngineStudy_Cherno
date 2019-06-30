@@ -14,10 +14,6 @@ namespace GES {
 	{
 	}
 
-	ImGuiLayer::~ImGuiLayer()
-	{
-	}
-
 	void ImGuiLayer::OnAttach()
 	{
 		Application& app = Application::Get();

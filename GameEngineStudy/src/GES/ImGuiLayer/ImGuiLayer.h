@@ -13,7 +13,7 @@ namespace GES {
 	{
 	public:
 		ImGuiLayer();
-		~ImGuiLayer() override;
+		~ImGuiLayer() override = default;
 
 	public:
 		void OnAttach() override;
