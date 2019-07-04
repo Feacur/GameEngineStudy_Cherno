@@ -7,6 +7,8 @@
 
 #include "ImGuiLayer/ImGuiLayer.h"
 
+#include "Renderer/Shader.h"
+
 namespace GES {
 	#ifdef GES_SHARED
 	GES_TEMPLATE template class GES_API std::_Compressed_pair<std::default_delete<Window>, Window *, true>;
@@ -37,6 +39,7 @@ namespace GES {
 		LayerStack m_LayerStack;
 
 		uint32 m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		std::unique_ptr<Shader> m_Shader;
 
 		static Application * s_Instance;
 	};
