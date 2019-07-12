@@ -49,7 +49,7 @@
 		"C_Cpp.intelliSenseCachePath": "..",
 		// files
 		"files.exclude": {
-			"**/.vscode/ipch/" : true,
+			"**/ipch/" : true,
 		},
 		"files.associations": {
 			"*.h": "cpp",
