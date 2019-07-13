@@ -13,8 +13,12 @@ namespace GES
 		void Bind() override;
 		void Unbind() override;
 
+		void SetLayout(BufferLayout const & layout) override { m_Layout = layout; }
+		BufferLayout const & GetLayout() const override { return m_Layout; }
+
 	private:
 		uint32 m_RendererID;
+		BufferLayout m_Layout;
 	};
 	
 	class OpenGLIndexBuffer : public IndexBuffer
