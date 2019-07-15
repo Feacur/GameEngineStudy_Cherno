@@ -12,26 +12,6 @@
 namespace GES {
 	Application * Application::s_Instance = nullptr;
 
-	static GLenum ShaderDataTypeOpenGLBaseType(ShaderDataType type)
-	{
-		switch(type)
-		{
-			case ShaderDataType::Float1: return GL_FLOAT;
-			case ShaderDataType::Float2: return GL_FLOAT;
-			case ShaderDataType::Float3: return GL_FLOAT;
-			case ShaderDataType::Float4: return GL_FLOAT;
-			case ShaderDataType::Mat3:   return GL_FLOAT;
-			case ShaderDataType::Mat4:   return GL_FLOAT;
-			case ShaderDataType::Int1:   return GL_INT;
-			case ShaderDataType::Int2:   return GL_INT;
-			case ShaderDataType::Int3:   return GL_INT;
-			case ShaderDataType::Int4:   return GL_INT;
-			case ShaderDataType::Bool:   return GL_BOOL;
-		}
-		GES_CORE_ASSERT(false, "unsupported ShaderDataType '{0}'", (int32)type);
-		return 0;
-	}
-
 	Application::Application()
 	{
 		GES_ASSERT(!s_Instance, "Duplicate Application intance");
@@ -43,39 +23,25 @@ namespace GES {
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-		glGenVertexArrays(1, &m_VertexArray);
-		glBindVertexArray(m_VertexArray);
+		m_VertexArray.reset(VertexArray::Create());
 
 		float vertices[] = {
 			/*position*/ -0.5f, -0.5f, 0.0f, /*color*/ 1.0f, 0.0f, 0.0f, 1.0f,
 			/*position*/  0.5f, -0.5f, 0.0f, /*color*/ 0.0f, 1.0f, 0.0f, 1.0f,
 			/*position*/  0.0f,  0.5f, 0.0f, /*color*/ 0.0f, 0.0f, 1.0f, 1.0f,
 		};
+		std::shared_ptr<VertexBuffer> m_VertexBuffer;
 		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-		
 		m_VertexBuffer->SetLayout({
 			{ ShaderDataType::Float3, "a_Position" },
 			{ ShaderDataType::Float4, "a_Color" },
 		});
-
-		uint32 vertexAttribIndex = 0;
-		auto const & bufferLayout = m_VertexBuffer->GetLayout();
-		for (auto const & element : bufferLayout)
-		{
-			glEnableVertexAttribArray(vertexAttribIndex);
-			glVertexAttribPointer(
-				vertexAttribIndex,
-				element.GetComponentCount(),
-				ShaderDataTypeOpenGLBaseType(element.Type),
-				element.Normalized ? GL_TRUE : GL_FALSE,
-				bufferLayout.GetStride(),
-				(void const *)(uintptr_t)element.Offset
-			);
-			vertexAttribIndex++;
-		}
+		m_VertexArray->AddVertexBuffer(m_VertexBuffer);
 
 		uint32 indices[] = { 0, 1, 2, };
+		std::shared_ptr<IndexBuffer> m_IndexBuffer;
 		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32)));
+		m_VertexArray->SetIndexBuffer(m_IndexBuffer);
 
 		const char * vertexSrc = R"(
 			#version 330 core
@@ -119,8 +85,8 @@ namespace GES {
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			m_Shader->Bind();
-			glBindVertexArray(m_VertexArray);
-			glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+			m_VertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer: m_LayerStack)
 				layer->OnUpdate();

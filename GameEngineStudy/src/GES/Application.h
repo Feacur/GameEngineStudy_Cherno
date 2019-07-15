@@ -7,6 +7,7 @@
 
 #include "ImGuiLayer/ImGuiLayer.h"
 
+#include "Renderer/VertexArray.h"
 #include "Renderer/Buffer.h"
 #include "Renderer/Shader.h"
 
@@ -39,9 +40,7 @@ namespace GES {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
-		uint32 m_VertexArray;
-		std::unique_ptr<VertexBuffer> m_VertexBuffer;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+		std::unique_ptr<VertexArray> m_VertexArray;
 		std::unique_ptr<Shader> m_Shader;
 
 		static Application * s_Instance;

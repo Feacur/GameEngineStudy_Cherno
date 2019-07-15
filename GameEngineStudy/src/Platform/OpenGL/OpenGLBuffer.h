@@ -10,8 +10,8 @@ namespace GES
 		~OpenGLVertexBuffer() override;
 
 	public:
-		void Bind() override;
-		void Unbind() override;
+		void Bind() const override;
+		void Unbind() const override;
 
 		void SetLayout(BufferLayout const & layout) override { m_Layout = layout; }
 		BufferLayout const & GetLayout() const override { return m_Layout; }
@@ -28,8 +28,8 @@ namespace GES
 		~OpenGLIndexBuffer() override;
 
 	public:
-		void Bind() override;
-		void Unbind() override;
+		void Bind() const override;
+		void Unbind() const override;
 
 		uint32 GetCount() const override { return m_Count; }
 
