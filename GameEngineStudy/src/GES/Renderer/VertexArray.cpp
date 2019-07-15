@@ -1,7 +1,7 @@
 #include "ges_pch.h"
 #include "VertexArray.h"
 
-#include "Renderer.h"
+#include "RendererAPI.h"
 
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 
@@ -9,12 +9,12 @@ namespace GES
 {
 	VertexArray * VertexArray::Create()
 	{
-		switch(Renderer::GetAPI())
+		switch(RendererAPI::GetType())
 		{
-			case RendererAPI::OpenGL:
+			case RendererAPI::Type::OpenGL:
 				return new OpenGLVertexArray();
 		}
-		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)Renderer::GetAPI());
+		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererAPI::GetType());
 		return nullptr;
 	}
 }
