@@ -28,6 +28,7 @@
 		"typescript.tsc.autoDetect": "off",
 		// extensions: ms-vscode.cpptools
 		"C_Cpp.dimInactiveRegions": true,
+		"C_Cpp.autoAddFileAssociations": false,
 		"C_Cpp.intelliSenseEngine": "Default",
 		"C_Cpp.default.cStandard": "c11",
 		"C_Cpp.default.cppStandard": "c++17",
@@ -53,9 +54,6 @@
 		},
 		"files.associations": {
 			"*.h": "cpp",
-			"vector": "cpp",
-			"xstring": "cpp",
-			"xutility": "cpp"
 		}
 	},
 	"extensions": {
