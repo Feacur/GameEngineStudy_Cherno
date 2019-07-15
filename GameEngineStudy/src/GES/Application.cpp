@@ -30,18 +30,18 @@ namespace GES {
 			/*position*/  0.5f, -0.5f, 0.0f, /*color*/ 0.0f, 1.0f, 0.0f, 1.0f,
 			/*position*/  0.0f,  0.5f, 0.0f, /*color*/ 0.0f, 0.0f, 1.0f, 1.0f,
 		};
-		std::shared_ptr<VertexBuffer> m_VertexBuffer;
-		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-		m_VertexBuffer->SetLayout({
+		std::shared_ptr<VertexBuffer> vertexBuffer;
+		vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+		vertexBuffer->SetLayout({
 			{ ShaderDataType::Float3, "a_Position" },
 			{ ShaderDataType::Float4, "a_Color" },
 		});
-		m_VertexArray->AddVertexBuffer(m_VertexBuffer);
+		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32 indices[] = { 0, 1, 2, };
-		std::shared_ptr<IndexBuffer> m_IndexBuffer;
-		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32)));
-		m_VertexArray->SetIndexBuffer(m_IndexBuffer);
+		std::shared_ptr<IndexBuffer> indexBuffer;
+		indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32)));
+		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		const char * vertexSrc = R"(
 			#version 330 core
