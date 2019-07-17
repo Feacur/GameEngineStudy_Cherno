@@ -47,7 +47,7 @@
 			"GES_PLATFORM_WINDOWS",
 			// "GES_SHARED",
 		],
-		"C_Cpp.intelliSenseCachePath": "${workspaceFolder}\\..",
+		"C_Cpp.intelliSenseCachePath": "${workspaceFolder}\\..\\bin-int",
 		// files
 		"files.exclude": {
 			"**/ipch/" : true,
