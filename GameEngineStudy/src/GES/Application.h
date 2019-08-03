@@ -40,7 +40,7 @@ namespace GES {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
-		std::unique_ptr<VertexArray> m_VertexArray;
+		std::shared_ptr<VertexArray> m_VertexArray;
 		std::unique_ptr<Shader> m_Shader;
 
 		static Application * s_Instance;

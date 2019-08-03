@@ -1,8 +1,6 @@
 #pragma once
 #include "GES/Core.h"
 
-#include <memory>
-
 namespace GES
 {
 	class VertexBuffer;
