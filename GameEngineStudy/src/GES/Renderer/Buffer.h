@@ -69,10 +69,9 @@ namespace GES
 		ShaderDataType Type;
 		std::string Name;
 		bool Normalized;
-		uint32 Offset;
 
 		BufferElement(ShaderDataType type, std::string name, bool normalized = false)
-			: Type(type), Name(name), Normalized(normalized), Offset(0) {}
+			: Type(type), Name(name), Normalized(normalized) {}
 		
 		uint32 GetSize() const { return ShaderDataTypeSize(Type); }
 		uint32 GetComponentCount() const { return ShaderDataTypeComponentCount(Type); }
@@ -84,11 +83,10 @@ namespace GES
 		BufferLayout() = default;
 
 		BufferLayout(std::initializer_list<BufferElement> const & elements)
-			: m_Elements(elements) { Init(); }
+			: m_Elements(elements) {}
 
 	public:
 		inline std::vector<BufferElement> const & GetElements() const { return m_Elements; }
-		inline uint32_t GetStride() const { return m_Stride; }
 
  		std::vector<BufferElement>::iterator begin() { return m_Elements.begin(); }
 		std::vector<BufferElement>::iterator end() { return m_Elements.end(); }
@@ -96,20 +94,7 @@ namespace GES
 		std::vector<BufferElement>::const_iterator end() const { return m_Elements.end(); }
 
 	private:
-		void Init()
-		{
-			uint32 offset = 0;
-			for (auto & element : m_Elements)
-			{
-				element.Offset = offset;
-				offset += element.GetSize();
-			}
-			m_Stride = offset;
-		}
-
-	private:
 		std::vector<BufferElement> m_Elements;
-		uint32 m_Stride;
 	};
 
 	class VertexBuffer

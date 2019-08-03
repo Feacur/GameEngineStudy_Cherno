@@ -55,8 +55,16 @@ namespace GES
 		vertexBuffer->Bind();
 		m_VertexBuffers.push_back(vertexBuffer);
 		
-		uint32 vertexAttribIndex = 0;
 		auto const & bufferLayout = vertexBuffer->GetLayout();
+
+		uint32 stride = 0;
+		for (auto & element : bufferLayout)
+		{
+			stride += element.GetSize();
+		}
+
+		uintptr_t offset = 0;
+		uint32 vertexAttribIndex = 0;
 		for (auto const & element : bufferLayout)
 		{
 			glEnableVertexAttribArray(vertexAttribIndex);
@@ -65,9 +73,10 @@ namespace GES
 				element.GetComponentCount(),
 				ShaderDataTypeOpenGLBaseType(element.Type),
 				element.Normalized ? GL_TRUE : GL_FALSE,
-				bufferLayout.GetStride(),
-				(void const *)(uintptr_t)element.Offset
+				stride,
+				(void const *)offset
 			);
+			offset += element.GetSize();
 			vertexAttribIndex++;
 		}
 	}
