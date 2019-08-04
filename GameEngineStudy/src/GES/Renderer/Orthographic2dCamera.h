@@ -24,7 +24,7 @@ namespace GES
 
 	private:
 		glm::vec3 m_Position;
-		float m_RotationZ;
+		float m_RotationZ = 0;
 
 	private:
 		glm::mat4 m_ViewMatrix;

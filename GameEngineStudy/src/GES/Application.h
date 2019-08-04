@@ -42,6 +42,7 @@ namespace GES {
 		ImGuiLayer * m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		float m_LastFrameTime;
 
 	private:
 		static Application * s_Instance;

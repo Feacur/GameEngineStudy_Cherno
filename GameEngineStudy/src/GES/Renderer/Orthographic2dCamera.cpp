@@ -10,10 +10,7 @@ namespace GES
 {
 	Orthographic2dCamera::Orthographic2dCamera(float left, float right, float bottom, float top)
 		: m_ProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f))
-		, m_ViewMatrix(1)
-	{
-		m_ViewProjectionMatrix = m_ViewMatrix;
-	}
+		, m_Position(0, 0, 0) {}
 
 	void Orthographic2dCamera::RecalculateViewMatrix()
 	{

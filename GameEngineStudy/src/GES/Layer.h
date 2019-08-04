@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GES/Core.h"
+#include "GES/Core/Timestep.h"
 
 #include <string>
 
@@ -14,19 +15,19 @@ namespace GES {
 	class GES_API Layer
 	{
 	public:
-		Layer(const std::string& name = "Layer");
+		Layer(std::string const & name = "Layer");
 		virtual ~Layer() = default;
 
 	public:
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
-		virtual void OnEvent(Event& event) {}
+		virtual void OnUpdate(Timestep ts) {}
+		virtual void OnEvent(Event & e) {}
 
 	public:
 		virtual void OnImGuiRender() {}
 
-		inline const std::string& GetName() const { return m_DebugName; }
+		inline const std::string & GetName() const { return m_DebugName; }
 	protected:
 		std::string m_DebugName;
 	};

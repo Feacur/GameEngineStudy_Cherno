@@ -63,10 +63,9 @@ public:
  		m_Shader.reset(new GES::Shader(vertexSrc, fragmentSrc));
 	}
 
-	void OnUpdate() override
+	void OnUpdate(GES::Timestep ts) override
 	{
-		m_Camera.SetRotation(45);
-		m_Camera.RecalculateViewMatrix();
+		UpdateCamera(ts);
 
 		GES::Renderer::SetClearColor();
 		GES::Renderer::Clear();
@@ -82,8 +81,47 @@ public:
 	{
 	}
 
-	void OnEvent(GES::Event& event) override
+	void OnEvent(GES::Event & e) override
 	{
+	}
+
+private:
+	void UpdateCamera(GES::Timestep ts)
+	{
+		float positionDelta = m_CameraPositionSpeed * ts;
+		float rotationDelta = m_CameraRotationSpeed * ts;
+
+		auto cameraPosition = m_Camera.GetPosition();
+		auto cameraRotation = m_Camera.GetRotation();
+
+		if (GES::Input::IsKeyPressed(GES_KEY_A)) {
+			cameraPosition.x -= positionDelta;
+		}
+
+		if (GES::Input::IsKeyPressed(GES_KEY_D)) {
+			cameraPosition.x += positionDelta;
+		}
+
+		if (GES::Input::IsKeyPressed(GES_KEY_S)) {
+			cameraPosition.y -= positionDelta;
+		}
+
+		if (GES::Input::IsKeyPressed(GES_KEY_W)) {
+			cameraPosition.y += positionDelta;
+		}
+
+		if (GES::Input::IsKeyPressed(GES_KEY_Q)) {
+			cameraRotation -= rotationDelta;
+		}
+
+		if (GES::Input::IsKeyPressed(GES_KEY_E)) {
+			cameraRotation += rotationDelta;
+		}
+
+		m_Camera.SetPosition(cameraPosition);
+		m_Camera.SetRotation(cameraRotation);
+		
+		m_Camera.RecalculateViewMatrix();
 	}
 
 private:
@@ -91,6 +129,8 @@ private:
 	std::shared_ptr<GES::Shader> m_Shader;
 
 	GES::Orthographic2dCamera m_Camera;
+	float m_CameraPositionSpeed = 1;
+	float m_CameraRotationSpeed = 1;
 };
 
 class Sandbox : public GES::Application

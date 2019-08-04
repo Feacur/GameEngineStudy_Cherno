@@ -2,6 +2,8 @@
 
 #include <sstream>
 
+#include "GES/Core/Timestep.h"
+
 #include "GES/Application.h"
 #include "GES/Layer.h"
 #include "GES/Log.h"
