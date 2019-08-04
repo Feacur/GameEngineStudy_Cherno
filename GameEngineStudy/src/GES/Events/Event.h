@@ -1,11 +1,5 @@
 #pragma once
 
-#include "ges_pch.h"
-#include "GES/Core.h"
-
-// #include <string>     // moved to the PCH
-// #include <functional> // moved to the PCH
-
 namespace GES {
 
 	// Events in GES are currently blocking, meaning when an event occurs it

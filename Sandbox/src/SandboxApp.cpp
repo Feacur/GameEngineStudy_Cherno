@@ -1,5 +1,7 @@
 #include <GES.h>
 
+#include <sstream>
+
 #include <GES/Events/ApplicationEvent.h>
 #include <GES/Events/KeyEvent.h>
 #include <GES/Events/MouseEvent.h>

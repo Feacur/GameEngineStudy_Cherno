@@ -1,11 +1,12 @@
 #pragma once
 
 #include "GES/Window.h"
-#include "GES/Renderer/GraphicsContext.h"
 
 struct GLFWwindow;
 
 namespace GES {
+	class GraphicsContext;
+
 	class WindowsWindow : public Window
 	{
 	public:

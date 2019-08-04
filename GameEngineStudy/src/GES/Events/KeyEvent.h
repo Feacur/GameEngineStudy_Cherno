@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-// #include <sstream>    // moved to PCH
-
 namespace GES {
 
 	class GES_API KeyEvent : public Event

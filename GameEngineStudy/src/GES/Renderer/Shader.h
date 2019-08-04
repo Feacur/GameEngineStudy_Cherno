@@ -1,7 +1,9 @@
 #pragma once
+
 #include "GES/Core.h"
 
 #include <glm/glm.hpp>
+
 #include <string>
 
 namespace GES
