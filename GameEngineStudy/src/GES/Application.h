@@ -6,12 +6,6 @@
 
 #include "ImGuiLayer/ImGuiLayer.h"
 
-#include "Renderer/VertexArray.h"
-#include "Renderer/Buffer.h"
-#include "Renderer/Shader.h"
-
-#include "GES/Renderer/Orthographic2dCamera.h"
-
 // #include <vector>
 #include <memory> // std::unique_ptr, std::shared_ptr
 
@@ -48,11 +42,6 @@ namespace GES {
 		ImGuiLayer * m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-
-		std::shared_ptr<VertexArray> m_VertexArray;
-		std::shared_ptr<Shader> m_Shader;
-
-		Orthographic2dCamera m_Camera;
 
 	private:
 		static Application * s_Instance;

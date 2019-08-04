@@ -23,6 +23,7 @@ workspace "GameEngineStudy"
 			"4530", -- C++ exception handling was used but -EHsc was not selected (suppress)
 			-- "4521", -- 'identifier' : class 'type' needs to have dll-interface to be used by clients of class 'type2'
 			-- "4312", -- 'operation' : conversion from 'type1' to 'type2' of greater size
+			-- "4127", -- conditional expression is constant
 		}
 		-- buildoptions {
 		-- 	"-Bt+",
