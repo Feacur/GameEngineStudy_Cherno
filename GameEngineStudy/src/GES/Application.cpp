@@ -13,6 +13,7 @@ namespace GES {
 	Application * Application::s_Instance = nullptr;
 
 	Application::Application()
+		: m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
 	{
 		GES_ASSERT(!s_Instance, "Duplicate Application intance");
 		s_Instance = this;
@@ -49,6 +50,8 @@ namespace GES {
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
 
+			uniform mat4 u_ViewProjectionMatrix;
+
  			out vec3 v_Position;
  			out vec4 v_Color;
 			
@@ -56,7 +59,7 @@ namespace GES {
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjectionMatrix * vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -81,13 +84,15 @@ namespace GES {
 	{
 		while (m_Running)
 		{
+			m_Camera.SetRotation(45);
+			m_Camera.RecalculateViewMatrix();
+
 			Renderer::SetClearColor();
 			Renderer::Clear();
 
-			Renderer::BeginScene();
+			Renderer::BeginScene(m_Camera);
 
-			m_Shader->Bind();
-			Renderer::Submit(m_VertexArray);
+			Renderer::Submit(m_Shader, m_VertexArray);
 
 			Renderer::EndScene();
 

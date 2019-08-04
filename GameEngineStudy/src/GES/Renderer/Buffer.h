@@ -35,7 +35,7 @@ namespace GES
 			case ShaderDataType::Int4:   return 4;
 			case ShaderDataType::Bool:   return 1;
 		}
-		GES_CORE_ASSERT(false, "unsupported ShaderDataType '{0}'", (int32)type);
+		// GES_CORE_ASSERT(false, "unsupported ShaderDataType '{0}'", (int32)type);
 		return 0;
 	}
 
@@ -55,7 +55,7 @@ namespace GES
 			case ShaderDataType::Int4:   return sizeof(int32);
 			case ShaderDataType::Bool:   return sizeof(int8);
 		}
-		GES_CORE_ASSERT(false, "unsupported ShaderDataType '{0}'", (int32)type);
+		// GES_CORE_ASSERT(false, "unsupported ShaderDataType '{0}'", (int32)type);
 		return 0;
 	}
 

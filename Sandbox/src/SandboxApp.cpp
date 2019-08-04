@@ -1,5 +1,9 @@
 #include <GES.h>
 
+#include <GES/Events/ApplicationEvent.h>
+#include <GES/Events/KeyEvent.h>
+#include <GES/Events/MouseEvent.h>
+
 class ExampleLayer : public GES::Layer
 {
 public:

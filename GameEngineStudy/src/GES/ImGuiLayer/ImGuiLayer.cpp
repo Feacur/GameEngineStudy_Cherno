@@ -2,6 +2,10 @@
 #include "ImGuiLayer.h"
 #include "GES/Application.h"
 
+#include "GES/Events/ApplicationEvent.h"
+#include "GES/Events/KeyEvent.h"
+#include "GES/Events/MouseEvent.h"
+
 #include <imgui.h>
 #include <examples/imgui_impl_opengl3.h>
 #include <examples/imgui_impl_glfw.h>

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "GES/Core.h"
-#include "Layer.h"
 
 #include <vector>
 
@@ -10,6 +9,8 @@
 #pragma warning(disable: 4251)
 #endif
 namespace GES {
+	class Layer;
+
 	class GES_API LayerStack
 	{
 	public:

@@ -2,10 +2,6 @@
 
 #include "GES/Layer.h"
 
-#include "GES/Events/ApplicationEvent.h"
-#include "GES/Events/KeyEvent.h"
-#include "GES/Events/MouseEvent.h"
-
 struct ImGuiContext;
 
 namespace GES {

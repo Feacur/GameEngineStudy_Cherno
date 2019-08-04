@@ -1,6 +1,8 @@
 #pragma once
 #include "GES/Core.h"
 
+#include <memory> // std::shared_ptr
+
 namespace GES
 {
 	class VertexBuffer;

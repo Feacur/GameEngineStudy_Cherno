@@ -1,11 +1,13 @@
 #pragma once
 
-#include "ges_pch.h"
-
 #include "GES/Core.h"
-#include "GES/Events/Event.h"
+
+#include <string>
+#include <functional>
 
 namespace GES {
+	class Event;
+
 	struct WindowProps
 	{
 		std::string Title;

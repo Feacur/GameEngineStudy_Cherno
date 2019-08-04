@@ -3,8 +3,8 @@
 #include "ges_pch.h"
 #include "GES/Core.h"
 
-// #include <string>     // moved to PCH
-// #include <functional> // moved to PCH
+// #include <string>     // moved to the PCH
+// #include <functional> // moved to the PCH
 
 namespace GES {
 

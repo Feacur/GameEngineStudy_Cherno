@@ -2,7 +2,6 @@
 
 #include "Core.h"
 #include "GES/LayerStack.h"
-#include "Events/Event.h"
 #include "Window.h"
 
 #include "ImGuiLayer/ImGuiLayer.h"
@@ -11,11 +10,18 @@
 #include "Renderer/Buffer.h"
 #include "Renderer/Shader.h"
 
+#include "GES/Renderer/Orthographic2dCamera.h"
+
+// #include <vector>
+#include <memory> // std::unique_ptr, std::shared_ptr
+
 namespace GES {
 	#ifdef GES_SHARED
 	GES_TEMPLATE template class GES_API std::_Compressed_pair<std::default_delete<Window>, Window *, true>;
 	GES_TEMPLATE template class GES_API std::unique_ptr<Window>;
 	#endif
+	
+	class Event;
 	class WindowCloseEvent;
 
 	class GES_API Application
@@ -33,16 +39,22 @@ namespace GES {
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
+
 	private:
 		bool OnWindowClose(WindowCloseEvent & e);
+
+	private:
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer * m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
 		std::shared_ptr<VertexArray> m_VertexArray;
-		std::unique_ptr<Shader> m_Shader;
+		std::shared_ptr<Shader> m_Shader;
 
+		Orthographic2dCamera m_Camera;
+
+	private:
 		static Application * s_Instance;
 	};
 

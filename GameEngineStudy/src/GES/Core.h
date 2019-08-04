@@ -15,8 +15,6 @@ typedef uint64_t uint64; // unsigned long long
 typedef long          int48;  // witty (32 + 64) / 2
 typedef unsigned long uint48; // witty (32 + 64) / 2
 
-#include <memory> // std::unique_ptr, std::shared_ptr
-
 #ifdef GES_PLATFORM_WINDOWS
 	#ifdef GES_SHARED
 		#ifdef GES_BUILD_DLL

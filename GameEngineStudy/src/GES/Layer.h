@@ -1,13 +1,16 @@
 #pragma once
 
 #include "GES/Core.h"
-#include "GES/Events/Event.h"
+
+#include <string>
 
 #ifdef GES_SHARED
 #pragma warning(push)
 #pragma warning(disable: 4251)
 #endif
 namespace GES {
+	class Event;
+
 	class GES_API Layer
 	{
 	public:

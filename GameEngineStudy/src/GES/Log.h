@@ -4,6 +4,8 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/ostr.h>
 
+#include <memory> // std::shared_ptr
+
 #ifdef GES_SHARED
 GES_TEMPLATE template class GES_API std::shared_ptr<spdlog::logger>;
 #endif

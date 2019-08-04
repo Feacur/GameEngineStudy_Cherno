@@ -1,6 +1,8 @@
 #include "ges_pch.h"
 #include "LayerStack.h"
 
+#include "Layer.h"
+
 namespace GES {
 	LayerStack::~LayerStack()
 	{
