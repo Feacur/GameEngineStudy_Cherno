@@ -1,5 +1,7 @@
 #include "GES.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+
 class ExampleLayer : public GES::Layer
 {
 public:
@@ -34,6 +36,7 @@ public:
 			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjectionMatrix;
+			uniform mat4 u_Transform;
 
  			out vec3 v_Position;
  			out vec4 v_Color;
@@ -42,7 +45,7 @@ public:
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = u_ViewProjectionMatrix * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjectionMatrix * u_Transform * vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -72,7 +75,16 @@ public:
 
 		GES::Renderer::BeginScene(m_Camera);
 
-		GES::Renderer::Submit(m_Shader, m_VertexArray);
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+		for (int y = -10; y < 10; y++)
+		{
+			for (int x = -10; x < 10; x++)
+			{
+				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
+				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+				GES::Renderer::Submit(m_Shader, m_VertexArray, transform);
+			}
+		}
 
 		GES::Renderer::EndScene();
 	}

@@ -20,7 +20,7 @@ namespace GES
 
 	public:
 		static void BeginScene(Orthographic2dCamera const & camera);
-		static void Submit(std::shared_ptr<Shader> const & shader, std::shared_ptr<VertexArray> const & vertexArray);
+		static void Submit(std::shared_ptr<Shader> const & shader, std::shared_ptr<VertexArray> const & vertexArray, glm::mat4 const & transform);
 		static void EndScene();
 
 	private:
