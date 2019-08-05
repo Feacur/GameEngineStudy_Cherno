@@ -29,7 +29,7 @@ public:
 		indexBuffer.reset(GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
-		const char * vertexSrc = R"(
+		cstring vertexSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
@@ -38,10 +38,10 @@ public:
 			uniform mat4 u_ViewProjectionMatrix;
 			uniform mat4 u_Transform;
 
- 			out vec3 v_Position;
- 			out vec4 v_Color;
+			out vec3 v_Position;
+			out vec4 v_Color;
 			
- 			void main()
+			void main()
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
@@ -49,21 +49,21 @@ public:
 			}
 		)";
 
- 		const char * fragmentSrc = R"(
+		cstring fragmentSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) out vec4 color;
 			
- 			in vec3 v_Position;
- 			in vec4 v_Color;
+			in vec3 v_Position;
+			in vec4 v_Color;
 
- 			void main()
+			void main()
 			{
 				color = v_Color;
 			}
 		)";
 
- 		m_Shader.reset(new GES::Shader(vertexSrc, fragmentSrc));
+		m_Shader.reset(GES::Shader::Create(vertexSrc, fragmentSrc));
 	}
 
 	void OnUpdate(GES::Timestep ts) override

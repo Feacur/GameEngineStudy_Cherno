@@ -4,23 +4,20 @@
 
 #include <glm/glm.hpp>
 
-#include <string>
-
 namespace GES
 {
 	class Shader
 	{
 	public:
-		Shader(const char* vertexSource, const char* fragmentSource);
-		~Shader();
+		virtual ~Shader() = default;
 
 	public:
-		void Bind() const;
-		void Unbind() const;
+		static Shader * Shader::Create(cstring vertexSource, cstring fragmentSource);
 
-		void UploadUniformMat4(std::string const & name, glm::mat4 const & matrix);
+	public:
+		virtual void Bind() const = 0;
+		virtual void Unbind() const = 0;
 
-	private:
-		uint32 m_RendererID;
+		virtual void UploadUniformMat4(cstring name, glm::mat4 const & matrix) = 0;
 	};
 }

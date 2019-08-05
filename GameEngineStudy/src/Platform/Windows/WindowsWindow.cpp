@@ -13,7 +13,7 @@
 namespace GES {
 	static bool s_GLFWInitialized = false;
 
-	static void GLFWErrorCallback(int error, char const * description)
+	static void GLFWErrorCallback(int error, cstring description)
 	{
 		GES_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}

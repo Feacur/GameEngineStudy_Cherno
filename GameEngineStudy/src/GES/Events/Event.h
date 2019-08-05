@@ -32,7 +32,7 @@ namespace GES {
 
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
 								EventType GetEventType() const override { return GetStaticType(); }\
-								char const * GetName() const override { return #type; }
+								cstring GetName() const override { return #type; }
 
 #define EVENT_CLASS_CATEGORY(category) int32 GetCategoryFlags() const override { return (int32)(category); }
 
@@ -42,7 +42,7 @@ namespace GES {
 		bool Handled = false;
 	public:
 		virtual EventType GetEventType() const = 0;
-		virtual char const * GetName() const = 0;
+		virtual cstring GetName() const = 0;
 		virtual int32 GetCategoryFlags() const = 0;
 		virtual std::string ToString() const { return GetName(); }
 
