@@ -49,14 +49,13 @@ namespace GES
 	
 	void OpenGLVertexArray::AddVertexBuffer(std::shared_ptr<VertexBuffer> const & vertexBuffer)
 	{
-		GES_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout");
+		auto const & bufferLayout = vertexBuffer->GetLayout();
+		GES_CORE_ASSERT(bufferLayout.GetElements().size(), "Vertex Buffer has no layout");
 
 		glBindVertexArray(m_RendererID);
 		vertexBuffer->Bind();
 		m_VertexBuffers.push_back(vertexBuffer);
 		
-		auto const & bufferLayout = vertexBuffer->GetLayout();
-
 		uint32 stride = 0;
 		for (auto & element : bufferLayout)
 		{
