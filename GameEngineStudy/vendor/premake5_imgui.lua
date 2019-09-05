@@ -6,6 +6,9 @@ project "imgui"
 	warnings "Default"
 	removeflags { "FatalWarnings" }
 	
+	symbols "Off"
+	optimize "On"
+	
 	imgui_to_root = path.getrelative(os.getcwd(), root_directory)
 	targetdir (imgui_to_root .. "/bin/" .. outputdir .. "/%{prj.name}")
 	objdir (imgui_to_root .. "/bin-int/" .. outputdir .. "/%{prj.name}")
@@ -26,10 +29,7 @@ project "imgui"
 		"imgui"
 	}
 	
-	filter "system:windows"
-		staticruntime "Off"
-		systemversion "latest"
-		
-		-- defines {
-		-- 	"IMGUI_API=__declspec(dllexport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
-		-- }
+	-- filter "system:windows"
+	-- 	-- defines {
+	-- 	-- 	"IMGUI_API=__declspec(dllexport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
+	-- 	-- }

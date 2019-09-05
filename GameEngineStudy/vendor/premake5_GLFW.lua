@@ -6,6 +6,9 @@ project "GLFW"
 	warnings "Default"
 	removeflags { "FatalWarnings" }
 	
+	symbols "Off"
+	optimize "On"
+	
 	GLFW_to_root = path.getrelative(os.getcwd(), root_directory)
 	targetdir (GLFW_to_root .. "/bin/" .. outputdir .. "/%{prj.name}")
 	objdir (GLFW_to_root .. "/bin-int/" .. outputdir .. "/%{prj.name}")
@@ -27,9 +30,6 @@ project "GLFW"
 	}
 	
 	filter "system:windows"
-		staticruntime "Off"
-		systemversion "latest"
-		
 		files {
 			"GLFW/src/win32_init.c",
 			"GLFW/src/win32_joystick.c",

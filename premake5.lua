@@ -1,9 +1,10 @@
 workspace "GameEngineStudy"
 	-- toolset ("msc")
 	architecture "x64"
+	systemversion "latest"
 	startproject "Sandbox"
 	warnings "Extra"
-	flags { "FatalWarnings", "NoMinimalRebuild" }
+	flags { "FatalWarnings", "NoMinimalRebuild", "MultiProcessorCompile" }
 	floatingpoint "Fast"
 	floatingpointexceptions "off"
 	exceptionhandling "Off"
@@ -42,20 +43,23 @@ workspace "GameEngineStudy"
 
 	filter "configurations:Debug"
 		defines "DEBUG"
-		symbols "On"
+		staticruntime "Off"
 		runtime "Debug"
+		symbols "On"
 		optimize "Off"
 
 	filter "configurations:Development"
 		defines "DEVELOPMENT"
-		symbols "On"
+		staticruntime "Off"
 		runtime "Release"
+		symbols "On"
 		optimize "On"
 
 	filter "configurations:Shipping"
 		defines "SHIPPING"
-		symbols "Off"
+		staticruntime "On"
 		runtime "Release"
+		symbols "Off"
 		optimize "On"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
@@ -110,9 +114,6 @@ project "GameEngineStudy"
 	}
 
 	filter "system:windows"
-		staticruntime "Off"
-		systemversion "latest"
-
 		defines {
 			"GES_PLATFORM_WINDOWS",
 			-- "GES_BUILD_DLL", -- if specified [kind "SharedLib"]
@@ -161,9 +162,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		staticruntime "Off"
-		systemversion "latest"
-
 		defines {
 			"GES_PLATFORM_WINDOWS",
 			-- "GES_SHARED", -- if specified [kind "SharedLib"] for the GameEngineStudy

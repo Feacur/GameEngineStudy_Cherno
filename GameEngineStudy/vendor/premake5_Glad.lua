@@ -6,6 +6,9 @@ project "Glad"
 	warnings "Default"
 	removeflags { "FatalWarnings" }
 	
+	symbols "Off"
+	optimize "On"
+	
 	Glad_to_root = path.getrelative(os.getcwd(), root_directory)
 	targetdir (Glad_to_root .. "/bin/" .. outputdir .. "/%{prj.name}")
 	objdir (Glad_to_root .. "/bin-int/" .. outputdir .. "/%{prj.name}")
@@ -19,7 +22,3 @@ project "Glad"
 	includedirs {
 		"Glad/include"
 	}
-	
-	filter "system:windows"
-		staticruntime "Off"
-		systemversion "latest"
