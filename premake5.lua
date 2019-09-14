@@ -56,8 +56,10 @@ workspace "GameEngineStudy"
 		optimize "On"
 
 	filter "configurations:Shipping"
+		-- either bundle CRT (vcruntime140.dll, etc.)
+		-- or build with [staticruntime "On"]
 		defines "SHIPPING"
-		staticruntime "On"
+		staticruntime "Off"
 		runtime "Release"
 		symbols "Off"
 		optimize "On"
