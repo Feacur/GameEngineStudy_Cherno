@@ -20,6 +20,7 @@
 #include "GES/Renderer/VertexArray.h"
 #include "GES/Renderer/Buffer.h"
 #include "GES/Renderer/Shader.h"
+#include "GES/Renderer/Texture.h"
 #include "GES/Renderer/Orthographic2dCamera.h"
 
 #include <imgui.h>

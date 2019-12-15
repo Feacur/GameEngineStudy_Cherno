@@ -13,7 +13,7 @@ namespace GES {
 
 	Application::Application()
 	{
-		GES_ASSERT(!s_Instance, "Duplicate Application intance");
+		GES_CORE_ASSERT(!s_Instance, "Duplicate Application intance");
 		s_Instance = this;
 
 		m_Window = std::unique_ptr<Window>(Window::Create());

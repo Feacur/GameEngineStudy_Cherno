@@ -5,6 +5,7 @@
 
 #include "RendererCommand.h"
 #include "Shader.h"
+#include "Texture.h"
 #include "VertexArray.h"
 
 namespace GES
@@ -32,6 +33,17 @@ namespace GES
 		shader->Bind();
 		shader->UploadUniformMat4("u_ViewProjectionMatrix", s_Data->ViewProjectionMatrix);
 		shader->UploadUniformMat4("u_Transform", transform);
+
+		vertexArray->Bind();
+		s_RendererCommand->DrawIndexed(vertexArray);
+	}
+
+	void Renderer::Submit(std::shared_ptr<Shader> const & shader, std::shared_ptr<VertexArray> const & vertexArray, glm::mat4 const & transform, std::shared_ptr<Texture> const & texture)
+	{
+		shader->Bind();
+		shader->UploadUniformMat4("u_ViewProjectionMatrix", s_Data->ViewProjectionMatrix);
+		shader->UploadUniformMat4("u_Transform", transform);
+		shader->UploadUniformInt32("u_Texture", (int32)texture->GetSlot());
 
 		vertexArray->Bind();
 		s_RendererCommand->DrawIndexed(vertexArray);

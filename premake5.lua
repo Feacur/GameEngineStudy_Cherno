@@ -75,6 +75,7 @@ include_directories["GLFW"]   = enginename .. "/vendor/GLFW/include"
 include_directories["Glad"]   = enginename .. "/vendor/Glad/include"
 include_directories["imgui"]  = enginename .. "/vendor/imgui"
 include_directories["glm"]    = enginename .. "/vendor/glm"
+include_directories["stb_image"] = enginename .. "/vendor/stb_image"
 
 root_directory = os.getcwd()
 
@@ -101,9 +102,11 @@ project "GameEngineStudy"
 	files {
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
-		-- "%{include_directories.spdlog}/spdlog/**.h",
-		-- "%{include_directories.glm}/glm/**.hpp",
-		-- "%{include_directories.glm}/glm/**.inl",
+		"%{include_directories.spdlog}/spdlog/**.h",
+		"%{include_directories.glm}/glm/**.hpp",
+		"%{include_directories.glm}/glm/**.inl",
+		"%{include_directories.stb_image}/**.h",
+		"%{include_directories.stb_image}/**.cpp",
 	}
 
 	includedirs {
@@ -113,6 +116,7 @@ project "GameEngineStudy"
 		"%{include_directories.Glad}",
 		"%{include_directories.imgui}",
 		"%{include_directories.glm}",
+		"%{include_directories.stb_image}",
 	}
 
 	filter "system:windows"
@@ -161,6 +165,10 @@ project "Sandbox"
 
 	links {
 		"GameEngineStudy",
+	}
+
+	postbuildcommands {
+		("{COPY} \"%{prj.location}assets\" \"%{cfg.buildtarget.directory}assets\"")
 	}
 
 	filter "system:windows"

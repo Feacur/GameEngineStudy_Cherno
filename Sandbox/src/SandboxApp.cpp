@@ -13,7 +13,9 @@ public:
 		CreateVertexArraySquare();
 
 		CreateShaderProgramVertexColor();
-		CreateShaderProgramUV();
+		CreateShaderProgramTexture();
+
+		m_Texture.reset(GES::Texture2D::Create("assets/textures/checkerboard.png"));
 	}
 
 	void OnUpdate(GES::Timestep ts) override
@@ -38,10 +40,11 @@ public:
 			}
 		}
 
+		m_Texture->Bind(0u);
 		glm::mat4 square_scale = glm::scale(identity, glm::vec3(1.5f));
 		glm::vec3 square_pos(0.0f, 0.0f, 0.0f);
 		glm::mat4 square_transform = glm::translate(identity, square_pos) * square_scale;
-		GES::Renderer::Submit(m_ShaderUV, m_VertexArraySquare, square_transform);
+		GES::Renderer::Submit(m_ShaderTexture, m_VertexArraySquare, square_transform, m_Texture);
 
 		GES::Renderer::EndScene();
 	}
@@ -148,19 +151,17 @@ private:
 
 		cstring vertexSrc = R"(
 			#version 330 core
-			
+
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjectionMatrix;
 			uniform mat4 u_Transform;
 
-			out vec3 v_Position;
 			out vec4 v_Color;
-			
+
 			void main()
 			{
-				v_Position = a_Position;
 				v_Color = a_Color;
 				gl_Position = u_ViewProjectionMatrix * u_Transform * vec4(a_Position, 1.0);
 			}
@@ -168,10 +169,9 @@ private:
 
 		cstring fragmentSrc = R"(
 			#version 330 core
-			
+
 			layout(location = 0) out vec4 color;
 			
-			in vec3 v_Position;
 			in vec4 v_Color;
 
 			void main()
@@ -183,25 +183,23 @@ private:
 		shader.reset(GES::Shader::Create(vertexSrc, fragmentSrc));
 	}
 
-	void CreateShaderProgramUV()
+	void CreateShaderProgramTexture()
 	{
-		std::shared_ptr<GES::Shader> & shader = m_ShaderUV;
+		std::shared_ptr<GES::Shader> & shader = m_ShaderTexture;
 
 		cstring vertexSrc = R"(
 			#version 330 core
-			
+
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec2 a_TexCoord;
 
 			uniform mat4 u_ViewProjectionMatrix;
 			uniform mat4 u_Transform;
 
-			out vec3 v_Position;
 			out vec2 v_TexCoord;
-			
+
 			void main()
 			{
-				v_Position = a_Position;
 				v_TexCoord = a_TexCoord;
 				gl_Position = u_ViewProjectionMatrix * u_Transform * vec4(a_Position, 1.0);
 			}
@@ -209,15 +207,16 @@ private:
 
 		cstring fragmentSrc = R"(
 			#version 330 core
-			
+
 			layout(location = 0) out vec4 color;
-			
-			in vec3 v_Position;
+
+			uniform sampler2D u_Texture;
+
 			in vec2 v_TexCoord;
 
 			void main()
 			{
-				color = vec4(v_TexCoord, 0, 1);
+				color = texture(u_Texture, v_TexCoord);
 			}
 		)";
 
@@ -228,7 +227,8 @@ private:
 	std::shared_ptr<GES::VertexArray> m_VertexArrayTriangle;
 	std::shared_ptr<GES::VertexArray> m_VertexArraySquare;
 	std::shared_ptr<GES::Shader> m_ShaderVertexColor;
-	std::shared_ptr<GES::Shader> m_ShaderUV;
+	std::shared_ptr<GES::Shader> m_ShaderTexture;
+	std::shared_ptr<GES::Texture> m_Texture;
 
 	GES::Orthographic2dCamera m_Camera;
 	float m_CameraPositionSpeed = 1;

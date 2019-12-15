@@ -142,4 +142,10 @@ namespace GES
 		auto location = glGetUniformLocation(m_RendererID, name);
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
+
+	void OpenGLShader::UploadUniformInt32(cstring name, int32 value)
+	{
+		auto location = glGetUniformLocation(m_RendererID, name);
+		glUniform1i(location, value);
+	}
 }
