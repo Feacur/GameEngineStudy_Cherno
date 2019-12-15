@@ -9,65 +9,17 @@ public:
 		: Layer("Example")
 		, m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
 	{
-		m_VertexArray.reset(GES::VertexArray::Create());
+		CreateVertexArrayTriangle();
+		CreateVertexArraySquare();
 
-		float vertices[] = {
-			/*position*/ -0.5f, -0.5f, 0.0f, /*color*/ 1.0f, 0.0f, 0.0f, 1.0f,
-			/*position*/  0.5f, -0.5f, 0.0f, /*color*/ 0.0f, 1.0f, 0.0f, 1.0f,
-			/*position*/  0.0f,  0.5f, 0.0f, /*color*/ 0.0f, 0.0f, 1.0f, 1.0f,
-		};
-		std::shared_ptr<GES::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(GES::VertexBuffer::Create(vertices, sizeof(vertices)));
-		vertexBuffer->SetLayout({
-			{ GES::ShaderDataType::Float3, "a_Position" },
-			{ GES::ShaderDataType::Float4, "a_Color" },
-		});
-		m_VertexArray->AddVertexBuffer(vertexBuffer);
-
-		uint32 indices[] = { 0, 1, 2, };
-		std::shared_ptr<GES::IndexBuffer> indexBuffer;
-		indexBuffer.reset(GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32)));
-		m_VertexArray->SetIndexBuffer(indexBuffer);
-
-		cstring vertexSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec4 a_Color;
-
-			uniform mat4 u_ViewProjectionMatrix;
-			uniform mat4 u_Transform;
-
-			out vec3 v_Position;
-			out vec4 v_Color;
-			
-			void main()
-			{
-				v_Position = a_Position;
-				v_Color = a_Color;
-				gl_Position = u_ViewProjectionMatrix * u_Transform * vec4(a_Position, 1.0);
-			}
-		)";
-
-		cstring fragmentSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
-			
-			in vec3 v_Position;
-			in vec4 v_Color;
-
-			void main()
-			{
-				color = v_Color;
-			}
-		)";
-
-		m_Shader.reset(GES::Shader::Create(vertexSrc, fragmentSrc));
+		CreateShaderProgramVertexColor();
+		CreateShaderProgramUV();
 	}
 
 	void OnUpdate(GES::Timestep ts) override
 	{
+		static glm::mat4 const identity = glm::mat4(1.0f);
+
 		UpdateCamera(ts);
 
 		GES::Renderer::SetClearColor();
@@ -75,16 +27,21 @@ public:
 
 		GES::Renderer::BeginScene(m_Camera);
 
-		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+		glm::mat4 triangle_scale = glm::scale(identity, glm::vec3(0.1f));
 		for (int y = -10; y < 10; y++)
 		{
 			for (int x = -10; x < 10; x++)
 			{
-				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
-				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-				GES::Renderer::Submit(m_Shader, m_VertexArray, transform);
+				glm::vec3 triangle_pos(x * 0.11f, y * 0.11f, 0.0f);
+				glm::mat4 triangle_transform = glm::translate(identity, triangle_pos) * triangle_scale;
+				GES::Renderer::Submit(m_ShaderVertexColor, m_VertexArrayTriangle, triangle_transform);
 			}
 		}
+
+		glm::mat4 square_scale = glm::scale(identity, glm::vec3(1.5f));
+		glm::vec3 square_pos(0.0f, 0.0f, 0.0f);
+		glm::mat4 square_transform = glm::translate(identity, square_pos) * square_scale;
+		GES::Renderer::Submit(m_ShaderUV, m_VertexArraySquare, square_transform);
 
 		GES::Renderer::EndScene();
 	}
@@ -136,9 +93,142 @@ private:
 		m_Camera.RecalculateViewMatrix();
 	}
 
+	void CreateVertexArrayTriangle()
+	{
+		std::shared_ptr<GES::VertexArray> & vertexArray = m_VertexArrayTriangle;
+		vertexArray.reset(GES::VertexArray::Create());
+
+		float vertices[] = {
+			/*position*/ -0.5f, -0.5f, 0.0f, /*color*/ 1.0f, 0.0f, 0.0f, 1.0f,
+			/*position*/  0.5f, -0.5f, 0.0f, /*color*/ 0.0f, 1.0f, 0.0f, 1.0f,
+			/*position*/  0.0f,  0.5f, 0.0f, /*color*/ 0.0f, 0.0f, 1.0f, 1.0f,
+		};
+		std::shared_ptr<GES::VertexBuffer> vertexBuffer;
+		vertexBuffer.reset(GES::VertexBuffer::Create(vertices, sizeof(vertices)));
+		vertexBuffer->SetLayout({
+			{ GES::ShaderDataType::Float3, "a_Position" },
+			{ GES::ShaderDataType::Float4, "a_Color" },
+		});
+		vertexArray->AddVertexBuffer(vertexBuffer);
+
+		uint32 indices[] = { 0, 1, 2, };
+		std::shared_ptr<GES::IndexBuffer> indexBuffer;
+		indexBuffer.reset(GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32)));
+		vertexArray->SetIndexBuffer(indexBuffer);
+	}
+
+	void CreateVertexArraySquare()
+	{
+		std::shared_ptr<GES::VertexArray> & vertexArray = m_VertexArraySquare;
+		vertexArray.reset(GES::VertexArray::Create());
+
+		float vertices[] = {
+			/*position*/ -0.5f, -0.5f, 0.0f, /*UV*/ 0.0f, 0.0f,
+			/*position*/  0.5f, -0.5f, 0.0f, /*UV*/ 1.0f, 0.0f,
+			/*position*/  0.5f,  0.5f, 0.0f, /*UV*/ 1.0f, 1.0f,
+			/*position*/ -0.5f,  0.5f, 0.0f, /*UV*/ 0.0f, 1.0f,
+		};
+		std::shared_ptr<GES::VertexBuffer> vertexBuffer;
+		vertexBuffer.reset(GES::VertexBuffer::Create(vertices, sizeof(vertices)));
+		vertexBuffer->SetLayout({
+			{ GES::ShaderDataType::Float3, "a_Position" },
+			{ GES::ShaderDataType::Float2, "a_TexCoord" },
+		});
+		vertexArray->AddVertexBuffer(vertexBuffer);
+
+		uint32 indices[] = { 0, 1, 2, 2, 3, 0, };
+		std::shared_ptr<GES::IndexBuffer> indexBuffer;
+		indexBuffer.reset(GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32)));
+		vertexArray->SetIndexBuffer(indexBuffer);
+	}
+
+	void CreateShaderProgramVertexColor()
+	{
+		std::shared_ptr<GES::Shader> & shader = m_ShaderVertexColor;
+
+		cstring vertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec4 a_Color;
+
+			uniform mat4 u_ViewProjectionMatrix;
+			uniform mat4 u_Transform;
+
+			out vec3 v_Position;
+			out vec4 v_Color;
+			
+			void main()
+			{
+				v_Position = a_Position;
+				v_Color = a_Color;
+				gl_Position = u_ViewProjectionMatrix * u_Transform * vec4(a_Position, 1.0);
+			}
+		)";
+
+		cstring fragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+			
+			in vec3 v_Position;
+			in vec4 v_Color;
+
+			void main()
+			{
+				color = v_Color;
+			}
+		)";
+
+		shader.reset(GES::Shader::Create(vertexSrc, fragmentSrc));
+	}
+
+	void CreateShaderProgramUV()
+	{
+		std::shared_ptr<GES::Shader> & shader = m_ShaderUV;
+
+		cstring vertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+
+			uniform mat4 u_ViewProjectionMatrix;
+			uniform mat4 u_Transform;
+
+			out vec3 v_Position;
+			out vec2 v_TexCoord;
+			
+			void main()
+			{
+				v_Position = a_Position;
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjectionMatrix * u_Transform * vec4(a_Position, 1.0);
+			}
+		)";
+
+		cstring fragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+			
+			in vec3 v_Position;
+			in vec2 v_TexCoord;
+
+			void main()
+			{
+				color = vec4(v_TexCoord, 0, 1);
+			}
+		)";
+
+		shader.reset(GES::Shader::Create(vertexSrc, fragmentSrc));
+	}
+
 private:
-	std::shared_ptr<GES::VertexArray> m_VertexArray;
-	std::shared_ptr<GES::Shader> m_Shader;
+	std::shared_ptr<GES::VertexArray> m_VertexArrayTriangle;
+	std::shared_ptr<GES::VertexArray> m_VertexArraySquare;
+	std::shared_ptr<GES::Shader> m_ShaderVertexColor;
+	std::shared_ptr<GES::Shader> m_ShaderUV;
 
 	GES::Orthographic2dCamera m_Camera;
 	float m_CameraPositionSpeed = 1;
