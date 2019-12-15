@@ -47,7 +47,7 @@ namespace GES
 		glBindVertexArray(0);
 	}
 	
-	void OpenGLVertexArray::AddVertexBuffer(std::shared_ptr<VertexBuffer> const & vertexBuffer)
+	void OpenGLVertexArray::AddVertexBuffer(GES::Ref<VertexBuffer> const & vertexBuffer)
 	{
 		auto const & bufferLayout = vertexBuffer->GetLayout();
 		GES_CORE_ASSERT(bufferLayout.GetElements().size(), "Vertex Buffer has no layout");
@@ -80,7 +80,7 @@ namespace GES
 		}
 	}
 
-	void OpenGLVertexArray::SetIndexBuffer(std::shared_ptr<IndexBuffer> const & indexBuffer)
+	void OpenGLVertexArray::SetIndexBuffer(GES::Ref<IndexBuffer> const & indexBuffer)
 	{
 		glBindVertexArray(m_RendererID);
 		indexBuffer->Bind();

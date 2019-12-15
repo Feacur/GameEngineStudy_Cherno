@@ -28,7 +28,7 @@ namespace GES
 		s_Data->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
 	}
 
-	void Renderer::Submit(std::shared_ptr<Shader> const & shader, std::shared_ptr<VertexArray> const & vertexArray, glm::mat4 const & transform)
+	void Renderer::Submit(GES::Ref<Shader> const & shader, GES::Ref<VertexArray> const & vertexArray, glm::mat4 const & transform)
 	{
 		shader->Bind();
 		shader->UploadUniformMat4("u_ViewProjectionMatrix", s_Data->ViewProjectionMatrix);
@@ -38,7 +38,7 @@ namespace GES
 		s_RendererCommand->DrawIndexed(vertexArray);
 	}
 
-	void Renderer::Submit(std::shared_ptr<Shader> const & shader, std::shared_ptr<VertexArray> const & vertexArray, glm::mat4 const & transform, std::shared_ptr<Texture> const & texture)
+	void Renderer::Submit(GES::Ref<Shader> const & shader, GES::Ref<VertexArray> const & vertexArray, glm::mat4 const & transform, GES::Ref<Texture> const & texture)
 	{
 		shader->Bind();
 		shader->UploadUniformMat4("u_ViewProjectionMatrix", s_Data->ViewProjectionMatrix);

@@ -4,8 +4,8 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 
 namespace GES {
-	std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
-	std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
+	GES::Ref<spdlog::logger> Log::s_CoreLogger;
+	GES::Ref<spdlog::logger> Log::s_ClientLogger;
 
 	void Log::Init()
 	{

@@ -14,6 +14,6 @@ namespace GES
 		void SetClearColor() const override;
 		void Clear() const override;
 
-		void DrawIndexed(std::shared_ptr<VertexArray> const & vertexArray) const override;
+		void DrawIndexed(GES::Ref<VertexArray> const & vertexArray) const override;
 	};
 }

@@ -18,7 +18,7 @@ namespace GES
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
-	void OpenGLRendererCommand::DrawIndexed(std::shared_ptr<VertexArray> const & vertexArray) const
+	void OpenGLRendererCommand::DrawIndexed(GES::Ref<VertexArray> const & vertexArray) const
 	{
 		auto & indexBuffer = vertexArray->GetIndexBuffer();
 		glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);

@@ -4,10 +4,8 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/fmt/ostr.h>
 
-#include <memory> // std::shared_ptr
-
 #ifdef GES_SHARED
-GES_TEMPLATE template class GES_API std::shared_ptr<spdlog::logger>;
+GES_TEMPLATE template class GES_API GES::Ref<spdlog::logger>;
 #endif
 
 namespace GES {
@@ -16,12 +14,12 @@ namespace GES {
 	public:
 		static void Init();
 
-		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
-		inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
+		inline static GES::Ref<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
+		inline static GES::Ref<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 
 	private:
-		static std::shared_ptr<spdlog::logger> s_CoreLogger;
-		static std::shared_ptr<spdlog::logger> s_ClientLogger;
+		static GES::Ref<spdlog::logger> s_CoreLogger;
+		static GES::Ref<spdlog::logger> s_ClientLogger;
 	};
 }
 

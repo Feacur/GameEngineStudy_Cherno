@@ -98,7 +98,7 @@ private:
 
 	void CreateVertexArrayTriangle()
 	{
-		std::shared_ptr<GES::VertexArray> & vertexArray = m_VertexArrayTriangle;
+		GES::Ref<GES::VertexArray> & vertexArray = m_VertexArrayTriangle;
 		vertexArray.reset(GES::VertexArray::Create());
 
 		float vertices[] = {
@@ -106,7 +106,7 @@ private:
 			/*position*/  0.5f, -0.5f, 0.0f, /*color*/ 0.0f, 1.0f, 0.0f, 1.0f,
 			/*position*/  0.0f,  0.5f, 0.0f, /*color*/ 0.0f, 0.0f, 1.0f, 1.0f,
 		};
-		std::shared_ptr<GES::VertexBuffer> vertexBuffer;
+		GES::Ref<GES::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(GES::VertexBuffer::Create(vertices, sizeof(vertices)));
 		vertexBuffer->SetLayout({
 			{ GES::ShaderDataType::Float3, "a_Position" },
@@ -115,14 +115,14 @@ private:
 		vertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32 indices[] = { 0, 1, 2, };
-		std::shared_ptr<GES::IndexBuffer> indexBuffer;
+		GES::Ref<GES::IndexBuffer> indexBuffer;
 		indexBuffer.reset(GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32)));
 		vertexArray->SetIndexBuffer(indexBuffer);
 	}
 
 	void CreateVertexArraySquare()
 	{
-		std::shared_ptr<GES::VertexArray> & vertexArray = m_VertexArraySquare;
+		GES::Ref<GES::VertexArray> & vertexArray = m_VertexArraySquare;
 		vertexArray.reset(GES::VertexArray::Create());
 
 		float vertices[] = {
@@ -131,7 +131,7 @@ private:
 			/*position*/  0.5f,  0.5f, 0.0f, /*UV*/ 1.0f, 1.0f,
 			/*position*/ -0.5f,  0.5f, 0.0f, /*UV*/ 0.0f, 1.0f,
 		};
-		std::shared_ptr<GES::VertexBuffer> vertexBuffer;
+		GES::Ref<GES::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(GES::VertexBuffer::Create(vertices, sizeof(vertices)));
 		vertexBuffer->SetLayout({
 			{ GES::ShaderDataType::Float3, "a_Position" },
@@ -140,14 +140,14 @@ private:
 		vertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32 indices[] = { 0, 1, 2, 2, 3, 0, };
-		std::shared_ptr<GES::IndexBuffer> indexBuffer;
+		GES::Ref<GES::IndexBuffer> indexBuffer;
 		indexBuffer.reset(GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32)));
 		vertexArray->SetIndexBuffer(indexBuffer);
 	}
 
 	void CreateShaderProgramVertexColor()
 	{
-		std::shared_ptr<GES::Shader> & shader = m_ShaderVertexColor;
+		GES::Ref<GES::Shader> & shader = m_ShaderVertexColor;
 
 		cstring vertexSrc = R"(
 			#version 330 core
@@ -185,7 +185,7 @@ private:
 
 	void CreateShaderProgramTexture()
 	{
-		std::shared_ptr<GES::Shader> & shader = m_ShaderTexture;
+		GES::Ref<GES::Shader> & shader = m_ShaderTexture;
 
 		cstring vertexSrc = R"(
 			#version 330 core
@@ -224,11 +224,11 @@ private:
 	}
 
 private:
-	std::shared_ptr<GES::VertexArray> m_VertexArrayTriangle;
-	std::shared_ptr<GES::VertexArray> m_VertexArraySquare;
-	std::shared_ptr<GES::Shader> m_ShaderVertexColor;
-	std::shared_ptr<GES::Shader> m_ShaderTexture;
-	std::shared_ptr<GES::Texture> m_Texture;
+	GES::Ref<GES::VertexArray> m_VertexArrayTriangle;
+	GES::Ref<GES::VertexArray> m_VertexArraySquare;
+	GES::Ref<GES::Shader> m_ShaderVertexColor;
+	GES::Ref<GES::Shader> m_ShaderTexture;
+	GES::Ref<GES::Texture> m_Texture;
 
 	GES::Orthographic2dCamera m_Camera;
 	float m_CameraPositionSpeed = 1;

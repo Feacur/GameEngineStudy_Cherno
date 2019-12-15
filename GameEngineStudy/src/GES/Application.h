@@ -7,7 +7,6 @@
 #include "ImGuiLayer/ImGuiLayer.h"
 
 // #include <vector>
-#include <memory> // std::unique_ptr, std::shared_ptr
 
 namespace GES {
 	#ifdef GES_SHARED

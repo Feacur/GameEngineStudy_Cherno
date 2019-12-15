@@ -2,6 +2,7 @@
 
 #include <sstream>
 
+#include "GES/Core.h"
 #include "GES/Core/Timestep.h"
 
 #include "GES/Application.h"
@@ -24,7 +25,6 @@
 #include "GES/Renderer/Orthographic2dCamera.h"
 
 #include <imgui.h>
-#include <memory>
 
 // ---- Entry Point -------
 #include "GES/EntryPoint.h"

@@ -45,3 +45,14 @@ typedef char const * cstring;
 #define BIT(T, index) static_cast<T>(static_cast<T>(1) << index)
 
 #define BIND_EVENT_FN(name) std::bind(&name, this, std::placeholders::_1)
+
+#define HZ_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+#include <memory> // std::unique_ptr, std::shared_ptr
+namespace GES {
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+}
