@@ -12,7 +12,8 @@ namespace GES
 		virtual ~Shader() = default;
 
 	public:
-		static Shader * Shader::Create(cstring vertexSource, cstring fragmentSource);
+		static Shader * Shader::CreatePath(cstring path);
+		static Shader * Shader::CreateSource(cstring source);
 
 	public:
 		virtual void Bind() const = 0;

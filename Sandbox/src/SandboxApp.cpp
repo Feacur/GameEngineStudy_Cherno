@@ -12,8 +12,8 @@ public:
 		CreateVertexArrayTriangle();
 		CreateVertexArraySquare();
 
-		CreateShaderProgramVertexColor();
-		CreateShaderProgramTexture();
+		m_ShaderVertexColor.reset(GES::Shader::CreatePath("assets/shaders/vertex_color.glsl"));
+		m_ShaderTexture.reset(GES::Shader::CreatePath("assets/shaders/texture.glsl"));
 
 		m_TextureCheckerboard.reset(GES::Texture2D::Create("assets/textures/checkerboard.png"));
 		m_TextureChernoLogo.reset(GES::Texture2D::Create("assets/textures/cherno_logo.png"));
@@ -143,84 +143,6 @@ private:
 		GES::Ref<GES::IndexBuffer> indexBuffer;
 		indexBuffer.reset(GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32)));
 		vertexArray->SetIndexBuffer(indexBuffer);
-	}
-
-	void CreateShaderProgramVertexColor()
-	{
-		GES::Ref<GES::Shader> & shader = m_ShaderVertexColor;
-
-		cstring vertexSrc = R"(
-			#version 330 core
-
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec4 a_Color;
-
-			uniform mat4 u_ViewProjectionMatrix;
-			uniform mat4 u_Transform;
-
-			out vec4 v_Color;
-
-			void main()
-			{
-				v_Color = a_Color;
-				gl_Position = u_ViewProjectionMatrix * u_Transform * vec4(a_Position, 1.0);
-			}
-		)";
-
-		cstring fragmentSrc = R"(
-			#version 330 core
-
-			layout(location = 0) out vec4 color;
-			
-			in vec4 v_Color;
-
-			void main()
-			{
-				color = v_Color;
-			}
-		)";
-
-		shader.reset(GES::Shader::Create(vertexSrc, fragmentSrc));
-	}
-
-	void CreateShaderProgramTexture()
-	{
-		GES::Ref<GES::Shader> & shader = m_ShaderTexture;
-
-		cstring vertexSrc = R"(
-			#version 330 core
-
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec2 a_TexCoord;
-
-			uniform mat4 u_ViewProjectionMatrix;
-			uniform mat4 u_Transform;
-
-			out vec2 v_TexCoord;
-
-			void main()
-			{
-				v_TexCoord = a_TexCoord;
-				gl_Position = u_ViewProjectionMatrix * u_Transform * vec4(a_Position, 1.0);
-			}
-		)";
-
-		cstring fragmentSrc = R"(
-			#version 330 core
-
-			layout(location = 0) out vec4 color;
-
-			uniform sampler2D u_Texture;
-
-			in vec2 v_TexCoord;
-
-			void main()
-			{
-				color = texture(u_Texture, v_TexCoord);
-			}
-		)";
-
-		shader.reset(GES::Shader::Create(vertexSrc, fragmentSrc));
 	}
 
 private:

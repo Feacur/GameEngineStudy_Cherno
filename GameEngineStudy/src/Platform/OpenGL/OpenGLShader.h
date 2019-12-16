@@ -6,7 +6,7 @@ namespace GES
 	class OpenGLShader : public Shader
 	{
 	public:
-		OpenGLShader(cstring vertexSource, cstring fragmentSource);
+		OpenGLShader(cstring source);
 		~OpenGLShader() override;
 
 	public:
