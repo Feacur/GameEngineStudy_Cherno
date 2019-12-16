@@ -17,6 +17,8 @@ namespace GES
 		static void SetClearColor();
 		static void Clear();
 
+		static void Init();
+
 	public:
 		static void BeginScene(Orthographic2dCamera const & camera);
 		static void Submit(GES::Ref<Shader> const & shader, GES::Ref<VertexArray> const & vertexArray, glm::mat4 const & transform);

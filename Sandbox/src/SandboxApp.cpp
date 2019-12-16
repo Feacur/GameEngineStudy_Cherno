@@ -15,7 +15,8 @@ public:
 		CreateShaderProgramVertexColor();
 		CreateShaderProgramTexture();
 
-		m_Texture.reset(GES::Texture2D::Create("assets/textures/checkerboard.png"));
+		m_TextureCheckerboard.reset(GES::Texture2D::Create("assets/textures/checkerboard.png"));
+		m_TextureChernoLogo.reset(GES::Texture2D::Create("assets/textures/cherno_logo.png"));
 	}
 
 	void OnUpdate(GES::Timestep ts) override
@@ -40,11 +41,10 @@ public:
 			}
 		}
 
-		m_Texture->Bind(0u);
 		glm::mat4 square_scale = glm::scale(identity, glm::vec3(1.5f));
 		glm::vec3 square_pos(0.0f, 0.0f, 0.0f);
 		glm::mat4 square_transform = glm::translate(identity, square_pos) * square_scale;
-		GES::Renderer::Submit(m_ShaderTexture, m_VertexArraySquare, square_transform, m_Texture);
+		GES::Renderer::Submit(m_ShaderTexture, m_VertexArraySquare, square_transform, m_TextureChernoLogo);
 
 		GES::Renderer::EndScene();
 	}
@@ -228,7 +228,8 @@ private:
 	GES::Ref<GES::VertexArray> m_VertexArraySquare;
 	GES::Ref<GES::Shader> m_ShaderVertexColor;
 	GES::Ref<GES::Shader> m_ShaderTexture;
-	GES::Ref<GES::Texture> m_Texture;
+	GES::Ref<GES::Texture> m_TextureCheckerboard;
+	GES::Ref<GES::Texture> m_TextureChernoLogo;
 
 	GES::Orthographic2dCamera m_Camera;
 	float m_CameraPositionSpeed = 1;

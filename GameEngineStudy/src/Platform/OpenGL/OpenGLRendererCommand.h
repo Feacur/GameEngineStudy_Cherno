@@ -13,6 +13,7 @@ namespace GES
 	public:
 		void SetClearColor() const override;
 		void Clear() const override;
+		void Init() const override;
 
 		void DrawIndexed(GES::Ref<VertexArray> const & vertexArray) const override;
 	};

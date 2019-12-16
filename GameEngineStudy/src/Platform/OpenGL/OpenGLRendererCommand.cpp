@@ -18,6 +18,12 @@ namespace GES
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
+	void OpenGLRendererCommand::Init() const
+	{
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+
 	void OpenGLRendererCommand::DrawIndexed(GES::Ref<VertexArray> const & vertexArray) const
 	{
 		auto & indexBuffer = vertexArray->GetIndexBuffer();

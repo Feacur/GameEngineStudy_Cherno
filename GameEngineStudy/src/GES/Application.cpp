@@ -1,10 +1,11 @@
 #include "ges_pch.h"
 #include "Application.h"
 
-#include "GES/Events/ApplicationEvent.h"
-#include "GES/Log.h"
+#include "Events/ApplicationEvent.h"
+#include "Log.h"
 
 #include "Input.h"
+#include "Renderer/Renderer.h"
 
 #include <GLFW/glfw3.h>
 
@@ -18,6 +19,8 @@ namespace GES {
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+		Renderer::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);

@@ -22,6 +22,11 @@ namespace GES
 	{
 		s_RendererCommand->Clear();
 	}
+	
+	void Renderer::Init()
+	{
+		s_RendererCommand->Init();
+	}
 
 	void Renderer::BeginScene(Orthographic2dCamera const & camera)
 	{
@@ -40,6 +45,8 @@ namespace GES
 
 	void Renderer::Submit(GES::Ref<Shader> const & shader, GES::Ref<VertexArray> const & vertexArray, glm::mat4 const & transform, GES::Ref<Texture> const & texture)
 	{
+		texture->Bind(0u);
+
 		shader->Bind();
 		shader->UploadUniformMat4("u_ViewProjectionMatrix", s_Data->ViewProjectionMatrix);
 		shader->UploadUniformMat4("u_Transform", transform);

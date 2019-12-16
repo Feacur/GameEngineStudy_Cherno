@@ -16,6 +16,7 @@ namespace GES
 	public:
 		virtual void SetClearColor() const = 0;
 		virtual void Clear() const = 0;
+		virtual void Init() const = 0;
 		virtual void DrawIndexed(GES::Ref<VertexArray> const & vertexArray) const = 0;
 	};
 }
