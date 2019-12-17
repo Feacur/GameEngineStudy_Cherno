@@ -15,6 +15,6 @@ namespace GES
 		void Clear() const override;
 		void Init() const override;
 
-		void DrawIndexed(GES::Ref<VertexArray> const & vertexArray) const override;
+		void DrawIndexed(Ref<VertexArray> const & vertexArray) const override;
 	};
 }

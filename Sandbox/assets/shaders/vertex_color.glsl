@@ -1,3 +1,5 @@
+#name vertex_color
+
 #type vertex
 #version 330 core
 

@@ -28,21 +28,50 @@ namespace GES
 		
 		return result;
 	}
-
-	Shader * Shader::CreatePath(cstring path)
+	
+	std::string FindName(std::string const & source)
 	{
-		std::string source = ReadFile(path);
-		return CreateSource(source.c_str());
+		cstring typeToken = "#name";
+		const size_t typeTokenLength = strlen(typeToken);
+
+		size_t pos = source.find(typeToken, 0);
+		if (pos == std::string::npos) { return ""; }
+
+		size_t eol = source.find_first_of("\r\n", pos);
+		GES_CORE_ASSERT(eol != std::string::npos, "Syntax error");
+
+		size_t begin = pos + typeTokenLength + 1;
+		return source.substr(begin, eol - begin);
 	}
 
-	Shader * Shader::CreateSource(cstring source)
+	Shader * Shader::CreatePath(cstring path, cstring name)
 	{
+		std::string source = ReadFile(path);
+		return CreateSource(source.c_str(), name);
+	}
+
+	Shader * Shader::CreateSource(cstring source, cstring name)
+	{
+		std::string autoName;
+		if (!name) {
+			autoName = FindName(source);
+			name = autoName.c_str();
+		}
 		switch(RendererAPI::GetType())
 		{
 			case RendererAPI::Type::OpenGL:
-				return new OpenGLShader(source);
+				return new OpenGLShader(source, name);
 		}
 		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererAPI::GetType());
 		return nullptr;
+	}
+
+	void ShaderLibrary::Add(Ref<Shader> const & shader) {
+		auto & name = shader->GetName();
+		m_Shaders[name] = shader;
+	}
+
+	Ref<Shader> ShaderLibrary::Get(cstring name) {
+		return m_Shaders[name];
 	}
 }

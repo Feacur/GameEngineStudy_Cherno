@@ -12,10 +12,12 @@ VSCode workspace, because it doesn't support nested projects
 > GameEngineStudy
 Game engine project
 
-vendor/spdlog ... logging library
-vendor/GLFW ..... platform layer provider 
 vendor/Glad ..... OpenGL loader
+vendor/GLFW ..... platform layer provider
+vendor/glm ...... math code library
+vendor/spdlog ... logging library
 vendor/imgui .... immediate-mode GUI tool
+vendor/stb_image  image-processing library
 ```
 
 ```

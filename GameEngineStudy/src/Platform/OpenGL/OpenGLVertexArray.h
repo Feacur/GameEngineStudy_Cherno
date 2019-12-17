@@ -14,15 +14,15 @@ namespace GES
 		void Bind() const override;
 		void Unbind() const override;
 
-		void AddVertexBuffer(GES::Ref<VertexBuffer> const & vertexBuffer) override;
-		void SetIndexBuffer(GES::Ref<IndexBuffer> const & indexBuffer) override;
+		void AddVertexBuffer(Ref<VertexBuffer> const & vertexBuffer) override;
+		void SetIndexBuffer(Ref<IndexBuffer> const & indexBuffer) override;
 
-		std::vector<GES::Ref<VertexBuffer>> const & GetVertexBuffers() const { return m_VertexBuffers; }
-		GES::Ref<IndexBuffer> const & GetIndexBuffer() const { return m_IndexBuffer; }
+		std::vector<Ref<VertexBuffer>> const & GetVertexBuffers() const { return m_VertexBuffers; }
+		Ref<IndexBuffer> const & GetIndexBuffer() const { return m_IndexBuffer; }
 
 	private:
 		uint32 m_RendererID;
-		std::vector<GES::Ref<VertexBuffer>> m_VertexBuffers;
-		GES::Ref<IndexBuffer> m_IndexBuffer;
+		std::vector<Ref<VertexBuffer>> m_VertexBuffers;
+		Ref<IndexBuffer> m_IndexBuffer;
 	};
 }

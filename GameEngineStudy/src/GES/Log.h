@@ -5,7 +5,7 @@
 #include <spdlog/fmt/ostr.h>
 
 #ifdef GES_SHARED
-GES_TEMPLATE template class GES_API GES::Ref<spdlog::logger>;
+GES_TEMPLATE template class GES_API Ref<spdlog::logger>;
 #endif
 
 namespace GES {
@@ -14,12 +14,12 @@ namespace GES {
 	public:
 		static void Init();
 
-		inline static GES::Ref<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
-		inline static GES::Ref<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
+		inline static Ref<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
+		inline static Ref<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 
 	private:
-		static GES::Ref<spdlog::logger> s_CoreLogger;
-		static GES::Ref<spdlog::logger> s_ClientLogger;
+		static Ref<spdlog::logger> s_CoreLogger;
+		static Ref<spdlog::logger> s_ClientLogger;
 	};
 }
 

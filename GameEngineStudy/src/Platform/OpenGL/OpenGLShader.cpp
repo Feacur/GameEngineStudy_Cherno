@@ -28,8 +28,9 @@ namespace GES
 	{
 		std::unordered_map<GLenum, std::string> shaderSources;
 
-		const char* typeToken = "#type";
-		size_t typeTokenLength = strlen(typeToken);
+		cstring typeToken = "#type";
+		const size_t typeTokenLength = strlen(typeToken);
+		
 		size_t pos = source.find(typeToken, 0);
 		while (pos != std::string::npos)
 		{
@@ -50,8 +51,8 @@ namespace GES
 	GLuint Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
 		GLuint program = glCreateProgram();
-		std::vector<GLenum> glShaderIDs;
-		glShaderIDs.reserve(shaderSources.size());
+		GLenum glShaderIDs[4] = {};
+		uint8 glShaderIDsIndex = 0;
 		for (auto& kv : shaderSources)
 		{
 			GLenum type = kv.first;
@@ -81,13 +82,15 @@ namespace GES
 			}
 
 			glAttachShader(program, shader);
-			glShaderIDs.push_back(shader);
+			glShaderIDs[glShaderIDsIndex++] = shader;
 		}
 
 		// Link our program
 		glLinkProgram(program);
-		for (auto id : glShaderIDs) { glDetachShader(program, id); }
-		for (auto id : glShaderIDs) { glDeleteShader(id); }
+		for (uint8 i = 0; i < glShaderIDsIndex; i++) {
+			glDetachShader(program, glShaderIDs[i]);
+			glDeleteShader(glShaderIDs[i]);
+		}
 
 		// Note the different functions here: glGetProgram* instead of glGetShader*.
 		GLint isLinked = 0;
@@ -110,10 +113,11 @@ namespace GES
 		return program;
 	}
 
-	OpenGLShader::OpenGLShader(cstring source)
+	OpenGLShader::OpenGLShader(cstring source, cstring name)
 	{
 		auto shaderSources = PreProcess(source);
 		m_RendererID = Compile(shaderSources);
+		m_Name = name;
 	}
 
 	OpenGLShader::~OpenGLShader()

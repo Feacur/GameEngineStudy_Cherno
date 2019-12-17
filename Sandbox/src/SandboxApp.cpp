@@ -12,8 +12,12 @@ public:
 		CreateVertexArrayTriangle();
 		CreateVertexArraySquare();
 
-		m_ShaderVertexColor.reset(GES::Shader::CreatePath("assets/shaders/vertex_color.glsl"));
-		m_ShaderTexture.reset(GES::Shader::CreatePath("assets/shaders/texture.glsl"));
+		m_ShaderLibrary.Add(GES::Ref<GES::Shader>(
+			GES::Shader::CreatePath("assets/shaders/vertex_color.glsl")
+		));
+		m_ShaderLibrary.Add(GES::Ref<GES::Shader>(
+			GES::Shader::CreatePath("assets/shaders/texture.glsl")
+		));
 
 		m_TextureCheckerboard.reset(GES::Texture2D::Create("assets/textures/checkerboard.png"));
 		m_TextureChernoLogo.reset(GES::Texture2D::Create("assets/textures/cherno_logo.png"));
@@ -30,6 +34,7 @@ public:
 
 		GES::Renderer::BeginScene(m_Camera);
 
+		auto shaderVertexColor = m_ShaderLibrary.Get("vertex_color");
 		glm::mat4 triangle_scale = glm::scale(identity, glm::vec3(0.1f));
 		for (int y = -10; y < 10; y++)
 		{
@@ -37,14 +42,15 @@ public:
 			{
 				glm::vec3 triangle_pos(x * 0.11f, y * 0.11f, 0.0f);
 				glm::mat4 triangle_transform = glm::translate(identity, triangle_pos) * triangle_scale;
-				GES::Renderer::Submit(m_ShaderVertexColor, m_VertexArrayTriangle, triangle_transform);
+				GES::Renderer::Submit(shaderVertexColor, m_VertexArrayTriangle, triangle_transform);
 			}
 		}
 
+		auto shaderTexture = m_ShaderLibrary.Get("texture");
 		glm::mat4 square_scale = glm::scale(identity, glm::vec3(1.5f));
 		glm::vec3 square_pos(0.0f, 0.0f, 0.0f);
 		glm::mat4 square_transform = glm::translate(identity, square_pos) * square_scale;
-		GES::Renderer::Submit(m_ShaderTexture, m_VertexArraySquare, square_transform, m_TextureChernoLogo);
+		GES::Renderer::Submit(shaderTexture, m_VertexArraySquare, square_transform, m_TextureChernoLogo);
 
 		GES::Renderer::EndScene();
 	}
@@ -146,10 +152,9 @@ private:
 	}
 
 private:
+	GES::ShaderLibrary m_ShaderLibrary;
 	GES::Ref<GES::VertexArray> m_VertexArrayTriangle;
 	GES::Ref<GES::VertexArray> m_VertexArraySquare;
-	GES::Ref<GES::Shader> m_ShaderVertexColor;
-	GES::Ref<GES::Shader> m_ShaderTexture;
 	GES::Ref<GES::Texture> m_TextureCheckerboard;
 	GES::Ref<GES::Texture> m_TextureChernoLogo;
 

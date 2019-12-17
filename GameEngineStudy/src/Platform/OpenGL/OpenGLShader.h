@@ -6,10 +6,11 @@ namespace GES
 	class OpenGLShader : public Shader
 	{
 	public:
-		OpenGLShader(cstring source);
+		OpenGLShader(cstring source, cstring name);
 		~OpenGLShader() override;
 
 	public:
+		std::string const & GetName() const override { return m_Name; }
 		void Bind() const override;
 		void Unbind() const override;
 
@@ -18,5 +19,6 @@ namespace GES
 
 	private:
 		uint32 m_RendererID;
+		std::string m_Name;
 	};
 }

@@ -16,7 +16,6 @@ extern "C" { // @Note: use discrete GPU by default
 #include "Platform/OpenGL/OpenGLContext.h"
 
 #include <GLFW/glfw3.h>
-#include <glad/glad.h>
 
 namespace GES {
 	static bool s_GLFWInitialized = false;

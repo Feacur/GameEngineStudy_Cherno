@@ -21,8 +21,8 @@ namespace GES
 
 	public:
 		static void BeginScene(Orthographic2dCamera const & camera);
-		static void Submit(GES::Ref<Shader> const & shader, GES::Ref<VertexArray> const & vertexArray, glm::mat4 const & transform);
-		static void Submit(GES::Ref<Shader> const & shader, GES::Ref<VertexArray> const & vertexArray, glm::mat4 const & transform, GES::Ref<Texture> const & texture);
+		static void Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform);
+		static void Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform, Ref<Texture> const & texture);
 		static void EndScene();
 
 	private:

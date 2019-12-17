@@ -24,7 +24,7 @@ namespace GES
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
-	void OpenGLRendererCommand::DrawIndexed(GES::Ref<VertexArray> const & vertexArray) const
+	void OpenGLRendererCommand::DrawIndexed(Ref<VertexArray> const & vertexArray) const
 	{
 		auto & indexBuffer = vertexArray->GetIndexBuffer();
 		glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
