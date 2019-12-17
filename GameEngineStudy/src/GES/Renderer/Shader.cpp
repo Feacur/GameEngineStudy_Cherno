@@ -11,7 +11,7 @@ namespace GES
 {
 	std::string ReadFile(cstring path)
 	{
-		std::ifstream file(path, std::ios::in, std::ios::binary);
+		std::ifstream file(path, std::ios::in | std::ios::binary);
 		if (!file)
 		{
 			GES_CORE_ERROR("Could not open file '{0}'", path);

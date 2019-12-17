@@ -50,7 +50,8 @@ namespace GES
 	GLuint Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
 		GLuint program = glCreateProgram();
-		std::vector<GLenum> glShaderIDs(shaderSources.size());
+		std::vector<GLenum> glShaderIDs;
+		glShaderIDs.reserve(shaderSources.size());
 		for (auto& kv : shaderSources)
 		{
 			GLenum type = kv.first;
@@ -85,6 +86,8 @@ namespace GES
 
 		// Link our program
 		glLinkProgram(program);
+		for (auto id : glShaderIDs) { glDetachShader(program, id); }
+		for (auto id : glShaderIDs) { glDeleteShader(id); }
 
 		// Note the different functions here: glGetProgram* instead of glGetShader*.
 		GLint isLinked = 0;
@@ -94,24 +97,14 @@ namespace GES
 			GLint maxLength = 0;
 			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
 
-			// The maxLength includes the NULL character
 			std::vector<GLchar> infoLog(maxLength);
 			glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
 
-			// We don't need the program anymore.
 			glDeleteProgram(program);
 			
-			for (auto id : glShaderIDs) {
-				glDeleteShader(id);
-			}
-
 			GES_CORE_ERROR("{0}", infoLog.data());
 			GES_CORE_ASSERT(false, "Shader link failure!");
 			return 0;
-		}
-
-		for (auto id : glShaderIDs) {
-			glDetachShader(program, id);
 		}
 
 		return program;
