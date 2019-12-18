@@ -22,6 +22,7 @@ workspace "GameEngineStudy"
 			"4189", -- local variable is initialized but not referenced (suppress)
 			"4100", -- unreferenced formal parameter (suppress)
 			"4530", -- C++ exception handling was used but -EHsc was not selected (suppress)
+			"4702", -- unreachable code (suppress) -- fmt from spdlog causes it
 			-- "4521", -- 'identifier' : class 'type' needs to have dll-interface to be used by clients of class 'type2'
 			-- "4312", -- 'operation' : conversion from 'type1' to 'type2' of greater size
 			-- "4127", -- conditional expression is constant
@@ -121,7 +122,6 @@ project "GameEngineStudy"
 
 	filter "system:windows"
 		defines {
-			"GES_PLATFORM_WINDOWS",
 			-- "GES_BUILD_DLL", -- if specified [kind "SharedLib"]
 			-- "GES_SHARED", -- if specified [kind "SharedLib"]
 			"GLFW_INCLUDE_NONE",
@@ -173,7 +173,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		defines {
-			"GES_PLATFORM_WINDOWS",
 			-- "GES_SHARED", -- if specified [kind "SharedLib"] for the GameEngineStudy
 			-- "IMGUI_API=__declspec(dllimport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
 		}

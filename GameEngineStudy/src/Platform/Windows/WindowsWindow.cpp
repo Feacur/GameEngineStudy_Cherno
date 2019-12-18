@@ -18,7 +18,7 @@ extern "C" { // @Note: use discrete GPU by default
 #include <GLFW/glfw3.h>
 
 namespace GES {
-	static bool s_GLFWInitialized = false;
+	static uint8 s_GLFWWindowCount = 0;
 
 	static void GLFWErrorCallback(int error, cstring description)
 	{
@@ -48,17 +48,17 @@ namespace GES {
 
 		GES_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-		if (!s_GLFWInitialized)
+		if (s_GLFWWindowCount == 0)
 		{
-			// TODO: glfwTerminate on system shutdown
+			GES_CORE_INFO("Initializing GLFW");
 			int success = glfwInit();
 			GES_CORE_ASSERT(success, "Could not intialize GLFW!");
 
 			glfwSetErrorCallback(&GLFWErrorCallback);
-			s_GLFWInitialized = true;
 		}
 
 		m_Window = glfwCreateWindow((int32)props.Width, (int32)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		++s_GLFWWindowCount;
 
 		m_Context = new OpenGLContext(m_Window);
 		m_Context->Init();
@@ -141,6 +141,11 @@ namespace GES {
 	void WindowsWindow::Shutdown()
 	{
 		glfwDestroyWindow(m_Window);
+		--s_GLFWWindowCount;
+		if (s_GLFWWindowCount == 0) {
+			GES_CORE_INFO("Terminating GLFW");
+			glfwTerminate();
+		}
 	}
 
 	void WindowsWindow::OnUpdate()

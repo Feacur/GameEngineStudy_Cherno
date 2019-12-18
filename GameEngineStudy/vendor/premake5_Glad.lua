@@ -5,6 +5,11 @@ project "Glad"
 	cppdialect "C++11"
 	warnings "Default"
 	removeflags { "FatalWarnings" }
+
+	filter "toolset:msc*"
+		disablewarnings {
+			"4005", -- 'identifier' : macro redefinition (suppress) -- might ignore it as well, though
+		}
 	
 	symbols "Off"
 	optimize "On"

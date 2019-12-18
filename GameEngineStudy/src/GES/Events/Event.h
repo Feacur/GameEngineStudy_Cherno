@@ -30,7 +30,7 @@ namespace GES {
 		return static_cast<EventCategory>(static_cast<int32>(container) | static_cast<int32>(bits));
 	}
 
-#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
+#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\
 								EventType GetEventType() const override { return GetStaticType(); }\
 								cstring GetName() const override { return #type; }
 

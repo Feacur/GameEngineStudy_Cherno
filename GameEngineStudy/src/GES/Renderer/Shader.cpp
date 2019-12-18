@@ -18,8 +18,16 @@ namespace GES
 			return "";
 		}
 
-		std::string result;
 		file.seekg(0, std::ios::end);
+		size_t size = file.tellg();
+		if (size < 0)
+		{
+			file.close();
+			GES_CORE_ERROR("Could not read file '{0}'", path);
+			return "";
+		}
+
+		std::string result;
 		result.resize(file.tellg());
 		file.seekg(0, std::ios::beg);
 
