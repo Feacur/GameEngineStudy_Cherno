@@ -5,7 +5,7 @@
 
 #include <string>
 
-#ifdef GES_SHARED
+#if defined(GES_SHARED)
 #pragma warning(push)
 #pragma warning(disable: 4251)
 #endif
@@ -33,6 +33,6 @@ namespace GES {
 	};
 }
 
-#ifdef GES_SHARED
+#if defined(GES_SHARED)
 #pragma warning(pop)
 #endif

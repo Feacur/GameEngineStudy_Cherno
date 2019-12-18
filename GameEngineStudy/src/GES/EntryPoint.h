@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef GES_PLATFORM_WINDOWS
+#if defined(GES_PLATFORM_WINDOWS)
 extern GES::Application *GES::CreateApplication();
 
 int main(int argc, char* argv[])

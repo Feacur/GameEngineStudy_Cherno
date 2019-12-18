@@ -7,7 +7,7 @@
 #include "ImGuiLayer/ImGuiLayer.h"
 
 namespace GES {
-	#ifdef GES_SHARED
+	#if defined(GES_SHARED)
 	GES_TEMPLATE template class GES_API std::_Compressed_pair<std::default_delete<Window>, Window *, true>;
 	GES_TEMPLATE template class GES_API std::unique_ptr<Window>;
 	#endif

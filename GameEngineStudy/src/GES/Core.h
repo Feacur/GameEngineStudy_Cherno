@@ -17,11 +17,11 @@ typedef unsigned long uint48; // witty (32 + 64) / 2
 
 typedef char const * cstring;
 
-#ifdef _WIN32
-	#ifdef _WIN64
+#if defined(_WIN32)
+	#if defined(_WIN64)
 		#define GES_PLATFORM_WINDOWS
 	#else
-		#error "x86 Builds are not supported!"
+		#define GES_PLATFORM_WINDOWS
 	#endif
 #elif defined(__APPLE__) || defined(__MACH__)
 	#include <TargetConditionals.h>
@@ -30,13 +30,11 @@ typedef char const * cstring;
 	 * to ensure that we're running on MAC
 	 * and not some other Apple platform */
 	#if TARGET_IPHONE_SIMULATOR == 1
-		#error "IOS simulator is not supported!"
+		#define GES_PLATFORM_IOS_SIMULATOR
 	#elif TARGET_OS_IPHONE == 1
 		#define GES_PLATFORM_IOS
-		#error "IOS is not supported!"
 	#elif TARGET_OS_MAC == 1
 		#define GES_PLATFORM_MACOS
-		#error "MacOS is not supported!"
 	#else
 		#error "Unknown Apple platform!"
 	#endif
@@ -45,17 +43,15 @@ typedef char const * cstring;
  * it has __linux__ defined */
 #elif defined(__ANDROID__)
 	#define GES_PLATFORM_ANDROID
-	#error "Android is not supported!"
 #elif defined(__linux__)
 	#define GES_PLATFORM_LINUX
-	#error "Linux is not supported!"
 #else
 	#error "Unknown compiler/platform!"
 #endif
 
-#ifdef GES_PLATFORM_WINDOWS
-	#ifdef GES_SHARED
-		#ifdef GES_BUILD_DLL
+#if defined(GES_PLATFORM_WINDOWS)
+	#if defined(GES_SHARED)
+		#if defined(GES_BUILD_DLL)
 			#define GES_API __declspec(dllexport)
 			#define GES_TEMPLATE
 		#else
@@ -70,7 +66,7 @@ typedef char const * cstring;
 	#error supported platforms: Windows
 #endif
 
-#ifdef SHIPPING
+#if defined(SHIPPING)
 	#define GES_ASSERT(x, ...)
 	#define GES_CORE_ASSERT(x, ...)
 #else

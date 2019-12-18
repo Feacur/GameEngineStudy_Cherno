@@ -6,6 +6,6 @@
 
 #include "GES/Log.h"
 
-#ifdef GES_PLATFORM_WINDOWS
+#if defined(GES_PLATFORM_WINDOWS)
 	#include <Windows.h>
 #endif
