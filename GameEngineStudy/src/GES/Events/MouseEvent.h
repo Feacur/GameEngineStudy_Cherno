@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Event.h"
+#include "GES/MouseCodes.h"
 
 namespace GES {
 
@@ -51,20 +52,20 @@ namespace GES {
 	class GES_API MouseButtonEvent : public Event
 	{
 	public:
-		inline int32 GetMouseButton() const { return m_Button; }
+		inline MouseCode GetMouseButton() const { return m_Button; }
 
 		EVENT_CLASS_CATEGORY(EventCategory::Mouse | EventCategory::Input)
 	protected:
-		MouseButtonEvent(int32 button)
+		MouseButtonEvent(MouseCode button)
 			: m_Button(button) {}
 
-		int32 m_Button;
+		MouseCode m_Button;
 	};
 
 	class GES_API MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressedEvent(int32 button)
+		MouseButtonPressedEvent(MouseCode button)
 			: MouseButtonEvent(button) {}
 
 		std::string ToString() const override
@@ -80,7 +81,7 @@ namespace GES {
 	class GES_API MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleasedEvent(int32 button)
+		MouseButtonReleasedEvent(MouseCode button)
 			: MouseButtonEvent(button) {}
 
 		std::string ToString() const override

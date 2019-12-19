@@ -1,26 +1,27 @@
 #pragma once
 
 #include "Event.h"
+#include "GES/KeyCodes.h"
 
 namespace GES {
 
 	class GES_API KeyEvent : public Event
 	{
 	public:
-		inline int32 GetKeyCode() const { return m_KeyCode; }
+		inline KeyCode GetKeyCode() const { return m_KeyCode; }
 
 		EVENT_CLASS_CATEGORY(EventCategory::Keyboard | EventCategory::Input)
 	protected:
-		KeyEvent(int32 keycode)
+		KeyEvent(KeyCode keycode)
 			: m_KeyCode(keycode) {}
 
-		int32 m_KeyCode;
+		KeyCode m_KeyCode;
 	};
 
 	class GES_API KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(int32 keycode, int32 repeatCount)
+		KeyPressedEvent(KeyCode keycode, int32 repeatCount)
 			: KeyEvent(keycode), m_RepeatCount(repeatCount) {}
 
 		inline int32 GetRepeatCount() const { return m_RepeatCount; }
@@ -40,7 +41,7 @@ namespace GES {
 	class GES_API KeyReleasedEvent : public KeyEvent
 	{
 	public:
-		KeyReleasedEvent(int32 keycode)
+		KeyReleasedEvent(KeyCode keycode)
 			: KeyEvent(keycode) {}
 
 		std::string ToString() const override
@@ -56,7 +57,7 @@ namespace GES {
 	class GES_API KeyTypedEvent : public KeyEvent
 	{
 	public:
-		KeyTypedEvent(int32 keycode)
+		KeyTypedEvent(KeyCode keycode)
 			: KeyEvent(keycode) {}
 
 		std::string ToString() const override

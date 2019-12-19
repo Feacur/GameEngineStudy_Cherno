@@ -10,8 +10,6 @@
 #include "GES/Log.h"
 
 #include "GES/Input.h"
-#include "GES/KeyCodes.h"
-#include "GES/MouseButtonCodes.h"
 
 #include "GES/Events/ApplicationEvent.h"
 #include "GES/Events/KeyEvent.h"
