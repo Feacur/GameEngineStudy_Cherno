@@ -10,6 +10,7 @@
 #include "GES/Log.h"
 
 #include "GES/Input.h"
+#include "GES/Orthographic2dCameraController.h"
 
 #include "GES/Events/ApplicationEvent.h"
 #include "GES/Events/KeyEvent.h"
@@ -20,7 +21,6 @@
 #include "GES/Renderer/Buffer.h"
 #include "GES/Renderer/Shader.h"
 #include "GES/Renderer/Texture.h"
-#include "GES/Renderer/Orthographic2dCamera.h"
 
 #include <imgui.h>
 

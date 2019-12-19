@@ -78,8 +78,6 @@ typedef char const * cstring;
 
 #define BIND_EVENT_FN(name) std::bind(&name, this, std::placeholders::_1)
 
-#define HZ_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
-
 #include <memory> // std::unique_ptr, std::shared_ptr
 namespace GES {
 	template<typename T>

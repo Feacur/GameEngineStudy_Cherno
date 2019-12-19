@@ -7,7 +7,7 @@ class ExampleLayer : public GES::Layer
 public:
 	ExampleLayer()
 		: Layer("Example")
-		, m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
+		, m_CameraController(1280.0f / 720.0f)
 	{
 		CreateVertexArrayTriangle();
 		CreateVertexArraySquare();
@@ -27,12 +27,12 @@ public:
 	{
 		static glm::mat4 const identity = glm::mat4(1.0f);
 
-		UpdateCamera(ts);
+		m_CameraController.OnUpdate(ts);
 
 		GES::Renderer::SetClearColor();
 		GES::Renderer::Clear();
 
-		GES::Renderer::BeginScene(m_Camera);
+		GES::Renderer::BeginScene(m_CameraController.GetCamera());
 
 		auto shaderVertexColor = m_ShaderLibrary.Get("vertex_color");
 		glm::mat4 triangle_scale = glm::scale(identity, glm::vec3(0.1f));
@@ -61,47 +61,10 @@ public:
 
 	void OnEvent(GES::Event & e) override
 	{
+		m_CameraController.OnEvent(e);
 	}
 
 private:
-	void UpdateCamera(GES::Timestep ts)
-	{
-		float positionDelta = m_CameraPositionSpeed * ts;
-		float rotationDelta = m_CameraRotationSpeed * ts;
-
-		auto cameraPosition = m_Camera.GetPosition();
-		auto cameraRotation = m_Camera.GetRotation();
-
-		if (GES::Input::IsKeyPressed(GES_KEY_A)) {
-			cameraPosition.x -= positionDelta;
-		}
-
-		if (GES::Input::IsKeyPressed(GES_KEY_D)) {
-			cameraPosition.x += positionDelta;
-		}
-
-		if (GES::Input::IsKeyPressed(GES_KEY_S)) {
-			cameraPosition.y -= positionDelta;
-		}
-
-		if (GES::Input::IsKeyPressed(GES_KEY_W)) {
-			cameraPosition.y += positionDelta;
-		}
-
-		if (GES::Input::IsKeyPressed(GES_KEY_Q)) {
-			cameraRotation -= rotationDelta;
-		}
-
-		if (GES::Input::IsKeyPressed(GES_KEY_E)) {
-			cameraRotation += rotationDelta;
-		}
-
-		m_Camera.SetPosition(cameraPosition);
-		m_Camera.SetRotation(cameraRotation);
-		
-		m_Camera.RecalculateViewMatrix();
-	}
-
 	void CreateVertexArrayTriangle()
 	{
 		m_VertexArrayTriangle = GES::VertexArray::Create();
@@ -159,9 +122,7 @@ private:
 	GES::Ref<GES::Texture> m_TextureCheckerboard;
 	GES::Ref<GES::Texture> m_TextureChernoLogo;
 
-	GES::Orthographic2dCamera m_Camera;
-	float m_CameraPositionSpeed = 1;
-	float m_CameraRotationSpeed = 1;
+	GES::Orthographic2dCameraController m_CameraController;
 };
 
 class Sandbox : public GES::Application

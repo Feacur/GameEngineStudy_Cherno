@@ -20,6 +20,7 @@ namespace GES
 		glm::mat4 const & GetProjectionMatrix() const { return m_ProjectionMatrix; }
 		glm::mat4 const & GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
 
+		void SetProjection(float left, float right, float bottom, float top);
 		void RecalculateViewMatrix();
 
 	private:
