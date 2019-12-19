@@ -1,6 +1,8 @@
 #pragma once
 #include "GES/Core.h"
 
+#include <string>
+
 namespace GES
 {
 	enum class ShaderDataType

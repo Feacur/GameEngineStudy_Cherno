@@ -1,5 +1,4 @@
 #pragma once
-
 #include "GES/Input.h"
 
 namespace GES

@@ -1,6 +1,8 @@
 #include "ges_pch.h"
 #include "WindowsWindow.h"
 
+#include "GES/Log.h"
+
 extern "C" { // @Note: use discrete GPU by default
 	// http://developer.download.nvidia.com/devzone/devcenter/gamegraphics/files/OptimusRenderingPolicies.pdf
 	__declspec(dllexport) DWORD NvOptimusEnablement = 1;
@@ -9,6 +11,10 @@ extern "C" { // @Note: use discrete GPU by default
 	__declspec(dllexport) DWORD AmdPowerXpressRequestHighPerformance = 1;
 }
 
+#include "GES/KeyCodes.h"
+#include "GES/MouseCodes.h"
+
+#include "GES/Events/Event.h"
 #include "GES/Events/ApplicationEvent.h"
 #include "GES/Events/MouseEvent.h"
 #include "GES/Events/KeyEvent.h"

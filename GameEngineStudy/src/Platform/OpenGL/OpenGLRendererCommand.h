@@ -1,5 +1,4 @@
 #pragma once
-
 #include "GES/Renderer/RendererCommand.h"
 
 namespace GES

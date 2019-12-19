@@ -1,10 +1,16 @@
 #pragma once
 
-#include <string>
 #include <functional>
+#include <vector>
+#include <unordered_map>
+#include <string>
 #include <sstream>
+#include <fstream>
 
-#include "GES/Log.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/fmt/ostr.h>
+
+#include <glm/glm.hpp>
 
 #if defined(GES_PLATFORM_WINDOWS)
 	#include <Windows.h>

@@ -1,6 +1,8 @@
 #include "ges_pch.h"
 #include "OpenGLContext.h"
 
+#include "GES/Log.h"
+
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 

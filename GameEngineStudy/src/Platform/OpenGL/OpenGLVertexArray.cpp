@@ -1,6 +1,8 @@
 #include "ges_pch.h"
 #include "OpenGLVertexArray.h"
 
+#include "GES/Log.h"
+
 #include "GES/Renderer/Buffer.h"
 
 #include <glad/glad.h>

@@ -1,6 +1,8 @@
 #include "ges_pch.h"
 #include "VertexArray.h"
 
+#include "GES/Log.h"
+
 #include "RendererAPI.h"
 
 #include "Platform/OpenGL/OpenGLVertexArray.h"

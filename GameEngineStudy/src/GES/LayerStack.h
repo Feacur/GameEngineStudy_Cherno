@@ -1,5 +1,4 @@
 #pragma once
-
 #include "GES/Core.h"
 
 #include <vector>

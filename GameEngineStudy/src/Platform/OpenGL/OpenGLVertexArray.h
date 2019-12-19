@@ -1,5 +1,4 @@
 #pragma once
-
 #include "GES/Renderer/VertexArray.h"
 
 namespace GES

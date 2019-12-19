@@ -1,6 +1,8 @@
 #include "ges_pch.h"
 #include "OpenGLTexture.h"
 
+#include "GES/Log.h"
+
 #include <stb_image.h>
 
 #include <glad/glad.h>

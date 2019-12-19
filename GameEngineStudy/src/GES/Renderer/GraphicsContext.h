@@ -1,4 +1,5 @@
 #pragma once
+#include "GES/Core.h"
 
 namespace GES
 {

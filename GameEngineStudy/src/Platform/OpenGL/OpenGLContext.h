@@ -1,5 +1,4 @@
 #pragma once
-
 #include "GES/Renderer/GraphicsContext.h"
 
 struct GLFWwindow;

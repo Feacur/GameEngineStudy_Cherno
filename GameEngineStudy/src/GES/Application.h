@@ -1,6 +1,6 @@
 #pragma once
-
 #include "Core.h"
+
 #include "GES/LayerStack.h"
 #include "Window.h"
 

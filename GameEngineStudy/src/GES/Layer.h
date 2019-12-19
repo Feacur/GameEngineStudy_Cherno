@@ -1,6 +1,6 @@
 #pragma once
-
 #include "GES/Core.h"
+
 #include "GES/Core/Timestep.h"
 
 #include <string>

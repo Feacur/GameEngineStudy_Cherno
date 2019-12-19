@@ -1,7 +1,12 @@
 #include "ges_pch.h"
 #include "ImGuiLayer.h"
+
 #include "GES/Application.h"
 
+#include "GES/MouseCodes.h"
+#include "GES/KeyCodes.h"
+
+#include "GES/Events/Event.h"
 #include "GES/Events/ApplicationEvent.h"
 #include "GES/Events/KeyEvent.h"
 #include "GES/Events/MouseEvent.h"

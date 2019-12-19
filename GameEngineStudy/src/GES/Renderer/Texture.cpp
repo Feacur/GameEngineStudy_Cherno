@@ -1,6 +1,8 @@
 #include "ges_pch.h"
 #include "Texture.h"
 
+#include "GES/Log.h"
+
 #include "RendererAPI.h"
 
 #include "Platform/OpenGL/OpenGLTexture.h"

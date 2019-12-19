@@ -1,4 +1,5 @@
 #pragma once
+#include "GES/Core.h"
 
 #include "GES/Renderer/Orthographic2dCamera.h"
 #include "GES/Core/Timestep.h"
