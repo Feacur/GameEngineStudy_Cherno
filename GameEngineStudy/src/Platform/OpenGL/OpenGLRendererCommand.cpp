@@ -8,6 +8,25 @@
 
 namespace GES
 {
+	void OpenGLMessageCallback(
+		unsigned source,
+		unsigned type,
+		unsigned id,
+		unsigned severity,
+		int length,
+		const char* message,
+		const void* userParam)
+	{
+		switch (severity)
+		{
+			case GL_DEBUG_SEVERITY_HIGH:         GES_CORE_CRITICAL(message); return;
+			case GL_DEBUG_SEVERITY_MEDIUM:       GES_CORE_ERROR(message); return;
+			case GL_DEBUG_SEVERITY_LOW:          GES_CORE_WARN(message); return;
+			case GL_DEBUG_SEVERITY_NOTIFICATION: GES_CORE_TRACE(message); return;
+		}
+		GES_CORE_ASSERT(false, "Unknown severity level!");
+	}
+
 	void OpenGLRendererCommand::SetClearColor() const
 	{
 		glClearColor(0.1f, 0.1f, 0.1f, 1);
@@ -20,6 +39,13 @@ namespace GES
 
 	void OpenGLRendererCommand::Init() const
 	{
+		#if !defined(GES_SHIPPING)
+			glEnable(GL_DEBUG_OUTPUT);
+			glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+			glDebugMessageCallback(OpenGLMessageCallback, nullptr);
+			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, NULL, GL_FALSE);
+		#endif
+		
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}

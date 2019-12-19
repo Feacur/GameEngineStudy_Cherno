@@ -13,6 +13,7 @@ extern "C" { // @Note: use discrete GPU by default
 #include "GES/Events/MouseEvent.h"
 #include "GES/Events/KeyEvent.h"
 
+#include "GES/Renderer/RendererAPI.h"
 #include "Platform/OpenGL/OpenGLContext.h"
 
 #include <GLFW/glfw3.h>
@@ -57,6 +58,12 @@ namespace GES {
 			glfwSetErrorCallback(&GLFWErrorCallback);
 		}
 
+		#if !defined(GES_SHIPPING)
+		if (RendererAPI::GetType() == RendererAPI::Type::OpenGL)
+		{
+			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+		}
+		#endif
 		m_Window = glfwCreateWindow((int32)props.Width, (int32)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		++s_GLFWWindowCount;
 
