@@ -1,6 +1,6 @@
 workspace "GameEngineStudy"
 	-- toolset ("msc")
-	architecture "x64"
+	architecture "x86_64"
 	systemversion "latest"
 	startproject "Sandbox"
 	warnings "Extra"
@@ -13,7 +13,7 @@ workspace "GameEngineStudy"
 	configurations {
 		"Debug",
 		"Development",
-		"Shipping"
+		"Shipping",
 	}
 
 	filter "toolset:msc*"
