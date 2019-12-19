@@ -52,13 +52,13 @@ namespace GES
 		return source.substr(begin, eol - begin);
 	}
 
-	Shader * Shader::CreatePath(cstring path, cstring name)
+	Ref<Shader> Shader::CreatePath(cstring path, cstring name)
 	{
 		std::string source = ReadFile(path);
 		return CreateSource(source.c_str(), name);
 	}
 
-	Shader * Shader::CreateSource(cstring source, cstring name)
+	Ref<Shader> Shader::CreateSource(cstring source, cstring name)
 	{
 		std::string autoName;
 		if (!name) {
@@ -68,7 +68,7 @@ namespace GES
 		switch(RendererAPI::GetType())
 		{
 			case RendererAPI::Type::OpenGL:
-				return new OpenGLShader(source, name);
+				return CreateRef<OpenGLShader>(source, name);
 		}
 		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererAPI::GetType());
 		return nullptr;

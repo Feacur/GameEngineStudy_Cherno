@@ -26,9 +26,9 @@ namespace GES {
 		GES_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
 
-	Window* Window::Create(WindowProps const & props)
+	Ref<Window> Window::Create(WindowProps const & props)
 	{
-		return new WindowsWindow(props);
+		return CreateRef<WindowsWindow>(props);
 	}
 
 	WindowsWindow::WindowsWindow(WindowProps const & props)

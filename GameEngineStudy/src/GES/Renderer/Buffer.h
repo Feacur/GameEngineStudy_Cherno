@@ -103,7 +103,7 @@ namespace GES
 		virtual ~VertexBuffer() = default;
 
 	public:
-		static VertexBuffer * Create(float * vertices, uint32 size);
+		static Ref<VertexBuffer> Create(float * vertices, uint32 size);
 
 	public:
 		virtual void Bind() const = 0;
@@ -119,7 +119,7 @@ namespace GES
 		virtual ~IndexBuffer() = default;
 
 	public:
-		static IndexBuffer * Create(uint32 * indices, uint32 size);
+		static Ref<IndexBuffer> Create(uint32 * indices, uint32 size);
 
 	public:
 		virtual void Bind() const = 0;

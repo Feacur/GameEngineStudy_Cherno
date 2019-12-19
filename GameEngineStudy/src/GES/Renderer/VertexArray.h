@@ -12,7 +12,7 @@ namespace GES
 		virtual ~VertexArray() = default;
 
 	public:
-		static VertexArray * Create();
+		static Ref<VertexArray> Create();
 
 	public:
 		virtual void Bind() const = 0;

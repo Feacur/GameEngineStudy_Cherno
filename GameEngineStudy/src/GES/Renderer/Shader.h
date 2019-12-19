@@ -15,8 +15,8 @@ namespace GES
 		virtual ~Shader() = default;
 
 	public:
-		static Shader * Shader::CreatePath(cstring path, cstring name = 0);
-		static Shader * Shader::CreateSource(cstring source, cstring name = 0);
+		static Ref<Shader> Shader::CreatePath(cstring path, cstring name = 0);
+		static Ref<Shader> Shader::CreateSource(cstring source, cstring name = 0);
 
 	public:
 		virtual std::string const & GetName() const = 0;

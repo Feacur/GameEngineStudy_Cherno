@@ -7,23 +7,23 @@
 
 namespace GES
 {
-	VertexBuffer * VertexBuffer::Create(float * vertices, uint32 size)
+	Ref<VertexBuffer> VertexBuffer::Create(float * vertices, uint32 size)
 	{
 		switch(RendererAPI::GetType())
 		{
 			case RendererAPI::Type::OpenGL:
-				return new OpenGLVertexBuffer(vertices, size);
+				return CreateRef<OpenGLVertexBuffer>(vertices, size);
 		}
 		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererAPI::GetType());
 		return nullptr;
 	}
 
-	IndexBuffer * IndexBuffer::Create(uint32 * indices, uint32 size)
+	Ref<IndexBuffer> IndexBuffer::Create(uint32 * indices, uint32 size)
 	{
 		switch(RendererAPI::GetType())
 		{
 			case RendererAPI::Type::OpenGL:
-				return new OpenGLIndexBuffer(indices, size);
+				return CreateRef<OpenGLIndexBuffer>(indices, size);
 		}
 		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererAPI::GetType());
 		return nullptr;

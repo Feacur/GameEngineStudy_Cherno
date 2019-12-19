@@ -10,8 +10,8 @@
 
 namespace GES
 {
-	Renderer::Data * Renderer::s_Data = new Data();
-	RendererCommand * Renderer::s_RendererCommand = RendererCommand::Create();
+	Scope<Renderer::Data> Renderer::s_Data = CreateScope<Data>();
+	Ref<RendererCommand> Renderer::s_RendererCommand = RendererCommand::Create();
 	
 	void Renderer::SetClearColor()
 	{

@@ -7,12 +7,12 @@
 
 namespace GES
 {
-	VertexArray * VertexArray::Create()
+	Ref<VertexArray> VertexArray::Create()
 	{
 		switch(RendererAPI::GetType())
 		{
 			case RendererAPI::Type::OpenGL:
-				return new OpenGLVertexArray();
+				return CreateRef<OpenGLVertexArray>();
 		}
 		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererAPI::GetType());
 		return nullptr;

@@ -10,9 +10,6 @@ namespace GES
 		virtual ~Texture() = default;
 
 	public:
-		static Texture * Texture::Create(cstring source);
-
-	public:
 		virtual uint32 GetWidth() const = 0;
 		virtual uint32 GetHeight() const = 0;
 		virtual uint32 GetSlot() const = 0;
@@ -27,6 +24,6 @@ namespace GES
 		virtual ~Texture2D() = default;
 
 	public:
-		static Texture2D * Texture2D::Create(cstring source);
+		static Ref<Texture2D> Texture2D::Create(cstring source);
 	};
 }

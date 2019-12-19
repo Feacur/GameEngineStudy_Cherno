@@ -35,7 +35,7 @@ namespace GES {
 		bool OnWindowClose(WindowCloseEvent & e);
 
 	private:
-		Scope<Window> m_Window;
+		Ref<Window> m_Window;
 		ImGuiLayer * m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
@@ -45,5 +45,5 @@ namespace GES {
 		static Application * s_Instance;
 	};
 
-	Application *CreateApplication();
+	Ref<Application> CreateApplication();
 }

@@ -42,7 +42,7 @@ namespace GES {
 
 		virtual void * GetNativeWindow() const = 0;
 
-		static Window* Create(WindowProps const & props = WindowProps());
+		static Ref<Window> Create(WindowProps const & props = WindowProps());
 	};
 
 }

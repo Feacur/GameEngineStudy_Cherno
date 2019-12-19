@@ -12,15 +12,15 @@ public:
 		CreateVertexArrayTriangle();
 		CreateVertexArraySquare();
 
-		m_ShaderLibrary.Add(GES::Ref<GES::Shader>(
+		m_ShaderLibrary.Add(
 			GES::Shader::CreatePath("assets/shaders/vertex_color.glsl")
-		));
-		m_ShaderLibrary.Add(GES::Ref<GES::Shader>(
+		);
+		m_ShaderLibrary.Add(
 			GES::Shader::CreatePath("assets/shaders/texture.glsl")
-		));
+		);
 
-		m_TextureCheckerboard.reset(GES::Texture2D::Create("assets/textures/checkerboard.png"));
-		m_TextureChernoLogo.reset(GES::Texture2D::Create("assets/textures/cherno_logo.png"));
+		m_TextureCheckerboard = GES::Texture2D::Create("assets/textures/checkerboard.png");
+		m_TextureChernoLogo = GES::Texture2D::Create("assets/textures/cherno_logo.png");
 	}
 
 	void OnUpdate(GES::Timestep ts) override
@@ -104,32 +104,32 @@ private:
 
 	void CreateVertexArrayTriangle()
 	{
+		m_VertexArrayTriangle = GES::VertexArray::Create();
 		GES::Ref<GES::VertexArray> & vertexArray = m_VertexArrayTriangle;
-		vertexArray.reset(GES::VertexArray::Create());
 
 		float vertices[] = {
 			/*position*/ -0.5f, -0.5f, 0.0f, /*color*/ 1.0f, 0.0f, 0.0f, 1.0f,
 			/*position*/  0.5f, -0.5f, 0.0f, /*color*/ 0.0f, 1.0f, 0.0f, 1.0f,
 			/*position*/  0.0f,  0.5f, 0.0f, /*color*/ 0.0f, 0.0f, 1.0f, 1.0f,
 		};
-		GES::Ref<GES::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(GES::VertexBuffer::Create(vertices, sizeof(vertices)));
+		auto vertexBuffer = GES::VertexBuffer::Create(vertices, sizeof(vertices));
 		vertexBuffer->SetLayout({
 			{ GES::ShaderDataType::Float3, "a_Position" },
 			{ GES::ShaderDataType::Float4, "a_Color" },
 		});
 		vertexArray->AddVertexBuffer(vertexBuffer);
 
-		uint32 indices[] = { 0, 1, 2, };
-		GES::Ref<GES::IndexBuffer> indexBuffer;
-		indexBuffer.reset(GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32)));
+		uint32 indices[] = {
+			0, 1, 2,
+		};
+		auto indexBuffer = GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32));
 		vertexArray->SetIndexBuffer(indexBuffer);
 	}
 
 	void CreateVertexArraySquare()
 	{
+		m_VertexArraySquare = GES::VertexArray::Create();
 		GES::Ref<GES::VertexArray> & vertexArray = m_VertexArraySquare;
-		vertexArray.reset(GES::VertexArray::Create());
 
 		float vertices[] = {
 			/*position*/ -0.5f, -0.5f, 0.0f, /*UV*/ 0.0f, 0.0f,
@@ -137,17 +137,18 @@ private:
 			/*position*/  0.5f,  0.5f, 0.0f, /*UV*/ 1.0f, 1.0f,
 			/*position*/ -0.5f,  0.5f, 0.0f, /*UV*/ 0.0f, 1.0f,
 		};
-		GES::Ref<GES::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(GES::VertexBuffer::Create(vertices, sizeof(vertices)));
+		auto vertexBuffer = GES::VertexBuffer::Create(vertices, sizeof(vertices));
 		vertexBuffer->SetLayout({
 			{ GES::ShaderDataType::Float3, "a_Position" },
 			{ GES::ShaderDataType::Float2, "a_TexCoord" },
 		});
 		vertexArray->AddVertexBuffer(vertexBuffer);
 
-		uint32 indices[] = { 0, 1, 2, 2, 3, 0, };
-		GES::Ref<GES::IndexBuffer> indexBuffer;
-		indexBuffer.reset(GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32)));
+		uint32 indices[] = {
+			0, 1, 2,
+			2, 3, 0,
+		};
+		auto indexBuffer = GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32));
 		vertexArray->SetIndexBuffer(indexBuffer);
 	}
 
@@ -173,7 +174,7 @@ public:
 	}
 };
 
-GES::Application *GES::CreateApplication()
+GES::Ref<GES::Application> GES::CreateApplication()
 {
-	return new Sandbox();
+	return GES::CreateRef<Sandbox>();
 }

@@ -26,7 +26,7 @@ namespace GES
 		static void EndScene();
 
 	private:
-		static RendererCommand * s_RendererCommand;
+		static Ref<RendererCommand> s_RendererCommand;
 
 	private:
 		struct Data
@@ -34,6 +34,6 @@ namespace GES
 			glm::mat4 ViewProjectionMatrix;
 		};
 
-		static Data * s_Data;
+		static Scope<Data> s_Data;
 	};
 }
