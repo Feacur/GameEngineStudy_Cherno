@@ -3,7 +3,7 @@
 
 #include "Orthographic2dCamera.h"
 
-#include "RendererCommand.h"
+#include "RendererAPI.h"
 #include "Shader.h"
 #include "Texture.h"
 #include "VertexArray.h"
@@ -16,21 +16,21 @@ namespace GES
 	};
 
 	static Scope<Data> s_Data = CreateScope<Data>();
-	static Scope<RendererCommand> s_RendererCommand = RendererCommand::Create();
+	static Scope<RendererAPI> s_RendererAPI = RendererAPI::Create();
 	
 	void Renderer::SetClearColor()
 	{
-		s_RendererCommand->SetClearColor();
+		s_RendererAPI->SetClearColor();
 	}
 
 	void Renderer::Clear()
 	{
-		s_RendererCommand->Clear();
+		s_RendererAPI->Clear();
 	}
 	
 	void Renderer::Init()
 	{
-		s_RendererCommand->Init();
+		s_RendererAPI->Init();
 	}
 	
 	void Renderer::Shutdown()
@@ -39,7 +39,7 @@ namespace GES
 
 	void Renderer::OnWindowResize(uint32 width, uint32 height)
 	{
-		s_RendererCommand->SetViewport(0, 0, width, height);
+		s_RendererAPI->SetViewport(0, 0, width, height);
 	}
 
 	void Renderer::BeginScene(Orthographic2dCamera const & camera)
@@ -54,7 +54,7 @@ namespace GES
 		shader->UploadUniformMat4("u_Transform", transform);
 
 		vertexArray->Bind();
-		s_RendererCommand->DrawIndexed(vertexArray);
+		s_RendererAPI->DrawIndexed(vertexArray);
 	}
 
 	void Renderer::Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform, Ref<Texture> const & texture)
@@ -67,7 +67,7 @@ namespace GES
 		shader->UploadUniformInt32("u_Texture", (int32)texture->GetSlot());
 
 		vertexArray->Bind();
-		s_RendererCommand->DrawIndexed(vertexArray);
+		s_RendererAPI->DrawIndexed(vertexArray);
 	}
 
 	void Renderer::EndScene()

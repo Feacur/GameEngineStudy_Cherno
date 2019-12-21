@@ -1,13 +1,13 @@
 #pragma once
-#include "GES/Renderer/RendererCommand.h"
+#include "GES/Renderer/RendererAPI.h"
 
 namespace GES
 {
-	class OpenGLRendererCommand : public RendererCommand
+	class OpenGLRendererAPI : public RendererAPI
 	{
 	public:
-		OpenGLRendererCommand() = default;
-		~OpenGLRendererCommand() override = default;
+		OpenGLRendererAPI() = default;
+		~OpenGLRendererAPI() override = default;
 
 	public:
 		void SetClearColor() const override;

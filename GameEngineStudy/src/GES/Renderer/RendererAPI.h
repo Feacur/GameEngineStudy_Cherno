@@ -5,13 +5,13 @@ namespace GES
 {
 	class VertexArray;
 
-	class RendererCommand
+	class RendererAPI
 	{
 	public:
-		virtual ~RendererCommand() = default;
+		virtual ~RendererAPI() = default;
 
 	public:
-		static Scope<RendererCommand> Create();
+		static Scope<RendererAPI> Create();
 
 	public:
 		virtual void SetClearColor() const = 0;

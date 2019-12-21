@@ -1,5 +1,5 @@
 #include "ges_pch.h"
-#include "OpenGLRendererCommand.h"
+#include "OpenGLRendererAPI.h"
 
 #include "GES/Core/Log.h"
 
@@ -29,17 +29,17 @@ namespace GES
 		GES_CORE_ASSERT(false, "Unknown severity level!");
 	}
 
-	void OpenGLRendererCommand::SetClearColor() const
+	void OpenGLRendererAPI::SetClearColor() const
 	{
 		glClearColor(0.1f, 0.1f, 0.1f, 1);
 	}
 
-	void OpenGLRendererCommand::Clear() const
+	void OpenGLRendererAPI::Clear() const
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
-	void OpenGLRendererCommand::Init() const
+	void OpenGLRendererAPI::Init() const
 	{
 		#if !defined(GES_SHIPPING)
 			glEnable(GL_DEBUG_OUTPUT);
@@ -52,12 +52,12 @@ namespace GES
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
-	void OpenGLRendererCommand::SetViewport(uint32 x, uint32 y, uint32 width, uint32 height)
+	void OpenGLRendererAPI::SetViewport(uint32 x, uint32 y, uint32 width, uint32 height)
 	{
 		glViewport(x, y, width, height);
 	}
 
-	void OpenGLRendererCommand::DrawIndexed(Ref<VertexArray> const & vertexArray) const
+	void OpenGLRendererAPI::DrawIndexed(Ref<VertexArray> const & vertexArray) const
 	{
 		auto & indexBuffer = vertexArray->GetIndexBuffer();
 		glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
