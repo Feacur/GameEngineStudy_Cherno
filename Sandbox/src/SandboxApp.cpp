@@ -130,7 +130,7 @@ class Sandbox : public GES::Application
 public:
 	Sandbox()
 	{
-		ImGui::SetCurrentContext(GetImGuiContext());
+		ImGui::SetCurrentContext(GetImGuiLayer()->GetImGuiContext());
 		PushLayer(new ExampleLayer());
 	}
 };

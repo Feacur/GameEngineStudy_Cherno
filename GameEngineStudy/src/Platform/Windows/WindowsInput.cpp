@@ -3,7 +3,9 @@
 // #include "GES/MouseCodes.h"
 #include "WindowsInput.h"
 
+#include "GES/Window.h"
 #include "GES/Application.h"
+
 #include <GLFW/glfw3.h>
 
 namespace GES

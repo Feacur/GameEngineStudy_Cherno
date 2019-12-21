@@ -1,6 +1,7 @@
 #include "ges_pch.h"
 #include "ImGuiLayer.h"
 
+#include "GES/Window.h"
 #include "GES/Application.h"
 
 #include "GES/MouseCodes.h"

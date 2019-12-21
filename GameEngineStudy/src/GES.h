@@ -5,6 +5,7 @@
 #include "GES/Core.h"
 #include "GES/Core/Timestep.h"
 
+#include "GES/Window.h"
 #include "GES/Application.h"
 #include "GES/Layer.h"
 #include "GES/Log.h"
@@ -23,6 +24,8 @@
 #include "GES/Renderer/Buffer.h"
 #include "GES/Renderer/Shader.h"
 #include "GES/Renderer/Texture.h"
+
+#include "GES/ImGuiLayer/ImGuiLayer.h"
 
 #include "GES/Orthographic2dCameraController.h"
 

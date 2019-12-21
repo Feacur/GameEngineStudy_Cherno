@@ -10,7 +10,11 @@
 #include "Events/Event.h"
 #include "Events/ApplicationEvent.h"
 
+#include "Window.h"
+
 #include "Renderer/Renderer.h"
+
+#include "ImGuiLayer/ImGuiLayer.h"
 
 #include <GLFW/glfw3.h>
 

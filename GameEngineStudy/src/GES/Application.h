@@ -2,9 +2,6 @@
 #include "Core.h"
 
 #include "GES/LayerStack.h"
-#include "Window.h"
-
-#include "ImGuiLayer/ImGuiLayer.h"
 
 namespace GES {
 	#if defined(GES_SHARED)
@@ -12,27 +9,31 @@ namespace GES {
 	GES_TEMPLATE template class GES_API std::unique_ptr<Window>;
 	#endif
 	
+	class Window;
 	class Event;
 	class WindowCloseEvent;
 	class WindowResizeEvent;
+	class ImGuiLayer;
 
 	class GES_API Application
 	{
 	public:
 		Application();
 		virtual ~Application() = default;
+
 	public:
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
-		inline ImGuiContext* GetImGuiContext() { return m_ImGuiLayer->GetImGuiContext(); }
-	public:
 		void Run();
-		void OnEvent(Event & e);
 
+	protected:
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
+		inline ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
 
 	private:
+		void OnEvent(Event & e);
+
 		bool OnWindowClose(WindowCloseEvent & e);
 		bool OnWindowResize(WindowResizeEvent & e);
 
