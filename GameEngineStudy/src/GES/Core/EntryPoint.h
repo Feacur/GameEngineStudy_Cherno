@@ -1,7 +1,10 @@
 #pragma once
 
 #if defined(GES_PLATFORM_WINDOWS)
-extern GES::Ref<GES::Application> GES::CreateApplication();
+namespace GES
+{
+	extern Scope<Application> CreateApplication();
+}
 
 int main(int argc, char* argv[])
 {

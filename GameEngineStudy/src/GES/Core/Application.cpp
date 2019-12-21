@@ -13,6 +13,7 @@
 #include "Window.h"
 
 #include "GES/Renderer/Renderer.h"
+#include "GES/Renderer/RendererCommand.h"
 
 #include "GES/ImGuiLayer/ImGuiLayer.h"
 
@@ -29,6 +30,7 @@ namespace GES {
 		m_Window = Window::Create();
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
+		RendererCommand::Init();
 		Renderer::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();

@@ -48,6 +48,4 @@ namespace GES {
 	private:
 		static Application * s_Instance;
 	};
-
-	Ref<Application> CreateApplication();
 }

@@ -15,11 +15,11 @@ namespace GES
 	class Renderer
 	{
 	public:
-		static void SetClearColor();
-		static void Clear();
-
 		static void Init();
 		static void Shutdown();
+
+		static void SetClearColor();
+		static void Clear();
 		static void OnWindowResize(uint32 width, uint32 height);
 
 	public:

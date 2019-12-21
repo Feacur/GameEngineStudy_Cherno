@@ -135,7 +135,7 @@ public:
 	}
 };
 
-GES::Ref<GES::Application> GES::CreateApplication()
+GES::Scope<GES::Application> GES::CreateApplication()
 {
-	return GES::CreateRef<Sandbox>();
+	return GES::CreateScope<Sandbox>();
 }
