@@ -3,7 +3,9 @@
 
 #include "GES/Core/Timestep.h"
 
-#include <string>
+#if !defined(GES_BYPASS_VENDOR_HEADERS)
+	#include <string>
+#endif
 
 #if defined(GES_SHARED)
 #pragma warning(push)

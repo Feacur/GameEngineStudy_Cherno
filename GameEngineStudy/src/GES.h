@@ -1,6 +1,19 @@
 #pragma once
 
-#include <sstream>
+// #define GES_BYPASS_VENDOR_HEADERS
+#if defined(GES_BYPASS_VENDOR_HEADERS)
+	#include <functional>
+	#include <vector>
+	#include <unordered_map>
+	#include <string>
+	#include <sstream>
+	#include <fstream>
+
+	#include <spdlog/spdlog.h>
+	#include <spdlog/fmt/ostr.h>
+
+	#include <glm/glm.hpp>
+#endif
 
 #include "GES/Core.h"
 #include "GES/Core/Timestep.h"

@@ -1,7 +1,9 @@
 #pragma once
 #include "GES/Core.h"
 
-#include <vector>
+#if !defined(GES_BYPASS_VENDOR_HEADERS)
+	#include <vector>
+#endif
 
 #if defined(GES_SHARED)
 #pragma warning(push)

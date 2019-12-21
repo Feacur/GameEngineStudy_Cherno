@@ -1,7 +1,9 @@
 #pragma once
 #include "GES/Core.h"
 
-#include <glm/glm.hpp>
+#if !defined(GES_BYPASS_VENDOR_HEADERS)
+	#include <glm/glm.hpp>
+#endif
 
 namespace GES
 {

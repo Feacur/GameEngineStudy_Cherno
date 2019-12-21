@@ -1,8 +1,10 @@
 #pragma once
 #include "Core.h"
 
-#include <spdlog/spdlog.h>
-#include <spdlog/fmt/ostr.h>
+#if !defined(GES_BYPASS_VENDOR_HEADERS)
+	#include <spdlog/spdlog.h>
+	#include <spdlog/fmt/ostr.h>
+#endif
 
 #if defined(GES_SHARED)
 GES_TEMPLATE template class GES_API Ref<spdlog::logger>;

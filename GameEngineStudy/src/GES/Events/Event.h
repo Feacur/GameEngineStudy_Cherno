@@ -1,5 +1,9 @@
 #pragma once
 
+#if !defined(GES_BYPASS_VENDOR_HEADERS)
+	#include <sstream>
+#endif
+
 namespace GES {
 
 	// Events in GES are currently blocking, meaning when an event occurs it
