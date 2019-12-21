@@ -35,6 +35,11 @@ namespace GES {
 		PushOverlay(m_ImGuiLayer);
 	}
 
+	Application::~Application()
+	{
+		Renderer::Shutdown();
+	}
+
 	void Application::Run()
 	{
 		m_LastFrameTime = (float)glfwGetTime();

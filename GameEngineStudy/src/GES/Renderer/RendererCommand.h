@@ -11,7 +11,7 @@ namespace GES
 		virtual ~RendererCommand() = default;
 
 	public:
-		static Ref<RendererCommand> Create();
+		static Scope<RendererCommand> Create();
 
 	public:
 		virtual void SetClearColor() const = 0;

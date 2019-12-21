@@ -1,8 +1,10 @@
 #pragma once
 #include "GES/Core/Code.h"
 
-#include <string>
-#include <functional>
+#if !defined(GES_BYPASS_VENDOR_HEADERS)
+	#include <string>
+	#include <functional>
+#endif
 
 namespace GES {
 	class Event;
@@ -41,7 +43,7 @@ namespace GES {
 
 		virtual void * GetNativeWindow() const = 0;
 
-		static Ref<Window> Create(WindowProps const & props = WindowProps());
+		static Scope<Window> Create(WindowProps const & props = WindowProps());
 	};
 
 }

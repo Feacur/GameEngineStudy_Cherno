@@ -20,7 +20,7 @@ extern "C" { // @Note: use discrete GPU by default
 #include "GES/Events/KeyEvent.h"
 
 #include "GES/Renderer/RendererAPI.h"
-#include "Platform/OpenGL/OpenGLContext.h"
+#include "GES/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 
@@ -32,9 +32,9 @@ namespace GES {
 		GES_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
 
-	Ref<Window> Window::Create(WindowProps const & props)
+	Scope<Window> Window::Create(WindowProps const & props)
 	{
-		return CreateRef<WindowsWindow>(props);
+		return CreateScope<WindowsWindow>(props);
 	}
 
 	WindowsWindow::WindowsWindow(WindowProps const & props)
@@ -70,16 +70,16 @@ namespace GES {
 			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 		}
 		#endif
-		m_Window = glfwCreateWindow((int32)props.Width, (int32)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		m_WindowHandle = glfwCreateWindow((int32)props.Width, (int32)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		++s_GLFWWindowCount;
 
-		m_Context = new OpenGLContext(m_Window);
+		m_Context = GraphicsContext::Create(m_WindowHandle);
 		m_Context->Init();
 
-		glfwSetWindowUserPointer(m_Window, &m_Data);
+		glfwSetWindowUserPointer(m_WindowHandle, &m_Data);
 		SetVSync(true);
 
-		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow * window, int32 width, int32 height) {
+		glfwSetWindowSizeCallback(m_WindowHandle, [](GLFWwindow * window, int32 width, int32 height) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			data.Width = width;
 			data.Height = height;
@@ -88,14 +88,14 @@ namespace GES {
 			data.EventCallback(event);
 		});
 
-		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow * window) {
+		glfwSetWindowCloseCallback(m_WindowHandle, [](GLFWwindow * window) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			WindowCloseEvent event;
 			data.EventCallback(event);
 		});
 
-		glfwSetKeyCallback(m_Window, [](GLFWwindow * window, int32 key, int32 scancode, int32 action, int32 mods) {
+		glfwSetKeyCallback(m_WindowHandle, [](GLFWwindow * window, int32 key, int32 scancode, int32 action, int32 mods) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			switch (action) {
@@ -114,14 +114,14 @@ namespace GES {
 			}
 		});
 
-		glfwSetCharCallback(m_Window, [](GLFWwindow * window, uint32 keycode) {
+		glfwSetCharCallback(m_WindowHandle, [](GLFWwindow * window, uint32 keycode) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			KeyTypedEvent event(static_cast<KeyCode>(keycode));
 			data.EventCallback(event);
 		});
 
-		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow * window, int button, int action, int mods) {
+		glfwSetMouseButtonCallback(m_WindowHandle, [](GLFWwindow * window, int button, int action, int mods) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			
 			switch (action) {
@@ -136,14 +136,14 @@ namespace GES {
 			}
 		});
 
-		glfwSetScrollCallback(m_Window, [](GLFWwindow * window, double xOffset, double yOffset) {
+		glfwSetScrollCallback(m_WindowHandle, [](GLFWwindow * window, double xOffset, double yOffset) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			MouseScrolledEvent event((float)xOffset, (float)yOffset);
 			data.EventCallback(event);
 		});
 
-		glfwSetCursorPosCallback(m_Window, [](GLFWwindow * window, double xPos, double yPos) {
+		glfwSetCursorPosCallback(m_WindowHandle, [](GLFWwindow * window, double xPos, double yPos) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			MouseMovedEvent event((float)xPos, (float)yPos);
@@ -153,7 +153,7 @@ namespace GES {
 
 	void WindowsWindow::Shutdown()
 	{
-		glfwDestroyWindow(m_Window);
+		glfwDestroyWindow(m_WindowHandle);
 		--s_GLFWWindowCount;
 		if (s_GLFWWindowCount == 0) {
 			GES_CORE_INFO("Terminating GLFW");

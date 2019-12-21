@@ -88,7 +88,7 @@ group ""
 
 project "GameEngineStudy"
 	location "GameEngineStudy"
-	kind "StaticLib"
+	kind "StaticLib" -- or "SharedLib"
 	language "C++"
 	cdialect "C11"
 	cppdialect "C++17"
@@ -135,9 +135,13 @@ project "GameEngineStudy"
 			"opengl32.lib",
 		}
 
+		postbuildcommands {
+			("{COPY} \"%{prj.location}assets\" \"../bin/" .. outputdir .. "/Sandbox/assets\"")
+		}
+
 		-- if specified [kind "SharedLib"]
 		-- postbuildcommands {
-		-- 	("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
+		-- 	("{COPY} \"%{cfg.buildtarget.relpath}\" \"../bin/" .. outputdir .. "/Sandbox/\"")
 		-- }
 
 project "Sandbox"

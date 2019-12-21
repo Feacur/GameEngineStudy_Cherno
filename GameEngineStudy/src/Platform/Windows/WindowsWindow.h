@@ -21,13 +21,13 @@ namespace GES {
 		inline void SetEventCallback(EventCallbackFn const & callback) override { m_Data.EventCallback = callback; }
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
-		inline void * GetNativeWindow() const override { return m_Window; }
+		inline void * GetNativeWindow() const override { return m_WindowHandle; }
 	private:
 		void Init(WindowProps const & props);
 		void Shutdown();
 	private:
-		GLFWwindow* m_Window;
-		GraphicsContext* m_Context;
+		GLFWwindow* m_WindowHandle;
+		Scope<GraphicsContext> m_Context;
 
 		struct WindowData
 		{

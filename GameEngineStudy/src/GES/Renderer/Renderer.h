@@ -20,6 +20,7 @@ namespace GES
 		static void Clear();
 
 		static void Init();
+		static void Shutdown();
 		static void OnWindowResize(uint32 width, uint32 height);
 
 	public:
@@ -29,14 +30,12 @@ namespace GES
 		static void EndScene();
 
 	private:
-		static Ref<RendererCommand> s_RendererCommand;
-
-	private:
 		struct Data
 		{
 			glm::mat4 ViewProjectionMatrix;
 		};
 
 		static Scope<Data> s_Data;
+		static Scope<RendererCommand> s_RendererCommand;
 	};
 }

@@ -11,7 +11,7 @@
 namespace GES
 {
 	Scope<Renderer::Data> Renderer::s_Data = CreateScope<Data>();
-	Ref<RendererCommand> Renderer::s_RendererCommand = RendererCommand::Create();
+	Scope<RendererCommand> Renderer::s_RendererCommand = RendererCommand::Create();
 	
 	void Renderer::SetClearColor()
 	{
@@ -26,6 +26,10 @@ namespace GES
 	void Renderer::Init()
 	{
 		s_RendererCommand->Init();
+	}
+	
+	void Renderer::Shutdown()
+	{
 	}
 
 	void Renderer::OnWindowResize(uint32 width, uint32 height)

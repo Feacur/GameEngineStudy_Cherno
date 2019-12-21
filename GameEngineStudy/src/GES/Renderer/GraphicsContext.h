@@ -6,6 +6,9 @@ namespace GES
 	class GES_API GraphicsContext
 	{
 	public:
+		static Scope<GraphicsContext> Create(void * windowHandle);
+
+	public:
 		virtual void Init() = 0;
 		virtual void SwapBuffers() = 0;
 	};
