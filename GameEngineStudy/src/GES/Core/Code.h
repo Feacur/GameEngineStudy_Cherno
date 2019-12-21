@@ -1,6 +1,12 @@
 #pragma once
 
-#include <stdint.h> // the following types
+// #include <intrin.h> // __debugbreak(), SIMD
+#include <stdint.h> // integer types data
+// #include <float.h>  // floating point types data
+// #include <stdio.h>  // printf
+// #include <string.h> // memset, memcpy
+// #include <math.h>   // sqrtf, sinf, cosf
+#include <memory>   // std::unique_ptr, std::shared_ptr
 
 typedef int8_t   int8;  // signed char
 typedef int16_t  int16; // short
@@ -17,6 +23,29 @@ typedef unsigned long uint48; // witty (32 + 64) / 2
 
 typedef char const * cstring;
 
+// macros
+// #define STRINGIFY_A_VALUE(VALUE) #VALUE
+// #define STRINGIFY_A_MACRO(MACRO) STRINGIFY_A_VALUE(MACRO)
+// #define FILE_AND_LINE __FILE__ ":" STRINGIFY_A_MACRO(__LINE__)
+// #define C_ARRAY_LENGTH(array) (sizeof(array) / sizeof(array[0]))
+
+// #undef min
+// #undef max
+
+// language-specific
+#if defined(__cplusplus)
+	#define API_C extern "C"
+	#define API_C_BLOCK_START extern "C" {
+	#define API_C_BLOCK_END }
+#else
+	#define API_C
+	#define API_C_BLOCK_START
+	#define API_C_BLOCK_END
+	// #define constexpr
+	// #define thread_local
+#endif
+
+// platform-specific
 #if defined(_WIN32)
 	#if defined(_WIN64)
 		#define GES_PLATFORM_WINDOWS
@@ -49,7 +78,9 @@ typedef char const * cstring;
 	#error "Unknown compiler/platform!"
 #endif
 
-#if defined(GES_PLATFORM_WINDOWS)
+// compiler-specific
+#if defined(_MSC_VER)
+	#define CODE_BREAK() __debugbreak()
 	#if defined(GES_SHARED)
 		#if defined(GES_BUILD_DLL)
 			#define GES_API __declspec(dllexport)
@@ -66,6 +97,7 @@ typedef char const * cstring;
 	#error supported platforms: Windows
 #endif
 
+// logging
 #if defined(SHIPPING)
 	#define GES_ASSERT(x, ...)
 	#define GES_CORE_ASSERT(x, ...)
@@ -74,11 +106,12 @@ typedef char const * cstring;
 	#define GES_CORE_ASSERT(x, ...) { if(!(x)) { GES_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #endif
 
+//
 #define BIT(T, index) static_cast<T>(static_cast<T>(1) << index)
 
 #define BIND_EVENT_FN(name) std::bind(&name, this, std::placeholders::_1)
 
-#include <memory> // std::unique_ptr, std::shared_ptr
+//
 namespace GES {
 	template<typename T>
 	using Scope = std::unique_ptr<T>;

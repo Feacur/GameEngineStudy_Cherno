@@ -1,20 +1,20 @@
 [submodule "GameEngineStudy/vendor/spdlog"]
 	path = GameEngineStudy/vendor/spdlog
-	url = https://github.com/gabime/spdlog
+	url = ../gabime/spdlog.git
 	branch = v1.x
 [submodule "vendor/bin/premake"]
 	path = vendor/bin/premake
-	url = https://github.com/Feacur/premake
+	url = ../premake.git
 	branch = master
 [submodule "GameEngineStudy/vendor/GLFW"]
 	path = GameEngineStudy/vendor/GLFW
-	url = https://github.com/glfw/glfw
+	url = ../glfw/glfw.git
 	branch = master
 [submodule "GameEngineStudy/vendor/imgui"]
 	path = GameEngineStudy/vendor/imgui
-	url = https://github.com/ocornut/imgui
+	url = ../ocornut/imgui.git
 	branch = docking
 [submodule "GameEngineStudy/vendor/glm"]
 	path = GameEngineStudy/vendor/glm
-	url = https://github.com/g-truc/glm
+	url = ../g-truc/glm.git
 	branch = master
