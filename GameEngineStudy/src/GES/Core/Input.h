@@ -1,8 +1,8 @@
 #pragma once
-#include "GES/Core.h"
+#include "Code.h"
 
-#include "GES/KeyCodes.h"
-#include "GES/MouseCodes.h"
+#include "KeyCodes.h"
+#include "MouseCodes.h"
 
 namespace GES
 {

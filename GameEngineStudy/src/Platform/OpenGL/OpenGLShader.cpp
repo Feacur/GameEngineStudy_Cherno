@@ -1,7 +1,7 @@
 #include "ges_pch.h"
 #include "OpenGLShader.h"
 
-#include "GES/Log.h"
+#include "GES/Core/Log.h"
 
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>

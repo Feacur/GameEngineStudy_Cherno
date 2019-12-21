@@ -1,7 +1,7 @@
 #pragma once
-#include "GES/Core.h"
+#include "Code.h"
 
-#include "GES/Core/Timestep.h"
+#include "Timestep.h"
 
 #if !defined(GES_BYPASS_VENDOR_HEADERS)
 	#include <string>

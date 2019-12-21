@@ -1,8 +1,7 @@
 #pragma once
-#include "GES/Core.h"
 
 #include "GES/Renderer/Orthographic2dCamera.h"
-#include "GES/Core/Timestep.h"
+#include "Timestep.h"
 
 namespace GES
 {
@@ -10,7 +9,7 @@ namespace GES
 	class MouseScrolledEvent;
 	class WindowResizeEvent;
 
-	class GES_API Orthographic2dCameraController
+	class Orthographic2dCameraController
 	{
 	public:
 		Orthographic2dCameraController(float aspectRatio, bool rotation = false);

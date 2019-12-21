@@ -1,5 +1,5 @@
 #pragma once
-#include "GES/Window.h"
+#include "GES/Core/Window.h"
 
 struct GLFWwindow;
 

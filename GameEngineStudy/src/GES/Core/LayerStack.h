@@ -1,5 +1,5 @@
 #pragma once
-#include "GES/Core.h"
+#include "Code.h"
 
 #if !defined(GES_BYPASS_VENDOR_HEADERS)
 	#include <vector>

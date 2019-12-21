@@ -1,7 +1,7 @@
 #include "ges_pch.h"
 #include "OpenGLVertexArray.h"
 
-#include "GES/Log.h"
+#include "GES/Core/Log.h"
 
 #include "GES/Renderer/Buffer.h"
 

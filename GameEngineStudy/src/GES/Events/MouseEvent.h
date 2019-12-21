@@ -1,7 +1,7 @@
 #pragma once
 
 // #include "Event.h"
-// #include "GES/MouseCodes.h"
+// #include "GES/Core/MouseCodes.h"
 
 namespace GES {
 

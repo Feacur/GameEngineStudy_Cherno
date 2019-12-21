@@ -15,17 +15,17 @@
 	#include <glm/glm.hpp>
 #endif
 
-#include "GES/Core.h"
+#include "GES/Core/Code.h"
 #include "GES/Core/Timestep.h"
 
-#include "GES/Window.h"
-#include "GES/Application.h"
-#include "GES/Layer.h"
-#include "GES/Log.h"
+#include "GES/Core/Window.h"
+#include "GES/Core/Application.h"
+#include "GES/Core/Layer.h"
+#include "GES/Core/Log.h"
 
-// #include "GES/KeyCodes.h"
-// #include "GES/MouseCodes.h"
-#include "GES/Input.h"
+// #include "GES/Core/KeyCodes.h"
+// #include "GES/Core/MouseCodes.h"
+#include "GES/Core/Input.h"
 
 #include "GES/Events/Event.h"
 #include "GES/Events/ApplicationEvent.h"
@@ -40,10 +40,10 @@
 
 #include "GES/ImGuiLayer/ImGuiLayer.h"
 
-#include "GES/Orthographic2dCameraController.h"
+#include "GES/Core/Orthographic2dCameraController.h"
 
 #include <imgui.h>
 
 // ---- Entry Point -------
-#include "GES/EntryPoint.h"
+#include "GES/Core/EntryPoint.h"
 // ------------------------

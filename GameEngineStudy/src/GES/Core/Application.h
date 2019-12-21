@@ -1,7 +1,7 @@
 #pragma once
-#include "Core.h"
+#include "Code.h"
 
-#include "GES/LayerStack.h"
+#include "LayerStack.h"
 
 namespace GES {
 	#if defined(GES_SHARED)

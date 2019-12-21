@@ -1,10 +1,10 @@
 #include "ges_pch.h"
-// #include "GES/KeyCodes.h"
-// #include "GES/MouseCodes.h"
+// #include "GES/Core/KeyCodes.h"
+// #include "GES/Core/MouseCodes.h"
 #include "WindowsInput.h"
 
-#include "GES/Window.h"
-#include "GES/Application.h"
+#include "GES/Core/Window.h"
+#include "GES/Core/Application.h"
 
 #include <GLFW/glfw3.h>
 

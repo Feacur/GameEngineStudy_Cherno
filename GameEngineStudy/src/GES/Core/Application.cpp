@@ -7,14 +7,14 @@
 // #include "MouseCodes.h"
 #include "Input.h"
 
-#include "Events/Event.h"
-#include "Events/ApplicationEvent.h"
+#include "GES/Events/Event.h"
+#include "GES/Events/ApplicationEvent.h"
 
 #include "Window.h"
 
-#include "Renderer/Renderer.h"
+#include "GES/Renderer/Renderer.h"
 
-#include "ImGuiLayer/ImGuiLayer.h"
+#include "GES/ImGuiLayer/ImGuiLayer.h"
 
 #include <GLFW/glfw3.h>
 

@@ -1,7 +1,7 @@
 #include "ges_pch.h"
 #include "Renderer.h"
 
-#include "GES/Renderer/Orthographic2dCamera.h"
+#include "Orthographic2dCamera.h"
 
 #include "RendererCommand.h"
 #include "Shader.h"
