@@ -18,6 +18,7 @@ namespace GES
 		static void Clear();
 
 		static void Init();
+		static void OnWindowResize(uint32 width, uint32 height);
 
 	public:
 		static void BeginScene(Orthographic2dCamera const & camera);

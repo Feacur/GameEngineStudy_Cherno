@@ -52,6 +52,11 @@ namespace GES
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
+	void OpenGLRendererCommand::SetViewport(uint32 x, uint32 y, uint32 width, uint32 height)
+	{
+		glViewport(x, y, width, height);
+	}
+
 	void OpenGLRendererCommand::DrawIndexed(Ref<VertexArray> const & vertexArray) const
 	{
 		auto & indexBuffer = vertexArray->GetIndexBuffer();

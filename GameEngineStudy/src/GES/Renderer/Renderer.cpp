@@ -28,6 +28,11 @@ namespace GES
 		s_RendererCommand->Init();
 	}
 
+	void Renderer::OnWindowResize(uint32 width, uint32 height)
+	{
+		s_RendererCommand->SetViewport(0, 0, width, height);
+	}
+
 	void Renderer::BeginScene(Orthographic2dCamera const & camera)
 	{
 		s_Data->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
