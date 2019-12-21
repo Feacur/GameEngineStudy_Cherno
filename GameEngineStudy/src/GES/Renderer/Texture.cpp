@@ -3,7 +3,7 @@
 
 #include "GES/Core/Log.h"
 
-#include "RendererAPI.h"
+#include "RendererSettings.h"
 
 #include "Platform/OpenGL/OpenGLTexture.h"
 
@@ -11,12 +11,12 @@ namespace GES
 {
 	Ref<Texture2D> Texture2D::Create(cstring source)
 	{
-		switch(RendererAPI::GetType())
+		switch(RendererSettings::GetType())
 		{
-			case RendererAPI::Type::OpenGL:
+			case RendererSettings::Type::OpenGL:
 				return CreateRef<OpenGLTexture2D>(source);
 		}
-		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererAPI::GetType());
+		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererSettings::GetType());
 		return nullptr;
 	}
 }

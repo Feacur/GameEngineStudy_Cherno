@@ -2,7 +2,7 @@
 
 namespace GES
 {
-	class RendererAPI
+	class RendererSettings
 	{
 	public:
 		enum class Type

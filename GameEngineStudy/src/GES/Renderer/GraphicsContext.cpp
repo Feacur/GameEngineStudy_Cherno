@@ -3,7 +3,7 @@
 
 #include "GES/Core/Log.h"
 
-#include "RendererAPI.h"
+#include "RendererSettings.h"
 
 #include "Platform/OpenGL/OpenGLContext.h"
 
@@ -11,12 +11,12 @@ namespace GES
 {
 	Scope<GraphicsContext> GraphicsContext::Create(void * windowHandle)
 	{
-		switch(RendererAPI::GetType())
+		switch(RendererSettings::GetType())
 		{
-			case RendererAPI::Type::OpenGL:
+			case RendererSettings::Type::OpenGL:
 				return CreateScope<OpenGLContext>(static_cast<GLFWwindow*>(windowHandle));
 		}
-		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererAPI::GetType());
+		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererSettings::GetType());
 		return nullptr;
 	}
 }

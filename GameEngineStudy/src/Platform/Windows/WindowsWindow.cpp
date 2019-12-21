@@ -19,7 +19,7 @@ extern "C" { // @Note: use discrete GPU by default
 #include "GES/Events/MouseEvent.h"
 #include "GES/Events/KeyEvent.h"
 
-#include "GES/Renderer/RendererAPI.h"
+#include "GES/Renderer/RendererSettings.h"
 #include "GES/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
@@ -65,7 +65,7 @@ namespace GES {
 		}
 
 		#if !defined(GES_SHIPPING)
-		if (RendererAPI::GetType() == RendererAPI::Type::OpenGL)
+		if (RendererSettings::GetType() == RendererSettings::Type::OpenGL)
 		{
 			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 		}
