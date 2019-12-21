@@ -10,8 +10,13 @@
 
 namespace GES
 {
-	Scope<Renderer::Data> Renderer::s_Data = CreateScope<Data>();
-	Scope<RendererCommand> Renderer::s_RendererCommand = RendererCommand::Create();
+	struct Data
+	{
+		glm::mat4 ViewProjectionMatrix;
+	};
+
+	static Scope<Data> s_Data = CreateScope<Data>();
+	static Scope<RendererCommand> s_RendererCommand = RendererCommand::Create();
 	
 	void Renderer::SetClearColor()
 	{

@@ -8,7 +8,6 @@
 namespace GES
 {
 	class Orthographic2dCamera;
-	class RendererCommand;
 	class Shader;
 	class Texture;
 	class VertexArray;
@@ -28,14 +27,5 @@ namespace GES
 		static void Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform);
 		static void Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform, Ref<Texture> const & texture);
 		static void EndScene();
-
-	private:
-		struct Data
-		{
-			glm::mat4 ViewProjectionMatrix;
-		};
-
-		static Scope<Data> s_Data;
-		static Scope<RendererCommand> s_RendererCommand;
 	};
 }
