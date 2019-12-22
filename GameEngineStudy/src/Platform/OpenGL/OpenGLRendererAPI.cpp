@@ -29,16 +29,6 @@ namespace GES
 		GES_CORE_ASSERT(false, "Unknown severity level!");
 	}
 
-	void OpenGLRendererAPI::SetClearColor(glm::vec4 const & color) const
-	{
-		glClearColor(color.r, color.g, color.b, color.a);
-	}
-
-	void OpenGLRendererAPI::Clear() const
-	{
-		glClear(GL_COLOR_BUFFER_BIT);
-	}
-
 	void OpenGLRendererAPI::Init() const
 	{
 		#if !defined(GES_SHIPPING)
@@ -50,6 +40,20 @@ namespace GES
 		
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+
+	void OpenGLRendererAPI::Shutdown() const
+	{
+	}
+
+	void OpenGLRendererAPI::SetClearColor(glm::vec4 const & color) const
+	{
+		glClearColor(color.r, color.g, color.b, color.a);
+	}
+
+	void OpenGLRendererAPI::Clear() const
+	{
+		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
 	void OpenGLRendererAPI::SetViewport(uint32 x, uint32 y, uint32 width, uint32 height)

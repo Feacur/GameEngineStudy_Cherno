@@ -15,10 +15,5 @@ public:
 	void OnEvent(GES::Event& e) override;
 
 private:
-	GES::ShaderLibrary m_ShaderLibrary;
-	GES::Ref<GES::VertexArray> m_SquareVA;
-
-	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
-
 	GES::Orthographic2dCameraController m_CameraController;
 };

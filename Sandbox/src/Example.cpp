@@ -82,8 +82,8 @@ void ExampleLayer::OnUpdate(GES::Timestep ts)
 
 	m_CameraController.OnUpdate(ts);
 
-	GES::Renderer::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-	GES::Renderer::Clear();
+	GES::RendererCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+	GES::RendererCommand::Clear();
 
 	GES::Renderer::BeginScene(m_CameraController.GetCamera());
 

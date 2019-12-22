@@ -18,9 +18,11 @@ namespace GES
 		static Scope<RendererAPI> Create();
 
 	public:
+		virtual void Init() const = 0;
+		virtual void Shutdown() const = 0;
+
 		virtual void SetClearColor(glm::vec4 const & color) const = 0;
 		virtual void Clear() const = 0;
-		virtual void Init() const = 0;
 		virtual void SetViewport(uint32 x, uint32 y, uint32 width, uint32 height) = 0;
 
 		virtual void DrawIndexed(Ref<VertexArray> const & vertexArray) const = 0;

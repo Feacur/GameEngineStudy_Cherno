@@ -12,8 +12,9 @@
 
 #include "Window.h"
 
-#include "GES/Renderer/Renderer.h"
 #include "GES/Renderer/RendererCommand.h"
+#include "GES/Renderer/Renderer.h"
+#include "GES/Renderer/Renderer2D.h"
 
 #include "GES/ImGuiLayer/ImGuiLayer.h"
 
@@ -32,6 +33,7 @@ namespace GES {
 
 		RendererCommand::Init();
 		Renderer::Init();
+		Renderer2D::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
@@ -39,7 +41,9 @@ namespace GES {
 
 	Application::~Application()
 	{
+		RendererCommand::Shutdown();
 		Renderer::Shutdown();
+		Renderer2D::Shutdown();
 	}
 
 	void Application::Run()
@@ -105,7 +109,7 @@ namespace GES {
 		}
 
 		m_Minimized = false;
-		Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+		RendererCommand::SetViewport(0, 0, e.GetWidth(), e.GetHeight());
 
 		return false;
 	}

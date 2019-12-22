@@ -14,35 +14,25 @@ namespace GES
 	{
 		glm::mat4 ViewProjectionMatrix;
 	};
-
-	static Scope<Data> s_Data = CreateScope<Data>();
-	
-	void Renderer::SetClearColor(glm::vec4 const & color)
-	{
-		RendererCommand::SetClearColor(color);
-	}
-
-	void Renderer::Clear()
-	{
-		RendererCommand::Clear();
-	}
+	static Data * s_Data;
 	
 	void Renderer::Init()
 	{
+		s_Data = new Data();
 	}
 	
 	void Renderer::Shutdown()
 	{
-	}
-
-	void Renderer::OnWindowResize(uint32 width, uint32 height)
-	{
-		RendererCommand::SetViewport(0, 0, width, height);
+		delete s_Data;
 	}
 
 	void Renderer::BeginScene(Orthographic2dCamera const & camera)
 	{
 		s_Data->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
+	}
+
+	void Renderer::EndScene()
+	{
 	}
 
 	void Renderer::Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform)
@@ -66,9 +56,5 @@ namespace GES
 
 		vertexArray->Bind();
 		RendererCommand::DrawIndexed(vertexArray);
-	}
-
-	void Renderer::EndScene()
-	{
 	}
 }

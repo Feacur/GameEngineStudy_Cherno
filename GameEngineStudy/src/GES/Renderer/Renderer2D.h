@@ -12,7 +12,7 @@ namespace GES
 	class Texture;
 	class VertexArray;
 
-	class Renderer
+	class Renderer2D
 	{
 	public:
 		static void Init();
@@ -22,7 +22,7 @@ namespace GES
 		static void BeginScene(Orthographic2dCamera const & camera);
 		static void EndScene();
 
-		static void Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform);
-		static void Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform, Ref<Texture> const & texture);
+		static void DrawQuad(glm::vec2 const & position, glm::vec2 const & size, glm::vec4 const & color);
+		static void DrawQuad(glm::vec3 const & position, glm::vec2 const & size, glm::vec4 const & color);
 	};
 }

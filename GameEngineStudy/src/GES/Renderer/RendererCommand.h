@@ -13,6 +13,7 @@ namespace GES
 	{
 	public:
 		static void Init();
+		static void Shutdown();
 
 		static void SetClearColor(glm::vec4 const & color);
 		static void Clear();

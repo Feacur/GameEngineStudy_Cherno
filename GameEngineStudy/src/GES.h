@@ -34,7 +34,9 @@
 #include "GES/Events/KeyEvent.h"
 #include "GES/Events/MouseEvent.h"
 
+#include "GES/Renderer/RendererCommand.h"
 #include "GES/Renderer/Renderer.h"
+#include "GES/Renderer/Renderer2D.h"
 #include "GES/Renderer/VertexArray.h"
 #include "GES/Renderer/Buffer.h"
 #include "GES/Renderer/Shader.h"

@@ -7,6 +7,16 @@ namespace GES
 {
 	static Scope<RendererAPI> s_RendererAPI = RendererAPI::Create();
 
+	void RendererCommand::Init()
+	{
+		s_RendererAPI->Init();
+	}
+
+	void RendererCommand::Shutdown()
+	{
+		s_RendererAPI->Shutdown();
+	}
+
 	void RendererCommand::SetClearColor(glm::vec4 const & color)
 	{
 		s_RendererAPI->SetClearColor(color);
@@ -15,11 +25,6 @@ namespace GES
 	void RendererCommand::Clear()
 	{
 		s_RendererAPI->Clear();
-	}
-
-	void RendererCommand::Init()
-	{
-		s_RendererAPI->Init();
 	}
 
 	void RendererCommand::SetViewport(uint32 x, uint32 y, uint32 width, uint32 height)
