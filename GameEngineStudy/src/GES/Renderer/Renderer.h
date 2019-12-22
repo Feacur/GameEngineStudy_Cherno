@@ -18,7 +18,7 @@ namespace GES
 		static void Init();
 		static void Shutdown();
 
-		static void SetClearColor();
+		static void SetClearColor(glm::vec4 const & color);
 		static void Clear();
 		static void OnWindowResize(uint32 width, uint32 height);
 

@@ -7,9 +7,9 @@ namespace GES
 {
 	static Scope<RendererAPI> s_RendererAPI = RendererAPI::Create();
 
-	void RendererCommand::SetClearColor()
+	void RendererCommand::SetClearColor(glm::vec4 const & color)
 	{
-		s_RendererAPI->SetClearColor();
+		s_RendererAPI->SetClearColor(color);
 	}
 
 	void RendererCommand::Clear()

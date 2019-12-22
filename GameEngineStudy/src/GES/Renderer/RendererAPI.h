@@ -1,6 +1,10 @@
 #pragma once
 #include "GES/Core/Code.h"
 
+#if !defined(GES_BYPASS_VENDOR_HEADERS)
+	#include <glm/glm.hpp>
+#endif
+
 namespace GES
 {
 	class VertexArray;
@@ -14,7 +18,7 @@ namespace GES
 		static Scope<RendererAPI> Create();
 
 	public:
-		virtual void SetClearColor() const = 0;
+		virtual void SetClearColor(glm::vec4 const & color) const = 0;
 		virtual void Clear() const = 0;
 		virtual void Init() const = 0;
 		virtual void SetViewport(uint32 x, uint32 y, uint32 width, uint32 height) = 0;

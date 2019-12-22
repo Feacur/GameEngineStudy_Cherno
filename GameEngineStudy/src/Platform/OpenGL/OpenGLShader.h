@@ -14,8 +14,9 @@ namespace GES
 		void Bind() const override;
 		void Unbind() const override;
 
-		void UploadUniformMat4(cstring name, glm::mat4 const & matrix) override;
+		void UploadUniformMat4(cstring name, glm::mat4 const & value) override;
 		void UploadUniformInt32(cstring name, int32 value) override;
+		void UploadUniformFloat4(cstring name, glm::vec4 const & value) override;
 
 	private:
 		uint32 m_RendererID;

@@ -24,8 +24,9 @@ namespace GES
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 
-		virtual void UploadUniformMat4(cstring name, glm::mat4 const & matrix) = 0;
+		virtual void UploadUniformMat4(cstring name, glm::mat4 const & value) = 0;
 		virtual void UploadUniformInt32(cstring name, int32 value) = 0;
+		virtual void UploadUniformFloat4(cstring name, glm::vec4 const & value) = 0;
 	};
 	
 	class ShaderLibrary

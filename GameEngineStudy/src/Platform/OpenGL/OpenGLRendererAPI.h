@@ -10,7 +10,7 @@ namespace GES
 		~OpenGLRendererAPI() override = default;
 
 	public:
-		void SetClearColor() const override;
+		void SetClearColor(glm::vec4 const & color) const override;
 		void Clear() const override;
 		void Init() const override;
 		void SetViewport(uint32 x, uint32 y, uint32 width, uint32 height) override;

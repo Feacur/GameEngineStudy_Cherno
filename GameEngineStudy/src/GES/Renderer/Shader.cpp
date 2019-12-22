@@ -11,7 +11,7 @@
 
 namespace GES
 {
-	std::string ReadFile(cstring path)
+	static std::string ReadFile(cstring path)
 	{
 		std::ifstream file(path, std::ios::in | std::ios::binary);
 		if (!file)
@@ -39,7 +39,7 @@ namespace GES
 		return result;
 	}
 	
-	std::string FindName(std::string const & source)
+	static std::string FindName(std::string const & source)
 	{
 		cstring typeToken = "#name";
 		const size_t typeTokenLength = strlen(typeToken);

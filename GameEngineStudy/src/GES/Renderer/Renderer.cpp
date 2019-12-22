@@ -17,9 +17,9 @@ namespace GES
 
 	static Scope<Data> s_Data = CreateScope<Data>();
 	
-	void Renderer::SetClearColor()
+	void Renderer::SetClearColor(glm::vec4 const & color)
 	{
-		RendererCommand::SetClearColor();
+		RendererCommand::SetClearColor(color);
 	}
 
 	void Renderer::Clear()
@@ -48,7 +48,7 @@ namespace GES
 	void Renderer::Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform)
 	{
 		shader->Bind();
-		shader->UploadUniformMat4("u_ViewProjectionMatrix", s_Data->ViewProjectionMatrix);
+		shader->UploadUniformMat4("u_ViewProjection", s_Data->ViewProjectionMatrix);
 		shader->UploadUniformMat4("u_Transform", transform);
 
 		vertexArray->Bind();

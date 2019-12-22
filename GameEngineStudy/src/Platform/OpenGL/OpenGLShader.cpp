@@ -26,7 +26,7 @@ namespace GES
 		return 0;
 	}
 
-	std::unordered_map<GLenum, std::string> PreProcess(std::string const & source)
+	static std::unordered_map<GLenum, std::string> PreProcess(std::string const & source)
 	{
 		std::unordered_map<GLenum, std::string> shaderSources;
 
@@ -52,7 +52,7 @@ namespace GES
 		return shaderSources;
 	}
 
-	GLuint Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
+	static GLuint Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
 		GLuint program = glCreateProgram();
 		GLenum glShaderIDs[4] = {};
@@ -139,15 +139,21 @@ namespace GES
 		glUseProgram(0);
 	}
 
-	void OpenGLShader::UploadUniformMat4(cstring name, glm::mat4 const & matrix)
+	void OpenGLShader::UploadUniformMat4(cstring name, glm::mat4 const & value)
 	{
 		auto location = glGetUniformLocation(m_RendererID, name);
-		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
 	}
 
 	void OpenGLShader::UploadUniformInt32(cstring name, int32 value)
 	{
 		auto location = glGetUniformLocation(m_RendererID, name);
 		glUniform1i(location, value);
+	}
+
+	void OpenGLShader::UploadUniformFloat4(cstring name, glm::vec4 const & value)
+	{
+		auto location = glGetUniformLocation(m_RendererID, name);
+		glUniform4f(location, value.x, value.y, value.z, value.w);
 	}
 }

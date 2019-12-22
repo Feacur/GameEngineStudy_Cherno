@@ -29,9 +29,9 @@ namespace GES
 		GES_CORE_ASSERT(false, "Unknown severity level!");
 	}
 
-	void OpenGLRendererAPI::SetClearColor() const
+	void OpenGLRendererAPI::SetClearColor(glm::vec4 const & color) const
 	{
-		glClearColor(0.1f, 0.1f, 0.1f, 1);
+		glClearColor(color.r, color.g, color.b, color.a);
 	}
 
 	void OpenGLRendererAPI::Clear() const

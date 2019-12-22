@@ -13,6 +13,8 @@
 	#include <spdlog/fmt/ostr.h>
 
 	#include <glm/glm.hpp>
+	
+	#include <imgui.h>
 #endif
 
 #include "GES/Core/Code.h"
@@ -41,9 +43,3 @@
 #include "GES/ImGuiLayer/ImGuiLayer.h"
 
 #include "GES/Core/Orthographic2dCameraController.h"
-
-#include <imgui.h>
-
-// ---- Entry Point -------
-#include "GES/Core/EntryPoint.h"
-// ------------------------
