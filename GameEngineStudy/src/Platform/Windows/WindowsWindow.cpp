@@ -5,10 +5,10 @@
 
 extern "C" { // @Note: use discrete GPU by default
 	// http://developer.download.nvidia.com/devzone/devcenter/gamegraphics/files/OptimusRenderingPolicies.pdf
-	__declspec(dllexport) DWORD NvOptimusEnablement = 1;
+	GES_API_EXPORT DWORD NvOptimusEnablement = 1;
 	// https://community.amd.com/thread/223376
 	// https://gpuopen.com/amdpowerxpressrequesthighperformance/
-	__declspec(dllexport) DWORD AmdPowerXpressRequestHighPerformance = 1;
+	GES_API_EXPORT DWORD AmdPowerXpressRequestHighPerformance = 1;
 }
 
 #include "GES/Core/KeyCodes.h"

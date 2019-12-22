@@ -79,22 +79,46 @@ typedef char const * cstring;
 #endif
 
 // compiler-specific
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) || defined(__clang__)
 	#define CODE_BREAK() __debugbreak()
-	#if defined(GES_SHARED)
-		#if defined(GES_BUILD_DLL)
-			#define GES_API __declspec(dllexport)
-			#define GES_TEMPLATE
-		#else
-			#define GES_API __declspec(dllimport)
-			#define GES_TEMPLATE extern
-		#endif
+	//
+	#define GES_API_EXPORT __declspec(dllexport)
+	#define GES_API_IMPORT __declspec(dllimport)
+	#define GES_API_LOCAL
+#elif defined(__GNUC__)
+	#define CODE_BREAK() __asm volatile ("int3")
+	// https://gcc.gnu.org/wiki/Visibility
+	#if __GNUC__ >= 4
+		#define GES_API_EXPORT __attribute__((visibility("default")))
+		#define GES_API_IMPORT __attribute__((visibility("default")))
+		#define GES_API_LOCAL __attribute__((visibility("hidden")))
 	#else
-		#define GES_API
+		#define GES_API_EXPORT
+		#define GES_API_IMPORT
+		#define GES_API_LOCAL
+	#endif
+#elif defined(__MINGW32__) || defined(__MINGW64__)
+	#define CODE_BREAK() __asm volatile ("int3")
+	//
+	#define GES_API_EXPORT
+	#define GES_API_IMPORT
+	#define GES_API_LOCAL
+#else
+	#error unsupported compiler
+#endif
+
+// dll-specific
+#if defined(GES_SHARED)
+	#if defined(GES_BUILD_DLL)
 		#define GES_TEMPLATE
+		#define GES_API GES_API_EXPORT
+	#else
+		#define GES_TEMPLATE extern
+		#define GES_API GES_API_IMPORT
 	#endif
 #else
-	#error supported platforms: Windows
+	#define GES_TEMPLATE
+	#define GES_API
 #endif
 
 // logging
