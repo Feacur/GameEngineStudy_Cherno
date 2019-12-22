@@ -40,6 +40,8 @@ namespace GES
 		
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		
+		glEnable(GL_DEPTH_TEST);
 	}
 
 	void OpenGLRendererAPI::Shutdown() const
@@ -53,7 +55,7 @@ namespace GES
 
 	void OpenGLRendererAPI::Clear() const
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	void OpenGLRendererAPI::SetViewport(uint32 x, uint32 y, uint32 width, uint32 height)

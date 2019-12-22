@@ -145,10 +145,28 @@ namespace GES
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
 	}
 
-	void OpenGLShader::UploadUniformInt32(cstring name, int32 value)
+	void OpenGLShader::UploadUniformInt(cstring name, int32 value)
 	{
 		auto location = glGetUniformLocation(m_RendererID, name);
 		glUniform1i(location, value);
+	}
+
+	void OpenGLShader::UploadUniformFloat1(cstring name, float value)
+	{
+		auto location = glGetUniformLocation(m_RendererID, name);
+		glUniform1f(location, value);
+	}
+
+	void OpenGLShader::UploadUniformFloat2(cstring name, glm::vec2 const & value)
+	{
+		auto location = glGetUniformLocation(m_RendererID, name);
+		glUniform2f(location, value.x, value.y);
+	}
+
+	void OpenGLShader::UploadUniformFloat3(cstring name, glm::vec3 const & value)
+	{
+		auto location = glGetUniformLocation(m_RendererID, name);
+		glUniform3f(location, value.x, value.y, value.z);
 	}
 
 	void OpenGLShader::UploadUniformFloat4(cstring name, glm::vec4 const & value)

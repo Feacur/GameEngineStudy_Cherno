@@ -45,14 +45,14 @@ namespace GES
 		RendererCommand::DrawIndexed(vertexArray);
 	}
 
-	void Renderer::Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform, Ref<Texture> const & texture)
+	void Renderer::Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform, Ref<Texture2D> const & texture)
 	{
 		texture->Bind(0u);
 
 		shader->Bind();
 		shader->UploadUniformMat4("u_ViewProjectionMatrix", s_Data->ViewProjectionMatrix);
 		shader->UploadUniformMat4("u_Transform", transform);
-		shader->UploadUniformInt32("u_Texture", (int32)texture->GetSlot());
+		shader->UploadUniformInt("u_Texture", (int32)texture->GetSlot());
 
 		vertexArray->Bind();
 		RendererCommand::DrawIndexed(vertexArray);

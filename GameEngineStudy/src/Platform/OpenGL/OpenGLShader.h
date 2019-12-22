@@ -15,7 +15,12 @@ namespace GES
 		void Unbind() const override;
 
 		void UploadUniformMat4(cstring name, glm::mat4 const & value) override;
-		void UploadUniformInt32(cstring name, int32 value) override;
+		
+		void UploadUniformInt(cstring name, int32 value) override;
+
+		void UploadUniformFloat1(cstring name, float value) override;
+		void UploadUniformFloat2(cstring name, glm::vec2 const & value) override;
+		void UploadUniformFloat3(cstring name, glm::vec3 const & value) override;
 		void UploadUniformFloat4(cstring name, glm::vec4 const & value) override;
 
 	private:

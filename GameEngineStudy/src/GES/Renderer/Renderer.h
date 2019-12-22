@@ -9,7 +9,7 @@ namespace GES
 {
 	class Orthographic2dCamera;
 	class Shader;
-	class Texture;
+	class Texture2D;
 	class VertexArray;
 
 	class Renderer
@@ -23,6 +23,6 @@ namespace GES
 		static void EndScene();
 
 		static void Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform);
-		static void Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform, Ref<Texture> const & texture);
+		static void Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform, Ref<Texture2D> const & texture);
 	};
 }

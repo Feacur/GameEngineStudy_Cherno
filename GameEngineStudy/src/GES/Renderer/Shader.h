@@ -25,7 +25,12 @@ namespace GES
 		virtual void Unbind() const = 0;
 
 		virtual void UploadUniformMat4(cstring name, glm::mat4 const & value) = 0;
-		virtual void UploadUniformInt32(cstring name, int32 value) = 0;
+
+		virtual void UploadUniformInt(cstring name, int32 value) = 0;
+
+		virtual void UploadUniformFloat1(cstring name, float value) = 0;
+		virtual void UploadUniformFloat2(cstring name, glm::vec2 const & value) = 0;
+		virtual void UploadUniformFloat3(cstring name, glm::vec3 const & value) = 0;
 		virtual void UploadUniformFloat4(cstring name, glm::vec4 const & value) = 0;
 	};
 	

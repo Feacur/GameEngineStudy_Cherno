@@ -16,4 +16,5 @@ public:
 
 private:
 	GES::Orthographic2dCameraController m_CameraController;
+	GES::Ref<GES::Texture2D> m_CheckerboardTexture;
 };

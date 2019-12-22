@@ -9,7 +9,7 @@ namespace GES
 {
 	class Orthographic2dCamera;
 	class Shader;
-	class Texture;
+	class Texture2D;
 	class VertexArray;
 
 	class Renderer2D
@@ -24,5 +24,7 @@ namespace GES
 
 		static void DrawQuad(glm::vec2 const & position, glm::vec2 const & size, glm::vec4 const & color);
 		static void DrawQuad(glm::vec3 const & position, glm::vec2 const & size, glm::vec4 const & color);
+		static void DrawQuad(glm::vec2 const & position, glm::vec2 const & size, Ref<Texture2D> const & texture);
+		static void DrawQuad(glm::vec3 const & position, glm::vec2 const & size, Ref<Texture2D> const & texture);
 	};
 }
