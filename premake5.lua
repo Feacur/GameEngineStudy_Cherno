@@ -59,7 +59,11 @@ workspace "GameEngineStudy"
 	filter "configurations:Shipping"
 		-- either bundle CRT (vcruntime140.dll, etc.)
 		-- or build with [staticruntime "On"]
-		defines "SHIPPING"
+		defines {
+			"SHIPPING",
+			"IMGUI_DISABLE_DEMO_WINDOWS",
+			"IMGUI_DISABLE_METRICS_WINDOW",
+		}
 		staticruntime "Off"
 		runtime "Release"
 		symbols "Off"
@@ -125,7 +129,7 @@ project "GameEngineStudy"
 			-- "GES_BUILD_DLL", -- if specified [kind "SharedLib"]
 			-- "GES_SHARED", -- if specified [kind "SharedLib"]
 			"GLFW_INCLUDE_NONE",
-			"_CRT_SECURE_NO_WARNINGS"
+			"_CRT_SECURE_NO_WARNINGS",
 		}
 
 		links {
