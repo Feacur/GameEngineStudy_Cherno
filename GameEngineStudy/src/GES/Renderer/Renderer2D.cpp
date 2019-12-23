@@ -16,8 +16,8 @@ namespace GES
 	struct Data
 	{
 		Ref<VertexArray> QuadVertexArray;
-		Ref<Shader> FlatColorShader;
 		Ref<Shader> TextureShader;
+		Ref<Texture2D> WhiteTexture;
 	};
 	static Data * s_Data;
 	static uint32 const s_TextureSlot = 0;
@@ -53,9 +53,12 @@ namespace GES
 	{
 		s_Data = new Data();
 		s_Data->QuadVertexArray = CreateQuadVertexArray();
-		s_Data->FlatColorShader = GES::Shader::CreatePath("assets/shaders/flat_color.glsl");
 		s_Data->TextureShader = GES::Shader::CreatePath("assets/shaders/texture.glsl");
 		
+		uint32 whiteTextureData = 0xffffffff;
+		s_Data->WhiteTexture = Texture2D::Create(1u, 1u);
+		s_Data->WhiteTexture->SetData(&whiteTextureData, sizeof(whiteTextureData));
+
 		s_Data->TextureShader->Bind();
 		s_Data->TextureShader->UploadUniformInt("u_Texture", (int32)s_TextureSlot);
 	}
@@ -67,9 +70,6 @@ namespace GES
 
 	void Renderer2D::BeginScene(Orthographic2dCamera const & camera)
 	{
-		s_Data->FlatColorShader->Bind();
-		s_Data->FlatColorShader->UploadUniformMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
-		
 		s_Data->TextureShader->Bind();
 		s_Data->TextureShader->UploadUniformMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 		
@@ -82,33 +82,37 @@ namespace GES
 	
 	void Renderer2D::DrawQuad(glm::vec2 const & position, glm::vec2 const & size, glm::vec4 const & color)
 	{
-		DrawQuad({position.x, position.y, 0.0f}, size, color);
+		DrawQuad({position.x, position.y, 0.0f}, size, color, s_Data->WhiteTexture);
 	}
 
 	void Renderer2D::DrawQuad(glm::vec3 const & position, glm::vec2 const & size, glm::vec4 const & color)
 	{
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-
-		s_Data->FlatColorShader->Bind();
-		s_Data->FlatColorShader->UploadUniformMat4("u_Transform", transform);
-		s_Data->FlatColorShader->UploadUniformFloat4("u_Color", color);
-
-		RendererCommand::DrawIndexed(s_Data->QuadVertexArray);
+		DrawQuad(position, size, color, s_Data->WhiteTexture);
 	}
-	
+
 	void Renderer2D::DrawQuad(glm::vec2 const & position, glm::vec2 const & size, Ref<Texture2D> const & texture)
 	{
-		DrawQuad({position.x, position.y, 0.0f}, size, texture);
+		DrawQuad({position.x, position.y, 0.0f}, size, glm::vec4(1.0f), texture);
 	}
 
 	void Renderer2D::DrawQuad(glm::vec3 const & position, glm::vec2 const & size, Ref<Texture2D> const & texture)
+	{
+		DrawQuad(position, size, glm::vec4(1.0f), texture);
+	}
+	
+	void Renderer2D::DrawQuad(glm::vec2 const & position, glm::vec2 const & size, glm::vec4 const & color, Ref<Texture2D> const & texture)
+	{
+		DrawQuad({position.x, position.y, 0.0f}, size, color, texture);
+	}
+
+	void Renderer2D::DrawQuad(glm::vec3 const & position, glm::vec2 const & size, glm::vec4 const & color, Ref<Texture2D> const & texture)
 	{
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
 		texture->Bind(s_TextureSlot);
 
-		s_Data->TextureShader->Bind();
 		s_Data->TextureShader->UploadUniformMat4("u_Transform", transform);
+		s_Data->TextureShader->UploadUniformFloat4("u_Color", color);
 
 		RendererCommand::DrawIndexed(s_Data->QuadVertexArray);
 	}

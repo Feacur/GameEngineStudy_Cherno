@@ -26,5 +26,7 @@ namespace GES
 		static void DrawQuad(glm::vec3 const & position, glm::vec2 const & size, glm::vec4 const & color);
 		static void DrawQuad(glm::vec2 const & position, glm::vec2 const & size, Ref<Texture2D> const & texture);
 		static void DrawQuad(glm::vec3 const & position, glm::vec2 const & size, Ref<Texture2D> const & texture);
+		static void DrawQuad(glm::vec2 const & position, glm::vec2 const & size, glm::vec4 const & color, Ref<Texture2D> const & texture);
+		static void DrawQuad(glm::vec3 const & position, glm::vec2 const & size, glm::vec4 const & color, Ref<Texture2D> const & texture);
 	};
 }
