@@ -2,9 +2,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-#if !defined(GES_BYPASS_VENDOR_HEADERS)
-	#include <imgui.h>
-#endif
+#include <imgui.h>
 
 static GES::Ref<GES::VertexArray> CreateVertexArrayTriangle()
 {

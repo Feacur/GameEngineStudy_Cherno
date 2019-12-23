@@ -13,8 +13,6 @@
 	#include <spdlog/fmt/ostr.h>
 
 	#include <glm/glm.hpp>
-	
-	#include <imgui.h>
 #endif
 
 #include "GES/Core/Code.h"

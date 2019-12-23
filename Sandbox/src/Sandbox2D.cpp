@@ -1,8 +1,10 @@
 #include "Sandbox2D.h"
 
-#if !defined(GES_BYPASS_VENDOR_HEADERS)
-	#include <imgui.h>
+#if defined(GES_BYPASS_VENDOR_HEADERS)
+	#include <vector>
 #endif
+
+#include <imgui.h>
 
 Sandbox2D::Sandbox2D()
 	: Layer("Sandbox2D")
