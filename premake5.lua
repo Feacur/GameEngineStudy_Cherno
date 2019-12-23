@@ -177,6 +177,7 @@ project "Sandbox"
 
 	filter "system:windows"
 		defines {
+			"_CRT_SECURE_NO_WARNINGS",
 			-- "GES_SHARED", -- if specified [kind "SharedLib"] for the GameEngineStudy
 			-- "IMGUI_API=__declspec(dllimport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
 		}

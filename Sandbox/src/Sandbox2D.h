@@ -21,4 +21,11 @@ public:
 private:
 	GES::Orthographic2dCameraController m_CameraController;
 	GES::Ref<GES::Texture2D> m_CheckerboardTexture;
+
+	struct ProfileResult
+	{
+		cstring Name;
+		float Time;
+	};
+	std::vector<ProfileResult> m_ProfileResults;
 };
