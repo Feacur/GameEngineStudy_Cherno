@@ -4,4 +4,7 @@
 #include <examples/imgui_impl_opengl3.cpp>
 #include <examples/imgui_impl_glfw.cpp>
 
-#include <imgui_demo.cpp> // ImGui::ShowDemoWindow
+#if defined(SHIPPING)
+	#define IMGUI_DISABLE_DEMO_WINDOWS
+#endif
+// #include <imgui_demo.cpp> // ImGui::ShowDemoWindow

@@ -66,11 +66,11 @@ namespace GES {
 		ImGui::DestroyContext();
 	}
 
-	void ImGuiLayer::OnImGuiRender()
-	{
-		static bool show;
-		ImGui::ShowDemoWindow(&show);
-	}
+	// void ImGuiLayer::OnImGuiRender()
+	// {
+	// 	static bool show;
+	// 	ImGui::ShowDemoWindow(&show);
+	// }
 	
 	void ImGuiLayer::Begin()
 	{

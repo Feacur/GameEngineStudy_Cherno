@@ -53,7 +53,7 @@ namespace GES
 	{
 		s_Data = new Data();
 		s_Data->QuadVertexArray = CreateQuadVertexArray();
-		s_Data->TextureShader = GES::Shader::CreatePath("assets/shaders/texture.glsl");
+		s_Data->TextureShader = GES::Shader::CreatePath("assets/shaders/renderer2d.glsl");
 		
 		uint32 whiteTextureData = 0xffffffff;
 		s_Data->WhiteTexture = Texture2D::Create(1u, 1u);

@@ -59,11 +59,7 @@ workspace "GameEngineStudy"
 	filter "configurations:Shipping"
 		-- either bundle CRT (vcruntime140.dll, etc.)
 		-- or build with [staticruntime "On"]
-		defines {
-			"SHIPPING",
-			"IMGUI_DISABLE_DEMO_WINDOWS",
-			"IMGUI_DISABLE_METRICS_WINDOW",
-		}
+		defines "SHIPPING"
 		staticruntime "Off"
 		runtime "Release"
 		symbols "Off"

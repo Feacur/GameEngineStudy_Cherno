@@ -28,6 +28,9 @@ project "imgui"
 	includedirs {
 		"imgui"
 	}
+
+	filter "configurations:Shipping"
+		defines "IMGUI_DISABLE_METRICS_WINDOW"
 	
 	-- filter "system:windows"
 	-- 	-- defines {
