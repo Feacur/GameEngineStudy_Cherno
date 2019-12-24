@@ -73,7 +73,9 @@ namespace GES
 	InstrumentationTimer::InstrumentationTimer(cstring name)
 		: m_Name(name)
 	{
-		m_StartTimepoint = std::chrono::high_resolution_clock::now();
+		auto time = std::chrono::high_resolution_clock::now();
+		// time = std::chrono::time_point_cast<std::chrono::nanoseconds>(time);
+		m_StartNanoseconds = time.time_since_epoch().count();
 	}
 
 	InstrumentationTimer::~InstrumentationTimer()
@@ -83,12 +85,11 @@ namespace GES
 
 	void InstrumentationTimer::Stop()
 	{
-		auto endTimepoint = std::chrono::high_resolution_clock::now();
-
-		int64 start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
-		int64 end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
+		auto time = std::chrono::high_resolution_clock::now();
+		// time = std::chrono::time_point_cast<std::chrono::nanoseconds>(time);
+		int64 endNanoseconds = time.time_since_epoch().count();
 
 		size_t threadID = std::hash<std::thread::id>{}(std::this_thread::get_id());
-		Instrumentor::Get().WriteProfile({ m_Name, start, end, threadID });
+		Instrumentor::Get().WriteProfile({ m_Name, m_StartNanoseconds, endNanoseconds, threadID });
 	}
 }

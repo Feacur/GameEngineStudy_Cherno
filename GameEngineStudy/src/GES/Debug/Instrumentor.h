@@ -3,12 +3,6 @@
 
 #define GES_INSTRUMENTOR
 
-#if defined(GES_BYPASS_VENDOR_HEADERS)
-	#include <chrono>
-	#include <algorithm>
-	#include <thread>
-#endif
-
 namespace GES {
 	struct InstrumentationSession;
 	struct ProfileResult;
@@ -49,6 +43,6 @@ namespace GES {
 
 	private:
 		cstring m_Name;
-		std::chrono::time_point<std::chrono::high_resolution_clock> m_StartTimepoint;
+		int64 m_StartNanoseconds;
 	};
 }

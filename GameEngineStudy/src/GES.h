@@ -3,15 +3,9 @@
 // #define GES_BYPASS_VENDOR_HEADERS
 #if defined(GES_BYPASS_VENDOR_HEADERS)
 	#include <functional>
-	#include <algorithm>
-
-	#include <chrono>
-	#include <thread>
-
 	#include <vector>
 	#include <unordered_map>
 	#include <string>
-
 	#include <sstream>
 	#include <fstream>
 
