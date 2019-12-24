@@ -1,7 +1,7 @@
 #include "ges_pch.h"
 #include "WindowsWindow.h"
 
-#include "GES/Core/Log.h"
+#include "GES/Debug/Log.h"
 
 extern "C" { // @Note: use discrete GPU by default
 	// http://developer.download.nvidia.com/devzone/devcenter/gamegraphics/files/OptimusRenderingPolicies.pdf

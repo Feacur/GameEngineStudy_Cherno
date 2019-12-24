@@ -1,7 +1,7 @@
 #include "ges_pch.h"
 #include "Application.h"
 
-#include "Log.h"
+#include "GES/Debug/Log.h"
 
 // #include "KeyCodes.h"
 // #include "MouseCodes.h"

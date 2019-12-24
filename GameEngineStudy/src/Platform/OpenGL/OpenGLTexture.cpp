@@ -1,7 +1,7 @@
 #include "ges_pch.h"
 #include "OpenGLTexture.h"
 
-#include "GES/Core/Log.h"
+#include "GES/Debug/Log.h"
 
 #include <stb_image.h>
 

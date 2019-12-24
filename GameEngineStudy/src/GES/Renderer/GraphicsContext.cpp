@@ -1,7 +1,7 @@
 #include "ges_pch.h"
 #include "GraphicsContext.h"
 
-#include "GES/Core/Log.h"
+#include "GES/Debug/Log.h"
 
 #include "RendererSettings.h"
 

@@ -3,9 +3,15 @@
 // #define GES_BYPASS_VENDOR_HEADERS
 #if defined(GES_BYPASS_VENDOR_HEADERS)
 	#include <functional>
+	#include <algorithm>
+
+	#include <chrono>
+	#include <thread>
+
 	#include <vector>
 	#include <unordered_map>
 	#include <string>
+
 	#include <sstream>
 	#include <fstream>
 
@@ -17,11 +23,13 @@
 
 #include "GES/Core/Code.h"
 #include "GES/Core/Timestep.h"
-
 #include "GES/Core/Window.h"
 #include "GES/Core/Application.h"
 #include "GES/Core/Layer.h"
-#include "GES/Core/Log.h"
+
+#include "GES/Debug/Log.h"
+// #include "GES/Debug/ScopedProfiler.h"
+#include "GES/Debug/Instrumentor.h"
 
 // #include "GES/Core/KeyCodes.h"
 // #include "GES/Core/MouseCodes.h"
