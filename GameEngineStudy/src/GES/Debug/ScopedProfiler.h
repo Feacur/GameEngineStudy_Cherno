@@ -1,6 +1,8 @@
 #pragma once
 #include "GES/Core/Code.h"
 
+#define GES_SCOPED_PROFILER
+
 #if defined(GES_BYPASS_VENDOR_HEADERS)
 	#include <chrono>
 #endif

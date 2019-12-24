@@ -2,6 +2,8 @@
 #include "GraphicsContext.h"
 
 #include "GES/Debug/Log.h"
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
 
 #include "RendererSettings.h"
 
@@ -11,6 +13,7 @@ namespace GES
 {
 	Scope<GraphicsContext> GraphicsContext::Create(void * windowHandle)
 	{
+		GES_PROFILE_FUNCTION();
 		switch(RendererSettings::GetType())
 		{
 			case RendererSettings::Type::OpenGL:

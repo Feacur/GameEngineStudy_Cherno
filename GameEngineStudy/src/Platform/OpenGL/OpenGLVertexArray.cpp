@@ -2,6 +2,8 @@
 #include "OpenGLVertexArray.h"
 
 #include "GES/Debug/Log.h"
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
 
 #include "GES/Renderer/Buffer.h"
 
@@ -11,6 +13,7 @@ namespace GES
 {
 	static GLenum ShaderDataTypeOpenGLBaseType(ShaderDataType type)
 	{
+		GES_PROFILE_FUNCTION();
 		switch(type)
 		{
 			case ShaderDataType::Float1: return GL_FLOAT;
@@ -31,27 +34,32 @@ namespace GES
 	
 	OpenGLVertexArray::OpenGLVertexArray()
 	{
+		GES_PROFILE_FUNCTION();
 		glGenVertexArrays(1, &m_RendererID);
 		glBindVertexArray(m_RendererID);
 	}
 
 	OpenGLVertexArray::~OpenGLVertexArray()
 	{
+		GES_PROFILE_FUNCTION();
 		glDeleteVertexArrays(1, &m_RendererID);
 	}
 
 	void OpenGLVertexArray::Bind() const
 	{
+		GES_PROFILE_FUNCTION();
 		glBindVertexArray(m_RendererID);
 	}
 
 	void OpenGLVertexArray::Unbind() const
 	{
+		GES_PROFILE_FUNCTION();
 		glBindVertexArray(0);
 	}
 	
 	void OpenGLVertexArray::AddVertexBuffer(Ref<VertexBuffer> const & vertexBuffer)
 	{
+		GES_PROFILE_FUNCTION();
 		auto const & bufferLayout = vertexBuffer->GetLayout();
 		GES_CORE_ASSERT(bufferLayout.GetElements().size(), "Vertex Buffer has no layout");
 
@@ -85,6 +93,7 @@ namespace GES
 
 	void OpenGLVertexArray::SetIndexBuffer(Ref<IndexBuffer> const & indexBuffer)
 	{
+		GES_PROFILE_FUNCTION();
 		glBindVertexArray(m_RendererID);
 		indexBuffer->Bind();
 		m_IndexBuffer = indexBuffer;

@@ -2,6 +2,8 @@
 #include "Buffer.h"
 
 #include "GES/Debug/Log.h"
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
 
 #include "RendererSettings.h"
 
@@ -11,6 +13,7 @@ namespace GES
 {
 	Ref<VertexBuffer> VertexBuffer::Create(float * vertices, uint32 size)
 	{
+		GES_PROFILE_FUNCTION();
 		switch(RendererSettings::GetType())
 		{
 			case RendererSettings::Type::OpenGL:
@@ -22,6 +25,7 @@ namespace GES
 
 	Ref<IndexBuffer> IndexBuffer::Create(uint32 * indices, uint32 size)
 	{
+		GES_PROFILE_FUNCTION();
 		switch(RendererSettings::GetType())
 		{
 			case RendererSettings::Type::OpenGL:

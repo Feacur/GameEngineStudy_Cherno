@@ -5,6 +5,9 @@
 // #include "MouseCodes.h"
 #include "Input.h"
 
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
+
 #include "GES/Events/Event.h"
 #include "GES/Events/ApplicationEvent.h"
 #include "GES/Events/MouseEvent.h"
@@ -14,10 +17,14 @@ namespace GES
 	Orthographic2dCameraController::Orthographic2dCameraController(float aspectRatio, bool rotation)
 		: m_AspectRatio(aspectRatio)
 		, m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel)
-		, m_Rotation(rotation) {}
+		, m_Rotation(rotation)
+	{
+		GES_PROFILE_FUNCTION();
+	}
 
 	void Orthographic2dCameraController::OnUpdate(Timestep ts)
 	{
+		GES_PROFILE_FUNCTION();
 		float positionDelta = m_CameraTranslationSpeed * ts;
 		float rotationDelta = m_CameraRotationSpeed * ts;
 
@@ -55,6 +62,7 @@ namespace GES
 
 	void Orthographic2dCameraController::OnEvent(Event & e)
 	{
+		GES_PROFILE_FUNCTION();
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(BIND_EVENT_FN(Orthographic2dCameraController::OnMouseScrolled));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Orthographic2dCameraController::OnWindowResized));
@@ -62,6 +70,7 @@ namespace GES
 
 	bool Orthographic2dCameraController::OnMouseScrolled(MouseScrolledEvent const & e)
 	{
+		GES_PROFILE_FUNCTION();
 		m_ZoomLevel -= e.GetYOffset() * 0.25f;
 		m_ZoomLevel = std::clamp(m_ZoomLevel, 0.25f, 4.0f);
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
@@ -70,6 +79,7 @@ namespace GES
 
 	bool Orthographic2dCameraController::OnWindowResized(WindowResizeEvent const & e)
 	{
+		GES_PROFILE_FUNCTION();
 		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 		return false;

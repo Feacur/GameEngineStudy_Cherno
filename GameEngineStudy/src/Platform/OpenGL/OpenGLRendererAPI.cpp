@@ -2,6 +2,8 @@
 #include "OpenGLRendererAPI.h"
 
 #include "GES/Debug/Log.h"
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
 
 #include "GES/Renderer/Buffer.h"
 #include "GES/Renderer/VertexArray.h"
@@ -19,6 +21,7 @@ namespace GES
 		const char* message,
 		const void* userParam)
 	{
+		GES_PROFILE_FUNCTION();
 		switch (severity)
 		{
 			case GL_DEBUG_SEVERITY_HIGH:         GES_CORE_CRITICAL(message); return;
@@ -31,7 +34,8 @@ namespace GES
 
 	void OpenGLRendererAPI::Init() const
 	{
-		#if !defined(GES_SHIPPING)
+		GES_PROFILE_FUNCTION();
+		#if defined(GES_LOGGER_ENABLED)
 			glEnable(GL_DEBUG_OUTPUT);
 			glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 			glDebugMessageCallback(OpenGLMessageCallback, nullptr);
@@ -46,25 +50,30 @@ namespace GES
 
 	void OpenGLRendererAPI::Shutdown() const
 	{
+		GES_PROFILE_FUNCTION();
 	}
 
 	void OpenGLRendererAPI::SetClearColor(glm::vec4 const & color) const
 	{
+		GES_PROFILE_FUNCTION();
 		glClearColor(color.r, color.g, color.b, color.a);
 	}
 
 	void OpenGLRendererAPI::Clear() const
 	{
+		GES_PROFILE_FUNCTION();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	void OpenGLRendererAPI::SetViewport(uint32 x, uint32 y, uint32 width, uint32 height)
 	{
+		GES_PROFILE_FUNCTION();
 		glViewport(x, y, width, height);
 	}
 
 	void OpenGLRendererAPI::DrawIndexed(Ref<VertexArray> const & vertexArray) const
 	{
+		GES_PROFILE_FUNCTION();
 		auto & indexBuffer = vertexArray->GetIndexBuffer();
 		glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 	}

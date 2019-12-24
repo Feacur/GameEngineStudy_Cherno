@@ -9,6 +9,9 @@
 #include "Buffer.h"
 #include "VertexArray.h"
 
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
+
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace GES
@@ -24,6 +27,7 @@ namespace GES
 
 	static Ref<VertexArray> CreateQuadVertexArray()
 	{
+		GES_PROFILE_FUNCTION();
 		auto vertexArray = VertexArray::Create();
 
 		float vertices[] = {
@@ -51,6 +55,7 @@ namespace GES
 	
 	void Renderer2D::Init()
 	{
+		GES_PROFILE_FUNCTION();
 		s_Data = new Data();
 		s_Data->QuadVertexArray = CreateQuadVertexArray();
 		s_Data->TextureShader = GES::Shader::CreatePath("assets/shaders/renderer2d.glsl");
@@ -65,11 +70,13 @@ namespace GES
 	
 	void Renderer2D::Shutdown()
 	{
+		GES_PROFILE_FUNCTION();
 		delete s_Data;
 	}
 
 	void Renderer2D::BeginScene(Orthographic2dCamera const & camera)
 	{
+		GES_PROFILE_FUNCTION();
 		s_Data->TextureShader->Bind();
 		s_Data->TextureShader->UploadUniformMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 		
@@ -78,35 +85,42 @@ namespace GES
 
 	void Renderer2D::EndScene()
 	{
+		GES_PROFILE_FUNCTION();
 	}
 	
 	void Renderer2D::DrawQuad(glm::vec2 const & position, glm::vec2 const & size, glm::vec4 const & color)
 	{
+		GES_PROFILE_FUNCTION();
 		DrawQuad({position.x, position.y, 0.0f}, size, color, s_Data->WhiteTexture);
 	}
 
 	void Renderer2D::DrawQuad(glm::vec3 const & position, glm::vec2 const & size, glm::vec4 const & color)
 	{
+		GES_PROFILE_FUNCTION();
 		DrawQuad(position, size, color, s_Data->WhiteTexture);
 	}
 
 	void Renderer2D::DrawQuad(glm::vec2 const & position, glm::vec2 const & size, Ref<Texture2D> const & texture)
 	{
+		GES_PROFILE_FUNCTION();
 		DrawQuad({position.x, position.y, 0.0f}, size, glm::vec4(1.0f), texture);
 	}
 
 	void Renderer2D::DrawQuad(glm::vec3 const & position, glm::vec2 const & size, Ref<Texture2D> const & texture)
 	{
+		GES_PROFILE_FUNCTION();
 		DrawQuad(position, size, glm::vec4(1.0f), texture);
 	}
 	
 	void Renderer2D::DrawQuad(glm::vec2 const & position, glm::vec2 const & size, glm::vec4 const & color, Ref<Texture2D> const & texture)
 	{
+		GES_PROFILE_FUNCTION();
 		DrawQuad({position.x, position.y, 0.0f}, size, color, texture);
 	}
 
 	void Renderer2D::DrawQuad(glm::vec3 const & position, glm::vec2 const & size, glm::vec4 const & color, Ref<Texture2D> const & texture)
 	{
+		GES_PROFILE_FUNCTION();
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
 		texture->Bind(s_TextureSlot);

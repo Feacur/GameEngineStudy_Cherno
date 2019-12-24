@@ -2,6 +2,8 @@
 #include "OpenGLContext.h"
 
 #include "GES/Debug/Log.h"
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -11,11 +13,13 @@ namespace GES
 	OpenGLContext::OpenGLContext(GLFWwindow * windowHandle)
 		: m_WindowHandle(windowHandle)
 	{
+		GES_PROFILE_FUNCTION();
 		GES_CORE_ASSERT(windowHandle, "Window handle is null");
 	}
 
 	void OpenGLContext::Init()
 	{
+		GES_PROFILE_FUNCTION();
 		glfwMakeContextCurrent(m_WindowHandle);
 		int gladStatus = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		GES_CORE_ASSERT(gladStatus, "Failed to initialize Glad");
@@ -34,6 +38,7 @@ namespace GES
 
 	void OpenGLContext::SwapBuffers()
 	{
+		GES_PROFILE_FUNCTION();
 		glfwSwapBuffers(m_WindowHandle);
 	}
 }

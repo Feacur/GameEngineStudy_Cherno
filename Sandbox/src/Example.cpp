@@ -6,6 +6,7 @@
 
 static GES::Ref<GES::VertexArray> CreateVertexArrayTriangle()
 {
+	GES_PROFILE_FUNCTION();
 	auto vertexArray = GES::VertexArray::Create();
 
 	float vertices[] = {
@@ -31,6 +32,7 @@ static GES::Ref<GES::VertexArray> CreateVertexArrayTriangle()
 
 static GES::Ref<GES::VertexArray> CreateVertexArraySquare()
 {
+	GES_PROFILE_FUNCTION();
 	auto vertexArray = GES::VertexArray::Create();
 
 	float vertices[] = {
@@ -60,6 +62,7 @@ ExampleLayer::ExampleLayer()
 	: Layer("Example")
 	, m_CameraController(1280.0f / 720.0f)
 {
+	GES_PROFILE_FUNCTION();
 	m_VertexArrayTriangle = CreateVertexArrayTriangle();
 	m_VertexArraySquare = CreateVertexArraySquare();
 
@@ -76,6 +79,7 @@ ExampleLayer::ExampleLayer()
 
 void ExampleLayer::OnUpdate(GES::Timestep ts)
 {
+	GES_PROFILE_FUNCTION();
 	static glm::mat4 const identity = glm::mat4(1.0f);
 
 	m_CameraController.OnUpdate(ts);
@@ -108,9 +112,11 @@ void ExampleLayer::OnUpdate(GES::Timestep ts)
 
 void ExampleLayer::OnImGuiRender()
 {
+	GES_PROFILE_FUNCTION();
 }
 
 void ExampleLayer::OnEvent(GES::Event & e)
 {
+	GES_PROFILE_FUNCTION();
 	m_CameraController.OnEvent(e);
 }

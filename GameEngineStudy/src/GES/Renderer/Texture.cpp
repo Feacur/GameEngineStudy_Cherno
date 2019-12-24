@@ -2,6 +2,8 @@
 #include "Texture.h"
 
 #include "GES/Debug/Log.h"
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
 
 #include "RendererSettings.h"
 
@@ -11,6 +13,7 @@ namespace GES
 {
 	Ref<Texture2D> Texture2D::Create(uint32 width, uint32 height)
 	{
+		GES_PROFILE_FUNCTION();
 		switch(RendererSettings::GetType())
 		{
 			case RendererSettings::Type::OpenGL:
@@ -22,6 +25,7 @@ namespace GES
 	
 	Ref<Texture2D> Texture2D::Create(cstring source)
 	{
+		GES_PROFILE_FUNCTION();
 		switch(RendererSettings::GetType())
 		{
 			case RendererSettings::Type::OpenGL:

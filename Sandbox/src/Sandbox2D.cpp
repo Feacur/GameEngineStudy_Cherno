@@ -6,24 +6,22 @@
 
 #include <imgui.h>
 
-// #define GES_PROFILE_SCOPE_OLD(name) GES::ScopedProfiler TOKENIZE_A_MACRO(profiler, __LINE__)(name,\
-// 	[&](ProfileResult profileResult) { m_ProfileResults.push_back(profileResult); }\
-// )
-
 Sandbox2D::Sandbox2D()
 	: Layer("Sandbox2D")
 	, m_CameraController(1280.0f / 720.0f)
 {
+	GES_PROFILE_FUNCTION();
 }
 
 void Sandbox2D::OnAttach()
 {
+	GES_PROFILE_FUNCTION();
 	m_CheckerboardTexture = GES::Texture2D::Create("assets/textures/checkerboard.png");
 }
 
 void Sandbox2D::OnDetach()
 {
-
+	GES_PROFILE_FUNCTION();
 }
 
 void Sandbox2D::OnUpdate(GES::Timestep ts)
@@ -57,6 +55,16 @@ void Sandbox2D::OnUpdate(GES::Timestep ts)
 void Sandbox2D::OnImGuiRender()
 {
 	GES_PROFILE_FUNCTION();
+
+	static bool profilerIsRunning = false;
+	profilerIsRunning = GES_PROFILE_GET_ENABLED();
+
+	ImGui::Begin("Profiler");
+	ImGui::Checkbox("Enable", &profilerIsRunning);
+	ImGui::End();
+
+	GES_PROFILE_SET_ENABLED(profilerIsRunning);
+	
 	// ImGui::Begin("Settings");
 	// ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 	// ImGui::End();
@@ -73,5 +81,6 @@ void Sandbox2D::OnImGuiRender()
 
 void Sandbox2D::OnEvent(GES::Event& e)
 {
+	GES_PROFILE_FUNCTION();
 	m_CameraController.OnEvent(e);
 }

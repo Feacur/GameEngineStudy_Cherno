@@ -7,6 +7,9 @@
 #include "GES/Core/MouseCodes.h"
 #include "GES/Core/KeyCodes.h"
 
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
+
 #include "GES/Events/Event.h"
 #include "GES/Events/ApplicationEvent.h"
 #include "GES/Events/KeyEvent.h"
@@ -22,10 +25,12 @@ namespace GES {
 	ImGuiLayer::ImGuiLayer()
 		: Layer("ImGuiLayer")
 	{
+		GES_PROFILE_FUNCTION();
 	}
 
 	void ImGuiLayer::OnAttach()
 	{
+		GES_PROFILE_FUNCTION();
 		Application& app = Application::Get();
 		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
 
@@ -61,6 +66,7 @@ namespace GES {
 
 	void ImGuiLayer::OnDetach()
 	{
+		GES_PROFILE_FUNCTION();
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
@@ -74,6 +80,7 @@ namespace GES {
 	
 	void ImGuiLayer::Begin()
 	{
+		GES_PROFILE_FUNCTION();
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -81,6 +88,7 @@ namespace GES {
 
 	void ImGuiLayer::End()
 	{
+		GES_PROFILE_FUNCTION();
 		ImGuiIO& io = ImGui::GetIO();
 		Window& window = Application::Get().GetWindow();
 		io.DisplaySize = ImVec2((float)window.GetWidth(), (float)window.GetHeight());

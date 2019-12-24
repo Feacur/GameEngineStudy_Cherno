@@ -6,6 +6,9 @@
 #include "GES/Core/Window.h"
 #include "GES/Core/Application.h"
 
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
+
 #include <GLFW/glfw3.h>
 
 namespace GES
@@ -14,6 +17,7 @@ namespace GES
 
 	bool WindowsInput::IsKeyPressedImpl(KeyCode keycode)
 	{
+		GES_PROFILE_FUNCTION();
 		auto window = static_cast<GLFWwindow *>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetKey(window, static_cast<int32>(keycode));
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
@@ -21,6 +25,7 @@ namespace GES
 
 	bool WindowsInput::IsMouseButtonPressedImpl(MouseCode button)
 	{
+		GES_PROFILE_FUNCTION();
 		auto window = static_cast<GLFWwindow *>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetMouseButton(window, static_cast<int32>(button));
 		return state == GLFW_PRESS;
@@ -28,6 +33,7 @@ namespace GES
 
 	std::pair<float, float> WindowsInput::GetMousePositionImpl()
 	{
+		GES_PROFILE_FUNCTION();
 		auto window = static_cast<GLFWwindow *>(Application::Get().GetWindow().GetNativeWindow());
 		double x, y;
 		glfwGetCursorPos(window, &x, &y);

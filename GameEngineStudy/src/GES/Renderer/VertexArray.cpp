@@ -2,6 +2,8 @@
 #include "VertexArray.h"
 
 #include "GES/Debug/Log.h"
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
 
 #include "RendererSettings.h"
 
@@ -11,6 +13,7 @@ namespace GES
 {
 	Ref<VertexArray> VertexArray::Create()
 	{
+		GES_PROFILE_FUNCTION();
 		switch(RendererSettings::GetType())
 		{
 			case RendererSettings::Type::OpenGL:

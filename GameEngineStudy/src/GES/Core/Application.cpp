@@ -1,11 +1,13 @@
 #include "ges_pch.h"
 #include "Application.h"
 
-#include "GES/Debug/Log.h"
-
 // #include "KeyCodes.h"
 // #include "MouseCodes.h"
 #include "Input.h"
+
+#include "GES/Debug/Log.h"
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
 
 #include "GES/Events/Event.h"
 #include "GES/Events/ApplicationEvent.h"
@@ -25,6 +27,7 @@ namespace GES {
 
 	Application::Application()
 	{
+		GES_PROFILE_FUNCTION();
 		GES_CORE_ASSERT(!s_Instance, "Duplicate Application intance");
 		s_Instance = this;
 
@@ -41,6 +44,7 @@ namespace GES {
 
 	Application::~Application()
 	{
+		GES_PROFILE_FUNCTION();
 		RendererCommand::Shutdown();
 		Renderer::Shutdown();
 		Renderer2D::Shutdown();
@@ -48,6 +52,7 @@ namespace GES {
 
 	void Application::Run()
 	{
+		GES_PROFILE_FUNCTION();
 		m_LastFrameTime = (float)glfwGetTime();
 		while (m_Running)
 		{
@@ -72,6 +77,7 @@ namespace GES {
 
 	void Application::OnEvent(Event & e)
 	{
+		GES_PROFILE_FUNCTION();
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
@@ -86,22 +92,26 @@ namespace GES {
 
 	void Application::PushLayer(Layer* layer)
 	{
+		GES_PROFILE_FUNCTION();
 		m_LayerStack.PushLayer(layer);
 	}
 
 	void Application::PushOverlay(Layer* layer)
 	{
+		GES_PROFILE_FUNCTION();
 		m_LayerStack.PushOverlay(layer);
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent & e)
 	{
+		GES_PROFILE_FUNCTION();
 		m_Running = false;
 		return true;
 	}
 
 	bool Application::OnWindowResize(WindowResizeEvent & e)
 	{
+		GES_PROFILE_FUNCTION();
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
 			m_Minimized = true;

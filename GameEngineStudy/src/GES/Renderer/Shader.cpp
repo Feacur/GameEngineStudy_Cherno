@@ -2,17 +2,18 @@
 #include "Shader.h"
 
 #include "GES/Debug/Log.h"
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
 
 #include "RendererSettings.h"
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
-#include <fstream>
-
 namespace GES
 {
 	static std::string ReadFile(cstring path)
 	{
+		GES_PROFILE_FUNCTION();
 		std::ifstream file(path, std::ios::in | std::ios::binary);
 		if (!file)
 		{
@@ -41,6 +42,7 @@ namespace GES
 	
 	static std::string FindName(std::string const & source)
 	{
+		GES_PROFILE_FUNCTION();
 		cstring typeToken = "#name";
 		const size_t typeTokenLength = strlen(typeToken);
 
@@ -56,12 +58,14 @@ namespace GES
 
 	Ref<Shader> Shader::CreatePath(cstring path, cstring name)
 	{
+		GES_PROFILE_FUNCTION();
 		std::string source = ReadFile(path);
 		return CreateSource(source.c_str(), name);
 	}
 
 	Ref<Shader> Shader::CreateSource(cstring source, cstring name)
 	{
+		GES_PROFILE_FUNCTION();
 		std::string autoName;
 		if (!name) {
 			autoName = FindName(source);
@@ -77,11 +81,13 @@ namespace GES
 	}
 
 	void ShaderLibrary::Add(Ref<Shader> const & shader) {
+		GES_PROFILE_FUNCTION();
 		auto & name = shader->GetName();
 		m_Shaders[name] = shader;
 	}
 
 	Ref<Shader> ShaderLibrary::Get(cstring name) {
+		GES_PROFILE_FUNCTION();
 		return m_Shaders[name];
 	}
 }

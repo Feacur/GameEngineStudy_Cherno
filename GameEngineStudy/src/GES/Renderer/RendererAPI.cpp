@@ -2,6 +2,8 @@
 #include "RendererAPI.h"
 
 #include "GES/Debug/Log.h"
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
 
 #include "RendererSettings.h"
 
@@ -11,6 +13,7 @@ namespace GES
 {
 	Scope<RendererAPI> RendererAPI::Create()
 	{
+		GES_PROFILE_FUNCTION();
 		switch(RendererSettings::GetType())
 		{
 			case RendererSettings::Type::OpenGL:

@@ -13,13 +13,15 @@ class Sandbox : public GES::Application
 public:
 	Sandbox()
 	{
+		GES_PROFILE_FUNCTION();
 		ImGui::SetCurrentContext(GetImGuiLayer()->GetImGuiContext());
 		// PushLayer(new ExampleLayer());
 		PushLayer(new Sandbox2D());
 	}
 };
 
-GES::Scope<GES::Application> GES::CreateApplication()
+GES::Application * GES::CreateApplication()
 {
-	return GES::CreateScope<Sandbox>();
+	GES_PROFILE_FUNCTION();
+	return new Sandbox();
 }

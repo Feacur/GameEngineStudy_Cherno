@@ -1,4 +1,5 @@
 #pragma once
+// define this before anything
 
 // #include <intrin.h> // __debugbreak(), SIMD
 #include <stdint.h> // integer types data
@@ -83,12 +84,16 @@ typedef char const * cstring;
 // compiler-specific
 #if defined(_MSC_VER) || defined(__clang__)
 	#define CODE_BREAK() __debugbreak()
+	#define FUNCTION_NAME __FUNCTION__
+	// __FUNCSIG__
 	//
 	#define GES_API_EXPORT __declspec(dllexport)
 	#define GES_API_IMPORT __declspec(dllimport)
 	#define GES_API_LOCAL
 #elif defined(__GNUC__)
 	#define CODE_BREAK() __asm volatile ("int3")
+	#define FUNCTION_NAME __func__
+	// __PRETTY_FUNCTION__
 	// https://gcc.gnu.org/wiki/Visibility
 	#if __GNUC__ >= 4
 		#define GES_API_EXPORT __attribute__((visibility("default")))
@@ -101,6 +106,8 @@ typedef char const * cstring;
 	#endif
 #elif defined(__MINGW32__) || defined(__MINGW64__)
 	#define CODE_BREAK() __asm volatile ("int3")
+	#define FUNCTION_NAME __FUNCTION__
+	// ?
 	//
 	#define GES_API_EXPORT
 	#define GES_API_IMPORT
@@ -121,15 +128,6 @@ typedef char const * cstring;
 #else
 	#define GES_TEMPLATE
 	#define GES_API
-#endif
-
-// logging
-#if defined(SHIPPING)
-	#define GES_ASSERT(x, ...)
-	#define GES_CORE_ASSERT(x, ...)
-#else
-	#define GES_ASSERT(x, ...) { if(!(x)) { GES_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-	#define GES_CORE_ASSERT(x, ...) { if(!(x)) { GES_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #endif
 
 //

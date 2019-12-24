@@ -2,6 +2,8 @@
 #include "WindowsWindow.h"
 
 #include "GES/Debug/Log.h"
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
 
 extern "C" { // @Note: use discrete GPU by default
 	// http://developer.download.nvidia.com/devzone/devcenter/gamegraphics/files/OptimusRenderingPolicies.pdf
@@ -29,26 +31,31 @@ namespace GES {
 
 	static void GLFWErrorCallback(int error, cstring description)
 	{
+		GES_PROFILE_FUNCTION();
 		GES_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
 
 	Scope<Window> Window::Create(WindowProps const & props)
 	{
+		GES_PROFILE_FUNCTION();
 		return CreateScope<WindowsWindow>(props);
 	}
 
 	WindowsWindow::WindowsWindow(WindowProps const & props)
 	{
+		GES_PROFILE_FUNCTION();
 		Init(props);
 	}
 
 	WindowsWindow::~WindowsWindow()
 	{
+		GES_PROFILE_FUNCTION();
 		Shutdown();
 	}
 
 	void WindowsWindow::Init(WindowProps const & props)
 	{
+		GES_PROFILE_FUNCTION();
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
@@ -153,6 +160,7 @@ namespace GES {
 
 	void WindowsWindow::Shutdown()
 	{
+		GES_PROFILE_FUNCTION();
 		glfwDestroyWindow(m_WindowHandle);
 		--s_GLFWWindowCount;
 		if (s_GLFWWindowCount == 0) {
@@ -163,12 +171,14 @@ namespace GES {
 
 	void WindowsWindow::OnUpdate()
 	{
+		GES_PROFILE_FUNCTION();
 		glfwPollEvents();
 		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)
 	{
+		GES_PROFILE_FUNCTION();
 		if (enabled)
 			glfwSwapInterval(1);
 		else
@@ -179,6 +189,7 @@ namespace GES {
 
 	bool WindowsWindow::IsVSync() const
 	{
+		GES_PROFILE_FUNCTION();
 		return m_Data.VSync;
 	}
 }

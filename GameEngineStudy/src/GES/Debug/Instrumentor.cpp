@@ -12,12 +12,15 @@ namespace GES
 
 	struct InstrumentationSession
 	{
-		std::string Name;
+		cstring Name;
+		int32 ProfileCount;
 		std::ofstream OutputStream;
 	};
 
+	bool Instrumentor::m_Enabled = false;
+
 	Instrumentor::Instrumentor()
-		: m_CurrentSession(nullptr), m_ProfileCount(0)
+		: m_CurrentSession(nullptr)
 	{
 	}
 
@@ -25,6 +28,7 @@ namespace GES
 	{
 		m_CurrentSession = new InstrumentationSession();
 		m_CurrentSession->Name = name;
+		m_CurrentSession->ProfileCount = 0;
 		
 		m_CurrentSession->OutputStream.open(filepath);
 		m_CurrentSession->OutputStream << "{\"otherData\": {},\"traceEvents\":[";
@@ -39,17 +43,19 @@ namespace GES
 
 		delete m_CurrentSession;
 		m_CurrentSession = nullptr;
-		
-		m_ProfileCount = 0;
 	}
 
 	void Instrumentor::WriteProfile(ProfileResult const & result)
 	{
-		if (m_ProfileCount++ > 0)
+		if (m_CurrentSession == nullptr) { return; }
+		if (!m_Enabled) { return; }
+
+		if (m_CurrentSession->ProfileCount++ > 0)
 			m_CurrentSession->OutputStream << ",";
 
 		std::string name = result.Name;
 		std::replace(name.begin(), name.end(), '"', '\'');
+		std::replace(name.begin(), name.end(), '\\', '/');
 
 		m_CurrentSession->OutputStream << "{";
 		m_CurrentSession->OutputStream << "\"cat\":\"function\",";
@@ -65,15 +71,14 @@ namespace GES
 	}
 
 	InstrumentationTimer::InstrumentationTimer(cstring name)
-		: m_Name(name), m_Stopped(false)
+		: m_Name(name)
 	{
 		m_StartTimepoint = std::chrono::high_resolution_clock::now();
 	}
 
 	InstrumentationTimer::~InstrumentationTimer()
 	{
-		if (!m_Stopped)
-			Stop();
+		Stop();
 	}
 
 	void InstrumentationTimer::Stop()
@@ -85,7 +90,5 @@ namespace GES
 
 		size_t threadID = std::hash<std::thread::id>{}(std::this_thread::get_id());
 		Instrumentor::Get().WriteProfile({ m_Name, start, end, threadID });
-
-		m_Stopped = true;
 	}
 }

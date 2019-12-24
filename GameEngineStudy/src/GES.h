@@ -28,8 +28,8 @@
 #include "GES/Core/Layer.h"
 
 #include "GES/Debug/Log.h"
-// #include "GES/Debug/ScopedProfiler.h"
 #include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
 
 // #include "GES/Core/KeyCodes.h"
 // #include "GES/Core/MouseCodes.h"

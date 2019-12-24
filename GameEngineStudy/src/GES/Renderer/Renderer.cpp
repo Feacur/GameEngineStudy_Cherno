@@ -8,6 +8,9 @@
 #include "Texture.h"
 #include "VertexArray.h"
 
+#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Code.h"
+
 namespace GES
 {
 	struct Data
@@ -18,25 +21,30 @@ namespace GES
 	
 	void Renderer::Init()
 	{
+		GES_PROFILE_FUNCTION();
 		s_Data = new Data();
 	}
 	
 	void Renderer::Shutdown()
 	{
+		GES_PROFILE_FUNCTION();
 		delete s_Data;
 	}
 
 	void Renderer::BeginScene(Orthographic2dCamera const & camera)
 	{
+		GES_PROFILE_FUNCTION();
 		s_Data->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
 	}
 
 	void Renderer::EndScene()
 	{
+		GES_PROFILE_FUNCTION();
 	}
 
 	void Renderer::Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform)
 	{
+		GES_PROFILE_FUNCTION();
 		shader->Bind();
 		shader->UploadUniformMat4("u_ViewProjection", s_Data->ViewProjectionMatrix);
 		shader->UploadUniformMat4("u_Transform", transform);
@@ -47,6 +55,7 @@ namespace GES
 
 	void Renderer::Submit(Ref<Shader> const & shader, Ref<VertexArray> const & vertexArray, glm::mat4 const & transform, Ref<Texture2D> const & texture)
 	{
+		GES_PROFILE_FUNCTION();
 		texture->Bind(0u);
 
 		shader->Bind();
