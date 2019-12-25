@@ -74,18 +74,18 @@ enginename = "GameEngineStudy"
 -- Include directories relative to the root folder (solution directory)
 include_directories = {}
 include_directories["GES"]    = enginename .. "/src"
-include_directories["spdlog"] = enginename .. "/vendor/spdlog/include"
-include_directories["GLFW"]   = enginename .. "/vendor/GLFW/include"
 include_directories["Glad"]   = enginename .. "/vendor/Glad/include"
-include_directories["imgui"]  = enginename .. "/vendor/imgui"
+include_directories["GLFW"]   = enginename .. "/vendor/GLFW/include"
 include_directories["glm"]    = enginename .. "/vendor/glm"
+include_directories["imgui"]  = enginename .. "/vendor/imgui"
+include_directories["spdlog"] = enginename .. "/vendor/spdlog/include"
 include_directories["stb_image"] = enginename .. "/vendor/stb_image"
 
 root_directory = os.getcwd()
 
 group "Dependecies"
-include "GameEngineStudy/vendor/premake5_GLFW.lua"
 include "GameEngineStudy/vendor/premake5_Glad.lua"
+include "GameEngineStudy/vendor/premake5_GLFW.lua"
 include "GameEngineStudy/vendor/premake5_imgui.lua"
 group ""
 

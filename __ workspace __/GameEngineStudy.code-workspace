@@ -35,19 +35,18 @@
 		"C_Cpp.default.compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Tools\\MSVC\\14.16.27023\\bin\\Hostx64\\x64\\cl.exe",
 		"C_Cpp.default.intelliSenseMode": "msvc-x64",
 		"C_Cpp.default.includePath": [
-			"..\\GameEngineStudy\\src",
-			"..\\GameEngineStudy\\src\\GES",
-			"..\\GameEngineStudy\\vendor\\GLFW\\include",
-			"..\\GameEngineStudy\\vendor\\Glad\\include",
-			"..\\GameEngineStudy\\vendor\\imgui",
-			"..\\GameEngineStudy\\vendor\\spdlog\\include",
-			"..\\GameEngineStudy\\vendor\\glm",
+			"${workspaceFolder:__ workspace __}\\..\\GameEngineStudy\\src",
+			"${workspaceFolder:__ workspace __}\\..\\GameEngineStudy\\vendor\\Glad\\include",
+			"${workspaceFolder:__ workspace __}\\..\\GameEngineStudy\\vendor\\GLFW\\include",
+			"${workspaceFolder:__ workspace __}\\..\\GameEngineStudy\\vendor\\glm",
+			"${workspaceFolder:__ workspace __}\\..\\GameEngineStudy\\vendor\\imgui",
+			"${workspaceFolder:__ workspace __}\\..\\GameEngineStudy\\vendor\\spdlog\\include",
+			"${workspaceFolder:__ workspace __}\\..\\GameEngineStudy\\vendor\\stb_image",
 		],
 		"C_Cpp.default.defines": [
-			"GES_PLATFORM_WINDOWS",
 			// "GES_SHARED",
 		],
-		"C_Cpp.intelliSenseCachePath": "${workspaceFolder}\\..\\bin-int",
+		"C_Cpp.intelliSenseCachePath": "${workspaceFolder:__ workspace __}\\..\\bin-int",
 		// files
 		"files.exclude": {
 			"**/ipch/" : true,
