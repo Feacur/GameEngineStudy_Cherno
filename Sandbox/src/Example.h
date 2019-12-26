@@ -7,6 +7,9 @@ public:
 	ExampleLayer();
 	~ExampleLayer() = default;
 
+	void OnAttach() override;
+	void OnDetach() override;
+
 	void OnUpdate(GES::Timestep ts) override;
 	void OnImGuiRender() override;
 	void OnEvent(GES::Event & e) override;

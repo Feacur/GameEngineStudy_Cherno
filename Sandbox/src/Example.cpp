@@ -73,8 +73,20 @@ ExampleLayer::ExampleLayer()
 		GES::Shader::CreatePath("assets/shaders/texture.glsl")
 	);
 
+}
+
+void ExampleLayer::OnAttach()
+{
+	GES_PROFILE_FUNCTION();
 	m_TextureCheckerboard = GES::Texture2D::Create("assets/textures/checkerboard.png");
 	m_TextureChernoLogo = GES::Texture2D::Create("assets/textures/cherno_logo.png");
+}
+
+void ExampleLayer::OnDetach()
+{
+	GES_PROFILE_FUNCTION();
+	m_TextureCheckerboard = nullptr;
+	m_TextureChernoLogo = nullptr;
 }
 
 void ExampleLayer::OnUpdate(GES::Timestep ts)

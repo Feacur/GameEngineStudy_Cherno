@@ -3,6 +3,7 @@
 
 #include "Example.h"
 #include "Sandbox2D.h"
+#include "ChernoOneHourGame/GameLayer.h"
 
 #if !defined(GES_BYPASS_VENDOR_HEADERS)
 	#include <imgui.h>
@@ -16,7 +17,8 @@ public:
 		GES_PROFILE_FUNCTION();
 		ImGui::SetCurrentContext(GetImGuiLayer()->GetImGuiContext());
 		// PushLayer(new ExampleLayer());
-		PushLayer(new Sandbox2D());
+		// PushLayer(new Sandbox2D());
+		PushLayer(new GameLayer());
 	}
 };
 

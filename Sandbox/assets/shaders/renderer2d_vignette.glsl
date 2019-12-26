@@ -1,4 +1,4 @@
-#name renderer2d
+#name renderer2d_vignette
 
 #type vertex
 #version 330 core
@@ -29,5 +29,8 @@ layout(location = 0) out vec4 color;
 
 void main()
 {
-	color = texture(u_Texture, v_TexCoord) * u_Color;
+	float vignette = 1.0 - distance(v_ScreenPos * 0.8, vec2(0.0));
+	vignette = clamp(vignette, 0.0, 1.0);
+	vignette = sqrt(vignette);
+	color = texture(u_Texture, v_TexCoord) * u_Color * vignette;
 }

@@ -88,40 +88,42 @@ namespace GES
 		GES_PROFILE_FUNCTION();
 	}
 	
-	void Renderer2D::DrawQuad(glm::vec2 const & position, glm::vec2 const & size, glm::vec4 const & color)
+	void Renderer2D::DrawQuad(glm::vec2 const & position, glm::vec2 const & size, float rotation, glm::vec4 const & color)
 	{
 		GES_PROFILE_FUNCTION();
-		DrawQuad({position.x, position.y, 0.0f}, size, color, s_Data->WhiteTexture);
+		DrawQuad({position.x, position.y, 0.0f}, size, rotation, color, s_Data->WhiteTexture);
 	}
 
-	void Renderer2D::DrawQuad(glm::vec3 const & position, glm::vec2 const & size, glm::vec4 const & color)
+	void Renderer2D::DrawQuad(glm::vec3 const & position, glm::vec2 const & size, float rotation, glm::vec4 const & color)
 	{
 		GES_PROFILE_FUNCTION();
-		DrawQuad(position, size, color, s_Data->WhiteTexture);
+		DrawQuad(position, size, rotation, color, s_Data->WhiteTexture);
 	}
 
-	void Renderer2D::DrawQuad(glm::vec2 const & position, glm::vec2 const & size, Ref<Texture2D> const & texture)
+	void Renderer2D::DrawQuad(glm::vec2 const & position, glm::vec2 const & size, float rotation, Ref<Texture2D> const & texture)
 	{
 		GES_PROFILE_FUNCTION();
-		DrawQuad({position.x, position.y, 0.0f}, size, glm::vec4(1.0f), texture);
+		DrawQuad({position.x, position.y, 0.0f}, size, rotation, glm::vec4(1.0f), texture);
 	}
 
-	void Renderer2D::DrawQuad(glm::vec3 const & position, glm::vec2 const & size, Ref<Texture2D> const & texture)
+	void Renderer2D::DrawQuad(glm::vec3 const & position, glm::vec2 const & size, float rotation, Ref<Texture2D> const & texture)
 	{
 		GES_PROFILE_FUNCTION();
-		DrawQuad(position, size, glm::vec4(1.0f), texture);
+		DrawQuad(position, size, rotation, glm::vec4(1.0f), texture);
 	}
 	
-	void Renderer2D::DrawQuad(glm::vec2 const & position, glm::vec2 const & size, glm::vec4 const & color, Ref<Texture2D> const & texture)
+	void Renderer2D::DrawQuad(glm::vec2 const & position, glm::vec2 const & size, float rotation, glm::vec4 const & color, Ref<Texture2D> const & texture)
 	{
 		GES_PROFILE_FUNCTION();
-		DrawQuad({position.x, position.y, 0.0f}, size, color, texture);
+		DrawQuad({position.x, position.y, 0.0f}, size, rotation, color, texture);
 	}
 
-	void Renderer2D::DrawQuad(glm::vec3 const & position, glm::vec2 const & size, glm::vec4 const & color, Ref<Texture2D> const & texture)
+	void Renderer2D::DrawQuad(glm::vec3 const & position, glm::vec2 const & size, float rotation, glm::vec4 const & color, Ref<Texture2D> const & texture)
 	{
 		GES_PROFILE_FUNCTION();
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
+			* glm::rotate(glm::mat4(1.0f), rotation, { 0.0f, 0.0f, 1.0f })
+			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
 		texture->Bind(s_TextureSlot);
 
