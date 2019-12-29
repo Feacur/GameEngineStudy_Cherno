@@ -7,7 +7,14 @@ workspace "GameEngineStudy"
 	startproject "Sandbox"
 	warnings "Extra"
 	editandcontinue "Off"
-	flags { "FatalWarnings", "NoMinimalRebuild", "MultiProcessorCompile" }
+	flags {
+		"FatalWarnings",
+		"NoMinimalRebuild",
+		"MultiProcessorCompile",
+		"NoIncrementalLink",
+		-- "LinkTimeOptimization",
+		-- "Maps",
+	}
 	floatingpoint "Fast"
 	floatingpointexceptions "off"
 	exceptionhandling "Off"
@@ -49,14 +56,14 @@ workspace "GameEngineStudy"
 		defines "DEBUG"
 		staticruntime "Off"
 		runtime "Debug"
-		symbols "On"
+		symbols "Full" -- On, Full
 		optimize "Off" -- Off, Debug
 
 	filter "configurations:Development"
 		defines "DEVELOPMENT"
 		staticruntime "Off"
 		runtime "Release"
-		symbols "On"
+		symbols "FastLink" -- On, FastLink
 		optimize "On" -- On, Debug
 
 	filter "configurations:Shipping"
@@ -69,11 +76,13 @@ workspace "GameEngineStudy"
 		optimize "On" -- On, Size, Speed, Full
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+target_location = ("bin/" .. outputdir)
+intermediate_location = ("bin-int/" .. outputdir)
 enginename = "GameEngineStudy"
 
 -- Include directories relative to the root folder (solution directory)
 include_directories = {}
-include_directories["GES"]    = enginename .. "/src"
+include_directories["engine"] = enginename .. "/src"
 include_directories["Glad"]   = enginename .. "/vendor/Glad/include"
 include_directories["GLFW"]   = enginename .. "/vendor/GLFW/include"
 include_directories["glm"]    = enginename .. "/vendor/glm"
@@ -95,10 +104,10 @@ project "GameEngineStudy"
 	language "C++"
 	cdialect "C11"
 	cppdialect "C++17"
-	characterset ("Unicode")
+	characterset ("Unicode") -- Default, Unicode, MBCS, ASCII
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir (target_location .. "/%{prj.name}")
+	objdir (intermediate_location .. "/%{prj.name}")
 
 	pchheader "ges_pch.h"
 	pchsource (enginename .. "/src/ges_pch.cpp")
@@ -114,12 +123,12 @@ project "GameEngineStudy"
 	}
 
 	includedirs {
-		"%{include_directories.GES}",
-		"%{include_directories.spdlog}",
-		"%{include_directories.GLFW}",
+		"%{include_directories.engine}",
 		"%{include_directories.Glad}",
-		"%{include_directories.imgui}",
+		"%{include_directories.GLFW}",
 		"%{include_directories.glm}",
+		"%{include_directories.imgui}",
+		"%{include_directories.spdlog}",
 		"%{include_directories.stb_image}",
 	}
 
@@ -153,10 +162,10 @@ project "Sandbox"
 	language "C++"
 	cdialect "C11"
 	cppdialect "C++17"
-	characterset ("Unicode")
+	characterset ("Unicode") -- Default, Unicode, MBCS, ASCII
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir (target_location .. "/%{prj.name}")
+	objdir (intermediate_location .. "/%{prj.name}")
 
 	files {
 		"%{prj.name}/src/**.h",
@@ -164,10 +173,10 @@ project "Sandbox"
 	}
 
 	includedirs {
-		"%{include_directories.GES}",
-		"%{include_directories.spdlog}",
-		"%{include_directories.imgui}",
+		"%{include_directories.engine}",
 		"%{include_directories.glm}",
+		"%{include_directories.imgui}",
+		"%{include_directories.spdlog}",
 	}
 
 	links {

@@ -1,7 +1,7 @@
 #pragma once
 #include "GES/Core/Code.h"
 
-#define GES_INSTRUMENTOR
+#define FEATURE_GES_INSTRUMENTOR
 
 namespace GES {
 	struct InstrumentationSession;

@@ -21,8 +21,8 @@
 #include "GES/Core/Application.h"
 #include "GES/Core/Layer.h"
 
-#include "GES/Debug/Log.h"
-#include "GES/Debug/Instrumentor.h"
+#include "GES/Debug/Log.h" // FEATURE_GES_LOGGER
+#include "GES/Debug/Instrumentor.h" // FEATURE_GES_INSTRUMENTOR
 #include "GES/Debug/Code.h"
 
 // #include "GES/Core/KeyCodes.h"

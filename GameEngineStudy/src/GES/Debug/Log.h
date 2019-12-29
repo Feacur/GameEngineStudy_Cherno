@@ -1,7 +1,7 @@
 #pragma once
 #include "GES/Core/Code.h"
 
-#define GES_LOGGER
+#define FEATURE_GES_LOGGER
 
 #if !defined(GES_BYPASS_VENDOR_HEADERS)
 	#include <spdlog/spdlog.h>

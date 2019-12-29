@@ -1,7 +1,7 @@
 #pragma once
 // define this after the class headers
 
-#if defined(GES_LOGGER) && !defined(SHIPPING)
+#if defined(FEATURE_GES_LOGGER) && !defined(SHIPPING)
 	#define GES_LOGGER_ENABLED
 #endif
 #if defined(GES_LOGGER_ENABLED)
@@ -38,7 +38,7 @@
 	#define GES_ASSERT(x, ...)
 #endif
 
-#if defined(GES_INSTRUMENTOR) && !defined(SHIPPING)
+#if defined(FEATURE_GES_INSTRUMENTOR) && !defined(SHIPPING)
 	#define GES_INSTRUMENTOR_ENABLED
 #endif
 #if defined(GES_INSTRUMENTOR_ENABLED)
