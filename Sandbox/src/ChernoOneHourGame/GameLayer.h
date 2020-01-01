@@ -34,4 +34,5 @@ private:
 	};
 
 	GameState m_State = GameState::MainMenu;
+	uint32 m_Random;
 };

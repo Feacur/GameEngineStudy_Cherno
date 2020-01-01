@@ -1,9 +1,6 @@
 #pragma once
 #include "GES.h"
 
-#include "Color.h"
-#include "Random.h"
-
 #include "ParticleSystem.h"
 
 class Player

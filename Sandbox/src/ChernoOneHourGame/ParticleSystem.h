@@ -35,4 +35,5 @@ private:
 	};
 	std::vector<Particle> m_ParticlePool;
 	uint32 m_PoolIndex = 999;
+	uint32 m_Random;
 };

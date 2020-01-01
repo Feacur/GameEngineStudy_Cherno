@@ -1,12 +1,22 @@
 #include "ParticleSystem.h"
 
-#include "Random.h"
-
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/compatibility.hpp>
 
+// @Note: probably I should factor out a new submodule
+//        instead of copy-pasting chunks around...
+// https://github.com/Feacur/CustomEngineStudy/blob/master/code/shared/random.h
+inline static float hash_radius01(uint32 * state) {
+	union { uint32 x; float xf; }; // local unionized values
+	x = (*state = *state * 16807); // hash
+	x = (x >> 9) | 0x40000000;     // clamp to [1 .. 2) * (2^1)
+	return xf - 3;                 // return [2 .. 4) - 3
+}
+
+#define random_radius01() hash_radius01(&m_Random)
 ParticleSystem::ParticleSystem()
 {
+	m_Random = 1u;
 	m_ParticlePool.resize(1000);
 }
 
@@ -15,19 +25,19 @@ void ParticleSystem::Emit(const ParticleProps& particleProps)
 	Particle& particle = m_ParticlePool[m_PoolIndex];
 	particle.Active = true;
 	particle.Position = particleProps.Position;
-	particle.Rotation = Random::Float() * 2.0f * glm::pi<float>();
+	particle.Rotation = random_radius01() * 2.0f * glm::pi<float>();
 
 	// Velocity
 	particle.Velocity = particleProps.Velocity;
-	particle.Velocity.x += particleProps.VelocityVariation.x * (Random::Float() - 0.5f);
-	particle.Velocity.y += particleProps.VelocityVariation.y * (Random::Float() - 0.5f);
+	particle.Velocity.x += particleProps.VelocityVariation.x * random_radius01();
+	particle.Velocity.y += particleProps.VelocityVariation.y * random_radius01();
 
 	// Color
 	particle.ColorBegin = particleProps.ColorBegin;
 	particle.ColorEnd = particleProps.ColorEnd;
 
 	// Size
-	particle.SizeBegin = particleProps.SizeBegin + particleProps.SizeVariation * (Random::Float() - 0.5f);
+	particle.SizeBegin = particleProps.SizeBegin + particleProps.SizeVariation * random_radius01();
 	particle.SizeEnd = particleProps.SizeEnd;
 
 	// Life

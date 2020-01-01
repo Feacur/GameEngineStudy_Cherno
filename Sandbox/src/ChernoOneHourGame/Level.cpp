@@ -63,9 +63,20 @@ static bool PointInTri(const glm::vec2& p, glm::vec2& p0, const glm::vec2& p1, c
 		(s >= 0 && s + t <= A);
 }
 
+// @Note: probably I should factor out a new submodule
+//        instead of copy-pasting chunks around...
+// https://github.com/Feacur/CustomEngineStudy/blob/master/code/shared/random.h
+inline static float hash_01(uint32 * state) {
+	union { uint32 x; float xf; };  // local unionized values
+	x = (*state = *state * 16807);  // hash
+	x = (x >> 9) | 0x3f800000; // clamp to [1 .. 2) * (2^0)
+	return xf - 1;                  // return [1 .. 2) - 1
+}
 
+#define random_01() hash_01(&m_Random)
 void Level::Init()
 {
+	m_Random = 1u;
 	m_TriangleTexture = Texture2D::Create("assets/textures/triangle.png");
 	m_Player.LoadAssets();
 
@@ -131,8 +142,8 @@ void Level::CreatePillar(int index, float offset)
 	pillar.TopPosition.z = index * 0.1f - 0.5f;
 	pillar.BottomPosition.z = index * 0.1f - 0.5f + 0.05f;
 
-	float center = Random::Float() * 35.0f - 17.5f;
-	float gap = 2.0f + Random::Float() * 5.0f;
+	float center = random_01() * 35.0f - 17.5f;
+	float gap = 2.0f + random_01() * 5.0f;
 
 	pillar.TopPosition.y = 10.0f - ((10.0f - center) * 0.2f) + gap * 0.5f;
 	pillar.BottomPosition.y = -10.0f - ((-10.0f - center) * 0.2f) - gap * 0.5f;

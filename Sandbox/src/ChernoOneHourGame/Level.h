@@ -43,4 +43,5 @@ private:
 	std::vector<Pillar> m_Pillars;
 
 	GES::Ref<GES::Texture2D> m_TriangleTexture;
+	uint32 m_Random;
 };

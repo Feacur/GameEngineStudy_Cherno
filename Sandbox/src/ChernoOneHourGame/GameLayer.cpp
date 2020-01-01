@@ -9,9 +9,8 @@ using namespace GES;
 
 GameLayer::GameLayer()
 	: Layer("GameLayer")
-	, m_Camera(-16, 16, -9, 9)
+	, m_Camera(-16.0f, 16.0f, -9.0f, 9.0f)
 {
-	Random::Init();
 }
 
 void GameLayer::OnAttach()
