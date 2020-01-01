@@ -72,7 +72,6 @@ ExampleLayer::ExampleLayer()
 	m_ShaderLibrary.Add(
 		GES::Shader::CreatePath("assets/shaders/texture.glsl")
 	);
-
 }
 
 void ExampleLayer::OnAttach()

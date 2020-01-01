@@ -1,9 +1,9 @@
 #pragma once
 #include "GES.h"
 
-#if !defined(GES_BYPASS_VENDOR_HEADERS)
-	#include <vector>
-#endif
+// #if !defined(GES_BYPASS_VENDOR_HEADERS)
+// 	#include <vector>
+// #endif
 
 class Sandbox2D : public GES::Layer
 {
