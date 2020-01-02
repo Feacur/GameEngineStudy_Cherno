@@ -1,9 +1,10 @@
 #include "GES.h"
 #include "GES/Core/EntryPoint.h"
 
-#include "Example.h"
-#include "Sandbox2D.h"
-#include "ChernoOneHourGame/GameLayer.h"
+// #include "Example.h"
+// #include "Sandbox2D.h"
+// #include "ChernoOneHourGame/GameLayer.h"
+#include "FloatyRocket/MainLayer.h"
 
 #if !defined(GES_BYPASS_VENDOR_HEADERS)
 	#include <imgui.h>
@@ -18,7 +19,8 @@ public:
 		ImGui::SetCurrentContext(GetImGuiLayer()->GetImGuiContext());
 		// PushLayer(new ExampleLayer());
 		// PushLayer(new Sandbox2D());
-		PushLayer(new GameLayer());
+		// PushLayer(new GameLayer());
+		PushLayer(new FloatyRocket::MainLayer());
 	}
 };
 
