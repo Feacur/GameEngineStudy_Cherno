@@ -38,10 +38,9 @@ private:
 
 	float m_PillarTarget = 30.0f;
 	int m_PillarIndex = 0;
+	std::vector<Pillar> m_Pillars;
 	glm::vec3 m_PillarHSV = { 0.0f, 0.8f, 0.8f };
 
-	std::vector<Pillar> m_Pillars;
-
 	GES::Ref<GES::Texture2D> m_TriangleTexture;
-	uint32 m_Random;
+	uint32 m_Random = 1u;
 };

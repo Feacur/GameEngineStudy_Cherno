@@ -16,7 +16,6 @@ inline static float hash_radius01(uint32 * state) {
 #define random_radius01() hash_radius01(&m_Random)
 ParticleSystem::ParticleSystem()
 {
-	m_Random = 1u;
 	m_ParticlePool.resize(1000);
 }
 

@@ -76,7 +76,6 @@ inline static float hash_01(uint32 * state) {
 #define random_01() hash_01(&m_Random)
 void Level::Init()
 {
-	m_Random = 1u;
 	m_TriangleTexture = Texture2D::Create("assets/textures/triangle.png");
 	m_Player.LoadAssets();
 
