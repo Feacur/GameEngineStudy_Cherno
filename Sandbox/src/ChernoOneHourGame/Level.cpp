@@ -68,8 +68,8 @@ static bool PointInTri(const glm::vec2& p, glm::vec2& p0, const glm::vec2& p1, c
 // https://github.com/Feacur/CustomEngineStudy/blob/master/code/shared/random.h
 inline static float hash_01(uint32 * state) {
 	union { uint32 x; float xf; };  // local unionized values
-	x = (*state = *state * 16807);  // hash
-	x = (x >> 9) | 0x3f800000; // clamp to [1 .. 2) * (2^0)
+	x = (*state = *state * 16807U); // hash
+	x = (x >> 9) | 0x3f800000U;     // clamp to [1 .. 2) * (2^0)
 	return xf - 1;                  // return [1 .. 2) - 1
 }
 

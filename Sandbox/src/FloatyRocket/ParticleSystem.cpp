@@ -9,10 +9,10 @@
 //        instead of copy-pasting chunks around...
 // https://github.com/Feacur/CustomEngineStudy/blob/master/code/shared/random.h
 inline static float hash_radius01(uint32 * state) {
-	union { uint32 x; float xf; }; // local unionized values
-	x = (*state = *state * 16807); // hash
-	x = (x >> 9) | 0x40000000;     // clamp to [1 .. 2) * (2^1)
-	return xf - 3;                 // return [2 .. 4) - 3
+	union { uint32 x; float xf; };  // local unionized values
+	x = (*state = *state * 16807U); // hash
+	x = (x >> 9) | 0x40000000U;     // clamp to [1 .. 2) * (2^1)
+	return xf - 3;                  // return [2 .. 4) - 3
 }
 
 namespace FloatyRocket
