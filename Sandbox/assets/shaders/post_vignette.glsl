@@ -14,6 +14,7 @@
 // http://momentsingraphics.de/BlueNoise.html
 
 // https://youtu.be/IviNO7iICTM
+// https://youtu.be/--GB9qyZJqg
 // https://digitalrune.github.io/DigitalRune-Documentation/html/fa431d48-b457-4c70-a590-d44b0840ab1e.htm
 // https://ocias.com/blog/unity-stipple-transparency-shader/
 
