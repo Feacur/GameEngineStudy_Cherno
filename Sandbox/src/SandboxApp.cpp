@@ -3,7 +3,6 @@
 
 // #include "Example.h"
 // #include "Sandbox2D.h"
-// #include "ChernoOneHourGame/GameLayer.h"
 #include "FloatyRocket/MainLayer.h"
 
 #if !defined(GES_BYPASS_VENDOR_HEADERS)
@@ -19,7 +18,6 @@ public:
 		ImGui::SetCurrentContext(GetImGuiLayer()->GetImGuiContext());
 		// PushLayer(new ExampleLayer());
 		// PushLayer(new Sandbox2D());
-		// PushLayer(new GameLayer());
 		PushLayer(new FloatyRocket::MainLayer());
 	}
 };
