@@ -77,6 +77,14 @@ namespace GES {
 			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 		}
 		#endif
+
+		glfwWindowHint(GLFW_RED_BITS, 8);
+		glfwWindowHint(GLFW_GREEN_BITS, 8);
+		glfwWindowHint(GLFW_BLUE_BITS, 8);
+		glfwWindowHint(GLFW_ALPHA_BITS, 8);
+		glfwWindowHint(GLFW_DEPTH_BITS, 24);
+		// glfwWindowHint(GLFW_STENCIL_BITS, 8);
+
 		m_WindowHandle = glfwCreateWindow((int32)props.Width, (int32)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		++s_GLFWWindowCount;
 
