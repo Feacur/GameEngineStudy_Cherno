@@ -132,4 +132,14 @@ namespace GES
 
 		RendererCommand::DrawIndexed(s_Data->QuadVertexArray);
 	}
+
+	void Renderer2D::DrawPost(Ref<Shader> const & shader, glm::vec4 const & color)
+	{
+		GES_PROFILE_FUNCTION();
+
+		shader->Bind();
+		shader->UploadUniformFloat4("u_Color", color);
+
+		RendererCommand::DrawIndexed(s_Data->QuadVertexArray);
+	}
 }

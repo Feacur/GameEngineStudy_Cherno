@@ -97,6 +97,7 @@ namespace FloatyRocket
 	{
 		static glm::vec2 const size = { 1.0f, 1.3f };
 		glm::vec2 playerPos = GetPosition();
-		GES::Renderer2D::DrawQuad({ playerPos.x, playerPos.y, 0.5f }, size, GetRotation(), texture);
+		glm::vec3 drawPosition(playerPos.x, playerPos.y, 0.1f);
+		GES::Renderer2D::DrawQuad(drawPosition, size, GetRotation(), texture);
 	}
 }

@@ -106,7 +106,7 @@ void ExampleLayer::OnUpdate(GES::Timestep ts)
 	{
 		for (int x = -10; x < 10; x++)
 		{
-			glm::vec3 triangle_pos(x * 0.11f, y * 0.11f, 0.0f);
+			glm::vec3 triangle_pos(x * 0.11f, y * 0.11f, 0.9f);
 			glm::mat4 triangle_transform = glm::translate(identity, triangle_pos) * triangle_scale;
 			GES::Renderer::Submit(shaderVertexColor, m_VertexArrayTriangle, triangle_transform);
 		}
@@ -114,7 +114,7 @@ void ExampleLayer::OnUpdate(GES::Timestep ts)
 
 	auto shaderTexture = m_ShaderLibrary.Get("texture");
 	glm::mat4 square_scale = glm::scale(identity, glm::vec3(1.5f));
-	glm::vec3 square_pos(0.0f, 0.0f, 0.0f);
+	glm::vec3 square_pos(0.0f, 0.0f, 0.1f);
 	glm::mat4 square_transform = glm::translate(identity, square_pos) * square_scale;
 	GES::Renderer::Submit(shaderTexture, m_VertexArraySquare, square_transform, m_TextureChernoLogo);
 

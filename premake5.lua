@@ -26,6 +26,11 @@ workspace "GameEngineStudy"
 		"Shipping",
 	}
 
+	defines {
+		"GLM_FORCE_DEPTH_ZERO_TO_ONE",
+		"GLM_FORCE_LEFT_HANDED",
+	}
+
 	filter "toolset:msc*"
 		disablewarnings {
 			"4201", -- nameless struct/union (suppress)

@@ -104,7 +104,8 @@ namespace FloatyRocket
 			glm::vec4 color = glm::lerp(rendering.Color1, rendering.Color2, life);
 			float size = glm::lerp(rendering.Size1, rendering.Size2, life);
 
-			GES::Renderer2D::DrawQuad(state.Position, { size, size }, state.Rotation, color);
+			glm::vec3 drawPosition(state.Position.x, state.Position.y, 0.2f);
+			GES::Renderer2D::DrawQuad(drawPosition, { size, size }, state.Rotation, color);
 		}
 	}
 	#undef random_radius01

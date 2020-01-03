@@ -19,6 +19,7 @@ namespace FloatyRocket
 		GES_PROFILE_FUNCTION();
 		m_PlayerTexture = GES::Texture2D::Create("assets/textures/ship.png");
 		m_LevelTexture = GES::Texture2D::Create("assets/textures/triangle.png");
+		m_PostVignette = GES::Shader::CreatePath("assets/shaders/post_vignette.glsl");
 	}
 
 	void MainLayer::OnDetach()
@@ -26,6 +27,7 @@ namespace FloatyRocket
 		GES_PROFILE_FUNCTION();
 		m_PlayerTexture = nullptr;
 		m_LevelTexture = nullptr;
+		m_PostVignette = nullptr;
 	}
 
 	void MainLayer::OnUpdate(GES::Timestep ts)
@@ -46,7 +48,8 @@ namespace FloatyRocket
 			m_Player.OnUpdate(ts, m_ParticleSystem);
 			m_Level.OnUpdate(ts, m_Player.GetPosition(), m_Player.GetRotation());
 
-			m_Camera.SetPosition({ m_Player.GetPosition(), 0.0f });
+			glm::vec3 cameraPosition(m_Player.GetPosition(), 0.0f);
+			m_Camera.SetPosition(cameraPosition);
 			m_Camera.RecalculateViewMatrix();
 		}
 
@@ -65,6 +68,7 @@ namespace FloatyRocket
 			m_Level.OnRender(m_LevelTexture, m_Player.GetPosition());
 			m_ParticleSystem.OnRender();
 			m_Player.OnRender(m_PlayerTexture);
+			GES::Renderer2D::DrawPost(m_PostVignette, {0.0f, 0.0f, 0.0f, 0.5f});
 			GES::Renderer2D::EndScene();
 		}
 	}
