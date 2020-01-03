@@ -50,13 +50,13 @@ namespace FloatyRocket
 		if (!m_Level.IsCollision())
 		{
 			m_Player.OnUpdate(ts, m_ParticleSystem);
-			m_Level.OnUpdate(ts, m_Player.GetPosition(), m_Player.GetRotation());
 
 			glm::vec3 cameraPosition(m_Player.GetPosition(), 0.0f);
 			m_Camera.SetPosition(cameraPosition);
 			m_Camera.RecalculateViewMatrix();
 		}
 
+		m_Level.OnUpdate(ts, m_Player.GetPosition(), m_Player.GetRotation());
 		m_ParticleSystem.OnUpdate(ts);
 
 		// Render

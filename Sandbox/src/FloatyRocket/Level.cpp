@@ -91,12 +91,12 @@ namespace FloatyRocket
 
 	void Level::OnUpdate(GES::Timestep ts, glm::vec2 playerPos, float playerRot)
 	{
-		if (m_IsCollision) { return; }
-		if (CollisionTest(playerPos, playerRot)) { m_IsCollision = true; return; }
-
 		m_PillarHSV.x += 0.1f * ts;
 		if (m_PillarHSV.x > 1.0f)
 			m_PillarHSV.x = 0.0f;
+
+		if (m_IsCollision) { return; }
+		if (CollisionTest(playerPos, playerRot)) { m_IsCollision = true; return; }
 
 		if (playerPos.x > m_PillarTarget)
 		{
