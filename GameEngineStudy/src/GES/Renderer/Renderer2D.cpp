@@ -133,12 +133,27 @@ namespace GES
 		RendererCommand::DrawIndexed(s_Data->QuadVertexArray);
 	}
 
-	void Renderer2D::DrawPost(Ref<Shader> const & shader, glm::vec4 const & color)
+	void Renderer2D::DrawPost(Ref<Shader> const & shader, glm::vec2 const & screenSize, glm::vec4 const & color)
 	{
 		GES_PROFILE_FUNCTION();
 
 		shader->Bind();
+		shader->UploadUniformFloat2("u_ScreenSize", screenSize);
 		shader->UploadUniformFloat4("u_Color", color);
+
+		RendererCommand::DrawIndexed(s_Data->QuadVertexArray);
+	}
+
+	void Renderer2D::DrawPost(Ref<Shader> const & shader, glm::vec2 const & screenSize, glm::vec4 const & color, Ref<Texture2D> const & texture)
+	{
+		GES_PROFILE_FUNCTION();
+
+		texture->Bind(s_TextureSlot);
+
+		shader->Bind();
+		shader->UploadUniformFloat2("u_ScreenSize", screenSize);
+		shader->UploadUniformFloat4("u_Color", color);
+		shader->UploadUniformInt("u_Texture", (int32)s_TextureSlot);
 
 		RendererCommand::DrawIndexed(s_Data->QuadVertexArray);
 	}

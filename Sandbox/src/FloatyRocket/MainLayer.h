@@ -33,5 +33,7 @@ namespace FloatyRocket
 		GES::Ref<GES::Texture2D> m_PlayerTexture;
 		GES::Ref<GES::Texture2D> m_LevelTexture;
 		GES::Ref<GES::Shader> m_PostVignette;
+		GES::Ref<GES::Shader> m_PostVignetteTexture;
+		GES::Ref<GES::Texture2D> m_NoiseTexture;
 	};
 }

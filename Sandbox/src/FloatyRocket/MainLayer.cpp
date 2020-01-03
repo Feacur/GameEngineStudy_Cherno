@@ -20,6 +20,8 @@ namespace FloatyRocket
 		m_PlayerTexture = GES::Texture2D::Create("assets/textures/ship.png");
 		m_LevelTexture = GES::Texture2D::Create("assets/textures/triangle.png");
 		m_PostVignette = GES::Shader::CreatePath("assets/shaders/post_vignette.glsl");
+		m_PostVignetteTexture = GES::Shader::CreatePath("assets/shaders/post_vignette_texture.glsl");
+		m_NoiseTexture = GES::Texture2D::Create("assets/textures/blue_noise.png");
 	}
 
 	void MainLayer::OnDetach()
@@ -28,6 +30,8 @@ namespace FloatyRocket
 		m_PlayerTexture = nullptr;
 		m_LevelTexture = nullptr;
 		m_PostVignette = nullptr;
+		m_PostVignetteTexture = nullptr;
+		m_NoiseTexture = nullptr;
 	}
 
 	void MainLayer::OnUpdate(GES::Timestep ts)
@@ -68,7 +72,12 @@ namespace FloatyRocket
 			m_Level.OnRender(m_LevelTexture, m_Player.GetPosition());
 			m_ParticleSystem.OnRender();
 			m_Player.OnRender(m_PlayerTexture);
-			GES::Renderer2D::DrawPost(m_PostVignette, {0.0f, 0.0f, 0.0f, 0.5f});
+
+			GES::Window & window = GES::Application::Get().GetWindow();
+			glm::vec2 screenSize((float)window.GetWidth(), (float)window.GetHeight());
+			// GES::Renderer2D::DrawPost(m_PostVignette, screenSize, {0.0f, 0.0f, 0.0f, 0.5f});
+			GES::Renderer2D::DrawPost(m_PostVignetteTexture, screenSize, {0.0f, 0.0f, 0.0f, 0.5f}, m_NoiseTexture);
+
 			GES::Renderer2D::EndScene();
 		}
 	}

@@ -39,7 +39,15 @@ namespace GES
 		m_Width = (uint32)width;
 		m_Height = (uint32)height;
 
-		if (channels == 3) {
+		if (channels == 1) {
+			m_InternalFormat = GL_R8;
+			m_DataFormat = GL_RED;
+		}
+		else if (channels == 2) {
+			m_InternalFormat = GL_RG8;
+			m_DataFormat = GL_RG;
+		}
+		else if (channels == 3) {
 			m_InternalFormat = GL_RGB8;
 			m_DataFormat = GL_RGB;
 		}
