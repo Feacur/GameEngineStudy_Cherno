@@ -5,6 +5,10 @@
 #include "Level.h"
 #include "ParticleSystem.h"
 
+// https://youtu.be/qITIvVV6BHk
+// https://github.com/TheCherno/Hazel1HourGame
+// https://youtu.be/EGBvvlgbJVM
+
 namespace FloatyRocket
 {
 	class MainLayer : public GES::Layer
