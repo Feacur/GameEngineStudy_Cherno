@@ -16,7 +16,7 @@ Sandbox2D::Sandbox2D()
 void Sandbox2D::OnAttach()
 {
 	GES_PROFILE_FUNCTION();
-	m_CheckerboardTexture = GES::Texture2D::Create("assets/textures/checkerboard.png");
+	m_CheckerboardTexture = GES::Texture2D::CreatePath("assets/textures/checkerboard.png");
 }
 
 void Sandbox2D::OnDetach()

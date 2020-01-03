@@ -25,7 +25,7 @@ namespace GES
 		virtual ~Texture2D() = default;
 
 	public:
-		static Ref<Texture2D> Texture2D::Create(uint32 width, uint32 height);
-		static Ref<Texture2D> Texture2D::Create(cstring source);
+		static Ref<Texture2D> Texture2D::CreateRaw(uint32 width, uint32 height);
+		static Ref<Texture2D> Texture2D::CreatePath(cstring source);
 	};
 }

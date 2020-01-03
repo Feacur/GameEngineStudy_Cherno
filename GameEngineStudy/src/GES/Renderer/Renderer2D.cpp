@@ -61,7 +61,7 @@ namespace GES
 		s_Data->TextureShader = GES::Shader::CreatePath("assets/shaders/renderer2d.glsl");
 		
 		uint32 whiteTextureData = 0xffffffff;
-		s_Data->WhiteTexture = Texture2D::Create(1u, 1u);
+		s_Data->WhiteTexture = Texture2D::CreateRaw(1u, 1u);
 		s_Data->WhiteTexture->SetData(&whiteTextureData, sizeof(whiteTextureData));
 
 		s_Data->TextureShader->Bind();

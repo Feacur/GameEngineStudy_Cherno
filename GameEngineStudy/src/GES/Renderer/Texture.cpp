@@ -11,7 +11,7 @@
 
 namespace GES
 {
-	Ref<Texture2D> Texture2D::Create(uint32 width, uint32 height)
+	Ref<Texture2D> Texture2D::CreateRaw(uint32 width, uint32 height)
 	{
 		GES_PROFILE_FUNCTION();
 		switch(RendererSettings::GetType())
@@ -23,7 +23,7 @@ namespace GES
 		return nullptr;
 	}
 	
-	Ref<Texture2D> Texture2D::Create(cstring source)
+	Ref<Texture2D> Texture2D::CreatePath(cstring source)
 	{
 		GES_PROFILE_FUNCTION();
 		switch(RendererSettings::GetType())

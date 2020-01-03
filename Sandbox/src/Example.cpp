@@ -77,8 +77,8 @@ ExampleLayer::ExampleLayer()
 void ExampleLayer::OnAttach()
 {
 	GES_PROFILE_FUNCTION();
-	m_TextureCheckerboard = GES::Texture2D::Create("assets/textures/checkerboard.png");
-	m_TextureChernoLogo = GES::Texture2D::Create("assets/textures/cherno_logo.png");
+	m_TextureCheckerboard = GES::Texture2D::CreatePath("assets/textures/checkerboard.png");
+	m_TextureChernoLogo = GES::Texture2D::CreatePath("assets/textures/cherno_logo.png");
 }
 
 void ExampleLayer::OnDetach()

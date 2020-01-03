@@ -17,11 +17,11 @@ namespace FloatyRocket
 	void MainLayer::OnAttach()
 	{
 		GES_PROFILE_FUNCTION();
-		m_PlayerTexture = GES::Texture2D::Create("assets/textures/ship.png");
-		m_LevelTexture = GES::Texture2D::Create("assets/textures/triangle.png");
+		m_PlayerTexture = GES::Texture2D::CreatePath("assets/textures/ship.png");
+		m_LevelTexture = GES::Texture2D::CreatePath("assets/textures/triangle.png");
 		m_PostVignetteProcedural = GES::Shader::CreatePath("assets/shaders/post_vignette_procedural.glsl");
 		m_PostVignette = GES::Shader::CreatePath("assets/shaders/post_vignette.glsl");
-		m_NoiseTexture = GES::Texture2D::Create("assets/textures/blue_noise.png");
+		m_NoiseTexture = GES::Texture2D::CreatePath("assets/textures/blue_noise.png");
 	}
 
 	void MainLayer::OnDetach()
