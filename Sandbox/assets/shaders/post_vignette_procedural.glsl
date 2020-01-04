@@ -83,8 +83,8 @@ layout(location = 0) out vec4 color;
 		return uintBitsToFloat(x) - 1; // return [1 .. 2) - 1
 	}
 	float hash_to_radius01(uint x) {
-		x = (x >> 9) | 0x40000000U;    // clamp to [1 .. 2) * (2^0)
-		return uintBitsToFloat(x) - 1; // return [1 .. 2) - 1
+		x = (x >> 9) | 0x40000000U;    // clamp to [1 .. 2) * (2^1)
+		return uintBitsToFloat(x) - 3; // return [2 .. 4) - 3
 	}
 
 	float random_01(vec2 v) { return hash_to_01(hash(floatBitsToUint(v))); }
