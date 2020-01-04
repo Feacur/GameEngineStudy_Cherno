@@ -29,8 +29,16 @@ out vec2 v_ScreenPos;
 
 void main()
 {
+	// map the vertices to cover whole NDC, assuming a_Position is x[-0.5..0.5]:y[-0.5..0.5]
 	v_ScreenPos = a_Position.xy * 2.0;
-	gl_Position = vec4(v_ScreenPos, 0.01, 1.0);
+	// display in front of everything
+	gl_Position = vec4(v_ScreenPos, -1.0, 1.0);
+	// https://www.khronos.org/opengl/wiki/Vertex_Processing
+	// https://www.khronos.org/opengl/wiki/Vertex_Post-Processing
+	// https://www.khronos.org/opengl/wiki/Built-in_Variable_(GLSL)
+	// https://www.khronos.org/opengl/wiki/GLAPI/glDepthRange
+	// https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/projection-matrix-GPU-rendering-pipeline-clipping?url=3d-basic-rendering/perspective-and-orthographic-projection-matrix/projection-matrix-GPU-rendering-pipeline-clipping
+	// https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glClipControl.xhtml
 }
 
 #type fragment

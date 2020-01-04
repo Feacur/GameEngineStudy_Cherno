@@ -48,6 +48,7 @@ namespace GES
 		glEnable(GL_DEPTH_TEST);
 		// glDepthFunc(GL_LESS);
 		// glDepthRangef(0.0f, 1.0f);
+		// glClearDepth(1.0f);
 
 		// glCullFace(GL_BACK);
 	}
