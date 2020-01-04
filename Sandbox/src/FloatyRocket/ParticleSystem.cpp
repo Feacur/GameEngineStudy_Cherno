@@ -11,6 +11,7 @@
 inline static float hash_radius01(uint32 * state) {
 	union { uint32 x; float xf; };  // local unionized values
 	x = (*state = *state * 16807U); // hash
+	// @Note: might well mask fractional part with [0x007fffffU]
 	x = (x >> 9) | 0x40000000U;     // clamp to [1 .. 2) * (2^1)
 	return xf - 3;                  // return [2 .. 4) - 3
 }

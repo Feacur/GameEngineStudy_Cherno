@@ -79,10 +79,12 @@ layout(location = 0) out vec4 color;
 	uint hash(uvec2 v) { return hash(v.x ^ hash(v.y)); }
 
 	float hash_to_01(uint x) {
+		// @Note: might well mask fractional part with [0x007fffffU]
 		x = (x >> 9) | 0x3f800000U;    // clamp to [1 .. 2) * (2^0)
 		return uintBitsToFloat(x) - 1; // return [1 .. 2) - 1
 	}
 	float hash_to_radius01(uint x) {
+		// @Note: might well mask fractional part with [0x007fffffU]
 		x = (x >> 9) | 0x40000000U;    // clamp to [1 .. 2) * (2^1)
 		return uintBitsToFloat(x) - 3; // return [2 .. 4) - 3
 	}
