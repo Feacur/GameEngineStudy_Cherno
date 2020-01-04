@@ -20,5 +20,6 @@ namespace GES
 		static void SetViewport(uint32 x, uint32 y, uint32 width, uint32 height);
 
 		static void DrawIndexed(Ref<VertexArray> const & vertexArray);
+		static void DrawTriangle();
 	};
 }

@@ -141,7 +141,8 @@ namespace GES
 		shader->UploadUniformFloat2("u_ScreenSize", screenSize);
 		shader->UploadUniformFloat4("u_Color", color);
 
-		RendererCommand::DrawIndexed(s_Data->QuadVertexArray);
+		RendererCommand::DrawTriangle(); // assuming [VERTEX_MODE == 1]
+		// RendererCommand::DrawIndexed(s_Data->QuadVertexArray);
 	}
 
 	void Renderer2D::DrawPost(Ref<Shader> const & shader, glm::vec2 const & screenSize, glm::vec4 const & color, Ref<Texture2D> const & texture)
@@ -155,6 +156,7 @@ namespace GES
 		shader->UploadUniformFloat4("u_Color", color);
 		shader->UploadUniformInt("u_Texture", (int32)s_TextureSlot);
 
-		RendererCommand::DrawIndexed(s_Data->QuadVertexArray);
+		RendererCommand::DrawTriangle(); // assuming [VERTEX_MODE == 1]
+		// RendererCommand::DrawIndexed(s_Data->QuadVertexArray);
 	}
 }

@@ -26,5 +26,6 @@ namespace GES
 		virtual void SetViewport(uint32 x, uint32 y, uint32 width, uint32 height) = 0;
 
 		virtual void DrawIndexed(Ref<VertexArray> const & vertexArray) const = 0;
+		virtual void DrawTriangle() const = 0;
 	};
 }

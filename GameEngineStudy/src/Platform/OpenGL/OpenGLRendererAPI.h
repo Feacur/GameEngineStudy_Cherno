@@ -18,5 +18,6 @@ namespace GES
 		void SetViewport(uint32 x, uint32 y, uint32 width, uint32 height) override;
 
 		void DrawIndexed(Ref<VertexArray> const & vertexArray) const override;
+		void DrawTriangle() const override;
 	};
 }

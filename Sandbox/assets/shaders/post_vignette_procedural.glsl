@@ -21,12 +21,33 @@
 #type vertex
 #version 330 core
 
+#define VERTEX_MODE 1
+
+#if VERTEX_MODE == 1
+// no input
+#else
 layout(location = 0) in vec3 a_Position;
+#endif
 
 uniform vec2 u_ScreenSize;
 
 out vec2 v_ScreenPos;
 
+#if VERTEX_MODE == 1
+void main()
+{
+	// gl_VertexID == 0 -> (0, 0)
+	// gl_VertexID == 1 -> (2, 0)
+	// gl_VertexID == 2 -> (0, 2)
+	vec2 TexCoord = vec2((gl_VertexID << 1) & 2, gl_VertexID & 2);
+	// map the vertices to cover whole NDC
+	v_ScreenPos = TexCoord * 2 - 1;
+	// display in front of everything
+	gl_Position = vec4(v_ScreenPos, -1.0, 1.0);
+	// https://rauwendaal.net/2014/06/14/rendering-a-screen-covering-triangle-in-opengl/
+	// https://twitter.com/nice_byte/status/1093355080235999232
+}
+#else
 void main()
 {
 	// map the vertices to cover whole NDC, assuming a_Position is x[-0.5..0.5]:y[-0.5..0.5]
@@ -40,6 +61,7 @@ void main()
 	// https://www.scratchapixel.com/lessons/3d-basic-rendering/perspective-and-orthographic-projection-matrix/projection-matrix-GPU-rendering-pipeline-clipping?url=3d-basic-rendering/perspective-and-orthographic-projection-matrix/projection-matrix-GPU-rendering-pipeline-clipping
 	// https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glClipControl.xhtml
 }
+#endif
 
 #type fragment
 #version 330 core

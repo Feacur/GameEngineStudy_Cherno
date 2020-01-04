@@ -49,4 +49,10 @@ namespace GES
 		GES_PROFILE_FUNCTION();
 		s_RendererAPI->DrawIndexed(vertexArray);
 	}
+
+	void RendererCommand::DrawTriangle()
+	{
+		GES_PROFILE_FUNCTION();
+		s_RendererAPI->DrawTriangle();
+	}
 }
