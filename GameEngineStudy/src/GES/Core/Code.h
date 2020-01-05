@@ -130,12 +130,74 @@ typedef char const * cstring;
 	#define GES_API
 #endif
 
-//
+// traits
+#if defined(__cplusplus) // meta
+	namespace meta {
+		template<size_t S> struct uint_for_size;
+		template<> struct uint_for_size<1> { typedef uint8  type; };
+		template<> struct uint_for_size<2> { typedef uint16 type; };
+		template<> struct uint_for_size<4> { typedef uint32 type; };
+		template<> struct uint_for_size<8> { typedef uint64 type; };
+
+		template<typename T>
+		struct uint_for_type {
+			typedef typename uint_for_size<sizeof(T)>::type type;
+		};
+	}
+
+	#if defined(_MSC_VER)
+		namespace meta {
+			template<typename T>
+			struct underlying_type {
+				typedef typename __underlying_type(T) type;
+			};
+
+			template<typename T>
+			struct is_enum {
+				static bool const value = __is_enum(T);
+			};
+		}
+		#define UNDERLYING_TYPE_META(T, U)
+		#define IS_ENUM_META(T)
+	#else
+		namespace meta {
+			template<typename T> struct underlying_type;
+			template<typename T> struct is_enum;
+		}
+		#define UNDERLYING_TYPE_META(T, U)\
+		namespace meta { template<> struct underlying_type<T> { typedef typename U type; }; }
+
+		#define IS_ENUM_META(T)\
+		namespace meta { template<> struct is_enum<T> { static bool const value = true; }; }
+	#endif
+#endif // defined(__cplusplus) // meta
+
+// bitwise
 #define BIT(T, index) static_cast<T>(static_cast<T>(1) << index)
 
-#define BIND_EVENT_FN(name) std::bind(&name, this, std::placeholders::_1)
+#if defined(__cplusplus) // enum flag
+#define ENUM_FLAG_OPERATORS_IMPL(T)\
+constexpr inline T operator&(T a, T b) {\
+	using U = meta::uint_for_type<T>::type;\
+	return static_cast<T>(static_cast<U>(a) & static_cast<U>(b));\
+}\
+constexpr inline T operator|(T a, T b) {\
+	using U = meta::uint_for_type<T>::type;\
+	return static_cast<T>(static_cast<U>(a) | static_cast<U>(b));\
+}\
+constexpr inline T operator^(T a, T b) {\
+	using U = meta::uint_for_type<T>::type;\
+	return static_cast<T>(static_cast<U>(a) ^ static_cast<U>(b));\
+}\
+constexpr inline T operator~(T v) {\
+	using U = meta::uint_for_type<T>::type;\
+	return static_cast<T>(~static_cast<U>(v));\
+}\
+constexpr inline bool bits_are_set(T container, T bits) { return (container & bits) == bits; }\
+constexpr inline T bits_to_zero(T container, T bits) { return container & ~bits; }
+#endif // defined(__cplusplus) // enum flag
 
-//
+// memory
 namespace GES {
 	template<typename T>
 	using Scope = std::unique_ptr<T>;
@@ -153,3 +215,9 @@ namespace GES {
 		return std::make_shared<T>(std::forward<Args>(args)...);
 	}
 }
+
+//
+//
+//
+
+#define BIND_EVENT_FN(name) std::bind(&name, this, std::placeholders::_1)

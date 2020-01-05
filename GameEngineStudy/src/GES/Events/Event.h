@@ -19,6 +19,8 @@ namespace GES {
 		KeyPressed, KeyReleased, KeyTyped,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled,
 	};
+	UNDERLYING_TYPE_META(EventType, int32)
+	IS_ENUM_META(EventType)
 
 	enum class EventCategory : int32
 	{
@@ -29,16 +31,15 @@ namespace GES {
 		Mouse          = BIT(int32, 3),
 		MouseButton    = BIT(int32, 4),
 	};
-
-	inline EventCategory operator|(EventCategory container, EventCategory bits) {
-		return static_cast<EventCategory>(static_cast<int32>(container) | static_cast<int32>(bits));
-	}
+	UNDERLYING_TYPE_META(EventCategory, int32)
+	IS_ENUM_META(EventCategory)
+	ENUM_FLAG_OPERATORS_IMPL(EventCategory)
 
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\
 								EventType GetEventType() const override { return GetStaticType(); }\
 								cstring GetName() const override { return #type; }
 
-#define EVENT_CLASS_CATEGORY(category) int32 GetCategoryFlags() const override { return (int32)(category); }
+#define EVENT_CLASS_CATEGORY(category) EventCategory GetCategoryFlags() const override { return category; }
 
 	class GES_API Event
 	{
@@ -47,12 +48,12 @@ namespace GES {
 	public:
 		virtual EventType GetEventType() const = 0;
 		virtual cstring GetName() const = 0;
-		virtual int32 GetCategoryFlags() const = 0;
+		virtual EventCategory GetCategoryFlags() const = 0;
 		virtual std::string ToString() const { return GetName(); }
 
 		inline bool IsInCategory(EventCategory category)
 		{
-			return GetCategoryFlags() & (int32)category;
+			return bits_are_set(GetCategoryFlags(), category);
 		}
 	};
 
