@@ -14,6 +14,9 @@
 
 #define VERTEX_MODE 1
 
+const float NearClipValue = -1;
+const float FarClipValue  =  1;
+
 #if VERTEX_MODE == 1
 // no input
 #else
@@ -41,21 +44,21 @@ void main()
 	// compensate aspect ratio
 	v_TexCoord.x *= u_ScreenSize.x / u_ScreenSize.y;
 	// display in front of everything
-	gl_Position = vec4(v_ScreenPos, -1.0, 1.0);
+	gl_Position = vec4(v_ScreenPos, NearClipValue, 1);
 	// https://rauwendaal.net/2014/06/14/rendering-a-screen-covering-triangle-in-opengl/
 	// https://twitter.com/nice_byte/status/1093355080235999232
 }
 #else
 void main()
 {
+	// map the vertices to cover whole NDC, assuming a_Position is x[-0.5..0.5]:y[-0.5..0.5]
+	v_ScreenPos = a_Position.xy * 2;
 	// map texture pixel-to-pixel with the framebuffer, assuming wrap-repeat mode
 	v_TexCoord = a_TexCoord * textureSize(u_Texture, 0);
 	// compensate aspect ratio, assuming a_TexCoord is x[0..1]:y[0..1]
 	v_TexCoord.x *= u_ScreenSize.x / u_ScreenSize.y;
-	// map the vertices to cover whole NDC, assuming a_Position is x[-0.5..0.5]:y[-0.5..0.5]
-	v_ScreenPos = a_Position.xy * 2.0;
 	// display in front of everything
-	gl_Position = vec4(v_ScreenPos, -1.0, 1.0);
+	gl_Position = vec4(v_ScreenPos, -1, 1);
 	// https://www.khronos.org/opengl/wiki/Vertex_Processing
 	// https://www.khronos.org/opengl/wiki/Vertex_Post-Processing
 	// https://www.khronos.org/opengl/wiki/Built-in_Variable_(GLSL)
@@ -80,8 +83,8 @@ layout(location = 0) out vec4 color;
 
 void main()
 {
-	float vignette_value = distance(v_ScreenPos, vec2(0.0));
-	vignette_value = clamp(vignette_value - 0.4, 0.0, 1.0);
+	float vignette_value = distance(v_ScreenPos, vec2(0));
+	vignette_value = clamp(vignette_value - 0.4, 0, 1);
 	vignette_value *= vignette_value;
 
 	float dither_value = texture(u_Texture, v_TexCoord).r;
@@ -89,7 +92,7 @@ void main()
 	#if FRAG_OUT_MODE == 1
 		// jitter color with dither; blend by input alpha and vignette
 		// @Note: might restrict jittering RGB or Alpha only, too
-		color = vec4(u_Color.rgb, u_Color.a * vignette_value) + (dither_value - 0.5) / 8.0;
+		color = vec4(u_Color.rgb, u_Color.a * vignette_value) + (dither_value - 0.5) / 8;
 	#else
 		// default; blend by input alpha and vignette
 		color = vec4(u_Color.rgb, u_Color.a * vignette_value);

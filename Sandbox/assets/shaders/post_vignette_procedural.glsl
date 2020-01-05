@@ -23,6 +23,9 @@
 
 #define VERTEX_MODE 1
 
+const float NearClipValue = -1;
+const float FarClipValue  =  1;
+
 #if VERTEX_MODE == 1
 // no input
 #else
@@ -43,7 +46,7 @@ void main()
 	// map the vertices to cover whole NDC
 	v_ScreenPos = TexCoord * 2 - 1;
 	// display in front of everything
-	gl_Position = vec4(v_ScreenPos, -1.0, 1.0);
+	gl_Position = vec4(v_ScreenPos, NearClipValue, 1);
 	// https://rauwendaal.net/2014/06/14/rendering-a-screen-covering-triangle-in-opengl/
 	// https://twitter.com/nice_byte/status/1093355080235999232
 }
@@ -51,9 +54,9 @@ void main()
 void main()
 {
 	// map the vertices to cover whole NDC, assuming a_Position is x[-0.5..0.5]:y[-0.5..0.5]
-	v_ScreenPos = a_Position.xy * 2.0;
+	v_ScreenPos = a_Position.xy * 2;
 	// display in front of everything
-	gl_Position = vec4(v_ScreenPos, -1.0, 1.0);
+	gl_Position = vec4(v_ScreenPos, -1, 1);
 	// https://www.khronos.org/opengl/wiki/Vertex_Processing
 	// https://www.khronos.org/opengl/wiki/Vertex_Post-Processing
 	// https://www.khronos.org/opengl/wiki/Built-in_Variable_(GLSL)
@@ -125,8 +128,8 @@ layout(location = 0) out vec4 color;
 
 void main()
 {
-	float vignette_value = distance(v_ScreenPos, vec2(0.0));
-	vignette_value = clamp(vignette_value - 0.4, 0.0, 1.0);
+	float vignette_value = distance(v_ScreenPos, vec2(0));
+	vignette_value = clamp(vignette_value - 0.4, 0, 1);
 	vignette_value *= vignette_value;
 
 	#if DITHER_MODE == 4 || DITHER_MODE == 8
@@ -138,13 +141,13 @@ void main()
 		float dither_value = random_01(gl_FragCoord.xy);
 	#else
 		// default to zero
-		float dither_value = 0.0;
+		float dither_value = 0;
 	#endif
 
 	#if FRAG_OUT_MODE == 1
 		// mask with vignette and input alpha; do not blend
 		if (u_Color.a * vignette_value <= dither_value) discard;
-		color = vec4(u_Color.rgb, 1.0);
+		color = vec4(u_Color.rgb, 1);
 	#elif FRAG_OUT_MODE == 2
 		// mask with vignette only; blend by input alpha
 		if (vignette_value <= dither_value) discard;
@@ -156,15 +159,15 @@ void main()
 	#elif FRAG_OUT_MODE == 4
 		// control input alpha with vignette mixed by dither; blend by the result
 		// @Note: dither pattern is omnipresent
-		color = vec4(u_Color.rgb, u_Color.a * mix(1.0, vignette_value, dither_value));
+		color = vec4(u_Color.rgb, u_Color.a * mix(1, vignette_value, dither_value));
 	#elif FRAG_OUT_MODE == 5
 		// control input alpha with dither mixed by vignette; blend by the result
 		// @Note: dither pattern is omnipresent
-		color = vec4(u_Color.rgb, u_Color.a * mix(dither_value, 1.0, vignette_value));
+		color = vec4(u_Color.rgb, u_Color.a * mix(dither_value, 1, vignette_value));
 	#elif FRAG_OUT_MODE == 6
 		// jitter color with dither; blend by input alpha and vignette
 		// @Note: might restrict jittering RGB or Alpha only, too
-		color = vec4(u_Color.rgb, u_Color.a * vignette_value) + (dither_value - 0.5) / 8.0;
+		color = vec4(u_Color.rgb, u_Color.a * vignette_value) + (dither_value - 0.5) / 8;
 	#else
 		// default; blend by input alpha and vignette
 		color = vec4(u_Color.rgb, u_Color.a * vignette_value);
