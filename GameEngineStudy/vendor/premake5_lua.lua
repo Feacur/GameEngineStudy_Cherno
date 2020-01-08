@@ -3,6 +3,7 @@ project "lua"
 	language "C"
 	cdialect "C89"
 	cppdialect "C++11"
+	characterset ("ASCII") -- Default, Unicode, MBCS, ASCII
 	warnings "Default"
 	removeflags { "FatalWarnings" }
 

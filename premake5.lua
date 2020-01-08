@@ -111,7 +111,7 @@ project "GameEngineStudy"
 	language "C++"
 	cdialect "C11"
 	cppdialect "C++17"
-	characterset ("Unicode") -- Default, Unicode, MBCS, ASCII
+	characterset ("ASCII") -- Default, Unicode, MBCS, ASCII
 
 	targetdir (target_location .. "/%{prj.name}")
 	objdir (intermediate_location .. "/%{prj.name}")
@@ -168,7 +168,7 @@ project "Sandbox"
 	language "C++"
 	cdialect "C11"
 	cppdialect "C++17"
-	characterset ("Unicode") -- Default, Unicode, MBCS, ASCII
+	characterset ("ASCII") -- Default, Unicode, MBCS, ASCII
 
 	targetdir (target_location .. "/%{prj.name}")
 	objdir (intermediate_location .. "/%{prj.name}")
