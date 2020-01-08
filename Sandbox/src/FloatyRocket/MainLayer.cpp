@@ -5,25 +5,73 @@
 
 namespace FloatyRocket
 {
+	static bool CheckLua(lua_State * L, int32 result)
+	{
+		if (result == LUA_OK) { return true; }
+		cstring errorMessage = lua_tostring(L, -1);
+		GES_ERROR("Lua error: '{0}'", errorMessage);
+		return false;
+	}
+	
+	static int32 NativeCustomAdd(lua_State * L)
+	{
+		LUA_NUMBER a = lua_tonumber(L, -1);
+		LUA_NUMBER b = lua_tonumber(L, -2);
+		lua_pushnumber(L, a + b);
+		return 1;
+	}
+
 	static void TestLua()
 	{
 		lua_State *L = luaL_newstate();
 
-		cstring luaCodeString = "a = 7 + 11";
-		int32 codeResult = luaL_dostring(L, luaCodeString);
-		if (codeResult == LUA_OK)
+		// luaL_openlibs(L);
+		luaL_requiref(L, "_G", luaopen_base, 1);
+		lua_pop(L, 1);
+		luaL_requiref(L, LUA_STRLIBNAME, luaopen_string, 1);
+		lua_pop(L, 1);
+
+		lua_register(L, "NativeCustomAdd", NativeCustomAdd);
+
+		// luaL_dostring(L, "a = 7 + 11");
+		if (CheckLua(L, luaL_dofile(L, "assets/scripts/test.lua")))
 		{
-			lua_getglobal(L, "a");
-			if (lua_isnumber(L, -1))
+			lua_getglobal(L, "CustomAdd");
+			if (lua_isfunction(L, -1))
 			{
-				float aResult = (float)lua_tonumber(L, -1);
-				GES_TRACE("Lua 'a' value: '{0}'", aResult);
+				lua_pushnumber(L, 3.5f);
+				lua_pushnumber(L, 7.125f);
+				if (CheckLua(L, lua_pcall(L, 2, 1, 0)))
+				{
+					GES_TRACE("[Native] 'CustomAdd' result: '{0}'", lua_tonumber(L, -1));
+					lua_pop(L, 1);
+				}
 			}
-		}
-		else
-		{
-			cstring errorMessage = lua_tostring(L, -1);
-			GES_ERROR("Lua error: '{0}'", errorMessage);
+			lua_pop(L, 1);
+			
+			lua_getglobal(L, "CallNativeCustomAdd");
+			if (lua_isfunction(L, -1))
+			{
+				lua_pushnumber(L, 2.5f);
+				lua_pushnumber(L, 10.125f);
+				CheckLua(L, lua_pcall(L, 2, 1, 0));
+			}
+			lua_pop(L, 1);
+			
+			lua_getglobal(L, "entity");
+			if (lua_istable(L, -1))
+			{
+				lua_pushstring(L, "id");
+				lua_gettable(L, -2);
+				GES_TRACE("[Native] 'entity.id': '{0}'", lua_tointeger(L, -1));
+				lua_pop(L, 1);
+				
+				lua_pushstring(L, "name");
+				lua_gettable(L, -2);
+				GES_TRACE("[Native] 'entity.name': '{0}'", lua_tostring(L, -1));
+				lua_pop(L, 1);
+			}
+			lua_pop(L, 1);
 		}
 
 		lua_close(L);
