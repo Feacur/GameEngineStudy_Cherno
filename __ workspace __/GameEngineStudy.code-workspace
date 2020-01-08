@@ -40,6 +40,7 @@
 			"${workspaceFolder:__ workspace __}\\..\\GameEngineStudy\\vendor\\GLFW\\include",
 			"${workspaceFolder:__ workspace __}\\..\\GameEngineStudy\\vendor\\glm",
 			"${workspaceFolder:__ workspace __}\\..\\GameEngineStudy\\vendor\\imgui",
+			"${workspaceFolder:__ workspace __}\\..\\GameEngineStudy\\vendor\\lua\\src",
 			"${workspaceFolder:__ workspace __}\\..\\GameEngineStudy\\vendor\\spdlog\\include",
 			"${workspaceFolder:__ workspace __}\\..\\GameEngineStudy\\vendor\\stb_image",
 		],

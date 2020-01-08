@@ -1,9 +1,34 @@
 #include "MainLayer.h"
 
 #include <imgui.h>
+#include <lua.hpp>
 
 namespace FloatyRocket
 {
+	static void TestLua()
+	{
+		lua_State *L = luaL_newstate();
+
+		cstring luaCodeString = "a = 7 + 11";
+		int32 codeResult = luaL_dostring(L, luaCodeString);
+		if (codeResult == LUA_OK)
+		{
+			lua_getglobal(L, "a");
+			if (lua_isnumber(L, -1))
+			{
+				float aResult = (float)lua_tonumber(L, -1);
+				GES_TRACE("Lua 'a' value: '{0}'", aResult);
+			}
+		}
+		else
+		{
+			cstring errorMessage = lua_tostring(L, -1);
+			GES_ERROR("Lua error: '{0}'", errorMessage);
+		}
+
+		lua_close(L);
+	}
+
 	MainLayer::MainLayer()
 		: Layer("MainLayer")
 		, m_Camera(-16.0f, 16.0f, -9.0f, 9.0f)
@@ -22,6 +47,7 @@ namespace FloatyRocket
 		m_PostVignetteProcedural = GES::Shader::CreatePath("assets/shaders/post_vignette_procedural.glsl");
 		m_PostVignette = GES::Shader::CreatePath("assets/shaders/post_vignette.glsl");
 		m_NoiseTexture = GES::Texture2D::CreatePath("assets/textures/blue_noise.png");
+		TestLua();
 	}
 
 	void MainLayer::OnDetach()

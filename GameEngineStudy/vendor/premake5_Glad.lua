@@ -10,7 +10,7 @@ project "Glad"
 		disablewarnings {
 			"4005", -- 'identifier' : macro redefinition (suppress) -- might ignore it as well, though
 		}
-	
+
 	symbols "Off"
 	optimize "On"
 	
