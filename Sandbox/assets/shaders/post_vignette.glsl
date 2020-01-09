@@ -36,7 +36,7 @@ void main()
 	// gl_VertexID == 0 -> (0, 0)
 	// gl_VertexID == 1 -> (2, 0)
 	// gl_VertexID == 2 -> (0, 2)
-	v_TexCoord = vec2((gl_VertexID << 1) & 2, gl_VertexID & 2);
+	v_TexCoord = ivec2(gl_VertexID << 1, gl_VertexID) & 2;
 	// map the vertices to cover whole NDC
 	v_ScreenPos = v_TexCoord * 2 - 1;
 	// map texture pixel-to-pixel with the framebuffer, assuming wrap-repeat mode

@@ -42,7 +42,7 @@ void main()
 	// gl_VertexID == 0 -> (0, 0)
 	// gl_VertexID == 1 -> (2, 0)
 	// gl_VertexID == 2 -> (0, 2)
-	vec2 TexCoord = vec2((gl_VertexID << 1) & 2, gl_VertexID & 2);
+	vec2 TexCoord = ivec2(gl_VertexID << 1, gl_VertexID) & 2;
 	// map the vertices to cover whole NDC
 	v_ScreenPos = TexCoord * 2 - 1;
 	// display in front of everything
@@ -101,7 +101,7 @@ layout(location = 0) out vec4 color;
 		float[8](63/64., 31/64., 55/64., 23/64., 61/64., 29/64., 53/64., 21/64.)
 	);
 #elif DITHER_MODE == -1
-	uint hash(uint x) {
+	uint hash_jenkins(uint x) {
 		x += x << 10u;
 		x ^= x >>  6u;
 		x += x <<  3u;
@@ -109,21 +109,19 @@ layout(location = 0) out vec4 color;
 		x += x << 15u;
 		return x;
 	}
-	uint hash(uvec2 v) { return hash(v.x ^ hash(v.y)); }
+	uint hash_jenkins(uvec2 v) { return hash_jenkins(v.x ^ hash_jenkins(v.y)); }
 
-	float hash_to_01(uint x) {
-		// @Note: might well mask fractional part with [0x007fffffU]
-		x = (x >> 9) | 0x3f800000U;    // clamp to [1 .. 2) * (2^0)
-		return uintBitsToFloat(x) - 1; // return [1 .. 2) - 1
+	float uint_bits_to_01(uint x) {
+		// @Note: might well mask fractional part with [0x007fffffU] instead of shifting
+		return uintBitsToFloat((x >> 9) | 0x3f800000U) - 1.0; // return [1 .. 2) * (2^0) - 1
 	}
-	float hash_to_radius01(uint x) {
-		// @Note: might well mask fractional part with [0x007fffffU]
-		x = (x >> 9) | 0x40000000U;    // clamp to [1 .. 2) * (2^1)
-		return uintBitsToFloat(x) - 3; // return [2 .. 4) - 3
+	float uint_bits_to_radius01(uint x) {
+		// @Note: might well mask fractional part with [0x007fffffU] instead of shifting
+		return uintBitsToFloat(x = (x >> 9) | 0x40000000U) - 3.0; // return [1 .. 2) * (2^1) - 3
 	}
 
-	float random_01(vec2 v) { return hash_to_01(hash(floatBitsToUint(v))); }
-	float random_radius01(vec2 v) { return hash_to_radius01(hash(floatBitsToUint(v))); }
+	float random_01(vec2 v) { return uint_bits_to_01(hash_jenkins(floatBitsToUint(v))); }
+	float random_radius01(vec2 v) { return uint_bits_to_radius01(hash_jenkins(floatBitsToUint(v))); }
 #endif
 
 void main()
