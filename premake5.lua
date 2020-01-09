@@ -92,6 +92,7 @@ include_directories["Glad"]   = enginename .. "/vendor/Glad/include"
 include_directories["GLFW"]   = enginename .. "/vendor/GLFW/include"
 include_directories["glm"]    = enginename .. "/vendor/glm"
 include_directories["imgui"]  = enginename .. "/vendor/imgui"
+include_directories["lua"]    = enginename .. "/vendor/lua/src"
 include_directories["spdlog"] = enginename .. "/vendor/spdlog/include"
 include_directories["stb_image"] = enginename .. "/vendor/stb_image"
 
@@ -101,6 +102,7 @@ group "Dependecies"
 include "GameEngineStudy/vendor/premake5_Glad.lua"
 include "GameEngineStudy/vendor/premake5_GLFW.lua"
 include "GameEngineStudy/vendor/premake5_imgui.lua"
+include "GameEngineStudy/vendor/premake5_lua.lua"
 group ""
 
 project "GameEngineStudy"
@@ -109,7 +111,7 @@ project "GameEngineStudy"
 	language "C++"
 	cdialect "C11"
 	cppdialect "C++17"
-	characterset ("Unicode") -- Default, Unicode, MBCS, ASCII
+	characterset ("ASCII") -- Default, Unicode, MBCS, ASCII
 
 	targetdir (target_location .. "/%{prj.name}")
 	objdir (intermediate_location .. "/%{prj.name}")
@@ -133,6 +135,7 @@ project "GameEngineStudy"
 		"%{include_directories.GLFW}",
 		"%{include_directories.glm}",
 		"%{include_directories.imgui}",
+		"%{include_directories.lua}",
 		"%{include_directories.spdlog}",
 		"%{include_directories.stb_image}",
 	}
@@ -149,17 +152,15 @@ project "GameEngineStudy"
 			"GLFW",
 			"Glad",
 			"imgui",
+			"lua",
 			"opengl32.lib",
 		}
 
 		postbuildcommands {
-			("{COPY} \"%{prj.location}assets\" \"../bin/" .. outputdir .. "/Sandbox/assets\"")
+			("{COPY} \"%{prj.location}assets\" \"../bin/" .. outputdir .. "/Sandbox/assets\""),
+			-- if specified [kind "SharedLib"]
+			-- ("{COPY} \"%{cfg.buildtarget.relpath}\" \"../bin/" .. outputdir .. "/Sandbox/\""),
 		}
-
-		-- if specified [kind "SharedLib"]
-		-- postbuildcommands {
-		-- 	("{COPY} \"%{cfg.buildtarget.relpath}\" \"../bin/" .. outputdir .. "/Sandbox/\"")
-		-- }
 
 project "Sandbox"
 	location "Sandbox"
@@ -167,7 +168,7 @@ project "Sandbox"
 	language "C++"
 	cdialect "C11"
 	cppdialect "C++17"
-	characterset ("Unicode") -- Default, Unicode, MBCS, ASCII
+	characterset ("ASCII") -- Default, Unicode, MBCS, ASCII
 
 	targetdir (target_location .. "/%{prj.name}")
 	objdir (intermediate_location .. "/%{prj.name}")
@@ -181,6 +182,7 @@ project "Sandbox"
 		"%{include_directories.engine}",
 		"%{include_directories.glm}",
 		"%{include_directories.imgui}",
+		"%{include_directories.lua}",
 		"%{include_directories.spdlog}",
 	}
 
@@ -192,9 +194,16 @@ project "Sandbox"
 		("{COPY} \"%{prj.location}assets\" \"%{cfg.buildtarget.directory}assets\"")
 	}
 
+	defines {
+		-- "GES_SHARED", -- if specified [kind "SharedLib"] for the GameEngineStudy
+	}
+
 	filter "system:windows"
 		defines {
 			"_CRT_SECURE_NO_WARNINGS",
-			-- "GES_SHARED", -- if specified [kind "SharedLib"] for the GameEngineStudy
+		}
+
+	filter "toolset:msc*"
+		defines {
 			-- "IMGUI_API=__declspec(dllimport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
 		}

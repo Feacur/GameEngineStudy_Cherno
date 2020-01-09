@@ -3,6 +3,7 @@ project "GLFW"
 	language "C"
 	cdialect "C99"
 	cppdialect "C++11"
+	characterset ("Unicode") -- Default, Unicode, MBCS, ASCII
 	warnings "Default"
 	removeflags { "FatalWarnings" }
 	

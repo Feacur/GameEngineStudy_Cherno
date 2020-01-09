@@ -3,6 +3,7 @@ project "Glad"
 	language "C"
 	cdialect "C99"
 	cppdialect "C++11"
+	characterset ("ASCII") -- Default, Unicode, MBCS, ASCII
 	warnings "Default"
 	removeflags { "FatalWarnings" }
 
@@ -10,7 +11,7 @@ project "Glad"
 		disablewarnings {
 			"4005", -- 'identifier' : macro redefinition (suppress) -- might ignore it as well, though
 		}
-	
+
 	symbols "Off"
 	optimize "On"
 	

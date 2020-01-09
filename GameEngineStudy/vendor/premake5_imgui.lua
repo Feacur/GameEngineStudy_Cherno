@@ -3,6 +3,7 @@ project "imgui"
 	language "C"
 	cdialect "C99"
 	cppdialect "C++11"
+	characterset ("ASCII") -- Default, Unicode, MBCS, ASCII
 	warnings "Default"
 	removeflags { "FatalWarnings" }
 	
@@ -32,7 +33,7 @@ project "imgui"
 	filter "configurations:Shipping"
 		defines "IMGUI_DISABLE_METRICS_WINDOW"
 	
-	-- filter "system:windows"
-	-- 	-- defines {
-	-- 	-- 	"IMGUI_API=__declspec(dllexport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
-	-- 	-- }
+	filter "system:msc*"
+		defines {
+			-- "IMGUI_API=__declspec(dllexport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
+		}

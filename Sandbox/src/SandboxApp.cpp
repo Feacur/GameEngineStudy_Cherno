@@ -5,9 +5,7 @@
 // #include "Sandbox2D.h"
 #include "FloatyRocket/MainLayer.h"
 
-#if !defined(GES_BYPASS_VENDOR_HEADERS)
-	#include <imgui.h>
-#endif
+#include <imgui.h>
 
 class Sandbox : public GES::Application
 {
