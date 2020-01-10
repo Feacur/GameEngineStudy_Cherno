@@ -9,8 +9,8 @@ VSCode workspace, because it doesn't support nested projects
 ```
 
 ```
-> GameEngineStudy
-Game engine project
+> Engine
+Engine project
 
 vendor/Glad ..... OpenGL loader
 vendor/GLFW ..... platform layer provider

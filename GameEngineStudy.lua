@@ -83,7 +83,7 @@ workspace "GameEngineStudy"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 target_location = ("bin/" .. outputdir)
 intermediate_location = ("bin-int/" .. outputdir)
-enginename = "GameEngineStudy"
+enginename = "Engine"
 
 -- Include directories relative to the root folder (solution directory)
 include_directories = {}
@@ -99,14 +99,14 @@ include_directories["stb_image"] = enginename .. "/vendor/stb_image"
 root_directory = os.getcwd()
 
 group "Dependecies"
-include "GameEngineStudy/vendor/premake5_Glad.lua"
-include "GameEngineStudy/vendor/premake5_GLFW.lua"
-include "GameEngineStudy/vendor/premake5_imgui.lua"
-include "GameEngineStudy/vendor/premake5_lua.lua"
+include "Engine/vendor/premake5_Glad.lua"
+include "Engine/vendor/premake5_GLFW.lua"
+include "Engine/vendor/premake5_imgui.lua"
+include "Engine/vendor/premake5_lua.lua"
 group ""
 
-project "GameEngineStudy"
-	location "GameEngineStudy"
+project "Engine"
+	location "Engine"
 	kind "StaticLib" -- or "SharedLib"
 	language "C++"
 	cdialect "C11"
@@ -187,7 +187,7 @@ project "Sandbox"
 	}
 
 	links {
-		"GameEngineStudy",
+		"Engine",
 	}
 
 	postbuildcommands {
@@ -195,7 +195,7 @@ project "Sandbox"
 	}
 
 	defines {
-		-- "GES_SHARED", -- if specified [kind "SharedLib"] for the GameEngineStudy
+		-- "GES_SHARED", -- if specified [kind "SharedLib"] for the Engine
 	}
 
 	filter "system:windows"
@@ -205,5 +205,5 @@ project "Sandbox"
 
 	filter "toolset:msc*"
 		defines {
-			-- "IMGUI_API=__declspec(dllimport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
+			-- "IMGUI_API=__declspec(dllimport)", -- if specified [kind "SharedLib"] for the Engine
 		}

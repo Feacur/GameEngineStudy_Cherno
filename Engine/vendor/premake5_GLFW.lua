@@ -11,8 +11,8 @@ project "GLFW"
 	optimize "On"
 	
 	GLFW_to_root = path.getrelative(os.getcwd(), root_directory)
-	targetdir (GLFW_to_root .. "/bin/" .. outputdir .. "/%{prj.name}")
-	objdir (GLFW_to_root .. "/bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir (GLFW_to_root .. "/bin/" .. outputdir .. "/vendor/%{prj.name}")
+	objdir (GLFW_to_root .. "/bin-int/" .. outputdir .. "/vendor/%{prj.name}")
 
 	files {
 		"GLFW/include/GLFW/glfw3.h",

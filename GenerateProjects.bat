@@ -1,3 +1,3 @@
-rem call vendor\bin\premake\premake5.exe vs2017
-call vendor\bin\premake\premake5.exe vs2019
+rem call vendor\premake\premake5.exe --file=GameEngineStudy.lua vs2017
+call vendor\premake\premake5.exe --file=GameEngineStudy.lua vs2019
 pause

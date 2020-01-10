@@ -16,8 +16,8 @@ project "Glad"
 	optimize "On"
 	
 	Glad_to_root = path.getrelative(os.getcwd(), root_directory)
-	targetdir (Glad_to_root .. "/bin/" .. outputdir .. "/%{prj.name}")
-	objdir (Glad_to_root .. "/bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir (Glad_to_root .. "/bin/" .. outputdir .. "/vendor/%{prj.name}")
+	objdir (Glad_to_root .. "/bin-int/" .. outputdir .. "/vendor/%{prj.name}")
 
 	files {
 		"Glad/include/KHR/khrplatform.h",
