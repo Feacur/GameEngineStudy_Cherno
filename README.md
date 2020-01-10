@@ -17,6 +17,7 @@ vendor/GLFW ..... platform layer provider
 vendor/glm ...... math code library
 vendor/spdlog ... logging library
 vendor/imgui .... immediate-mode GUI tool
+vendor/lua ...... scripting language
 vendor/stb_image  image-processing library
 ```
 
@@ -59,7 +60,11 @@ Premake
 > Intermediate output into "/bin-int" folder  
 
 # Current state
-* WIP
+* [10.01.2020] up to date with (https://youtu.be/42aqVsdcxwU)
+* experimented with naive post-processing shaders, dithering, procedural and blue noise
+* linked Lua 5.3; without engine integration, though
 
 # To do
 * watch the videos, learn and study
+* explore forward on my own, too
+* switch to (id, generation) resources references?
