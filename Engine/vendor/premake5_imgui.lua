@@ -32,3 +32,8 @@ project "imgui"
 
 	filter "configurations:Shipping"
 		defines "IMGUI_DISABLE_METRICS_WINDOW"
+
+	filter "system:msc*"
+		defines {
+			-- "IMGUI_API=__declspec(dllexport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
+		}
