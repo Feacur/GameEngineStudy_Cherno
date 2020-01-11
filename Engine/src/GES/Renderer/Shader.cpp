@@ -43,7 +43,7 @@ namespace GES
 	static std::string FindName(std::string const & source)
 	{
 		GES_PROFILE_FUNCTION();
-		cstring typeToken = "#name";
+		cstring typeToken = "// name";
 		const size_t typeTokenLength = strlen(typeToken);
 
 		size_t pos = source.find(typeToken, 0);

@@ -1,5 +1,8 @@
-#name post_vignette
+// name post_vignette
+// version 330 core
 
+// VERTEX_SECTION
+#if defined(VERTEX_SECTION)
 // https://twitter.com/_kzr/status/829621272757755905
 // http://www.loopit.dk/banding_in_games.pdf
 // http://www.anisopteragames.com/how-to-fix-color-banding-with-dithering/
@@ -8,9 +11,6 @@
 // https://gist.github.com/pixelmager/5d25fa32987273b9608a2d2c6cc74bfa
 // https://github.com/playdeadgames/publications/blob/master/INSIDE/rendering_inside_gdc2016.pdf
 // http://momentsingraphics.de/BlueNoise.html
-
-#type vertex
-#version 330 core
 
 #define VERTEX_MODE 1
 
@@ -67,10 +67,10 @@ void main()
 	// https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glClipControl.xhtml
 }
 #endif
+#endif // defined(VERTEX_SECTION)
 
-#type fragment
-#version 330 core
-
+// FRAGMENT_SECTION
+#if defined(FRAGMENT_SECTION)
 #define FRAG_OUT_MODE 1
 
 in vec2 v_TexCoord;
@@ -98,3 +98,4 @@ void main()
 		color = vec4(u_Color.rgb, u_Color.a * vignette_value);
 	#endif
 }
+#endif // defined(FRAGMENT_SECTION)

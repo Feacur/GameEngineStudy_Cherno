@@ -10,110 +10,129 @@
 
 typedef GLchar const * glstring;
 
+static cstring const DefaultShader = R"(
+// name default
+// version 330 core
+
+#if defined(VERTEX_SECTION)
+layout(location = 0) in vec3 a_Position;
+uniform mat4 u_ViewProjection;
+uniform mat4 u_Transform;
+void main() { gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0); }
+#endif // defined(VERTEX_SECTION)
+
+#if defined(FRAGMENT_SECTION)
+layout(location = 0) out vec4 color;
+void main() { color = vec4(1.0, 0.0, 1.0, 1.0); }
+#endif // defined(FRAGMENT_SECTION)
+)";
+
 namespace GES
 {
-	static GLenum ShaderTypeFromString(std::string const & type)
+	static bool VerifyCompilation(GLuint shader, cstring name)
 	{
-		GES_PROFILE_FUNCTION();
-		if (type == "vertex") {
-			return GL_VERTEX_SHADER;
-		}
+		GLint isCompiled = 0;
+		glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
+		if (isCompiled == GL_TRUE) { return true; }
 
-		if (type == "fragment" || type == "pixel") {
-			return GL_FRAGMENT_SHADER;
-		}
+		// @Note: linker will inform of the errors anyway
+		// GLint maxLength = 0;
+		// glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
 
-		GES_CORE_ASSERT(false, "Unknown shader type");
-		return 0;
+		// std::vector<GLchar> infoLog(maxLength);
+		// glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);
+		// GES_CORE_ERROR("Shader compilation: '{0}'\n{1}", name, infoLog.data());
+
+		return false;
 	}
 
-	static std::unordered_map<GLenum, std::string> PreProcess(std::string const & source)
+	static bool VerifyLinking(GLuint program, cstring name)
+	{
+		GLint isLinked = 0;
+		glGetProgramiv(program, GL_LINK_STATUS, (int*)&isLinked);
+		if (isLinked == GL_TRUE) { return true; }
+
+		GLint maxLength = 0;
+		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+
+		std::vector<GLchar> infoLog(maxLength);
+		glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
+		GES_CORE_ERROR("Shader linking: '{0}'\n{1}", name, infoLog.data());
+
+		return false;
+	}
+
+	// uint8 const code_count = C_ARRAY_LENGTH(code);
+	// GLint length[code_count];
+	// for (uint8 i = 0; i < code_count; i++) {
+	// 	length[i] = (GLint)strlen(code[i]);
+	// }
+
+	// {
+	// 	GLint maxLength = 0;
+	// 	glGetShaderiv(shader, GL_SHADER_SOURCE_LENGTH, &maxLength);
+	// 	std::vector<GLchar> infoLog(maxLength);
+	// 	glGetShaderSource(shader, maxLength, &maxLength, &infoLog[0]);
+	// 	GES_CORE_TRACE("{0}", infoLog.data());
+	// }
+
+	struct ShaderProps
+	{
+		GLenum   type;
+		cstring version;
+		cstring defines;
+	};
+
+	static GLuint CompileShader(cstring source, ShaderProps props)
+	{
+		glstring code[] = { props.version, props.defines, source };
+		GLuint shader = glCreateShader(props.type);
+		glShaderSource(shader, C_ARRAY_LENGTH(code), code, 0);
+		glCompileShader(shader);
+		return shader;
+	}
+
+	static GLuint Compile(cstring source, cstring name)
 	{
 		GES_PROFILE_FUNCTION();
-		std::unordered_map<GLenum, std::string> shaderSources;
+		static ShaderProps compilations_props[] = {
+			{ GL_VERTEX_SHADER,   "#version 330 core\n", "#define VERTEX_SECTION\n" },
+			{ GL_FRAGMENT_SHADER, "#version 330 core\n", "#define FRAGMENT_SECTION\n" },
+		};
+		uint8 const compilations_props_count = C_ARRAY_LENGTH(compilations_props);
 
-		cstring typeToken = "#type";
-		const size_t typeTokenLength = strlen(typeToken);
-		
-		size_t pos = source.find(typeToken, 0);
-		while (pos != std::string::npos)
+		// Compile shaders
+		GLuint glShaderIDs[4] = {};
+		for (uint8 i = 0; i < compilations_props_count; i++)
 		{
-			size_t eol = source.find_first_of("\r\n", pos);
-			GES_CORE_ASSERT(eol != std::string::npos, "Syntax error");
-
-			size_t begin = pos + typeTokenLength + 1;
-			std::string type = source.substr(begin, eol - begin);
-
-			size_t nextLinePos = source.find_first_not_of("\r\n", eol);
-			GES_CORE_ASSERT(nextLinePos != std::string::npos, "Syntax error");
-
-			pos = source.find(typeToken, nextLinePos);
-			shaderSources[ShaderTypeFromString(type)] = (pos == std::string::npos) ? source.substr(nextLinePos) : source.substr(nextLinePos, pos - nextLinePos);
+			glShaderIDs[i] = CompileShader(source, compilations_props[i]);
 		}
 
-		return shaderSources;
-	}
+		bool isCompiled = true;
+		for (uint8 i = 0; i < compilations_props_count; i++)
+		{
+			bool isOk = VerifyCompilation(glShaderIDs[i], name);
+			isCompiled = isCompiled && isOk;
+		}
 
-	static GLuint Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
-	{
-		GES_PROFILE_FUNCTION();
+		// Link the program
 		GLuint program = glCreateProgram();
-		GLenum glShaderIDs[4] = {};
-		uint8 glShaderIDsIndex = 0;
-		for (auto& kv : shaderSources)
-		{
-			GLenum type = kv.first;
-			GLuint shader = glCreateShader(type);
-
-			std::string const & source = kv.second;
-			glstring sourceCStr = source.c_str();
-
-			glShaderSource(shader, 1, &sourceCStr, 0);
-			glCompileShader(shader);
-
-			GLint isCompiled = 0;
-			glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
-			if (isCompiled == GL_FALSE)
-			{
-				GLint maxLength = 0;
-				glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
-
-				std::vector<GLchar> infoLog(maxLength);
-				glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);
-
-				glDeleteShader(shader);
-
-				GES_CORE_ERROR("{0}", infoLog.data());
-				GES_CORE_ASSERT(false, "Shader compilation failure!");
-				break;
-			}
-
-			glAttachShader(program, shader);
-			glShaderIDs[glShaderIDsIndex++] = shader;
+		for (uint8 i = 0; i < compilations_props_count; i++) {
+			glAttachShader(program, glShaderIDs[i]);
 		}
-
-		// Link our program
 		glLinkProgram(program);
-		for (uint8 i = 0; i < glShaderIDsIndex; i++) {
+		bool isLinked = VerifyLinking(program, name);
+
+		// Free shader resources
+		for (uint8 i = 0; i < compilations_props_count; i++) {
 			glDetachShader(program, glShaderIDs[i]);
+		}
+		for (uint8 i = 0; i < compilations_props_count; i++) {
 			glDeleteShader(glShaderIDs[i]);
 		}
 
-		// Note the different functions here: glGetProgram* instead of glGetShader*.
-		GLint isLinked = 0;
-		glGetProgramiv(program, GL_LINK_STATUS, (int*)&isLinked);
-		if (isLinked == GL_FALSE)
-		{
-			GLint maxLength = 0;
-			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
-
-			std::vector<GLchar> infoLog(maxLength);
-			glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
-
+		if (!isCompiled || !isLinked) {
 			glDeleteProgram(program);
-			
-			GES_CORE_ERROR("{0}", infoLog.data());
-			GES_CORE_ASSERT(false, "Shader link failure!");
 			return 0;
 		}
 
@@ -123,8 +142,10 @@ namespace GES
 	OpenGLShader::OpenGLShader(cstring source, cstring name)
 	{
 		GES_PROFILE_FUNCTION();
-		auto shaderSources = PreProcess(source);
-		m_RendererID = Compile(shaderSources);
+		m_RendererID = Compile(source, name);
+		if (!m_RendererID) {
+			m_RendererID = Compile(DefaultShader, "default");
+		}
 		m_Name = name;
 	}
 

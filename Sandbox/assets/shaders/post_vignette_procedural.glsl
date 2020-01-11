@@ -1,5 +1,8 @@
-#name post_vignette
+// name post_vignette
+// version 330 core
 
+// VERTEX_SECTION
+#if defined(VERTEX_SECTION)
 // https://en.wikipedia.org/wiki/Stippling
 // https://en.wikipedia.org/wiki/Ordered_dithering
 // http://www.tannerhelland.com/4660/dithering-eleven-algorithms-source-code/
@@ -17,9 +20,6 @@
 // https://youtu.be/--GB9qyZJqg
 // https://digitalrune.github.io/DigitalRune-Documentation/html/fa431d48-b457-4c70-a590-d44b0840ab1e.htm
 // https://ocias.com/blog/unity-stipple-transparency-shader/
-
-#type vertex
-#version 330 core
 
 #define VERTEX_MODE 1
 
@@ -65,10 +65,10 @@ void main()
 	// https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glClipControl.xhtml
 }
 #endif
+#endif // defined(VERTEX_SECTION)
 
-#type fragment
-#version 330 core
-
+// FRAGMENT_SECTION
+#if defined(FRAGMENT_SECTION)
 #define DITHER_MODE 8
 #define FRAG_OUT_MODE 2
 
@@ -171,3 +171,4 @@ void main()
 		color = vec4(u_Color.rgb, u_Color.a * vignette_value);
 	#endif
 }
+#endif // defined(FRAGMENT_SECTION)
