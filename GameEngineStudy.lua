@@ -58,14 +58,14 @@ workspace "GameEngineStudy"
 		disablewarnings { "unused-variable", "unused-parameter", "missing-field-initializers" }
 
 	filter "configurations:Debug"
-		defines "DEBUG"
+		defines "GES_DEBUG"
 		staticruntime "Off"
 		runtime "Debug"
 		symbols "Full" -- On, Full
 		optimize "Off" -- Off, Debug
 
 	filter "configurations:Development"
-		defines "DEVELOPMENT"
+		defines "GES_DEVELOPMENT"
 		staticruntime "Off"
 		runtime "Release"
 		symbols "FastLink" -- On, FastLink
@@ -74,7 +74,7 @@ workspace "GameEngineStudy"
 	filter "configurations:Shipping"
 		-- either bundle CRT (vcruntime140.dll, etc.)
 		-- or build with [staticruntime "On"]
-		defines "SHIPPING"
+		defines "GES_SHIPPING"
 		staticruntime "Off"
 		runtime "Release"
 		symbols "Off"
