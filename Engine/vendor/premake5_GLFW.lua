@@ -45,6 +45,8 @@ project "GLFW"
 
 		defines {
 			"_GLFW_WIN32",
+			"_GLFW_USE_HYBRID_HPG",
+			-- "_GLFW_USE_OPTIMUS_HPG",
 			"_CRT_SECURE_NO_WARNINGS"
 		}
 

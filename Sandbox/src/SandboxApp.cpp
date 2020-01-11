@@ -1,5 +1,5 @@
 #include "GES.h"
-#include "GES/Core/EntryPoint.h"
+#include "GES_EntryPoint.h"
 
 // #include "Example.h"
 // #include "Sandbox2D.h"

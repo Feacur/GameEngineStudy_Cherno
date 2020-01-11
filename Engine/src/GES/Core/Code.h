@@ -1,7 +1,7 @@
 #pragma once
 // define this before anything
 
-// #include <intrin.h> // __debugbreak(), SIMD
+#include <intrin.h> // __debugbreak(), SIMD
 #include <stdint.h> // integer types data
 // #include <float.h>  // floating point types data
 // #include <stdio.h>  // printf
