@@ -44,9 +44,7 @@
 			"${workspaceFolder:__ workspace __}\\..\\Engine\\vendor\\spdlog\\include",
 			"${workspaceFolder:__ workspace __}\\..\\Engine\\vendor\\stb_image",
 		],
-		"C_Cpp.default.defines": [
-			// "GES_SHARED",
-		],
+		"C_Cpp.default.defines": [],
 		"C_Cpp.intelliSenseCachePath": "${workspaceFolder:__ workspace __}\\..\\bin-int",
 		// files
 		"files.exclude": {

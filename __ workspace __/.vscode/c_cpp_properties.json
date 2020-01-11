@@ -10,8 +10,7 @@
             
             "includePath": ["${default}"],
             "defines": [
-                "${default}",
-                "GES_BUILD_DLL"
+                "${default}"
             ]
         }
     ],
