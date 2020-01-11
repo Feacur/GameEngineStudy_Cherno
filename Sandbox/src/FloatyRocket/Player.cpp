@@ -12,6 +12,7 @@ namespace FloatyRocket
 		ParticleProps props = {};
 		props.Velocity = { -2.0f, 0.0f };
 		props.VelocityVariation = { 3.0f, 1.0f };
+		props.RotationSpeedVariation = 2.0f;
 		props.Size1 = 0.5f;
 		props.Size1Variation = 0.3f;
 		props.Color1 = { 0.99f, 0.43f, 0.17f, 1.0f };
@@ -25,6 +26,7 @@ namespace FloatyRocket
 		ParticleProps props = {};
 		props.Velocity = { -2.0f, 0.0f };
 		props.VelocityVariation = { 4.0f, 2.0f };
+		props.RotationSpeedVariation = 2.0f;
 		props.Size1 = 0.35f;
 		props.Size1Variation = 0.15f;
 		props.Size2 = 0.7f;
