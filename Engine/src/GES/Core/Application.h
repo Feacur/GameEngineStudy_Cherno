@@ -41,7 +41,7 @@ namespace GES {
 		Scope<Window> m_Window;
 		ImGuiLayer * m_ImGuiLayer;
 		bool m_Running = true;
-		bool m_Minimized;
+		bool m_Minimized = false;
 		LayerStack m_LayerStack;
 		float m_LastFrameTime;
 
