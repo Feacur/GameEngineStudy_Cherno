@@ -50,6 +50,7 @@ namespace GES
 		// glDepthRangef(0.0f, 1.0f);
 		// glClearDepth(1.0f);
 
+		// glFrontFace(GL_CCW);
 		// glCullFace(GL_BACK);
 	}
 

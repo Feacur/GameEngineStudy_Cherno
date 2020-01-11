@@ -41,7 +41,7 @@ static GES::Ref<GES::VertexArray> CreateVertexArraySquare()
 		/*position*/  0.5f,  0.5f, 0.0f, /*UV*/ 1.0f, 1.0f,
 		/*position*/ -0.5f,  0.5f, 0.0f, /*UV*/ 0.0f, 1.0f,
 	};
-	auto vertexBuffer = GES::VertexBuffer::Create(vertices, sizeof(vertices));
+	auto vertexBuffer = GES::VertexBuffer::Create(vertices, C_ARRAY_LENGTH(vertices));
 	vertexBuffer->SetLayout({
 		{ GES::ShaderDataType::Float3, "a_Position" },
 		{ GES::ShaderDataType::Float2, "a_TexCoord" },
@@ -52,7 +52,7 @@ static GES::Ref<GES::VertexArray> CreateVertexArraySquare()
 		0, 1, 2,
 		2, 3, 0,
 	};
-	auto indexBuffer = GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32));
+	auto indexBuffer = GES::IndexBuffer::Create(indices, C_ARRAY_LENGTH(indices));
 	vertexArray->SetIndexBuffer(indexBuffer);
 	
 	return vertexArray;

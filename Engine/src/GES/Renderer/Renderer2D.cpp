@@ -36,7 +36,7 @@ namespace GES
 			/*position*/  0.5f,  0.5f, 0.0f, /*UV*/ 1.0f, 1.0f,
 			/*position*/ -0.5f,  0.5f, 0.0f, /*UV*/ 0.0f, 1.0f,
 		};
-		auto vertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
+		auto vertexBuffer = VertexBuffer::Create(vertices, C_ARRAY_LENGTH(vertices));
 		vertexBuffer->SetLayout({
 			{ ShaderDataType::Float3, "a_Position" },
 			{ ShaderDataType::Float2, "a_TexCoord" },
@@ -47,7 +47,7 @@ namespace GES
 			0, 1, 2,
 			2, 3, 0,
 		};
-		auto indexBuffer = IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32));
+		auto indexBuffer = IndexBuffer::Create(indices, C_ARRAY_LENGTH(indices));
 		vertexArray->SetIndexBuffer(indexBuffer);
 		
 		return vertexArray;
