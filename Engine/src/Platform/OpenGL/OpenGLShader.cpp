@@ -95,9 +95,14 @@ namespace GES
 	static GLuint Compile(cstring source, cstring name)
 	{
 		GES_PROFILE_FUNCTION();
+		// @Todo: read this meta info from outside?
 		static ShaderProps compilations_props[] = {
 			{ GL_VERTEX_SHADER,   "#version 330 core\n", "#define VERTEX_SECTION\n" },
 			{ GL_FRAGMENT_SHADER, "#version 330 core\n", "#define FRAGMENT_SECTION\n" },
+			// { GL_GEOMETRY_SHADER, "#version 330 core\n", "#define GEOMETRY_SECTION\n" },
+			// { GL_COMPUTE_SHADER,  "#version 430 core\n", "#define COMPUTE_SECTION\n" },
+			// { GL_TESS_CONTROL_SHADER,    "#version 400 core\n", "#define TESSELATION_CONTROL_SECTION\n" },
+			// { GL_TESS_EVALUATION_SHADER, "#version 400 core\n", "#define TESSELATION_EVALUATION_SECTION\n" },
 		};
 		uint8 const compilations_props_count = C_ARRAY_LENGTH(compilations_props);
 

@@ -1,7 +1,7 @@
-// name renderer2d
-// version 330 core
+// name: renderer2d
+// version: 330 core
 
-// VERTEX_SECTION
+// section: VERTEX_SECTION
 #if defined(VERTEX_SECTION)
 layout(location = 0) in vec3 a_Position;
 layout(location = 1) in vec2 a_TexCoord;
@@ -18,7 +18,7 @@ void main()
 }
 #endif // defined(VERTEX_SECTION)
 
-// FRAGMENT_SECTION
+// section: FRAGMENT_SECTION
 #if defined(FRAGMENT_SECTION)
 in vec2 v_TexCoord;
 

@@ -1,7 +1,7 @@
-// name vertex_color
-// version 330 core
+// name: vertex_color
+// version: 330 core
 
-// VERTEX_SECTION
+// section: VERTEX_SECTION
 #if defined(VERTEX_SECTION)
 layout(location = 0) in vec3 a_Position;
 layout(location = 1) in vec4 a_Color;
@@ -18,7 +18,7 @@ void main()
 }
 #endif // defined(VERTEX_SECTION)
 
-// FRAGMENT_SECTION
+// section: FRAGMENT_SECTION
 #if defined(FRAGMENT_SECTION)
 in vec4 v_Color;
 

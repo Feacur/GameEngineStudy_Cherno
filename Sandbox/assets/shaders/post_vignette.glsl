@@ -1,7 +1,7 @@
-// name post_vignette
-// version 330 core
+// name: post_vignette
+// version: 330 core
 
-// VERTEX_SECTION
+// section: VERTEX_SECTION
 #if defined(VERTEX_SECTION)
 // https://twitter.com/_kzr/status/829621272757755905
 // http://www.loopit.dk/banding_in_games.pdf
@@ -69,7 +69,7 @@ void main()
 #endif
 #endif // defined(VERTEX_SECTION)
 
-// FRAGMENT_SECTION
+// section: FRAGMENT_SECTION
 #if defined(FRAGMENT_SECTION)
 #define FRAG_OUT_MODE 1
 

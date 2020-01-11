@@ -1,7 +1,7 @@
-// name post_vignette
-// version 330 core
+// name: post_vignette
+// version: 330 core
 
-// VERTEX_SECTION
+// section: VERTEX_SECTION
 #if defined(VERTEX_SECTION)
 // https://en.wikipedia.org/wiki/Stippling
 // https://en.wikipedia.org/wiki/Ordered_dithering
@@ -67,7 +67,7 @@ void main()
 #endif
 #endif // defined(VERTEX_SECTION)
 
-// FRAGMENT_SECTION
+// section: FRAGMENT_SECTION
 #if defined(FRAGMENT_SECTION)
 #define DITHER_MODE 8
 #define FRAG_OUT_MODE 2

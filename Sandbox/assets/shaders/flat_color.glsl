@@ -1,7 +1,7 @@
-// name flat_color
-// version 330 core
+// name: flat_color
+// version: 330 core
 
-// VERTEX_SECTION
+// section: VERTEX_SECTION
 #if defined(VERTEX_SECTION)
 layout(location = 0) in vec3 a_Position;
 
@@ -14,7 +14,7 @@ void main()
 }
 #endif // defined(VERTEX_SECTION)
 
-// FRAGMENT_SECTION
+// section: FRAGMENT_SECTION
 #if defined(FRAGMENT_SECTION)
 uniform vec4 u_Color;
 
