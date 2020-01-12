@@ -12,7 +12,7 @@ namespace GES
 	class Orthographic2dCameraController
 	{
 	public:
-		Orthographic2dCameraController(float aspectRatio, bool rotation = false);
+		Orthographic2dCameraController(r32 aspectRatio, bool rotation = false);
 
 		void OnUpdate(Timestep ts);
 		void OnEvent(Event & e);
@@ -24,15 +24,15 @@ namespace GES
 		bool OnWindowResized(WindowResizeEvent const & e);
 
 	private:
-		float m_AspectRatio;
-		float m_ZoomLevel = 1.0f;
+		r32 m_AspectRatio;
+		r32 m_ZoomLevel = 1.0f;
 		Orthographic2dCamera m_Camera;
 
 		bool m_Rotation;
 
 		glm::vec3 m_CameraPosition = { 0.0f, 0.0f, 0.0f };
-		float m_CameraRotatio = 0.0f;
-		float m_CameraTranslationSpeed = 1.0f;
-		float m_CameraRotationSpeed = 1.0f;
+		r32 m_CameraRotatio = 0.0f;
+		r32 m_CameraTranslationSpeed = 1.0f;
+		r32 m_CameraRotationSpeed = 1.0f;
 	};
 }

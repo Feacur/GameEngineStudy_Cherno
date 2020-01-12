@@ -17,7 +17,7 @@ namespace GES
 
 		static void SetClearColor(glm::vec4 const & color);
 		static void Clear();
-		static void SetViewport(uint32 x, uint32 y, uint32 width, uint32 height);
+		static void SetViewport(u32 x, u32 y, u32 width, u32 height);
 
 		static void DrawIndexed(Ref<VertexArray> const & vertexArray);
 		static void DrawTriangle();

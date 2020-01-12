@@ -2,7 +2,7 @@
 
 namespace GES
 {
-	typedef enum class MouseCode : uint16
+	typedef enum class MouseCode : u16
 	{
 		// From glfw3.h
 		Button0                = 0,
@@ -22,7 +22,7 @@ namespace GES
 	
 	inline std::ostream& operator<<(std::ostream& os, MouseCode mouseCode)
 	{
-		os << static_cast<int32>(mouseCode);
+		os << static_cast<s32>(mouseCode);
 		return os;
 	}
 }

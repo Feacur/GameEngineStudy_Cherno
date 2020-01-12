@@ -19,7 +19,7 @@ namespace GES
 	{
 		GES_PROFILE_FUNCTION();
 		auto window = static_cast<GLFWwindow *>(Application::Get().GetWindow().GetNativeWindow());
-		auto state = glfwGetKey(window, static_cast<int32>(keycode));
+		auto state = glfwGetKey(window, static_cast<s32>(keycode));
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
@@ -27,7 +27,7 @@ namespace GES
 	{
 		GES_PROFILE_FUNCTION();
 		auto window = static_cast<GLFWwindow *>(Application::Get().GetWindow().GetNativeWindow());
-		auto state = glfwGetMouseButton(window, static_cast<int32>(button));
+		auto state = glfwGetMouseButton(window, static_cast<s32>(button));
 		return state == GLFW_PRESS;
 	}
 

@@ -6,7 +6,7 @@
 struct ImGuiContext;
 
 namespace GES {
-	class GES_API ImGuiLayer : public Layer
+	class GES_DLL ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();
@@ -23,7 +23,7 @@ namespace GES {
 		inline ImGuiContext* GetImGuiContext() { return m_ImGuiContext; }
 
 	private:
-		float m_Time = 0;
+		r32 m_Time = 0;
 		ImGuiContext * m_ImGuiContext;
 	};
 }

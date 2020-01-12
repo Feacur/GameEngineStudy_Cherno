@@ -11,7 +11,7 @@ namespace GES {
 	// For the future, a better strategy might be to buffer events in an event
 	// bus and process them during the "event" part of the update stage.
 
-	enum class EventType : int32
+	enum class EventType : s32
 	{
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
@@ -19,19 +19,19 @@ namespace GES {
 		KeyPressed, KeyReleased, KeyTyped,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled,
 	};
-	UNDERLYING_TYPE_META(EventType, int32)
+	UNDERLYING_TYPE_META(EventType, s32)
 	IS_ENUM_META(EventType)
 
-	enum class EventCategory : int32
+	enum class EventCategory : s32
 	{
 		None           = 0,
-		Application    = BIT(int32, 0),
-		Input          = BIT(int32, 1),
-		Keyboard       = BIT(int32, 2),
-		Mouse          = BIT(int32, 3),
-		MouseButton    = BIT(int32, 4),
+		Application    = BIT(s32, 0),
+		Input          = BIT(s32, 1),
+		Keyboard       = BIT(s32, 2),
+		Mouse          = BIT(s32, 3),
+		MouseButton    = BIT(s32, 4),
 	};
-	UNDERLYING_TYPE_META(EventCategory, int32)
+	UNDERLYING_TYPE_META(EventCategory, s32)
 	IS_ENUM_META(EventCategory)
 	ENUM_FLAG_OPERATORS_IMPL(EventCategory)
 
@@ -41,7 +41,7 @@ namespace GES {
 
 #define EVENT_CLASS_CATEGORY(category) EventCategory GetCategoryFlags() const override { return category; }
 
-	class GES_API Event
+	class GES_DLL Event
 	{
 	public:
 		bool Handled = false;

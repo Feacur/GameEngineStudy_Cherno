@@ -11,7 +11,7 @@
 
 namespace GES
 {
-	Ref<Texture2D> Texture2D::CreateRaw(uint32 width, uint32 height)
+	Ref<Texture2D> Texture2D::CreateRaw(u32 width, u32 height)
 	{
 		GES_PROFILE_FUNCTION();
 		switch(RendererSettings::GetType())
@@ -19,7 +19,7 @@ namespace GES
 			case RendererSettings::Type::OpenGL:
 				return CreateRef<OpenGLTexture2D>(width, height);
 		}
-		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererSettings::GetType());
+		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (s32)RendererSettings::GetType());
 		return nullptr;
 	}
 	
@@ -31,7 +31,7 @@ namespace GES
 			case RendererSettings::Type::OpenGL:
 				return CreateRef<OpenGLTexture2D>(source);
 		}
-		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererSettings::GetType());
+		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (s32)RendererSettings::GetType());
 		return nullptr;
 	}
 }

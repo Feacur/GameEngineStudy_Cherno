@@ -22,12 +22,12 @@ namespace GES
 		static void BeginScene(Orthographic2dCamera const & camera);
 		static void EndScene();
 
-		static void DrawQuad(glm::vec2 const & position, glm::vec2 const & size, float rotation, glm::vec4 const & color);
-		static void DrawQuad(glm::vec3 const & position, glm::vec2 const & size, float rotation, glm::vec4 const & color);
-		static void DrawQuad(glm::vec2 const & position, glm::vec2 const & size, float rotation, Ref<Texture2D> const & texture);
-		static void DrawQuad(glm::vec3 const & position, glm::vec2 const & size, float rotation, Ref<Texture2D> const & texture);
-		static void DrawQuad(glm::vec2 const & position, glm::vec2 const & size, float rotation, glm::vec4 const & color, Ref<Texture2D> const & texture);
-		static void DrawQuad(glm::vec3 const & position, glm::vec2 const & size, float rotation, glm::vec4 const & color, Ref<Texture2D> const & texture);
+		static void DrawQuad(glm::vec2 const & position, glm::vec2 const & size, r32 rotation, glm::vec4 const & color);
+		static void DrawQuad(glm::vec3 const & position, glm::vec2 const & size, r32 rotation, glm::vec4 const & color);
+		static void DrawQuad(glm::vec2 const & position, glm::vec2 const & size, r32 rotation, Ref<Texture2D> const & texture);
+		static void DrawQuad(glm::vec3 const & position, glm::vec2 const & size, r32 rotation, Ref<Texture2D> const & texture);
+		static void DrawQuad(glm::vec2 const & position, glm::vec2 const & size, r32 rotation, glm::vec4 const & color, Ref<Texture2D> const & texture);
+		static void DrawQuad(glm::vec3 const & position, glm::vec2 const & size, r32 rotation, glm::vec4 const & color, Ref<Texture2D> const & texture);
 		static void DrawPost(Ref<Shader> const & shader, glm::vec2 const & screenSize, glm::vec4 const & color);
 		static void DrawPost(Ref<Shader> const & shader, glm::vec2 const & screenSize, glm::vec4 const & color, Ref<Texture2D> const & texture);
 	};

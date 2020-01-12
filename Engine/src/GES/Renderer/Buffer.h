@@ -23,7 +23,7 @@ namespace GES
 		Bool,
 	};
 
-	static uint32 ShaderDataTypeComponentCount(ShaderDataType type)
+	static u32 ShaderDataTypeComponentCount(ShaderDataType type)
 	{
 		switch(type)
 		{
@@ -39,31 +39,31 @@ namespace GES
 			case ShaderDataType::Int4:   return 4;
 			case ShaderDataType::Bool:   return 1;
 		}
-		// GES_CORE_ASSERT(false, "unsupported ShaderDataType '{0}'", (int32)type);
+		// GES_CORE_ASSERT(false, "unsupported ShaderDataType '{0}'", (s32)type);
 		return 0;
 	}
 
-	static uint32 ShaderDataTypeSingleSize(ShaderDataType type)
+	static u32 ShaderDataTypeSingleSize(ShaderDataType type)
 	{
 		switch(type)
 		{
-			case ShaderDataType::Float1: return sizeof(float);
-			case ShaderDataType::Float2: return sizeof(float);
-			case ShaderDataType::Float3: return sizeof(float);
-			case ShaderDataType::Float4: return sizeof(float);
-			case ShaderDataType::Mat3:   return sizeof(float);
-			case ShaderDataType::Mat4:   return sizeof(float);
-			case ShaderDataType::Int1:   return sizeof(int32);
-			case ShaderDataType::Int2:   return sizeof(int32);
-			case ShaderDataType::Int3:   return sizeof(int32);
-			case ShaderDataType::Int4:   return sizeof(int32);
-			case ShaderDataType::Bool:   return sizeof(int8);
+			case ShaderDataType::Float1: return sizeof(r32);
+			case ShaderDataType::Float2: return sizeof(r32);
+			case ShaderDataType::Float3: return sizeof(r32);
+			case ShaderDataType::Float4: return sizeof(r32);
+			case ShaderDataType::Mat3:   return sizeof(r32);
+			case ShaderDataType::Mat4:   return sizeof(r32);
+			case ShaderDataType::Int1:   return sizeof(s32);
+			case ShaderDataType::Int2:   return sizeof(s32);
+			case ShaderDataType::Int3:   return sizeof(s32);
+			case ShaderDataType::Int4:   return sizeof(s32);
+			case ShaderDataType::Bool:   return sizeof(s8);
 		}
-		// GES_CORE_ASSERT(false, "unsupported ShaderDataType '{0}'", (int32)type);
+		// GES_CORE_ASSERT(false, "unsupported ShaderDataType '{0}'", (s32)type);
 		return 0;
 	}
 
-	static uint32 ShaderDataTypeSize(ShaderDataType type)
+	static u32 ShaderDataTypeSize(ShaderDataType type)
 	{
 		return ShaderDataTypeSingleSize(type) * ShaderDataTypeComponentCount(type);
 	}
@@ -77,8 +77,8 @@ namespace GES
 		BufferElement(ShaderDataType type, std::string name, bool normalized = false)
 			: Type(type), Name(name), Normalized(normalized) {}
 		
-		uint32 GetSize() const { return ShaderDataTypeSize(Type); }
-		uint32 GetComponentCount() const { return ShaderDataTypeComponentCount(Type); }
+		u32 GetSize() const { return ShaderDataTypeSize(Type); }
+		u32 GetComponentCount() const { return ShaderDataTypeComponentCount(Type); }
 	};
 
 	class BufferLayout
@@ -107,7 +107,7 @@ namespace GES
 		virtual ~VertexBuffer() = default;
 
 	public:
-		static Ref<VertexBuffer> Create(float * vertices, uint32 count);
+		static Ref<VertexBuffer> Create(r32 * vertices, u32 count);
 
 	public:
 		virtual void Bind() const = 0;
@@ -123,12 +123,12 @@ namespace GES
 		virtual ~IndexBuffer() = default;
 
 	public:
-		static Ref<IndexBuffer> Create(uint32 * indices, uint32 count);
+		static Ref<IndexBuffer> Create(u32 * indices, u32 count);
 
 	public:
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 		
-		virtual uint32 GetCount() const = 0;
+		virtual u32 GetCount() const = 0;
 	};
 }

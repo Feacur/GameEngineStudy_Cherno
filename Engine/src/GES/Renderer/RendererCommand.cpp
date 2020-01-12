@@ -38,7 +38,7 @@ namespace GES
 		s_RendererAPI->Clear();
 	}
 
-	void RendererCommand::SetViewport(uint32 x, uint32 y, uint32 width, uint32 height)
+	void RendererCommand::SetViewport(u32 x, u32 y, u32 width, u32 height)
 	{
 		GES_PROFILE_FUNCTION();
 		s_RendererAPI->SetViewport(x, y, width, height);

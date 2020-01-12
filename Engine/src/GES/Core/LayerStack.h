@@ -12,7 +12,7 @@
 namespace GES {
 	class Layer;
 
-	class GES_API LayerStack
+	class GES_DLL LayerStack
 	{
 	public:
 		LayerStack() = default;
@@ -34,7 +34,7 @@ namespace GES {
 		std::vector<Layer*>::const_reverse_iterator rend() const { return m_Layers.rend(); }
 	private:
 		std::vector<Layer*> m_Layers;
-		uint32 m_LayerInsertIndex = 0;
+		u32 m_LayerInsertIndex = 0;
 	};
 }
 #if defined(GES_SHARED)

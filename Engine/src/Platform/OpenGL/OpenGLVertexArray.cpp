@@ -28,7 +28,7 @@ namespace GES
 			case ShaderDataType::Int4:   return GL_INT;
 			case ShaderDataType::Bool:   return GL_BOOL;
 		}
-		GES_CORE_ASSERT(false, "unsupported ShaderDataType '{0}'", (int32)type);
+		GES_CORE_ASSERT(false, "unsupported ShaderDataType '{0}'", (s32)type);
 		return 0;
 	}
 	
@@ -67,14 +67,14 @@ namespace GES
 		vertexBuffer->Bind();
 		m_VertexBuffers.push_back(vertexBuffer);
 		
-		uint32 stride = 0;
+		u32 stride = 0;
 		for (auto & element : bufferLayout)
 		{
 			stride += element.GetSize();
 		}
 
 		uintptr_t offset = 0;
-		uint32 vertexAttribIndex = 0;
+		u32 vertexAttribIndex = 0;
 		for (auto const & element : bufferLayout)
 		{
 			glEnableVertexAttribArray(vertexAttribIndex);

@@ -20,7 +20,7 @@ namespace GES
 		Ref<IndexBuffer> const & GetIndexBuffer() const { return m_IndexBuffer; }
 
 	private:
-		uint32 m_RendererID;
+		u32 m_RendererID;
 		std::vector<Ref<VertexBuffer>> m_VertexBuffers;
 		Ref<IndexBuffer> m_IndexBuffer;
 	};

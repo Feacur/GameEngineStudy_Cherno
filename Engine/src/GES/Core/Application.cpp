@@ -53,10 +53,10 @@ namespace GES {
 	void Application::Run()
 	{
 		GES_PROFILE_FUNCTION();
-		m_LastFrameTime = (float)glfwGetTime();
+		m_LastFrameTime = (r32)glfwGetTime();
 		while (m_Running)
 		{
-			float time = (float)glfwGetTime();
+			r32 time = (r32)glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 

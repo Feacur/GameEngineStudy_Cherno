@@ -6,8 +6,8 @@
 // @Note: probably I should factor out a new submodule
 //        instead of copy-pasting chunks around...
 // https://github.com/Feacur/CustomEngineStudy/blob/master/code/shared/random.h
-inline static float hash_01(uint32 * state) {
-	union { uint32 x; float xf; };  // local unionized values
+inline static r32 hash_01(u32 * state) {
+	union { u32 x; r32 xf; };  // local unionized values
 	x = (*state = *state * 16807U); // hash
 	// @Note: might well mask fractional part with [0x007fffffU]
 	x = (x >> 9) | 0x3f800000U;     // clamp to [1 .. 2) * (2^0)
@@ -16,13 +16,13 @@ inline static float hash_01(uint32 * state) {
 
 static glm::vec4 HSVtoRGB(const glm::vec3& hsv) {
 	int H = (int)(hsv.x * 360.0f);
-	double S = hsv.y;
-	double V = hsv.z;
+	r64 S = hsv.y;
+	r64 V = hsv.z;
 
-	double C = S * V;
-	double X = C * (1 - abs(fmod(H / 60.0, 2) - 1));
-	double m = V - C;
-	double Rs, Gs, Bs;
+	r64 C = S * V;
+	r64 X = C * (1 - abs(fmod(H / 60.0, 2) - 1));
+	r64 m = V - C;
+	r64 Rs, Gs, Bs;
 
 	if (H >= 0 && H < 60) {
 		Rs = C;
@@ -60,13 +60,13 @@ static glm::vec4 HSVtoRGB(const glm::vec3& hsv) {
 
 static bool PointInTri(const glm::vec2& p, glm::vec2& p0, const glm::vec2& p1, const glm::vec2& p2)
 {
-	float s = p0.y * p2.x - p0.x * p2.y + (p2.y - p0.y) * p.x + (p0.x - p2.x) * p.y;
-	float t = p0.x * p1.y - p0.y * p1.x + (p0.y - p1.y) * p.x + (p1.x - p0.x) * p.y;
+	r32 s = p0.y * p2.x - p0.x * p2.y + (p2.y - p0.y) * p.x + (p0.x - p2.x) * p.y;
+	r32 t = p0.x * p1.y - p0.y * p1.x + (p0.y - p1.y) * p.x + (p1.x - p0.x) * p.y;
 
 	if ((s < 0) != (t < 0))
 		return false;
 
-	float A = -p1.y * p2.x + p0.y * (p2.x - p1.x) + p0.x * (p1.y - p2.y) + p1.x * p2.y;
+	r32 A = -p1.y * p2.x + p0.y * (p2.x - p1.x) + p0.x * (p1.y - p2.y) + p1.x * p2.y;
 
 	return A < 0 ?
 		(s <= 0 && s + t >= A) :
@@ -90,7 +90,7 @@ namespace FloatyRocket
 			CreatePillar(i, i * 10.0f);
 	}
 
-	void Level::OnUpdate(GES::Timestep ts, glm::vec2 playerPos, float playerRot)
+	void Level::OnUpdate(GES::Timestep ts, glm::vec2 playerPos, r32 playerRot)
 	{
 		m_PillarHSV.x += 0.1f * ts;
 		if (m_PillarHSV.x > 1.0f)
@@ -125,12 +125,12 @@ namespace FloatyRocket
 		}
 	}
 
-	void Level::CreatePillar(int index, float offset)
+	void Level::CreatePillar(int index, r32 offset)
 	{
 		Pillar& pillar = m_Pillars[index];
 
-		float center = random_01() * 35.0f - 17.5f;
-		float gap = 2.0f + random_01() * 5.0f;
+		r32 center = random_01() * 35.0f - 17.5f;
+		r32 gap = 2.0f + random_01() * 5.0f;
 
 		pillar.TopPosition.x = offset;
 		pillar.TopPosition.y = 10.0f - ((10.0f - center) * 0.2f) + gap * 0.5f;
@@ -141,7 +141,7 @@ namespace FloatyRocket
 		pillar.BottomPosition.z = 0.90f - index * 0.1f;
 	}
 
-	bool Level::CollisionTest(glm::vec2 playerPos, float playerRot)
+	bool Level::CollisionTest(glm::vec2 playerPos, r32 playerRot)
 	{
 		if (glm::abs(playerPos.y) > 8.5f)
 			return true;

@@ -11,7 +11,7 @@
 
 namespace GES
 {
-	Ref<VertexBuffer> VertexBuffer::Create(float * vertices, uint32 count)
+	Ref<VertexBuffer> VertexBuffer::Create(r32 * vertices, u32 count)
 	{
 		GES_PROFILE_FUNCTION();
 		switch(RendererSettings::GetType())
@@ -19,11 +19,11 @@ namespace GES
 			case RendererSettings::Type::OpenGL:
 				return CreateRef<OpenGLVertexBuffer>(vertices, count);
 		}
-		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererSettings::GetType());
+		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (s32)RendererSettings::GetType());
 		return nullptr;
 	}
 
-	Ref<IndexBuffer> IndexBuffer::Create(uint32 * indices, uint32 count)
+	Ref<IndexBuffer> IndexBuffer::Create(u32 * indices, u32 count)
 	{
 		GES_PROFILE_FUNCTION();
 		switch(RendererSettings::GetType())
@@ -31,7 +31,7 @@ namespace GES
 			case RendererSettings::Type::OpenGL:
 				return CreateRef<OpenGLIndexBuffer>(indices, count);
 		}
-		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererSettings::GetType());
+		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (s32)RendererSettings::GetType());
 		return nullptr;
 	}
 }

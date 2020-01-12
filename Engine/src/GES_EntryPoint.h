@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(GES_PLATFORM_WINDOWS)
+#if defined(GES_OS_WINDOWS)
 namespace GES
 {
 	extern Application * CreateApplication();

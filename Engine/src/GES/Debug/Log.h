@@ -1,7 +1,7 @@
 #pragma once
 #include "GES/Core/Code.h"
 
-#define FEATURE_GES_LOGGER
+#define GES_FEATURE_LOGGER
 
 #if !defined(GES_BYPASS_VENDOR_HEADERS)
 	#include <spdlog/spdlog.h>
@@ -9,11 +9,11 @@
 #endif
 
 #if defined(GES_SHARED)
-GES_TEMPLATE template class GES_API Ref<spdlog::logger>;
+GES_TEMPLATE template class GES_DLL Ref<spdlog::logger>;
 #endif
 
 namespace GES {
-	class GES_API Log
+	class GES_DLL Log
 	{
 	public:
 		static void Init();

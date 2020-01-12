@@ -5,7 +5,7 @@
 
 namespace GES {
 
-	class GES_API KeyEvent : public Event
+	class GES_DLL KeyEvent : public Event
 	{
 	public:
 		inline KeyCode GetKeyCode() const { return m_KeyCode; }
@@ -18,13 +18,13 @@ namespace GES {
 		KeyCode m_KeyCode;
 	};
 
-	class GES_API KeyPressedEvent : public KeyEvent
+	class GES_DLL KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(KeyCode keycode, int32 repeatCount)
+		KeyPressedEvent(KeyCode keycode, s32 repeatCount)
 			: KeyEvent(keycode), m_RepeatCount(repeatCount) {}
 
-		inline int32 GetRepeatCount() const { return m_RepeatCount; }
+		inline s32 GetRepeatCount() const { return m_RepeatCount; }
 
 		std::string ToString() const override
 		{
@@ -35,10 +35,10 @@ namespace GES {
 
 		EVENT_CLASS_TYPE(KeyPressed)
 	private:
-		int32 m_RepeatCount;
+		s32 m_RepeatCount;
 	};
 
-	class GES_API KeyReleasedEvent : public KeyEvent
+	class GES_DLL KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(KeyCode keycode)
@@ -54,7 +54,7 @@ namespace GES {
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	class GES_API KeyTypedEvent : public KeyEvent
+	class GES_DLL KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(KeyCode keycode)

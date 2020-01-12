@@ -48,30 +48,30 @@ namespace FloatyRocket
 	{
 		static ParticleProps FireParticle = ConstructFireParticleProps();
 		static ParticleProps SmokeParticle = ConstructSmokeParticleProps();
-		static float const m_EnginePower = 31.25f;
-		static float const m_Gravity = 25.0f;
+		static r32 const m_EnginePower = 31.25f;
+		static r32 const m_Gravity = 25.0f;
 
-		m_ParticleSmokeElapsed += (float)ts;
+		m_ParticleSmokeElapsed += (r32)ts;
 
 		if (GES::Input::IsKeyPressed(GES_KEY_SPACE))
 		{
-			m_ParticleFireElapsed += (float)ts;
+			m_ParticleFireElapsed += (r32)ts;
 			if (m_Velocity.y < 0.0f)
 			{
-				m_Velocity.y += m_EnginePower * 3.0f * (float)ts;
+				m_Velocity.y += m_EnginePower * 3.0f * (r32)ts;
 			}
 			else
 			{
-				m_Velocity.y += m_EnginePower * (float)ts;
+				m_Velocity.y += m_EnginePower * (r32)ts;
 			}
 		}
 		else
 		{
-			m_Velocity.y -= m_Gravity * (float)ts;
+			m_Velocity.y -= m_Gravity * (r32)ts;
 		}
 
 		m_Velocity.y = glm::clamp(m_Velocity.y, -20.0f, 20.0f);
-		m_Position += m_Velocity * (float)ts;
+		m_Position += m_Velocity * (r32)ts;
 
 		if (m_ParticleFireElapsed >= m_ParticleFirePeriod)
 		{

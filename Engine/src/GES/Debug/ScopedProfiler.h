@@ -1,7 +1,7 @@
 #pragma once
 #include "GES/Core/Code.h"
 
-#define FEATURE_GES_SCOPED_PROFILER
+#define GES_FEATURE_SCOPED_PROFILER
 
 #if defined(GES_BYPASS_VENDOR_HEADERS)
 	#include <chrono>
@@ -29,12 +29,12 @@ namespace GES
 		{
 			auto endTimepoint = std::chrono::high_resolution_clock::now();
 
-			int64 start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
-			int64 end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
+			s64 start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
+			s64 end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
 
 			m_Stopped = true;
 
-			float duration = (end - start) * 0.001f;
+			r32 duration = (end - start) * 0.001f;
 			m_Func({ m_Name, duration });
 		}
 

@@ -12,6 +12,15 @@
 
 #include <glm/glm.hpp>
 
-#if defined(GES_PLATFORM_WINDOWS)
+#include <memory>
+
+#include <intrin.h>
+#include <stdint.h>
+#include <float.h>
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+#if defined(GES_OS_WINDOWS)
 	#include <Windows.h>
 #endif

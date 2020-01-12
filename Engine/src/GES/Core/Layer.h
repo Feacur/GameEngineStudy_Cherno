@@ -14,7 +14,7 @@
 namespace GES {
 	class Event;
 
-	class GES_API Layer
+	class GES_DLL Layer
 	{
 	public:
 		Layer(std::string const & name = "Layer");
@@ -29,7 +29,7 @@ namespace GES {
 	public:
 		virtual void OnImGuiRender() {}
 
-		inline const std::string & GetName() const { return m_DebugName; }
+		inline std::string const & GetName() const { return m_DebugName; }
 	protected:
 		std::string m_DebugName;
 	};

@@ -14,7 +14,7 @@
 
 namespace GES
 {
-	Orthographic2dCameraController::Orthographic2dCameraController(float aspectRatio, bool rotation)
+	Orthographic2dCameraController::Orthographic2dCameraController(r32 aspectRatio, bool rotation)
 		: m_AspectRatio(aspectRatio)
 		, m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel)
 		, m_Rotation(rotation)
@@ -25,8 +25,8 @@ namespace GES
 	void Orthographic2dCameraController::OnUpdate(Timestep ts)
 	{
 		GES_PROFILE_FUNCTION();
-		float positionDelta = m_CameraTranslationSpeed * ts;
-		float rotationDelta = m_CameraRotationSpeed * ts;
+		r32 positionDelta = m_CameraTranslationSpeed * ts;
+		r32 rotationDelta = m_CameraRotationSpeed * ts;
 
 		auto cameraPosition = m_Camera.GetPosition();
 		auto cameraRotation = m_Camera.GetRotation();
@@ -80,7 +80,7 @@ namespace GES
 	bool Orthographic2dCameraController::OnWindowResized(WindowResizeEvent const & e)
 	{
 		GES_PROFILE_FUNCTION();
-		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
+		m_AspectRatio = (r32)e.GetWidth() / (r32)e.GetHeight();
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 		return false;
 	}

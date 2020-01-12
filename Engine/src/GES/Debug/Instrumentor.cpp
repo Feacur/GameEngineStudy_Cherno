@@ -6,14 +6,14 @@ namespace GES
 	struct ProfileResult
 	{
 		std::string Name;
-		int64 Start, End;
+		s64 Start, End;
 		size_t ThreadID;
 	};
 
 	struct InstrumentationSession
 	{
 		cstring Name;
-		int32 ProfileCount;
+		s32 ProfileCount;
 		std::ofstream OutputStream;
 	};
 
@@ -87,7 +87,7 @@ namespace GES
 	{
 		auto time = std::chrono::high_resolution_clock::now();
 		// time = std::chrono::time_point_cast<std::chrono::nanoseconds>(time);
-		int64 endNanoseconds = time.time_since_epoch().count();
+		s64 endNanoseconds = time.time_since_epoch().count();
 
 		size_t threadID = std::hash<std::thread::id>{}(std::this_thread::get_id());
 		Instrumentor::Get().WriteProfile({ m_Name, m_StartNanoseconds, endNanoseconds, threadID });

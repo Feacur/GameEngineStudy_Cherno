@@ -62,9 +62,9 @@ namespace GES
 		return false;
 	}
 
-	// uint8 const code_count = C_ARRAY_LENGTH(code);
+	// u8 const code_count = C_ARRAY_LENGTH(code);
 	// GLint length[code_count];
-	// for (uint8 i = 0; i < code_count; i++) {
+	// for (u8 i = 0; i < code_count; i++) {
 	// 	length[i] = (GLint)strlen(code[i]);
 	// }
 
@@ -104,17 +104,17 @@ namespace GES
 			// { GL_TESS_CONTROL_SHADER,    "#version 400 core\n", "#define TESSELATION_CONTROL_SECTION\n" },
 			// { GL_TESS_EVALUATION_SHADER, "#version 400 core\n", "#define TESSELATION_EVALUATION_SECTION\n" },
 		};
-		uint8 const compilations_props_count = C_ARRAY_LENGTH(compilations_props);
+		u8 const compilations_props_count = C_ARRAY_LENGTH(compilations_props);
 
 		// Compile shaders
 		GLuint glShaderIDs[4] = {};
-		for (uint8 i = 0; i < compilations_props_count; i++)
+		for (u8 i = 0; i < compilations_props_count; i++)
 		{
 			glShaderIDs[i] = CompileShader(source, compilations_props[i]);
 		}
 
 		bool isCompiled = true;
-		for (uint8 i = 0; i < compilations_props_count; i++)
+		for (u8 i = 0; i < compilations_props_count; i++)
 		{
 			bool isOk = VerifyCompilation(glShaderIDs[i], name);
 			isCompiled = isCompiled && isOk;
@@ -122,17 +122,17 @@ namespace GES
 
 		// Link the program
 		GLuint program = glCreateProgram();
-		for (uint8 i = 0; i < compilations_props_count; i++) {
+		for (u8 i = 0; i < compilations_props_count; i++) {
 			glAttachShader(program, glShaderIDs[i]);
 		}
 		glLinkProgram(program);
 		bool isLinked = VerifyLinking(program, name);
 
 		// Free shader resources
-		for (uint8 i = 0; i < compilations_props_count; i++) {
+		for (u8 i = 0; i < compilations_props_count; i++) {
 			glDetachShader(program, glShaderIDs[i]);
 		}
-		for (uint8 i = 0; i < compilations_props_count; i++) {
+		for (u8 i = 0; i < compilations_props_count; i++) {
 			glDeleteShader(glShaderIDs[i]);
 		}
 
@@ -179,7 +179,7 @@ namespace GES
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
 	}
 
-	void OpenGLShader::UploadUniformInt(cstring name, int32 value)
+	void OpenGLShader::UploadUniformInt(cstring name, s32 value)
 	{
 		GES_PROFILE_FUNCTION();
 		auto location = glGetUniformLocation(m_RendererID, name);

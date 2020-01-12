@@ -9,7 +9,7 @@ static GES::Ref<GES::VertexArray> CreateVertexArrayTriangle()
 	GES_PROFILE_FUNCTION();
 	auto vertexArray = GES::VertexArray::Create();
 
-	float vertices[] = {
+	r32 vertices[] = {
 		/*position*/ -0.5f, -0.5f, 0.0f, /*color*/ 1.0f, 0.0f, 0.0f, 1.0f,
 		/*position*/  0.5f, -0.5f, 0.0f, /*color*/ 0.0f, 1.0f, 0.0f, 1.0f,
 		/*position*/  0.0f,  0.5f, 0.0f, /*color*/ 0.0f, 0.0f, 1.0f, 1.0f,
@@ -21,10 +21,10 @@ static GES::Ref<GES::VertexArray> CreateVertexArrayTriangle()
 	});
 	vertexArray->AddVertexBuffer(vertexBuffer);
 
-	uint32 indices[] = {
+	u32 indices[] = {
 		0, 1, 2,
 	};
-	auto indexBuffer = GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32));
+	auto indexBuffer = GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(u32));
 	vertexArray->SetIndexBuffer(indexBuffer);
 
 	return vertexArray;
@@ -35,7 +35,7 @@ static GES::Ref<GES::VertexArray> CreateVertexArraySquare()
 	GES_PROFILE_FUNCTION();
 	auto vertexArray = GES::VertexArray::Create();
 
-	float vertices[] = {
+	r32 vertices[] = {
 		/*position*/ -0.5f, -0.5f, 0.0f, /*UV*/ 0.0f, 0.0f,
 		/*position*/  0.5f, -0.5f, 0.0f, /*UV*/ 1.0f, 0.0f,
 		/*position*/  0.5f,  0.5f, 0.0f, /*UV*/ 1.0f, 1.0f,
@@ -48,7 +48,7 @@ static GES::Ref<GES::VertexArray> CreateVertexArraySquare()
 	});
 	vertexArray->AddVertexBuffer(vertexBuffer);
 
-	uint32 indices[] = {
+	u32 indices[] = {
 		0, 1, 2,
 		2, 3, 0,
 	};

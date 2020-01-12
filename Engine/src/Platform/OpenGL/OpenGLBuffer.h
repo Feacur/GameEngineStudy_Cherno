@@ -6,7 +6,7 @@ namespace GES
 	class OpenGLVertexBuffer : public VertexBuffer
 	{
 	public:
-		OpenGLVertexBuffer(float * vertices, uint32 size);
+		OpenGLVertexBuffer(float * vertices, u32 size);
 		~OpenGLVertexBuffer() override;
 
 	public:
@@ -17,24 +17,24 @@ namespace GES
 		BufferLayout const & GetLayout() const override { return m_Layout; }
 
 	private:
-		uint32 m_RendererID;
+		u32 m_RendererID;
 		BufferLayout m_Layout;
 	};
 	
 	class OpenGLIndexBuffer : public IndexBuffer
 	{
 	public:
-		OpenGLIndexBuffer(uint32 * indices, uint32 count);
+		OpenGLIndexBuffer(u32 * indices, u32 count);
 		~OpenGLIndexBuffer() override;
 
 	public:
 		void Bind() const override;
 		void Unbind() const override;
 
-		uint32 GetCount() const override { return m_Count; }
+		u32 GetCount() const override { return m_Count; }
 
 	private:
-		uint32 m_RendererID;
-		uint32 m_Count;
+		u32 m_RendererID;
+		u32 m_Count;
 	};
 }

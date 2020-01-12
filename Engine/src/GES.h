@@ -15,14 +15,16 @@
 	#include <glm/glm.hpp>
 #endif
 
+#include <memory> // current memory management
+
 #include "GES/Core/Code.h"
 #include "GES/Core/Timestep.h"
 #include "GES/Core/Window.h"
 #include "GES/Core/Application.h"
 #include "GES/Core/Layer.h"
 
-#include "GES/Debug/Log.h" // FEATURE_GES_LOGGER
-#include "GES/Debug/Instrumentor.h" // FEATURE_GES_INSTRUMENTOR
+#include "GES/Debug/Log.h" // GES_FEATURE_LOGGER
+#include "GES/Debug/Instrumentor.h" // GES_FEATURE_INSTRUMENTOR
 #include "GES/Debug/Code.h"
 
 // #include "GES/Core/KeyCodes.h"

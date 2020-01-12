@@ -5,7 +5,7 @@
 
 namespace FloatyRocket
 {
-	static bool CheckLua(lua_State * L, int32 result)
+	static bool CheckLua(lua_State * L, s32 result)
 	{
 		if (result == LUA_OK) { return true; }
 		cstring errorMessage = lua_tostring(L, -1);
@@ -13,7 +13,7 @@ namespace FloatyRocket
 		return false;
 	}
 	
-	static int32 NativeCustomAdd(lua_State * L)
+	static s32 NativeCustomAdd(lua_State * L)
 	{
 		LUA_NUMBER a = lua_tonumber(L, -1);
 		LUA_NUMBER b = lua_tonumber(L, -2);
@@ -148,7 +148,7 @@ namespace FloatyRocket
 			m_Player.OnRender(m_PlayerTexture);
 
 			GES::Window & window = GES::Application::Get().GetWindow();
-			glm::vec2 screenSize((float)window.GetWidth(), (float)window.GetHeight());
+			glm::vec2 screenSize((r32)window.GetWidth(), (r32)window.GetHeight());
 			// GES::Renderer2D::DrawPost(m_PostVignetteProcedural, screenSize, {0.0f, 0.0f, 0.0f, 0.5f});
 			GES::Renderer2D::DrawPost(m_PostVignette, screenSize, {0.0f, 0.0f, 0.0f, 0.5f}, m_NoiseTexture);
 
@@ -170,8 +170,8 @@ namespace FloatyRocket
 	bool MainLayer::OnWindowResized(GES::WindowResizeEvent const & e)
 	{
 		GES_PROFILE_FUNCTION();
-		float aspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
-		float zoomLevel = 10.0f;
+		r32 aspectRatio = (r32)e.GetWidth() / (r32)e.GetHeight();
+		r32 zoomLevel = 10.0f;
 		m_Camera.SetProjection(-aspectRatio * zoomLevel, aspectRatio * zoomLevel, -zoomLevel, zoomLevel);
 		return false;
 	}

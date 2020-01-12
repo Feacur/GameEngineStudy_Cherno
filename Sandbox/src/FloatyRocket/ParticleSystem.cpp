@@ -8,8 +8,8 @@
 // @Note: probably I should factor out a new submodule
 //        instead of copy-pasting chunks around...
 // https://github.com/Feacur/CustomEngineStudy/blob/master/code/shared/random.h
-inline static float hash_radius01(uint32 * state) {
-	union { uint32 x; float xf; };  // local unionized values
+inline static r32 hash_radius01(u32 * state) {
+	union { u32 x; r32 xf; };  // local unionized values
 	x = (*state = *state * 16807U); // hash
 	// @Note: might well mask fractional part with [0x007fffffU]
 	x = (x >> 9) | 0x40000000U;     // clamp to [1 .. 2) * (2^1)
@@ -19,7 +19,7 @@ inline static float hash_radius01(uint32 * state) {
 namespace FloatyRocket
 {
 	#define random_radius01() hash_radius01(&m_Random)
-	ParticleSystem::ParticleSystem(int32 limit)
+	ParticleSystem::ParticleSystem(s32 limit)
 	{
 		GES_PROFILE_FUNCTION();
 		m_Index = 0;
@@ -36,7 +36,7 @@ namespace FloatyRocket
 	void ParticleSystem::Emit(ParticleProps const & props)
 	{
 		GES_PROFILE_FUNCTION();
-		int32 index = m_Index;
+		s32 index = m_Index;
 		m_Index = (m_Index + 1) % m_Limit;
 
 		m_Active[index] = true;
@@ -68,32 +68,32 @@ namespace FloatyRocket
 	{
 		GES_PROFILE_FUNCTION();
 
-		int32 limit = m_Limit;
-		for (int32 i = 0; i < limit; i++)
+		s32 limit = m_Limit;
+		for (s32 i = 0; i < limit; i++)
 		{
 			if (!m_Active[i]) { continue; }
 
 			ParticleLifetime & lifetime = m_Lifetime[i];
-			lifetime.Elapsed += (float)ts;
+			lifetime.Elapsed += (r32)ts;
 			m_Active[i] = lifetime.Elapsed < lifetime.Duration;
 		}
 		
-		for (int32 i = 0; i < limit; i++)
+		for (s32 i = 0; i < limit; i++)
 		{
 			if (!m_Active[i]) { continue; }
 
 			ParticleState & state = m_State[i];
 			ParticleMotion & motion = m_Motion[i];
-			state.Position += motion.Velocity * (float)ts;
-			state.Rotation += motion.RotationSpeed * (float)ts;
+			state.Position += motion.Velocity * (r32)ts;
+			state.Rotation += motion.RotationSpeed * (r32)ts;
 		}
 	}
 
 	void ParticleSystem::OnRender()
 	{
 		GES_PROFILE_FUNCTION();
-		int32 limit = m_Limit;
-		for (int32 i = 0; i < limit; i++)
+		s32 limit = m_Limit;
+		for (s32 i = 0; i < limit; i++)
 		{
 			if (!m_Active[i]) { continue; }
 			
@@ -101,9 +101,9 @@ namespace FloatyRocket
 			ParticleState & state = m_State[i];
 			ParticleRendering & rendering = m_Rendering[i];
 
-			float life = lifetime.Elapsed / lifetime.Duration;
+			r32 life = lifetime.Elapsed / lifetime.Duration;
 			glm::vec4 color = glm::lerp(rendering.Color1, rendering.Color2, life);
-			float size = glm::lerp(rendering.Size1, rendering.Size2, life);
+			r32 size = glm::lerp(rendering.Size1, rendering.Size2, life);
 
 			glm::vec3 drawPosition(state.Position.x, state.Position.y, 0.2f);
 			GES::Renderer2D::DrawQuad(drawPosition, { size, size }, state.Rotation, color);

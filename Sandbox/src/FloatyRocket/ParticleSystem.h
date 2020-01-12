@@ -12,7 +12,7 @@ namespace FloatyRocket
 	class ParticleSystem
 	{
 		public:
-			ParticleSystem(int32 limit);
+			ParticleSystem(s32 limit);
 			~ParticleSystem();
 			
 			void Emit(ParticleProps const & props);
@@ -22,32 +22,32 @@ namespace FloatyRocket
 		private:
 			struct ParticleLifetime
 			{
-				float Duration;
-				float Elapsed;
+				r32 Duration;
+				r32 Elapsed;
 			};
 
 			struct ParticleState
 			{
 				glm::vec2 Position;
-				float Rotation;
+				r32 Rotation;
 			};
 
 			struct ParticleMotion
 			{
 				glm::vec2 Velocity;
-				float RotationSpeed;
+				r32 RotationSpeed;
 			};
 
 			struct ParticleRendering
 			{
 				glm::vec4 Color1, Color2;
-				float Size1, Size2;
+				r32 Size1, Size2;
 			};
 
-			uint32 m_Random = 1u;
+			u32 m_Random = 1u;
 
-			int32 m_Index;
-			int32 m_Limit;
+			s32 m_Index;
+			s32 m_Limit;
 			std::vector<bool> m_Active;
 			std::vector<ParticleLifetime> m_Lifetime;
 			std::vector<ParticleState> m_State;

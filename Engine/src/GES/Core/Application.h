@@ -5,8 +5,8 @@
 
 namespace GES {
 	#if defined(GES_SHARED)
-	GES_TEMPLATE template class GES_API std::_Compressed_pair<std::default_delete<Window>, Window *, true>;
-	GES_TEMPLATE template class GES_API std::unique_ptr<Window>;
+	GES_TEMPLATE template class GES_DLL std::_Compressed_pair<std::default_delete<Window>, Window *, true>;
+	GES_TEMPLATE template class GES_DLL std::unique_ptr<Window>;
 	#endif
 	
 	class Window;
@@ -15,7 +15,7 @@ namespace GES {
 	class WindowResizeEvent;
 	class ImGuiLayer;
 
-	class GES_API Application
+	class GES_DLL Application
 	{
 	public:
 		Application();
@@ -43,7 +43,7 @@ namespace GES {
 		bool m_Running = true;
 		bool m_Minimized = false;
 		LayerStack m_LayerStack;
-		float m_LastFrameTime;
+		r32 m_LastFrameTime;
 
 	private:
 		static Application * s_Instance;

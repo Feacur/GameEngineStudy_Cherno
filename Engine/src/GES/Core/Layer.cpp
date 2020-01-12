@@ -5,7 +5,7 @@
 #include "GES/Debug/Code.h"
 
 namespace GES {
-	Layer::Layer(const std::string& debugName)
+	Layer::Layer(std::string const & debugName)
 		: m_DebugName(debugName)
 	{
 		GES_PROFILE_FUNCTION();

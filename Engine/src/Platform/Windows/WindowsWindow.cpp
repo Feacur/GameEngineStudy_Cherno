@@ -19,7 +19,7 @@
 #include <GLFW/glfw3.h>
 
 namespace GES {
-	static uint8 s_GLFWWindowCount = 0;
+	static u8 s_GLFWWindowCount = 0;
 
 	static void GLFWErrorCallback(int error, cstring description)
 	{
@@ -77,7 +77,7 @@ namespace GES {
 		glfwWindowHint(GLFW_DEPTH_BITS, 24);
 		// glfwWindowHint(GLFW_STENCIL_BITS, 8);
 
-		m_WindowHandle = glfwCreateWindow((int32)props.Width, (int32)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		m_WindowHandle = glfwCreateWindow((s32)props.Width, (s32)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		++s_GLFWWindowCount;
 
 		m_Context = GraphicsContext::Create(m_WindowHandle);
@@ -86,7 +86,7 @@ namespace GES {
 		glfwSetWindowUserPointer(m_WindowHandle, &m_Data);
 		SetVSync(true);
 
-		glfwSetWindowSizeCallback(m_WindowHandle, [](GLFWwindow * window, int32 width, int32 height) {
+		glfwSetWindowSizeCallback(m_WindowHandle, [](GLFWwindow * window, s32 width, s32 height) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			data.Width = width;
 			data.Height = height;
@@ -102,7 +102,7 @@ namespace GES {
 			data.EventCallback(event);
 		});
 
-		glfwSetKeyCallback(m_WindowHandle, [](GLFWwindow * window, int32 key, int32 scancode, int32 action, int32 mods) {
+		glfwSetKeyCallback(m_WindowHandle, [](GLFWwindow * window, s32 key, s32 scancode, s32 action, s32 mods) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			switch (action) {
@@ -121,7 +121,7 @@ namespace GES {
 			}
 		});
 
-		glfwSetCharCallback(m_WindowHandle, [](GLFWwindow * window, uint32 keycode) {
+		glfwSetCharCallback(m_WindowHandle, [](GLFWwindow * window, u32 keycode) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			KeyTypedEvent event(static_cast<KeyCode>(keycode));

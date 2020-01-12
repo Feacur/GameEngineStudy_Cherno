@@ -11,14 +11,14 @@
 
 namespace GES
 {
-	Orthographic2dCamera::Orthographic2dCamera(float left, float right, float bottom, float top)
+	Orthographic2dCamera::Orthographic2dCamera(r32 left, r32 right, r32 bottom, r32 top)
 		: m_ProjectionMatrix(glm::ortho(left, right, bottom, top, 0.0f, 1.0f))
 		, m_Position(0, 0, 0)
 	{
 		GES_PROFILE_FUNCTION();
 	}
 
-	void Orthographic2dCamera::SetProjection(float left, float right, float bottom, float top)
+	void Orthographic2dCamera::SetProjection(r32 left, r32 right, r32 bottom, r32 top)
 	{
 		GES_PROFILE_FUNCTION();
 		m_ProjectionMatrix = glm::ortho(left, right, bottom, top, 0.0f, 1.0f);

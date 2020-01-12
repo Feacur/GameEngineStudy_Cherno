@@ -71,7 +71,7 @@ namespace GES
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	void OpenGLRendererAPI::SetViewport(uint32 x, uint32 y, uint32 width, uint32 height)
+	void OpenGLRendererAPI::SetViewport(u32 x, u32 y, u32 width, u32 height)
 	{
 		GES_PROFILE_FUNCTION();
 		glViewport(x, y, width, height);

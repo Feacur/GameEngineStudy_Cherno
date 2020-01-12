@@ -14,8 +14,8 @@ namespace GES {
 
 		void OnUpdate() override;
 
-		inline uint32 GetWidth() const override { return m_Data.Width; }
-		inline uint32 GetHeight() const override { return m_Data.Height; }
+		inline u32 GetWidth() const override { return m_Data.Width; }
+		inline u32 GetHeight() const override { return m_Data.Height; }
 
 		// Window attributes
 		inline void SetEventCallback(EventCallbackFn const & callback) override { m_Data.EventCallback = callback; }
@@ -32,7 +32,7 @@ namespace GES {
 		struct WindowData
 		{
 			std::string Title;
-			uint32 Width, Height;
+			u32 Width, Height;
 			bool VSync;
 
 			EventCallbackFn EventCallback;

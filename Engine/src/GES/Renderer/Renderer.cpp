@@ -61,7 +61,7 @@ namespace GES
 		shader->Bind();
 		shader->UploadUniformMat4("u_ViewProjectionMatrix", s_Data->ViewProjectionMatrix);
 		shader->UploadUniformMat4("u_Transform", transform);
-		shader->UploadUniformInt("u_Texture", (int32)texture->GetSlot());
+		shader->UploadUniformInt("u_Texture", (s32)texture->GetSlot());
 
 		vertexArray->Bind();
 		RendererCommand::DrawIndexed(vertexArray);

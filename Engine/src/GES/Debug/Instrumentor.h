@@ -1,7 +1,7 @@
 #pragma once
 #include "GES/Core/Code.h"
 
-#define FEATURE_GES_INSTRUMENTOR
+#define GES_FEATURE_INSTRUMENTOR
 
 namespace GES {
 	struct InstrumentationSession;
@@ -43,6 +43,6 @@ namespace GES {
 
 	private:
 		cstring m_Name;
-		int64 m_StartNanoseconds;
+		s64 m_StartNanoseconds;
 	};
 }

@@ -76,7 +76,7 @@ namespace GES
 			case RendererSettings::Type::OpenGL:
 				return CreateRef<OpenGLShader>(source, name);
 		}
-		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (int32)RendererSettings::GetType());
+		GES_CORE_ASSERT(false, "unsupported RendererAPI '{0}'", (s32)RendererSettings::GetType());
 		return nullptr;
 	}
 

@@ -3,7 +3,7 @@
 
 namespace GES
 {
-	class GES_API GraphicsContext
+	class GES_DLL GraphicsContext
 	{
 	public:
 		static Scope<GraphicsContext> Create(void * windowHandle);

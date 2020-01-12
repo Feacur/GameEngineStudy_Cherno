@@ -11,7 +11,7 @@
 
 namespace GES
 {
-	OpenGLTexture2D::OpenGLTexture2D(uint32 width, uint32 height)
+	OpenGLTexture2D::OpenGLTexture2D(u32 width, u32 height)
 		: m_Width(width), m_Height(height)
 	{
 		GES_PROFILE_FUNCTION();
@@ -31,13 +31,13 @@ namespace GES
 	OpenGLTexture2D::OpenGLTexture2D(cstring source)
 	{
 		GES_PROFILE_FUNCTION();
-		int32 width, height, channels;
+		s32 width, height, channels;
 		stbi_set_flip_vertically_on_load(1);
 		stbi_uc * data = stbi_load(source, &width, &height, &channels, 0);
 		GES_CORE_ASSERT(data, "Failed to load image");
 
-		m_Width = (uint32)width;
-		m_Height = (uint32)height;
+		m_Width = (u32)width;
+		m_Height = (u32)height;
 
 		if (channels == 1) {
 			m_InternalFormat = GL_R8;
@@ -81,7 +81,7 @@ namespace GES
 		glDeleteTextures(1, &m_RendererID);
 	}
 
-	void OpenGLTexture2D::SetData(void * data, uint32 size)
+	void OpenGLTexture2D::SetData(void * data, u32 size)
 	{
 		GES_PROFILE_FUNCTION();
 		uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
@@ -89,14 +89,14 @@ namespace GES
 		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 	}
 
-	void OpenGLTexture2D::Bind(uint32 slot) const
+	void OpenGLTexture2D::Bind(u32 slot) const
 	{
 		GES_PROFILE_FUNCTION();
 		m_Slot = slot;
 		glBindTextureUnit(slot, m_RendererID);
 	}
 
-	void OpenGLTexture2D::Unbind(uint32 slot) const
+	void OpenGLTexture2D::Unbind(u32 slot) const
 	{
 		GES_PROFILE_FUNCTION();
 		m_Slot = slot;

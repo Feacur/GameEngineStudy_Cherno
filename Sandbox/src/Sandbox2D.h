@@ -25,7 +25,7 @@ private:
 	// struct ProfileResult
 	// {
 	// 	cstring Name;
-	// 	float Time;
+	// 	r32 Time;
 	// };
 	// std::vector<ProfileResult> m_ProfileResults;
 };

@@ -2,7 +2,7 @@
 
 namespace GES
 {
-	typedef enum class KeyCode : uint16
+	typedef enum class KeyCode : u16
 	{
 		// From glfw3.h
 		Space               = 32,
@@ -139,7 +139,7 @@ namespace GES
 
 	inline std::ostream& operator<<(std::ostream& os, KeyCode keyCode)
 	{
-		os << static_cast<int32>(keyCode);
+		os << static_cast<s32>(keyCode);
 		return os;
 	}
 }

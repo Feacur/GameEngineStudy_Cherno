@@ -5,14 +5,14 @@
 
 namespace GES {
 
-	class GES_API MouseMovedEvent : public Event
+	class GES_DLL MouseMovedEvent : public Event
 	{
 	public:
-		MouseMovedEvent(float x, float y)
+		MouseMovedEvent(r32 x, r32 y)
 			: m_MouseX(x), m_MouseY(y) {}
 
-		inline float GetX() const { return m_MouseX; }
-		inline float GetY() const { return m_MouseY; }
+		inline r32 GetX() const { return m_MouseX; }
+		inline r32 GetY() const { return m_MouseY; }
 
 		std::string ToString() const override
 		{
@@ -24,17 +24,17 @@ namespace GES {
 		EVENT_CLASS_TYPE(MouseMoved)
 		EVENT_CLASS_CATEGORY(EventCategory::Mouse | EventCategory::Input)
 	private:
-		float m_MouseX, m_MouseY;
+		r32 m_MouseX, m_MouseY;
 	};
 
-	class GES_API MouseScrolledEvent : public Event
+	class GES_DLL MouseScrolledEvent : public Event
 	{
 	public:
-		MouseScrolledEvent(float xOffset, float yOffset)
+		MouseScrolledEvent(r32 xOffset, r32 yOffset)
 			: m_XOffset(xOffset), m_YOffset(yOffset) {}
 
-		inline float GetXOffset() const { return m_XOffset; }
-		inline float GetYOffset() const { return m_YOffset; }
+		inline r32 GetXOffset() const { return m_XOffset; }
+		inline r32 GetYOffset() const { return m_YOffset; }
 
 		std::string ToString() const override
 		{
@@ -46,10 +46,10 @@ namespace GES {
 		EVENT_CLASS_TYPE(MouseScrolled)
 		EVENT_CLASS_CATEGORY(EventCategory::Mouse | EventCategory::Input)
 	private:
-		float m_XOffset, m_YOffset;
+		r32 m_XOffset, m_YOffset;
 	};
 
-	class GES_API MouseButtonEvent : public Event
+	class GES_DLL MouseButtonEvent : public Event
 	{
 	public:
 		inline MouseCode GetMouseButton() const { return m_Button; }
@@ -62,7 +62,7 @@ namespace GES {
 		MouseCode m_Button;
 	};
 
-	class GES_API MouseButtonPressedEvent : public MouseButtonEvent
+	class GES_DLL MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(MouseCode button)
@@ -78,7 +78,7 @@ namespace GES {
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class GES_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class GES_DLL MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(MouseCode button)

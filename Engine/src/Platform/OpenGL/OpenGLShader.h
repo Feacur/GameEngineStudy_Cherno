@@ -16,7 +16,7 @@ namespace GES
 
 		void UploadUniformMat4(cstring name, glm::mat4 const & value) override;
 		
-		void UploadUniformInt(cstring name, int32 value) override;
+		void UploadUniformInt(cstring name, s32 value) override;
 
 		void UploadUniformFloat1(cstring name, float value) override;
 		void UploadUniformFloat2(cstring name, glm::vec2 const & value) override;
@@ -24,7 +24,7 @@ namespace GES
 		void UploadUniformFloat4(cstring name, glm::vec4 const & value) override;
 
 	private:
-		uint32 m_RendererID;
+		u32 m_RendererID;
 		std::string m_Name;
 	};
 }

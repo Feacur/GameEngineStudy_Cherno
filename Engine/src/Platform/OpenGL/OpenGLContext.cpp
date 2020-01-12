@@ -29,9 +29,9 @@ namespace GES
 		GES_CORE_INFO("  Renderer: {0}", glGetString(GL_RENDERER));
 		GES_CORE_INFO("  Version: {0}", glGetString(GL_VERSION));
 		
-		// int versionMajor;
-		// int versionMinor;
+		// GLint versionMajor;
 		// glGetIntegerv(GL_MAJOR_VERSION, &versionMajor);
+		// GLint versionMinor;
 		// glGetIntegerv(GL_MINOR_VERSION, &versionMinor);
 		// GES_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), "GES requires at least OpenGL version 4.5!");
 	}

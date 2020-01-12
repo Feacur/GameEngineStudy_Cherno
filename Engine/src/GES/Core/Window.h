@@ -12,19 +12,19 @@ namespace GES {
 	struct WindowProps
 	{
 		std::string Title;
-		uint32 Width;
-		uint32 Height;
+		u32 Width;
+		u32 Height;
 
 		WindowProps(std::string const & title = "Game Engine Study",
-			uint32 width = 960,
-			uint32 height = 540)
+			u32 width = 960,
+			u32 height = 540)
 			: Title(title), Width(width), Height(height)
 		{
 		}
 	};
 
 	// Interface representing a desktop system based Window
-	class GES_API Window
+	class GES_DLL Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;
@@ -33,8 +33,8 @@ namespace GES {
 
 		virtual void OnUpdate() = 0;
 
-		virtual uint32 GetWidth() const = 0;
-		virtual uint32 GetHeight() const = 0;
+		virtual u32 GetWidth() const = 0;
+		virtual u32 GetHeight() const = 0;
 
 		// Window attributes
 		virtual void SetEventCallback(EventCallbackFn const & callback) = 0;
