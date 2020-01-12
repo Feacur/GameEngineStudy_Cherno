@@ -10,23 +10,22 @@
 	#define GES_CORE_INFO(...)     GES::Log::GetCoreLogger()->info(__VA_ARGS__)
 	#define GES_CORE_WARN(...)     GES::Log::GetCoreLogger()->warn(__VA_ARGS__)
 	#define GES_CORE_ERROR(...)    GES::Log::GetCoreLogger()->error(__VA_ARGS__)
-	#define GES_CORE_CRITICAL(...) GES::Log::GetCoreLogger()->critical(__VA_ARGS__)
-	#define GES_CORE_ASSERT(x, ...) { if(x) { /**/ } else { GES_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); CODE_BREAK(); } }
+	#define GES_CORE_ASSERT(x, ...)\
+		if(x) { /**/ } else { GES::Log::GetCoreLogger()->critical(__VA_ARGS__); CODE_BREAK(); }
 
 	// client logger
 	#define GES_TRACE(...)    GES::Log::GetClientLogger()->trace(__VA_ARGS__)
 	#define GES_INFO(...)     GES::Log::GetClientLogger()->info(__VA_ARGS__)
 	#define GES_WARN(...)     GES::Log::GetClientLogger()->warn(__VA_ARGS__)
 	#define GES_ERROR(...)    GES::Log::GetClientLogger()->error(__VA_ARGS__)
-	#define GES_CRITICAL(...) GES::Log::GetClientLogger()->critical(__VA_ARGS__)
-	#define GES_ASSERT(x, ...) { if(x) { /**/ } else { GES_ERROR("Assertion Failed: {0}", __VA_ARGS__); CODE_BREAK(); } }
+	#define GES_ASSERT(x, ...)\
+		if(x) { /**/ } else { GES::Log::GetClientLogger()->critical(__VA_ARGS__); CODE_BREAK(); }
 #else
 	// core logger
 	#define GES_CORE_TRACE(...)
 	#define GES_CORE_INFO(...)
 	#define GES_CORE_WARN(...)
 	#define GES_CORE_ERROR(...)
-	#define GES_CORE_CRITICAL(...)
 	#define GES_CORE_ASSERT(x, ...)
 
 	// client logger
@@ -34,7 +33,6 @@
 	#define GES_INFO(...)
 	#define GES_WARN(...)
 	#define GES_ERROR(...)
-	#define GES_CRITICAL(...)
 	#define GES_ASSERT(x, ...)
 #endif
 

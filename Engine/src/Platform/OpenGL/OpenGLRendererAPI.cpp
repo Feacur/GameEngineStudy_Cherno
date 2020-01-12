@@ -24,9 +24,9 @@ namespace GES
 		GES_PROFILE_FUNCTION();
 		switch (severity)
 		{
-			case GL_DEBUG_SEVERITY_HIGH:         GES_CORE_CRITICAL(message); return;
-			case GL_DEBUG_SEVERITY_MEDIUM:       GES_CORE_ERROR(message); return;
-			case GL_DEBUG_SEVERITY_LOW:          GES_CORE_WARN(message); return;
+			case GL_DEBUG_SEVERITY_HIGH:         GES_CORE_ERROR(message); return;
+			case GL_DEBUG_SEVERITY_MEDIUM:       GES_CORE_WARN(message); return;
+			case GL_DEBUG_SEVERITY_LOW:          GES_CORE_INFO(message); return;
 			case GL_DEBUG_SEVERITY_NOTIFICATION: GES_CORE_TRACE(message); return;
 		}
 		GES_CORE_ASSERT(false, "Unknown severity level!");
