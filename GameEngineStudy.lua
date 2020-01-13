@@ -153,7 +153,6 @@ project "Engine"
 			"Glad",
 			"imgui",
 			"lua",
-			"opengl32.lib",
 		}
 
 		postbuildcommands {
