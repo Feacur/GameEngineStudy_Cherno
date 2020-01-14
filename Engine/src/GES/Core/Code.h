@@ -69,8 +69,8 @@ typedef char const * cstring;
 	#define GES_DLL_IMPORT
 #endif
 
-#if defined(GES_SHARED)
-	#if defined(GES_IS_DLL)
+#if defined(GES_SYMBOLS_SHARE)
+	#if defined(GES_SHARED_LIBRARY)
 		#define GES_EXTERN
 		#define GES_DLL GES_DLL_EXPORT
 	#else

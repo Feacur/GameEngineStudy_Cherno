@@ -51,11 +51,17 @@ workspace "GameEngineStudy"
 		-- 	"-time+",
 		-- }
 
-	filter "toolset:gcc*"
-		disablewarnings { "unused-variable", "unused-parameter", "missing-field-initializers" }
+	filter "kind:StaticLib"
+		defines "GES_STATIC_LIBRARY"
 
-	filter "toolset:clang*"
-		disablewarnings { "unused-variable", "unused-parameter", "missing-field-initializers" }
+	filter "kind:SharedLib"
+		defines {
+			"GES_SHARED_LIBRARY",
+			"GES_SYMBOLS_SHARE",
+		}
+
+	filter "kind:ConsoleApp or WindowedApp"
+		defines "GES_APPLICATION"
 
 	filter "configurations:Debug"
 		defines "GES_DEBUG"
@@ -140,26 +146,27 @@ project "Engine"
 		"%{include_directories.stb_image}",
 	}
 
+	defines {
+		"GLFW_INCLUDE_NONE",
+	}
+
+	links {
+		"GLFW",
+		"Glad",
+		"imgui",
+		"lua",
+	}
+
 	filter "system:windows"
 		defines {
-			-- "GES_BUILD_DLL", -- if specified [kind "SharedLib"]
-			-- "GES_SHARED", -- if specified [kind "SharedLib"]
-			"GLFW_INCLUDE_NONE",
 			"_CRT_SECURE_NO_WARNINGS",
 		}
 
-		links {
-			"GLFW",
-			"Glad",
-			"imgui",
-			"lua",
-		}
-
-		postbuildcommands {
-			("{COPY} \"%{prj.location}assets\" \"../bin/" .. outputdir .. "/Sandbox/assets\""),
-			-- if specified [kind "SharedLib"]
-			-- ("{COPY} \"%{cfg.buildtarget.relpath}\" \"../bin/" .. outputdir .. "/Sandbox/\""),
-		}
+	postbuildcommands {
+		("{COPY} \"%{prj.location}assets\" \"../bin/" .. outputdir .. "/Sandbox/assets\""),
+		-- if specified [kind "SharedLib"]
+		-- ("{COPY} \"%{cfg.buildtarget.relpath}\" \"../bin/" .. outputdir .. "/Sandbox/\""),
+	}
 
 project "Sandbox"
 	location "Sandbox"
@@ -195,7 +202,7 @@ project "Sandbox"
 	}
 
 	defines {
-		-- "GES_SHARED", -- if specified [kind "SharedLib"] for the Engine
+		-- "GES_SYMBOLS_SHARE", -- if specified [kind "SharedLib"] for the Engine
 	}
 
 	filter "system:windows"
