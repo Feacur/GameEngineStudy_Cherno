@@ -4,7 +4,7 @@ struct GLFWwindow;
 
 namespace GES
 {
-	class OpenGLContext
+	class GlfwOpenGlContext
 	{
 	public:
 		static void Init(GLFWwindow* windowHandle);

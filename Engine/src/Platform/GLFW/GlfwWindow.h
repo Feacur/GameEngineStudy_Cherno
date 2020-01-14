@@ -4,11 +4,13 @@
 struct GLFWwindow;
 
 namespace GES {
-	class WindowsWindow : public Window
+	class GlfwInput;
+
+	class GlfwWindow : public Window
 	{
 	public:
-		WindowsWindow(WindowProps const & props);
-		~WindowsWindow() override;
+		GlfwWindow(WindowProps const & props);
+		~GlfwWindow() override;
 
 		void OnUpdate() override;
 
@@ -25,6 +27,7 @@ namespace GES {
 		void Shutdown();
 	private:
 		GLFWwindow* m_WindowHandle;
+		Scope<GlfwInput> m_Input;
 
 		struct WindowData
 		{

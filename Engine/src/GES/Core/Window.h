@@ -27,23 +27,25 @@ namespace GES {
 	class GES_DLL Window
 	{
 	public:
-		using EventCallbackFn = std::function<void(Event&)>;
-
 		virtual ~Window() = default;
 
+	public:
+		static Scope<Window> Create(WindowProps const & props = WindowProps());
+
+	public:
 		virtual void OnUpdate() = 0;
 
 		virtual u32 GetWidth() const = 0;
 		virtual u32 GetHeight() const = 0;
 
 		// Window attributes
+		using EventCallbackFn = std::function<void(Event&)>;
 		virtual void SetEventCallback(EventCallbackFn const & callback) = 0;
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
 
 		virtual void * GetNativeWindow() const = 0;
 
-		static Scope<Window> Create(WindowProps const & props = WindowProps());
 	};
 
 }

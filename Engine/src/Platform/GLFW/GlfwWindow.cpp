@@ -1,5 +1,5 @@
 #include "ges_pch.h"
-#include "WindowsWindow.h"
+#include "GlfwWindow.h"
 
 #include "GES/Debug/Log.h"
 #include "GES/Debug/Instrumentor.h"
@@ -17,7 +17,8 @@
 
 #include <GLFW/glfw3.h>
 
-#include "OpenGLContext.h"
+#include "GlfwInput.h"
+#include "GlfwOpenGlContext.h"
 
 namespace GES {
 	static u8 s_GLFWWindowCount = 0;
@@ -28,25 +29,19 @@ namespace GES {
 		GES_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
 
-	Scope<Window> Window::Create(WindowProps const & props)
-	{
-		GES_PROFILE_FUNCTION();
-		return CreateScope<WindowsWindow>(props);
-	}
-
-	WindowsWindow::WindowsWindow(WindowProps const & props)
+	GlfwWindow::GlfwWindow(WindowProps const & props)
 	{
 		GES_PROFILE_FUNCTION();
 		Init(props);
 	}
 
-	WindowsWindow::~WindowsWindow()
+	GlfwWindow::~GlfwWindow()
 	{
 		GES_PROFILE_FUNCTION();
 		Shutdown();
 	}
 
-	void WindowsWindow::Init(WindowProps const & props)
+	void GlfwWindow::Init(WindowProps const & props)
 	{
 		GES_PROFILE_FUNCTION();
 		m_Data.Title = props.Title;
@@ -81,7 +76,8 @@ namespace GES {
 		m_WindowHandle = glfwCreateWindow((s32)props.Width, (s32)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		++s_GLFWWindowCount;
 
-		OpenGLContext::Init(m_WindowHandle);
+		m_Input = CreateScope<GlfwInput>();
+		GlfwOpenGlContext::Init(m_WindowHandle);
 
 		glfwSetWindowUserPointer(m_WindowHandle, &m_Data);
 		SetVSync(true);
@@ -158,7 +154,7 @@ namespace GES {
 		});
 	}
 
-	void WindowsWindow::Shutdown()
+	void GlfwWindow::Shutdown()
 	{
 		GES_PROFILE_FUNCTION();
 		glfwDestroyWindow(m_WindowHandle);
@@ -169,14 +165,14 @@ namespace GES {
 		}
 	}
 
-	void WindowsWindow::OnUpdate()
+	void GlfwWindow::OnUpdate()
 	{
 		GES_PROFILE_FUNCTION();
 		glfwPollEvents();
 		glfwSwapBuffers(m_WindowHandle);
 	}
 
-	void WindowsWindow::SetVSync(bool enabled)
+	void GlfwWindow::SetVSync(bool enabled)
 	{
 		GES_PROFILE_FUNCTION();
 		if (enabled)
@@ -187,7 +183,7 @@ namespace GES {
 		m_Data.VSync = enabled;
 	}
 
-	bool WindowsWindow::IsVSync() const
+	bool GlfwWindow::IsVSync() const
 	{
 		GES_PROFILE_FUNCTION();
 		return m_Data.VSync;

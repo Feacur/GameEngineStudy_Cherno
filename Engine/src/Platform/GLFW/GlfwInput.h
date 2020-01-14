@@ -3,8 +3,12 @@
 
 namespace GES
 {
-	class WindowsInput : public Input
+	class GlfwInput : public Input
 	{
+	public:
+		GlfwInput();
+		~GlfwInput() override = default;
+
 	protected:
 		bool IsKeyPressedImpl(KeyCode keycode) override;
 		bool IsMouseButtonPressedImpl(MouseCode button) override;

@@ -1,7 +1,7 @@
 #include "ges_pch.h"
 // #include "GES/Core/KeyCodes.h"
 // #include "GES/Core/MouseCodes.h"
-#include "WindowsInput.h"
+#include "GlfwInput.h"
 
 #include "GES/Core/Window.h"
 #include "GES/Core/Application.h"
@@ -13,9 +13,12 @@
 
 namespace GES
 {
-	Scope<Input> Input::s_Instance = CreateScope<WindowsInput>();
+	GlfwInput::GlfwInput()
+	{
+		s_Instance = this;
+	}
 
-	bool WindowsInput::IsKeyPressedImpl(KeyCode keycode)
+	bool GlfwInput::IsKeyPressedImpl(KeyCode keycode)
 	{
 		GES_PROFILE_FUNCTION();
 		auto window = static_cast<GLFWwindow *>(Application::Get().GetWindow().GetNativeWindow());
@@ -23,7 +26,7 @@ namespace GES
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
-	bool WindowsInput::IsMouseButtonPressedImpl(MouseCode button)
+	bool GlfwInput::IsMouseButtonPressedImpl(MouseCode button)
 	{
 		GES_PROFILE_FUNCTION();
 		auto window = static_cast<GLFWwindow *>(Application::Get().GetWindow().GetNativeWindow());
@@ -31,7 +34,7 @@ namespace GES
 		return state == GLFW_PRESS;
 	}
 
-	std::pair<float, float> WindowsInput::GetMousePositionImpl()
+	std::pair<float, float> GlfwInput::GetMousePositionImpl()
 	{
 		GES_PROFILE_FUNCTION();
 		auto window = static_cast<GLFWwindow *>(Application::Get().GetWindow().GetNativeWindow());

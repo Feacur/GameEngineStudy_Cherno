@@ -1,5 +1,5 @@
 #include "ges_pch.h"
-#include "OpenGLContext.h"
+#include "GlfwOpenGlContext.h"
 
 #include "GES/Debug/Log.h"
 #include "GES/Debug/Instrumentor.h"
@@ -10,7 +10,7 @@
 
 namespace GES
 {
-	void OpenGLContext::Init(GLFWwindow * windowHandle)
+	void GlfwOpenGlContext::Init(GLFWwindow * windowHandle)
 	{
 		GES_PROFILE_FUNCTION();
 		glfwMakeContextCurrent(windowHandle);
