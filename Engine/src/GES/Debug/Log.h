@@ -9,7 +9,7 @@
 #endif
 
 #if defined(GES_SHARED)
-GES_TEMPLATE template class GES_DLL Ref<spdlog::logger>;
+GES_EXTERN template class GES_DLL Ref<spdlog::logger>;
 #endif
 
 namespace GES {

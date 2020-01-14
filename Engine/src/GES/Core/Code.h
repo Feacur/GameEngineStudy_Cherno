@@ -71,14 +71,14 @@ typedef char const * cstring;
 
 #if defined(GES_SHARED)
 	#if defined(GES_IS_DLL)
-		#define GES_TEMPLATE
+		#define GES_EXTERN
 		#define GES_DLL GES_DLL_EXPORT
 	#else
-		#define GES_TEMPLATE extern
+		#define GES_EXTERN extern
 		#define GES_DLL GES_DLL_IMPORT
 	#endif
 #else
-	#define GES_TEMPLATE
+	#define GES_EXTERN
 	#define GES_DLL
 #endif
 

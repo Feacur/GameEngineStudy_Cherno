@@ -5,8 +5,8 @@
 
 namespace GES {
 	#if defined(GES_SHARED)
-	GES_TEMPLATE template class GES_DLL std::_Compressed_pair<std::default_delete<Window>, Window *, true>;
-	GES_TEMPLATE template class GES_DLL std::unique_ptr<Window>;
+	GES_EXTERN template class GES_DLL std::_Compressed_pair<std::default_delete<Window>, Window *, true>;
+	GES_EXTERN template class GES_DLL std::unique_ptr<Window>;
 	#endif
 	
 	class Window;
