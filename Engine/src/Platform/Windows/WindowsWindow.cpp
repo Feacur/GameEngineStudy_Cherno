@@ -14,9 +14,10 @@
 #include "GES/Events/KeyEvent.h"
 
 #include "GES/Renderer/RendererSettings.h"
-#include "GES/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
+
+#include "OpenGLContext.h"
 
 namespace GES {
 	static u8 s_GLFWWindowCount = 0;
@@ -80,8 +81,7 @@ namespace GES {
 		m_WindowHandle = glfwCreateWindow((s32)props.Width, (s32)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		++s_GLFWWindowCount;
 
-		m_Context = GraphicsContext::Create(m_WindowHandle);
-		m_Context->Init();
+		OpenGLContext::Init(m_WindowHandle);
 
 		glfwSetWindowUserPointer(m_WindowHandle, &m_Data);
 		SetVSync(true);
@@ -173,7 +173,7 @@ namespace GES {
 	{
 		GES_PROFILE_FUNCTION();
 		glfwPollEvents();
-		m_Context->SwapBuffers();
+		glfwSwapBuffers(m_WindowHandle);
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)

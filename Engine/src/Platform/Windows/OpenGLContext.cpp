@@ -10,17 +10,10 @@
 
 namespace GES
 {
-	OpenGLContext::OpenGLContext(GLFWwindow * windowHandle)
-		: m_WindowHandle(windowHandle)
+	void OpenGLContext::Init(GLFWwindow * windowHandle)
 	{
 		GES_PROFILE_FUNCTION();
-		GES_CORE_ASSERT(windowHandle, "Window handle is null");
-	}
-
-	void OpenGLContext::Init()
-	{
-		GES_PROFILE_FUNCTION();
-		glfwMakeContextCurrent(m_WindowHandle);
+		glfwMakeContextCurrent(windowHandle);
 		int gladStatus = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		GES_CORE_ASSERT(gladStatus, "Failed to initialize Glad");
 
@@ -34,11 +27,5 @@ namespace GES
 		// GLint versionMinor;
 		// glGetIntegerv(GL_MINOR_VERSION, &versionMinor);
 		// GES_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), "GES requires at least OpenGL version 4.5!");
-	}
-
-	void OpenGLContext::SwapBuffers()
-	{
-		GES_PROFILE_FUNCTION();
-		glfwSwapBuffers(m_WindowHandle);
 	}
 }

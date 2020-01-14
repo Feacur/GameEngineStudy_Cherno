@@ -4,8 +4,6 @@
 struct GLFWwindow;
 
 namespace GES {
-	class GraphicsContext;
-
 	class WindowsWindow : public Window
 	{
 	public:
@@ -27,7 +25,6 @@ namespace GES {
 		void Shutdown();
 	private:
 		GLFWwindow* m_WindowHandle;
-		Scope<GraphicsContext> m_Context;
 
 		struct WindowData
 		{
