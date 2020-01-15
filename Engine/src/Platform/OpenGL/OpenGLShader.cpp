@@ -36,12 +36,12 @@ namespace GES
 		if (isCompiled == GL_TRUE) { return true; }
 
 		// @Note: linker will inform of the errors anyway
-		// GLint maxLength = 0;
-		// glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
+		GLint maxLength = 0;
+		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
 
-		// std::vector<GLchar> infoLog(maxLength);
-		// glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);
-		// GES_CORE_ERROR("Shader compilation: '{0}'\n{1}", name, infoLog.data());
+		std::vector<GLchar> infoLog(maxLength);
+		glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);
+		GES_CORE_ERROR("Shader compilation: '{0}'\n{1}", name, infoLog.data());
 
 		return false;
 	}

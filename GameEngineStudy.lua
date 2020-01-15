@@ -92,16 +92,16 @@ target_location = ("bin/" .. outputdir)
 intermediate_location = ("bin-int/" .. outputdir)
 enginename = "Engine"
 
--- Include directories relative to the root folder (solution directory)
+
 include_directories = {}
-include_directories["engine"] = enginename .. "/src"
-include_directories["Glad"]   = enginename .. "/vendor/Glad/include"
-include_directories["GLFW"]   = enginename .. "/vendor/GLFW/include"
-include_directories["glm"]    = enginename .. "/vendor/glm"
-include_directories["imgui"]  = enginename .. "/vendor/imgui"
-include_directories["lua"]    = enginename .. "/vendor/lua/src"
-include_directories["spdlog"] = enginename .. "/vendor/spdlog/include"
-include_directories["stb_image"] = enginename .. "/vendor/stb_image"
+include_directories["engine"] = "src"
+include_directories["Glad"]   = "vendor/Glad/include"
+include_directories["GLFW"]   = "vendor/GLFW/include"
+include_directories["glm"]    = "vendor/glm"
+include_directories["imgui"]  = "vendor/imgui"
+include_directories["lua"]    = "vendor/lua/src"
+include_directories["spdlog"] = "vendor/spdlog/include"
+include_directories["stb_image"] = "vendor/stb_image"
 
 root_directory = os.getcwd()
 
@@ -112,96 +112,5 @@ include "Engine/vendor/premake5_imgui.lua"
 include "Engine/vendor/premake5_lua.lua"
 group ""
 
-project "Engine"
-	location "Engine"
-	kind "StaticLib" -- or "SharedLib"
-	language "C++"
-	cdialect "C11"
-	cppdialect "C++17"
-	characterset ("ASCII") -- Default, Unicode, MBCS, ASCII
-
-	targetdir (target_location .. "/%{prj.name}")
-	objdir (intermediate_location .. "/%{prj.name}")
-
-	pchheader "ges_pch.h"
-	pchsource (enginename .. "/src/ges_pch.cpp")
-
-	files {
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
-		"%{include_directories.spdlog}/spdlog/**.h",
-		"%{include_directories.glm}/glm/**.hpp",
-		"%{include_directories.glm}/glm/**.inl",
-		"%{include_directories.stb_image}/**.h",
-		"%{include_directories.stb_image}/**.cpp",
-	}
-
-	includedirs {
-		"%{include_directories.engine}",
-		"%{include_directories.Glad}",
-		"%{include_directories.GLFW}",
-		"%{include_directories.glm}",
-		"%{include_directories.imgui}",
-		"%{include_directories.lua}",
-		"%{include_directories.spdlog}",
-		"%{include_directories.stb_image}",
-	}
-
-	defines {
-		"GLFW_INCLUDE_NONE",
-	}
-
-	links {
-		"GLFW",
-		"Glad",
-		"imgui",
-		"lua",
-	}
-
-	postbuildcommands {
-		("{COPY} \"%{prj.location}assets\" \"../bin/" .. outputdir .. "/Sandbox/assets\""),
-		-- if specified [kind "SharedLib"]
-		-- ("{COPY} \"%{cfg.buildtarget.relpath}\" \"../bin/" .. outputdir .. "/Sandbox/\""),
-	}
-
-project "Sandbox"
-	location "Sandbox"
-	kind "ConsoleApp"
-	-- entrypoint "mainCRTStartup"
-	language "C++"
-	cdialect "C11"
-	cppdialect "C++17"
-	characterset ("ASCII") -- Default, Unicode, MBCS, ASCII
-
-	targetdir (target_location .. "/%{prj.name}")
-	objdir (intermediate_location .. "/%{prj.name}")
-
-	files {
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
-	}
-
-	includedirs {
-		"%{include_directories.engine}",
-		"%{include_directories.glm}",
-		"%{include_directories.imgui}",
-		"%{include_directories.lua}",
-		"%{include_directories.spdlog}",
-	}
-
-	links {
-		"Engine",
-	}
-
-	postbuildcommands {
-		("{COPY} \"%{prj.location}assets\" \"%{cfg.buildtarget.directory}assets\"")
-	}
-
-	defines {
-		-- "GES_SYMBOLS_SHARE", -- if specified [kind "SharedLib"] for the Engine
-	}
-
-	filter "toolset:msc*"
-		defines {
-			-- "IMGUI_API=__declspec(dllimport)", -- if specified [kind "SharedLib"] for the Engine
-		}
+include "Engine/premake5.lua"
+include "Sandbox/premake5.lua"

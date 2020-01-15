@@ -83,7 +83,7 @@ layout(location = 0) out vec4 color;
 
 void main()
 {
-	float vignette_value = distance(v_ScreenPos, vec2(0));
+	float vignette_value = distance(v_ScreenPos, vec2(0, 0));
 	vignette_value = clamp(vignette_value - 0.4, 0, 1);
 	vignette_value *= vignette_value;
 

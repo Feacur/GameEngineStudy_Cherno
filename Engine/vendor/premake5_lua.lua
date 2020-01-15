@@ -11,8 +11,9 @@ project "lua"
 	optimize "On"
 	
 	lua_to_root = path.getrelative(os.getcwd(), root_directory)
-	targetdir (lua_to_root .. "/bin/" .. outputdir .. "/vendor/%{prj.name}")
-	objdir (lua_to_root .. "/bin-int/" .. outputdir .. "/vendor/%{prj.name}")
+	targetdir (lua_to_root .. "/" .. target_location .. "/vendor/%{prj.name}")
+	objdir (lua_to_root .. "/" .. intermediate_location .. "/vendor/%{prj.name}")
+	implibdir (lua_to_root .. "/" .. intermediate_location .. "/vendor/%{prj.name}")
 
 	files {
 		-- see ./lua/doc/readme.html

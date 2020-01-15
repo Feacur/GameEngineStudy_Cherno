@@ -80,26 +80,24 @@ layout(location = 0) out vec4 color;
 
 #if DITHER_MODE == 4
 	// @Note: might be a texture, array, matrix
-	struct ThresholdLine { float data[DITHER_MODE]; };
-	uniform ThresholdLine u_Threshold[DITHER_MODE] = ThresholdLine[DITHER_MODE](
-		float[4]( 0/16.,  8/16.,  2/16., 10/16.),
-		float[4](12/16.,  4/16., 14/16.,  6/16.),
-		float[4]( 3/16., 11/16.,  1/16.,  9/16.),
-		float[4](15/16.,  7/16., 13/16.,  5/16.)
+	uniform float u_Threshold[DITHER_MODE * DITHER_MODE] = {
+		ThresholdLine(float[4]( 0/16.,  8/16.,  2/16., 10/16.)),
+		ThresholdLine(float[4](12/16.,  4/16., 14/16.,  6/16.)),
+		ThresholdLine(float[4]( 3/16., 11/16.,  1/16.,  9/16.)),
+		ThresholdLine(float[4](15/16.,  7/16., 13/16.,  5/16.))
 	);
 #elif DITHER_MODE == 8
 	// @Note: might be a texture, array
-	struct ThresholdLine { float data[DITHER_MODE]; };
-	uniform ThresholdLine u_Threshold[DITHER_MODE] = ThresholdLine[DITHER_MODE](
-		float[8]( 0/64., 32/64.,  8/64., 40/64.,  2/64., 34/64., 10/64., 42/64.),
-		float[8](48/64., 16/64., 56/64., 24/64., 50/64., 18/64., 58/64., 26/64.),
-		float[8](12/64., 44/64.,  4/64., 36/64., 14/64., 46/64.,  6/64., 38/64.),
-		float[8](60/64., 28/64., 52/64., 20/64., 62/64., 30/64., 54/64., 22/64.),
-		float[8]( 3/64., 35/64., 11/64., 43/64.,  1/64., 33/64.,  9/64., 41/64.),
-		float[8](51/64., 19/64., 59/64., 27/64., 49/64., 17/64., 57/64., 25/64.),
-		float[8](15/64., 47/64.,  7/64., 39/64., 13/64., 45/64.,  5/64., 37/64.),
-		float[8](63/64., 31/64., 55/64., 23/64., 61/64., 29/64., 53/64., 21/64.)
-	);
+	uniform float u_Threshold[DITHER_MODE * DITHER_MODE] = {
+		 0/64., 32/64.,  8/64., 40/64.,  2/64., 34/64., 10/64., 42/64.,
+		48/64., 16/64., 56/64., 24/64., 50/64., 18/64., 58/64., 26/64.,
+		12/64., 44/64.,  4/64., 36/64., 14/64., 46/64.,  6/64., 38/64.,
+		60/64., 28/64., 52/64., 20/64., 62/64., 30/64., 54/64., 22/64.,
+		 3/64., 35/64., 11/64., 43/64.,  1/64., 33/64.,  9/64., 41/64.,
+		51/64., 19/64., 59/64., 27/64., 49/64., 17/64., 57/64., 25/64.,
+		15/64., 47/64.,  7/64., 39/64., 13/64., 45/64.,  5/64., 37/64.,
+		63/64., 31/64., 55/64., 23/64., 61/64., 29/64., 53/64., 21/64.
+	};
 #elif DITHER_MODE == -1
 	uint hash_jenkins(uint x) {
 		x += x << 10u;
@@ -132,8 +130,8 @@ void main()
 
 	#if DITHER_MODE == 4 || DITHER_MODE == 8
 		// sample the threshold matrix
-		float dither_value = u_Threshold[int(gl_FragCoord.y) % DITHER_MODE]
-			.data[int(gl_FragCoord.x) % DITHER_MODE];
+		ivec2 dither_coord = ivec2(gl_FragCoord.xy) % DITHER_MODE;
+		float dither_value = u_Threshold[dither_coord.y * DITHER_MODE + dither_coord.x];
 	#elif DITHER_MODE == -1
 		// sample random value
 		float dither_value = random_01(gl_FragCoord.xy);

@@ -11,8 +11,9 @@ project "imgui"
 	optimize "On"
 	
 	imgui_to_root = path.getrelative(os.getcwd(), root_directory)
-	targetdir (imgui_to_root .. "/bin/" .. outputdir .. "/vendor/%{prj.name}")
-	objdir (imgui_to_root .. "/bin-int/" .. outputdir .. "/vendor/%{prj.name}")
+	targetdir (imgui_to_root .. "/" .. target_location .. "/vendor/%{prj.name}")
+	objdir (imgui_to_root .. "/" .. intermediate_location .. "/vendor/%{prj.name}")
+	implibdir (imgui_to_root .. "/" .. intermediate_location .. "/vendor/%{prj.name}")
 
 	files {
 		"imgui/imconfig.h",
