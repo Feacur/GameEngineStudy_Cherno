@@ -1,25 +1,12 @@
 #include "ges_pch.h"
 #include "ImGuiLayer.h"
 
-#include "GES/Core/Window.h"
-#include "GES/Core/Application.h"
-
-#include "GES/Core/MouseCodes.h"
-#include "GES/Core/KeyCodes.h"
+#include "ImGuiBindings.h"
 
 #include "GES/Debug/Instrumentor.h"
 #include "GES/Debug/Code.h"
 
-#include "GES/Events/Event.h"
-#include "GES/Events/ApplicationEvent.h"
-#include "GES/Events/KeyEvent.h"
-#include "GES/Events/MouseEvent.h"
-
 #include <imgui.h>
-#include <examples/imgui_impl_opengl3.h>
-#include <examples/imgui_impl_glfw.h>
-
-#include <GLFW/glfw3.h>
 
 namespace GES {
 	ImGuiLayer::ImGuiLayer()
@@ -31,12 +18,9 @@ namespace GES {
 	void ImGuiLayer::OnAttach()
 	{
 		GES_PROFILE_FUNCTION();
-		Application& app = Application::Get();
-		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
-
 		// Setup Dear ImGui context
 		IMGUI_CHECKVERSION();
-		ImGui::CreateContext();
+		m_ImGuiContext = ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
 		//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
@@ -58,17 +42,13 @@ namespace GES {
 		}
 
 		// Setup Platform/Renderer bindings
-		ImGui_ImplGlfw_InitForOpenGL(window, true);
-		ImGui_ImplOpenGL3_Init("#version 410");
-		
-		m_ImGuiContext = ImGui::GetCurrentContext();
+		ImGuiBindings::Init();
 	}
 
 	void ImGuiLayer::OnDetach()
 	{
 		GES_PROFILE_FUNCTION();
-		ImGui_ImplOpenGL3_Shutdown();
-		ImGui_ImplGlfw_Shutdown();
+		ImGuiBindings::Shutdown();
 		ImGui::DestroyContext();
 	}
 
@@ -81,28 +61,18 @@ namespace GES {
 	void ImGuiLayer::Begin()
 	{
 		GES_PROFILE_FUNCTION();
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui_ImplGlfw_NewFrame();
+		ImGuiBindings::Begin();
 		ImGui::NewFrame();
 	}
 
-	void ImGuiLayer::End()
+	void ImGuiLayer::End(r32 width, r32 height)
 	{
 		GES_PROFILE_FUNCTION();
 		ImGuiIO& io = ImGui::GetIO();
-		Window& window = Application::Get().GetWindow();
-		io.DisplaySize = ImVec2((r32)window.GetWidth(), (r32)window.GetHeight());
+		io.DisplaySize = ImVec2(width, height);
 
 		// Rendering
 		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-		{
-			GLFWwindow* backup_current_context = glfwGetCurrentContext();
-			ImGui::UpdatePlatformWindows();
-			ImGui::RenderPlatformWindowsDefault();
-			glfwMakeContextCurrent(backup_current_context);
-		}
+		ImGuiBindings::End();
 	}
 }

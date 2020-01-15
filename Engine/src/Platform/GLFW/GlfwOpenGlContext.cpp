@@ -10,10 +10,9 @@
 
 namespace GES
 {
-	void GlfwOpenGlContext::Init(GLFWwindow * windowHandle)
+	void GlfwOpenGlContext::Init()
 	{
 		GES_PROFILE_FUNCTION();
-		glfwMakeContextCurrent(windowHandle);
 		int gladStatus = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		GES_CORE_ASSERT(gladStatus, "Failed to initialize Glad");
 

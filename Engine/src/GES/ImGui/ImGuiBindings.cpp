@@ -1,10 +1,12 @@
 #include "ges_pch.h"
-
-#define IMGUI_IMPL_OPENGL_LOADER_GLAD
-#include <examples/imgui_impl_opengl3.cpp>
-#include <examples/imgui_impl_glfw.cpp>
+#include "ImGuiBindings.h"
 
 #if defined(GES_SHIPPING)
 	#define IMGUI_DISABLE_DEMO_WINDOWS
 #endif
 // #include <imgui_demo.cpp> // ImGui::ShowDemoWindow
+
+namespace GES
+{
+	ImGuiBindings * ImGuiBindings::s_Instance = nullptr;
+}

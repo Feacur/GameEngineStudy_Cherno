@@ -5,6 +5,7 @@ struct GLFWwindow;
 
 namespace GES {
 	class GlfwInput;
+	class GlfwImGuiBindings;
 
 	class GlfwWindow : public Window
 	{
@@ -28,6 +29,7 @@ namespace GES {
 	private:
 		GLFWwindow* m_WindowHandle;
 		Scope<GlfwInput> m_Input;
+		Scope<GlfwImGuiBindings> m_ImguiBindings;
 
 		struct WindowData
 		{

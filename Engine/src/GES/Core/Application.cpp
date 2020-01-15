@@ -18,7 +18,7 @@
 #include "GES/Renderer/Renderer.h"
 #include "GES/Renderer/Renderer2D.h"
 
-#include "GES/ImGuiLayer/ImGuiLayer.h"
+#include "GES/ImGui/ImGuiLayer.h"
 
 #include <GLFW/glfw3.h>
 
@@ -69,7 +69,7 @@ namespace GES {
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)
 				layer->OnImGuiRender();
-			m_ImGuiLayer->End();
+			m_ImGuiLayer->End((r32)m_Window->GetWidth(), (r32)m_Window->GetHeight());
 
 			m_Window->OnUpdate();
 		}

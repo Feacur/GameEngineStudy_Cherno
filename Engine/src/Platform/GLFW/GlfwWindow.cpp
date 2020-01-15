@@ -1,6 +1,10 @@
 #include "ges_pch.h"
 #include "GlfwWindow.h"
 
+#include "GlfwOpenGlContext.h"
+#include "GlfwInput.h"
+#include "GlfwImGuiBindings.h"
+
 #include "GES/Debug/Log.h"
 #include "GES/Debug/Instrumentor.h"
 #include "GES/Debug/Code.h"
@@ -16,9 +20,6 @@
 #include "GES/Renderer/RendererSettings.h"
 
 #include <GLFW/glfw3.h>
-
-#include "GlfwInput.h"
-#include "GlfwOpenGlContext.h"
 
 namespace GES {
 	static u8 s_GLFWWindowCount = 0;
@@ -74,10 +75,12 @@ namespace GES {
 		// glfwWindowHint(GLFW_STENCIL_BITS, 8);
 
 		m_WindowHandle = glfwCreateWindow((s32)props.Width, (s32)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		glfwMakeContextCurrent(m_WindowHandle);
 		++s_GLFWWindowCount;
 
+		GlfwOpenGlContext::Init();
 		m_Input = CreateScope<GlfwInput>();
-		GlfwOpenGlContext::Init(m_WindowHandle);
+		m_ImguiBindings = CreateScope<GlfwImGuiBindings>();
 
 		glfwSetWindowUserPointer(m_WindowHandle, &m_Data);
 		SetVSync(true);

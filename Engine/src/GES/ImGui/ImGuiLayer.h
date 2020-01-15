@@ -19,7 +19,7 @@ namespace GES {
 
 	public:
 		void Begin();
-		void End();
+		void End(r32 width, r32 height);
 		inline ImGuiContext* GetImGuiContext() { return m_ImGuiContext; }
 
 	private:

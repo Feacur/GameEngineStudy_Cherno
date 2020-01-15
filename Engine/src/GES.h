@@ -44,6 +44,6 @@
 #include "GES/Renderer/Shader.h"
 #include "GES/Renderer/Texture.h"
 
-#include "GES/ImGuiLayer/ImGuiLayer.h"
+#include "GES/ImGui/ImGuiLayer.h"
 
-#include "GES/Core/Orthographic2dCameraController.h"
+#include "GES/Utils/Orthographic2dCameraController.h"

@@ -1,12 +1,12 @@
 #include "ges_pch.h"
 #include "Renderer.h"
 
-#include "Orthographic2dCamera.h"
-
 #include "RendererCommand.h"
 #include "Shader.h"
 #include "Texture.h"
 #include "VertexArray.h"
+
+#include "GES/Utils/Orthographic2dCamera.h"
 
 #include "GES/Debug/Instrumentor.h"
 #include "GES/Debug/Code.h"

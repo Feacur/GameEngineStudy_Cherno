@@ -1,9 +1,9 @@
 #include "ges_pch.h"
 #include "Orthographic2dCameraController.h"
 
-// #include "KeyCodes.h"
-// #include "MouseCodes.h"
-#include "Input.h"
+// #include "GES/Core/KeyCodes.h"
+// #include "GES/Core/MouseCodes.h"
+#include "GES/Core/Input.h"
 
 #include "GES/Debug/Instrumentor.h"
 #include "GES/Debug/Code.h"

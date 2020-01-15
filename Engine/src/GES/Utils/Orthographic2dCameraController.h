@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GES/Renderer/Orthographic2dCamera.h"
-#include "Timestep.h"
+#include "Orthographic2dCamera.h"
+#include "GES/Core/Timestep.h"
 
 namespace GES
 {
