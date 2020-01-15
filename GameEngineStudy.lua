@@ -92,7 +92,6 @@ target_location = ("bin/" .. outputdir)
 intermediate_location = ("bin-int/" .. outputdir)
 enginename = "Engine"
 
-
 include_directories = {}
 include_directories["engine"] = "src"
 include_directories["Glad"]   = "vendor/Glad/include"
