@@ -175,42 +175,42 @@ namespace GES
 	void OpenGLShader::UploadUniformMat4(cstring name, glm::mat4 const & value)
 	{
 		GES_PROFILE_FUNCTION();
-		auto location = glGetUniformLocation(m_RendererID, name);
+		GLint location = glGetUniformLocation(m_RendererID, name);
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
 	}
 
 	void OpenGLShader::UploadUniformInt(cstring name, s32 value)
 	{
 		GES_PROFILE_FUNCTION();
-		auto location = glGetUniformLocation(m_RendererID, name);
+		GLint location = glGetUniformLocation(m_RendererID, name);
 		glUniform1i(location, value);
 	}
 
 	void OpenGLShader::UploadUniformFloat1(cstring name, float value)
 	{
 		GES_PROFILE_FUNCTION();
-		auto location = glGetUniformLocation(m_RendererID, name);
+		GLint location = glGetUniformLocation(m_RendererID, name);
 		glUniform1f(location, value);
 	}
 
 	void OpenGLShader::UploadUniformFloat2(cstring name, glm::vec2 const & value)
 	{
 		GES_PROFILE_FUNCTION();
-		auto location = glGetUniformLocation(m_RendererID, name);
+		GLint location = glGetUniformLocation(m_RendererID, name);
 		glUniform2f(location, value.x, value.y);
 	}
 
 	void OpenGLShader::UploadUniformFloat3(cstring name, glm::vec3 const & value)
 	{
 		GES_PROFILE_FUNCTION();
-		auto location = glGetUniformLocation(m_RendererID, name);
+		GLint location = glGetUniformLocation(m_RendererID, name);
 		glUniform3f(location, value.x, value.y, value.z);
 	}
 
 	void OpenGLShader::UploadUniformFloat4(cstring name, glm::vec4 const & value)
 	{
 		GES_PROFILE_FUNCTION();
-		auto location = glGetUniformLocation(m_RendererID, name);
+		GLint location = glGetUniformLocation(m_RendererID, name);
 		glUniform4f(location, value.x, value.y, value.z, value.w);
 	}
 }

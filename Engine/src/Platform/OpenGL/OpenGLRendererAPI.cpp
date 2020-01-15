@@ -80,7 +80,7 @@ namespace GES
 	void OpenGLRendererAPI::DrawIndexed(Ref<VertexArray> const & vertexArray) const
 	{
 		GES_PROFILE_FUNCTION();
-		auto & indexBuffer = vertexArray->GetIndexBuffer();
+		Ref<IndexBuffer> const & indexBuffer = vertexArray->GetIndexBuffer();
 		glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 	}
 

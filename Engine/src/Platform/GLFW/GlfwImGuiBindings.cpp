@@ -23,7 +23,7 @@ namespace GES
 	void GlfwImGuiBindings::InitImpl()
 	{
 		GES_PROFILE_FUNCTION();
-		auto window = glfwGetCurrentContext();
+		GLFWwindow * window = glfwGetCurrentContext();
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
@@ -49,7 +49,7 @@ namespace GES
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{
-			auto window = glfwGetCurrentContext();
+			GLFWwindow * window = glfwGetCurrentContext();
 			ImGui::UpdatePlatformWindows();
 			ImGui::RenderPlatformWindowsDefault();
 			glfwMakeContextCurrent(window);

@@ -28,8 +28,8 @@ namespace GES
 		r32 positionDelta = m_CameraTranslationSpeed * ts;
 		r32 rotationDelta = m_CameraRotationSpeed * ts;
 
-		auto cameraPosition = m_Camera.GetPosition();
-		auto cameraRotation = m_Camera.GetRotation();
+		glm::vec3 cameraPosition = m_Camera.GetPosition();
+		r32 cameraRotation = m_Camera.GetRotation();
 
 		if (GES::Input::IsKeyPressed(GES_KEY_A)) {
 			cameraPosition.x -= positionDelta;

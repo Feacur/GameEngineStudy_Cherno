@@ -7,14 +7,14 @@
 static GES::Ref<GES::VertexArray> CreateVertexArrayTriangle()
 {
 	GES_PROFILE_FUNCTION();
-	auto vertexArray = GES::VertexArray::Create();
+	GES::Ref<GES::VertexArray> vertexArray = GES::VertexArray::Create();
 
 	r32 vertices[] = {
 		/*position*/ -0.5f, -0.5f, 0.0f, /*color*/ 1.0f, 0.0f, 0.0f, 1.0f,
 		/*position*/  0.5f, -0.5f, 0.0f, /*color*/ 0.0f, 1.0f, 0.0f, 1.0f,
 		/*position*/  0.0f,  0.5f, 0.0f, /*color*/ 0.0f, 0.0f, 1.0f, 1.0f,
 	};
-	auto vertexBuffer = GES::VertexBuffer::Create(vertices, sizeof(vertices));
+	GES::Ref<GES::VertexBuffer> vertexBuffer = GES::VertexBuffer::Create(vertices, sizeof(vertices));
 	vertexBuffer->SetLayout({
 		{ GES::ShaderDataType::Float3, "a_Position" },
 		{ GES::ShaderDataType::Float4, "a_Color" },
@@ -24,7 +24,7 @@ static GES::Ref<GES::VertexArray> CreateVertexArrayTriangle()
 	u32 indices[] = {
 		0, 1, 2,
 	};
-	auto indexBuffer = GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(u32));
+	GES::Ref<GES::IndexBuffer> indexBuffer = GES::IndexBuffer::Create(indices, sizeof(indices) / sizeof(u32));
 	vertexArray->SetIndexBuffer(indexBuffer);
 
 	return vertexArray;
@@ -33,7 +33,7 @@ static GES::Ref<GES::VertexArray> CreateVertexArrayTriangle()
 static GES::Ref<GES::VertexArray> CreateVertexArraySquare()
 {
 	GES_PROFILE_FUNCTION();
-	auto vertexArray = GES::VertexArray::Create();
+	GES::Ref<GES::VertexArray> vertexArray = GES::VertexArray::Create();
 
 	r32 vertices[] = {
 		/*position*/ -0.5f, -0.5f, 0.0f, /*UV*/ 0.0f, 0.0f,
@@ -41,7 +41,7 @@ static GES::Ref<GES::VertexArray> CreateVertexArraySquare()
 		/*position*/  0.5f,  0.5f, 0.0f, /*UV*/ 1.0f, 1.0f,
 		/*position*/ -0.5f,  0.5f, 0.0f, /*UV*/ 0.0f, 1.0f,
 	};
-	auto vertexBuffer = GES::VertexBuffer::Create(vertices, C_ARRAY_LENGTH(vertices));
+	GES::Ref<GES::VertexBuffer> vertexBuffer = GES::VertexBuffer::Create(vertices, C_ARRAY_LENGTH(vertices));
 	vertexBuffer->SetLayout({
 		{ GES::ShaderDataType::Float3, "a_Position" },
 		{ GES::ShaderDataType::Float2, "a_TexCoord" },
@@ -52,7 +52,7 @@ static GES::Ref<GES::VertexArray> CreateVertexArraySquare()
 		0, 1, 2,
 		2, 3, 0,
 	};
-	auto indexBuffer = GES::IndexBuffer::Create(indices, C_ARRAY_LENGTH(indices));
+	GES::Ref<GES::IndexBuffer> indexBuffer = GES::IndexBuffer::Create(indices, C_ARRAY_LENGTH(indices));
 	vertexArray->SetIndexBuffer(indexBuffer);
 	
 	return vertexArray;
@@ -100,7 +100,7 @@ void ExampleLayer::OnUpdate(GES::Timestep ts)
 
 	GES::Renderer::BeginScene(m_CameraController.GetCamera());
 
-	auto shaderVertexColor = m_ShaderLibrary.Get("vertex_color");
+	GES::Ref<GES::Shader> shaderVertexColor = m_ShaderLibrary.Get("vertex_color");
 	glm::mat4 triangle_scale = glm::scale(identity, glm::vec3(0.1f));
 	for (int y = -10; y < 10; y++)
 	{
@@ -112,7 +112,7 @@ void ExampleLayer::OnUpdate(GES::Timestep ts)
 		}
 	}
 
-	auto shaderTexture = m_ShaderLibrary.Get("texture");
+	GES::Ref<GES::Shader> shaderTexture = m_ShaderLibrary.Get("texture");
 	glm::mat4 square_scale = glm::scale(identity, glm::vec3(1.5f));
 	glm::vec3 square_pos(0.0f, 0.0f, 0.1f);
 	glm::mat4 square_transform = glm::translate(identity, square_pos) * square_scale;

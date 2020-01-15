@@ -60,7 +60,7 @@ namespace GES
 	void OpenGLVertexArray::AddVertexBuffer(Ref<VertexBuffer> const & vertexBuffer)
 	{
 		GES_PROFILE_FUNCTION();
-		auto const & bufferLayout = vertexBuffer->GetLayout();
+		BufferLayout const & bufferLayout = vertexBuffer->GetLayout();
 		GES_CORE_ASSERT(bufferLayout.GetElements().size(), "Vertex Buffer has no layout");
 
 		glBindVertexArray(m_RendererID);

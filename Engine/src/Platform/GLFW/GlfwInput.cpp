@@ -19,23 +19,23 @@ namespace GES
 	bool GlfwInput::IsKeyPressedImpl(KeyCode keycode)
 	{
 		GES_PROFILE_FUNCTION();
-		auto window = glfwGetCurrentContext();
-		auto state = glfwGetKey(window, static_cast<s32>(keycode));
+		GLFWwindow * window = glfwGetCurrentContext();
+		int state = glfwGetKey(window, static_cast<s32>(keycode));
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
 	bool GlfwInput::IsMouseButtonPressedImpl(MouseCode button)
 	{
 		GES_PROFILE_FUNCTION();
-		auto window = glfwGetCurrentContext();
-		auto state = glfwGetMouseButton(window, static_cast<s32>(button));
+		GLFWwindow * window = glfwGetCurrentContext();
+		int state = glfwGetMouseButton(window, static_cast<s32>(button));
 		return state == GLFW_PRESS;
 	}
 
 	std::pair<float, float> GlfwInput::GetMousePositionImpl()
 	{
 		GES_PROFILE_FUNCTION();
-		auto window = glfwGetCurrentContext();
+		GLFWwindow * window = glfwGetCurrentContext();
 		double x, y;
 		glfwGetCursorPos(window, &x, &y);
 		return {(float)x, (float)y};

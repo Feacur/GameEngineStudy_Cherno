@@ -82,7 +82,7 @@ namespace GES
 
 	void ShaderLibrary::Add(Ref<Shader> const & shader) {
 		GES_PROFILE_FUNCTION();
-		auto & name = shader->GetName();
+		std::string const & name = shader->GetName();
 		m_Shaders[name] = shader;
 	}
 
