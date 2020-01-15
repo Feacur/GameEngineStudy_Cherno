@@ -29,6 +29,7 @@ workspace "GameEngineStudy"
 	defines {
 		"GLM_FORCE_DEPTH_ZERO_TO_ONE",
 		"GLM_FORCE_LEFT_HANDED",
+		"_CRT_SECURE_NO_WARNINGS", -- @Note: might want to enable this only locally
 	}
 
 	filter "toolset:msc*"
@@ -157,11 +158,6 @@ project "Engine"
 		"lua",
 	}
 
-	filter "system:windows"
-		defines {
-			"_CRT_SECURE_NO_WARNINGS",
-		}
-
 	postbuildcommands {
 		("{COPY} \"%{prj.location}assets\" \"../bin/" .. outputdir .. "/Sandbox/assets\""),
 		-- if specified [kind "SharedLib"]
@@ -204,11 +200,6 @@ project "Sandbox"
 	defines {
 		-- "GES_SYMBOLS_SHARE", -- if specified [kind "SharedLib"] for the Engine
 	}
-
-	filter "system:windows"
-		defines {
-			"_CRT_SECURE_NO_WARNINGS",
-		}
 
 	filter "toolset:msc*"
 		defines {
