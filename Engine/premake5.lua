@@ -19,22 +19,22 @@ project "Engine"
 	files {
 		"src/**.h",
 		"src/**.cpp",
-		"%{include_directories.spdlog}/spdlog/**.h",
-		"%{include_directories.glm}/glm/**.hpp",
-		"%{include_directories.glm}/glm/**.inl",
-		"%{include_directories.stb_image}/**.h",
-		"%{include_directories.stb_image}/**.cpp",
+		"%{engine_includes.spdlog}/spdlog/**.h",
+		"%{engine_includes.glm}/glm/**.hpp",
+		"%{engine_includes.glm}/glm/**.inl",
+		"%{engine_includes.stb_image}/**.h",
+		"%{engine_includes.stb_image}/**.cpp",
 	}
 
 	includedirs {
-		"%{include_directories.engine}",
-		"%{include_directories.Glad}",
-		"%{include_directories.GLFW}",
-		"%{include_directories.glm}",
-		"%{include_directories.imgui}",
-		"%{include_directories.lua}",
-		"%{include_directories.spdlog}",
-		"%{include_directories.stb_image}",
+		"%{engine_includes.engine}",
+		"%{engine_includes.Glad}",
+		"%{engine_includes.GLFW}",
+		"%{engine_includes.glm}",
+		"%{engine_includes.imgui}",
+		"%{engine_includes.lua}",
+		"%{engine_includes.spdlog}",
+		"%{engine_includes.stb_image}",
 	}
 
 	defines {

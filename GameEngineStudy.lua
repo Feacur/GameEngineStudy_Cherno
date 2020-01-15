@@ -92,15 +92,15 @@ target_location = ("bin/" .. outputdir)
 intermediate_location = ("bin-int/" .. outputdir)
 enginename = "Engine"
 
-include_directories = {}
-include_directories["engine"] = "src"
-include_directories["Glad"]   = "vendor/Glad/include"
-include_directories["GLFW"]   = "vendor/GLFW/include"
-include_directories["glm"]    = "vendor/glm"
-include_directories["imgui"]  = "vendor/imgui"
-include_directories["lua"]    = "vendor/lua/src"
-include_directories["spdlog"] = "vendor/spdlog/include"
-include_directories["stb_image"] = "vendor/stb_image"
+engine_includes = {}
+engine_includes["engine"] = "src"
+engine_includes["Glad"]   = "vendor/Glad/include"
+engine_includes["GLFW"]   = "vendor/GLFW/include"
+engine_includes["glm"]    = "vendor/glm"
+engine_includes["imgui"]  = "vendor/imgui"
+engine_includes["lua"]    = "vendor/lua/src"
+engine_includes["spdlog"] = "vendor/spdlog/include"
+engine_includes["stb_image"] = "vendor/stb_image"
 
 root_directory = os.getcwd()
 

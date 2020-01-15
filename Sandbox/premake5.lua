@@ -18,11 +18,11 @@ project "Sandbox"
 	}
 
 	includedirs {
-		Sandbox_to_root .. "/Engine/%{include_directories.engine}",
-		Sandbox_to_root .. "/Engine/%{include_directories.glm}",
-		Sandbox_to_root .. "/Engine/%{include_directories.imgui}",
-		Sandbox_to_root .. "/Engine/%{include_directories.lua}",
-		Sandbox_to_root .. "/Engine/%{include_directories.spdlog}",
+		Sandbox_to_root .. "/Engine/%{engine_includes.engine}",
+		Sandbox_to_root .. "/Engine/%{engine_includes.glm}",
+		Sandbox_to_root .. "/Engine/%{engine_includes.imgui}",
+		Sandbox_to_root .. "/Engine/%{engine_includes.lua}",
+		Sandbox_to_root .. "/Engine/%{engine_includes.spdlog}",
 	}
 
 	links {
