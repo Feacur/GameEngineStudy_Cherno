@@ -62,12 +62,6 @@ project "Engine"
 		}
 
 	filter "system:windows or macosx or linux or bsd"
-		files {
-			"src/Platform/GLFW_OpenGL/**.h",
-			"src/Platform/GLFW_OpenGL/**.cpp",
-		}
-
-	filter "system:windows or macosx or linux or bsd"
 		links {
 			"Glad",
 		}
@@ -81,3 +75,4 @@ project "Engine"
 			("{COPY} \"%{cfg.buildtarget.relpath}\" \"" .. Engine_target_location .. "/Sandbox/\""),
 		}
 
+	filter {}

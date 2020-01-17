@@ -3,8 +3,7 @@
 
 #include "GlfwInput.h"
 #include "GlfwImGuiBindings.h"
-
-#include "Platform/GLFW_OpenGL/GlfwOpenGlContext.h"
+#include "GlfwOpenGlContext.h"
 
 #include "GES/Debug/Log.h"
 #include "GES/Debug/Instrumentor.h"

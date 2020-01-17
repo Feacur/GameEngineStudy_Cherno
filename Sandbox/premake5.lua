@@ -41,3 +41,5 @@ project "Sandbox"
 		defines {
 			-- "IMGUI_API=__declspec(dllimport)", -- if specified [kind "SharedLib"] for the Engine
 		}
+
+	filter {}
