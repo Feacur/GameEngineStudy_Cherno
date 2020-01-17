@@ -29,3 +29,5 @@ project "Glad"
 	includedirs {
 		"Glad/include"
 	}
+
+	filter {}

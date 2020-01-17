@@ -30,8 +30,6 @@ project "Engine"
 
 	includedirs {
 		"%{engine_includes.engine}",
-		"%{engine_includes.Glad}",
-		"%{engine_includes.GLFW}",
 		"%{engine_includes.glm}",
 		"%{engine_includes.imgui}",
 		"%{engine_includes.lua}",
@@ -53,22 +51,20 @@ project "Engine"
 
 	filter "system:windows or macosx or linux or bsd"
 		defines "GLFW_INCLUDE_NONE"
-		links {
-			"GLFW",
-		}
+		links "GLFW"
 		files {
 			"src/Platform/GLFW/**.h",
 			"src/Platform/GLFW/**.cpp",
 		}
+		includedirs "%{engine_includes.GLFW}"
 
 	filter "system:windows or macosx or linux or bsd"
-		links {
-			"Glad",
-		}
+		links "Glad"
 		files {
 			"src/Platform/OpenGL/**.h",
 			"src/Platform/OpenGL/**.cpp",
 		}
+		includedirs "%{engine_includes.Glad}"
 
 	filter "kind:SharedLib"
 		postbuildcommands {

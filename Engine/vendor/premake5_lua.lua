@@ -56,3 +56,5 @@ project "lua"
 	includedirs {
 		"lua/src"
 	}
+
+	filter {}

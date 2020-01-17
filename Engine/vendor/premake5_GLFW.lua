@@ -68,3 +68,5 @@ project "GLFW"
 		defines {
 			"_GLFW_X11",
 		}
+
+	filter {}

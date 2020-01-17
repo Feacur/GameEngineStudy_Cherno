@@ -41,3 +41,5 @@ project "imgui"
 		defines {
 			-- "IMGUI_API=__declspec(dllexport)", -- if specified [kind "SharedLib"] for the GameEngineStudy
 		}
+
+	filter {}
