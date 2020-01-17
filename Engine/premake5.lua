@@ -15,10 +15,12 @@ project "Engine"
 
 	pchheader "ges_pch.h"
 	pchsource ("src/ges_pch.cpp")
+	defines "GES_PRECOMPILED_HEADER"
 
 	files {
-		"src/**.h",
-		"src/**.cpp",
+		"src/GES/**.h",
+		"src/GES/**.cpp",
+		"src/ges_pch.cpp",
 		"%{engine_includes.spdlog}/spdlog/**.h",
 		"%{engine_includes.glm}/glm/**.hpp",
 		"%{engine_includes.glm}/glm/**.inl",
@@ -37,20 +39,36 @@ project "Engine"
 		"%{engine_includes.stb_image}",
 	}
 
-	defines {
-		"GLFW_INCLUDE_NONE",
-	}
-
 	links {
-		"GLFW",
-		"Glad",
 		"imgui",
 		"lua",
 	}
-	
+
 	postbuildcommands {
 		("{COPY} \"%{prj.location}assets\" \"" .. Engine_target_location .. "/Sandbox/assets\""),
 	}
+
+	filter "system:windows"
+		defines "WIN32_LEAN_AND_MEAN"
+
+	filter "system:windows or macosx or linux or bsd"
+		defines "GLFW_INCLUDE_NONE"
+		links {
+			"GLFW",
+		}
+		files {
+			"src/Platform/GLFW/**.h",
+			"src/Platform/GLFW/**.cpp",
+		}
+
+	filter "system:windows or macosx or linux or bsd"
+		links {
+			"Glad",
+		}
+		files {
+			"src/Platform/OpenGL/**.h",
+			"src/Platform/OpenGL/**.cpp",
+		}
 
 	filter "kind:SharedLib"
 		postbuildcommands {

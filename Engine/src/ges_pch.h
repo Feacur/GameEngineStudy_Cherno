@@ -1,5 +1,7 @@
 #pragma once
 
+#if defined(GES_PRECOMPILED_HEADER)
+
 #include <functional>
 #include <vector>
 #include <unordered_map>
@@ -21,6 +23,4 @@
 #include <string.h>
 #include <math.h>
 
-#if defined(GES_OS_WINDOWS)
-	#include <Windows.h>
 #endif

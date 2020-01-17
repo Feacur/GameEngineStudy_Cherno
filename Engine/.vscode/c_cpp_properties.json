@@ -10,7 +10,9 @@
             
             "includePath": ["${default}"],
             "defines": [
-                "${default}"
+                "${default}",
+                "GES_PRECOMPILED_HEADER",
+                "WIN32_LEAN_AND_MEAN"
             ]
         }
     ],

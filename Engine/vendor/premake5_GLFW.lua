@@ -30,7 +30,7 @@ project "GLFW"
 	includedirs {
 		"GLFW/include"
 	}
-	
+
 	filter "system:windows"
 		files {
 			"GLFW/src/win32_init.c",
@@ -43,9 +43,9 @@ project "GLFW"
 			"GLFW/src/egl_context.c",
 			"GLFW/src/osmesa_context.c",
 		}
-
 		defines {
 			"_GLFW_WIN32",
+			"WIN32_LEAN_AND_MEAN",
 			"_GLFW_USE_HYBRID_HPG",
 			-- "_GLFW_USE_OPTIMUS_HPG",
 			-- "_CRT_SECURE_NO_WARNINGS",
@@ -53,7 +53,6 @@ project "GLFW"
 
 	filter "system:linux"
 		pic "On"
-
 		files {
 			"src/x11_init.c",
 			"src/x11_monitor.c",
@@ -66,7 +65,6 @@ project "GLFW"
 			"src/osmesa_context.c",
 			"src/linux_joystick.c",
 		}
-
 		defines {
-			"_GLFW_X11"
+			"_GLFW_X11",
 		}
